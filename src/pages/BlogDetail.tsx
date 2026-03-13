@@ -463,7 +463,7 @@ const BlogDetail = () => {
 
   return (
     <div className="bg-background">
-      {/* Back Button */}
+  
      
 
       {/* Featured Image */}

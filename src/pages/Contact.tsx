@@ -42,7 +42,7 @@ const Contact = () => {
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-block gradient-teal text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full mb-4 tracking-wider uppercase"
+            className="inline-block gradient-teal text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full  tracking-wider uppercase"
           >
             Get In Touch
           </motion.span>

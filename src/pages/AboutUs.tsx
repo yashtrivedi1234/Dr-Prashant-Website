@@ -42,7 +42,7 @@ const AboutUs = () => {
             <motion.span
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-block gradient-primary text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full mb-4 tracking-wider uppercase"
+              className="inline-block gradient-primary text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase"
             >
               Our Story
             </motion.span>
@@ -50,7 +50,7 @@ const AboutUs = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight"
+              className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-2 leading-tight"
             >
               Advanced Care for <span className="gradient-text">ENT & Allergy</span>
             </motion.h1>
@@ -97,10 +97,10 @@ const AboutUs = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-2">
               A Legacy of <span className="gradient-text">Medical Excellence</span>
             </h2>
-            <div className="space-y-4 text-muted-foreground leading-relaxed mb-8">
+            <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
                 Dr. Prashant stands as one of the foremost authorities in the fields of ENT, Vertigo, Allergy, and Head & Neck Cancer specialties. His distinguished career is marked by excellence in patient care, research, and academics.
               </p>
@@ -127,8 +127,8 @@ const AboutUs = () => {
       {/* Philosophy Section */}
       <section className="section-padding bg-slate-50 relative overflow-hidden">
         <div className="container-main relative z-10">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">Our Core Philosophy</h2>
+          <div className="text-center max-w-2xl mx-auto mb-3">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground ">Our Core Philosophy</h2>
             <p className="text-muted-foreground">Everything we do is guided by three fundamental principles that ensure the highest standard of specialized ENT and Allergy care.</p>
           </div>
 
@@ -158,10 +158,10 @@ const AboutUs = () => {
         <div className="container-main">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="order-2 lg:order-1">
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-8">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
                 Why Patients Trust <span className="gradient-text">Our Practice</span>
               </h2>
-              <ul className="space-y-4">
+              <ul className="space-y-2">
                 {[
                   "Certified Allergy Expert providing advanced Skin Prick Tests & Immunotherapy.",
                   "Certified in complete Vertigo, Vestibular, and Balance Assessment and Management.",
@@ -176,10 +176,10 @@ const AboutUs = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.05 }}
-                    className="flex items-start gap-3 text-muted-foreground"
+                    className="flex items-start gap-2 text-muted-foreground"
                   >
-                    <CheckCircle2 className="text-primary shrink-0 mt-1" size={20} />
-                    <span className="font-medium text-foreground/80">{item}</span>
+                    <CheckCircle2 className="text-primary shrink-0 mt-0.5" size={18} />
+                    <span className="font-medium text-foreground/80 text-sm leading-snug">{item}</span>
                   </motion.li>
                 ))}
               </ul>
