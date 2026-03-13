@@ -37,7 +37,7 @@ const WhyChooseUs = () => (
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-4"
+          className="text-center mb-5"
         >
           <span className="inline-block gradient-teal text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase">Our Strengths</span>
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">Why <span className="gradient-text">Choose Us</span></h2>
