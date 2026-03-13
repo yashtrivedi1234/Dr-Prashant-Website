@@ -208,7 +208,7 @@ const Services = () => {
       {/* Why Homeopathy Section */}
       <section className="section-padding bg-section-alt relative overflow-hidden">
         <div className="container-main relative z-10">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="text-center max-w-2xl mx-auto mb-5">
             <h2 className="font-heading text-3xl md:text-5xl font-bold text-foreground mb-4">The Power of <span className="gradient-text">Homeopathy</span></h2>
             <p className="text-muted-foreground text-lg italic">"Similia Similibus Curentur" — Let Like Be Cured By Like</p>
           </div>
