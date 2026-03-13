@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { Calendar, ArrowRight, Tag, Search } from "lucide-react";
 import CTASection from "@/components/CTASection";
 import blog1 from "@/assets/blog-1.jpg";
@@ -8,6 +9,7 @@ import blog3 from "@/assets/blog-3.jpg";
 const blogs = [
   { 
     id: 1,
+    slug: "understanding-vertigo-causes-and-advanced-treatments",
     img: blog1, 
     date: "March 10, 2026", 
     title: "Understanding Vertigo: Causes and Advanced Treatments", 
@@ -17,6 +19,7 @@ const blogs = [
   },
   { 
     id: 2,
+    slug: "clinical-approaches-to-seasonal-allergies",
     img: blog2, 
     date: "March 5, 2026", 
     title: "Clinical Approaches to Seasonal Allergies", 
@@ -26,6 +29,7 @@ const blogs = [
   },
   { 
     id: 3,
+    slug: "the-importance-of-sleep-studies-for-sleep-apnea",
     img: blog3, 
     date: "Feb 28, 2026", 
     title: "The Importance of Sleep Studies for Sleep Apnea", 
@@ -35,6 +39,7 @@ const blogs = [
   },
   { 
     id: 4,
+    slug: "micro-ear-surgery-restoring-your-hearing",
     img: blog1, 
     date: "Feb 15, 2026", 
     title: "Micro Ear Surgery: Restoring Your Hearing", 
@@ -44,6 +49,7 @@ const blogs = [
   },
   { 
     id: 5,
+    slug: "head-and-neck-cancer-recognizing-early-signs",
     img: blog2, 
     date: "Feb 10, 2026", 
     title: "Head & Neck Cancer: Recognizing Early Signs", 
@@ -53,6 +59,7 @@ const blogs = [
   },
   { 
     id: 6,
+    slug: "advanced-immunotherapy-vs-antihistamines",
     img: blog3, 
     date: "Jan 25, 2026", 
     title: "Advanced Immunotherapy vs. Antihistamines", 
@@ -63,6 +70,7 @@ const blogs = [
 ];
 
 const Blog = () => {
+  const navigate = useNavigate();
   return (
     <div className="bg-background">
       {/* Hero Section */}
@@ -120,7 +128,8 @@ const Blog = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="group flex flex-col bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100"
+                onClick={() => navigate(`/blog/${b.slug}`)}
+                className="group flex flex-col bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100 cursor-pointer"
               >
                 <div className="relative overflow-hidden aspect-[16/10]">
                   <img src={b.img} alt={b.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -141,9 +150,12 @@ const Blog = () => {
                   </p>
                   
                   <div className="pt-6 border-t border-slate-50 flex items-center justify-between mt-auto">
-                    <a href="#" className="flex items-center gap-2 text-primary font-bold hover:gap-4 transition-all">
+                    <button 
+                      onClick={() => navigate(`/blog/${b.slug}`)}
+                      className="flex items-center gap-2 text-primary font-bold hover:gap-4 transition-all"
+                    >
                       Read Full Article <ArrowRight size={18} />
-                    </a>
+                    </button>
                   </div>
                 </div>
               </motion.article>

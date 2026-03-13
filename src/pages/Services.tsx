@@ -1,40 +1,98 @@
 import { motion } from "framer-motion";
-import { Baby, Bone, HeartPulse, Smile, CheckCircle2, ShieldCheck, Zap, Activity, Ear, Mic, Wind, Stethoscope } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Baby, Bone, HeartPulse, Smile, CheckCircle2, ShieldCheck, Zap, Activity, Ear, Mic, Wind, Stethoscope, ArrowRight, Volume2, Moon } from "lucide-react";
 import CTASection from "@/components/CTASection";
 
 const mainServices = [
   { 
-    icon: Ear, 
-    title: "Advanced Ear Surgery", 
-    desc: "Specialized surgical interventions to restore hearing and treat complex ear conditions.",
-    longDesc: "We offer state-of-the-art surgical treatments for restoring and improving hearing. From intricate micro ear surgeries to life-changing cochlear implants, our experts provide comprehensive otology care.",
-    features: ["Micro Ear Surgery", "Cochlear Implantation", "Stapedectomy", "Tympanoplasty"],
-    gradient: "gradient-primary" 
+    id: "sinusitis-treatment",
+    icon: Wind,
+    title: "SINUSITIS",
+    desc: "Experience improved hearing with advanced hearing aids. These devices amplify sound, enhancing communication and quality of life for those with hearing loss.",
+    longDesc: "Sinusitis occurs when the sinus cavities become inflamed, causing nasal blockage, headaches, facial pain, and breathing difficulty. Our specialists provide advanced diagnosis and modern treatments for quick relief.",
+    features: ["Sinus Endoscopy", "Medication Therapy", "Balloon Sinuplasty", "Chronic Sinusitis Treatment"],
+    gradient: "gradient-blue"
   },
+
   { 
-    icon: Activity, 
-    title: "Audiology & Hearing", 
-    desc: "Comprehensive hearing assessments and advanced hearing aid fittings for all ages.",
-    longDesc: "Regain the joy of clear sound with our custom audiology services. We provide thorough hearing evaluations and prescribe discrete, advanced hearing aids tailored to your specific lifestyle needs.",
-    features: ["Advanced Hearing Aids", "Hearing Assessments", "Tinnitus Management", "Pediatric Audiology"],
-    gradient: "gradient-warm" 
+    id: "snoring-treatment",
+    icon: Moon,
+    title: "SNORING",
+    desc: "Snoring results from obstructed airways during sleep, causing vibrations in throat tissues and disturbing sleep quality.",
+    longDesc: "Snoring can indicate underlying airway obstruction or sleep apnea. Our ENT specialists diagnose the root cause and provide effective treatments to restore peaceful sleep.",
+    features: ["Sleep Apnea Evaluation", "Airway Correction", "Lifestyle Guidance", "Snoring Surgery"],
+    gradient: "gradient-purple"
   },
+
   { 
-    icon: Mic, 
-    title: "Throat & Voice Care", 
-    desc: "Expert diagnosis and surgical treatments for voice disorders and throat infections.",
-    longDesc: "Our dedicated throat care addresses recurrent infections and vocal cord issues. Whether you need treatment for chronic tonsillitis or delicate voice-restoring surgeries, we deliver precise and effective care.",
-    features: ["Voice Surgeries", "Tonsillitis Treatment", "Vocal Cord Rehabilitation", "Swallowing Disorders"],
-    gradient: "gradient-teal" 
+    id: "tonsillitis-treatment",
+    icon: Smile,
+    title: "TONSILLITIS",
+    desc: "Tonsillitis is inflammation of the tonsils causing sore throat, fever, and difficulty swallowing.",
+    longDesc: "Frequent tonsil infections can affect overall health and comfort. Our specialists provide medical treatment and surgical options like tonsillectomy when necessary.",
+    features: ["Medical Therapy", "Tonsillectomy", "Infection Management", "Pediatric Tonsil Care"],
+    gradient: "gradient-pink"
   },
+
   { 
-    icon: Wind, 
-    title: "Nose, Sinus & Sleep", 
-    desc: "Effective treatments for chronic sinusitis, breathing difficulties, and snoring.",
-    longDesc: "Breathe easier and sleep better with our advanced nasal and sinus care. We specialize in treating chronic sinusitis and providing effective surgical and non-surgical interventions to eliminate snoring.",
-    features: ["Sinusitis Management", "Snoring Solutions", "Nasal Airway Clearing", "Allergy Treatment"],
-    gradient: "gradient-primary" 
+    id: "voice-disorder-surgeries",
+    icon: Mic,
+    title: "VOICE SURGERIES",
+    desc: "Voice surgeries treat vocal cord disorders and improve speech and voice quality.",
+    longDesc: "Voice problems may result from nodules, polyps, or vocal cord damage. Our ENT specialists perform advanced procedures to restore clear voice function.",
+    features: ["Vocal Cord Surgery", "Nodule Removal", "Voice Therapy", "Laryngeal Examination"],
+    gradient: "gradient-orange"
   },
+
+  { 
+    id: "micro-ear-surgery",
+    icon: Ear,
+    title: "MICRO EAR SURGERY",
+    desc: "Micro ear surgery uses advanced microscopic techniques to treat delicate ear disorders.",
+    longDesc: "This surgery helps repair damaged ear structures and restore hearing using precision instruments and minimally invasive techniques.",
+    features: ["Tympanoplasty", "Ossicular Reconstruction", "Chronic Ear Infection Treatment", "Microscopic Surgery"],
+    gradient: "gradient-teal"
+  },
+
+  { 
+    id: "digital-hearing-aids",
+    icon: Volume2,
+    title: "HEARING AIDS",
+    desc: "Hearing aids are devices designed to amplify sound and improve hearing ability.",
+    longDesc: "Our audiology department provides advanced digital hearing aids with customized fitting and professional hearing assessments.",
+    features: ["Digital Hearing Aids", "Hearing Tests", "Custom Fitting", "Device Maintenance"],
+    gradient: "gradient-indigo"
+  },
+
+  { 
+    id: "stapedectomy-ear-surgery",
+    icon: Ear,
+    title: "STAPEDECTOMY",
+    desc: "Stapedectomy is a surgical procedure to treat hearing loss caused by otosclerosis.",
+    longDesc: "During this procedure, the damaged stapes bone is replaced with a prosthetic implant to restore sound transmission and hearing ability.",
+    features: ["Otosclerosis Treatment", "Microsurgical Procedure", "Hearing Restoration", "Prosthetic Implant"],
+    gradient: "gradient-primary"
+  },
+
+  { 
+    id: "cochlear-implant-hearing-restoration",
+    icon: Activity,
+    title: "COCHLEAR IMPLANTATION",
+    desc: "Cochlear implants restore hearing for individuals with severe hearing loss.",
+    longDesc: "This advanced procedure directly stimulates the auditory nerve, helping patients with profound hearing loss perceive sound again.",
+    features: ["Implant Surgery", "Hearing Rehabilitation", "Device Programming", "Post-implant Therapy"],
+    gradient: "gradient-warm"
+  },
+
+  { 
+    id: "throat-cancer-treatment",
+    icon: Stethoscope,
+    title: "THROAT CANCER",
+    desc: "Throat cancer affects the larynx or oropharynx and requires specialized medical treatment.",
+    longDesc: "Early diagnosis and treatment are critical for throat cancer. Our specialists provide comprehensive care including diagnosis, surgery, and rehabilitation.",
+    features: ["Cancer Diagnosis", "Tumor Surgery", "Oncology Care", "Voice Rehabilitation"],
+    gradient: "gradient-red"
+  }
 ];
 
 const reasons = [
@@ -56,6 +114,7 @@ const reasons = [
 ];
 
 const Services = () => {
+  const navigate = useNavigate();
   return (
     <div className="bg-background">
       {/* Hero Section */}
@@ -78,9 +137,9 @@ const Services = () => {
   initial={{ opacity: 0, y: 20 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ delay: 0.1 }}
-  className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight whitespace-nowrap"
+  className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight"
 >
-  Our Medical <span className="gradient-text">Specializations</span>
+  <span className="gradient-text">Treatments</span> We Offer
 </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -104,7 +163,8 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
-              className={`flex flex-col ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-12 items-center`}
+              onClick={() => navigate(`/services/${service.id}`)}
+              className={`flex flex-col ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-12 items-center cursor-pointer group hover:opacity-90 transition-opacity duration-300`}
             >
               <div className="flex-1">
                 <div className={`w-20 h-20 ${service.gradient} rounded-3xl flex items-center justify-center mb-6 shadow-xl shadow-primary/20`}>
@@ -114,7 +174,7 @@ const Services = () => {
                 <p className="text-xl text-primary font-medium mb-6">{service.desc}</p>
                 <p className="text-muted-foreground leading-relaxed mb-8">{service.longDesc}</p>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                   {service.features.map((feature) => (
                     <div key={feature} className="flex items-center gap-3">
                       <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
@@ -124,6 +184,13 @@ const Services = () => {
                     </div>
                   ))}
                 </div>
+
+                <button 
+                  onClick={() => navigate(`/services/${service.id}`)}
+                  className="inline-flex items-center gap-2 text-primary font-bold hover:gap-4 transition-all group"
+                >
+                  Learn More <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                </button>
               </div>
               
               <div className="flex-1 w-full max-w-lg aspect-square bg-slate-100 rounded-[3rem] relative overflow-hidden group">

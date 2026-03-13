@@ -7,15 +7,17 @@ import GallerySection from "@/components/GallerySection";
 import BlogSection from "@/components/BlogSection";
 import CTASection from "@/components/CTASection";
 import StatsSection from "@/components/StatsSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 
 const Index = () => (
   <>
     <HeroCarousel />
     <AboutSection />
     <ServicesSection />
-    <StatsSection />
+    {/* <StatsSection /> */}
     <WhyChooseUs />
-    <SocialSection />
+    {/* <SocialSection /> */}
+     <TestimonialsSection />
     <GallerySection />
     <BlogSection />
     <CTASection />

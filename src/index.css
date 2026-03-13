@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
@@ -71,31 +72,69 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
   }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
   }
 }
 
 @layer utilities {
+
   .section-padding {
     @apply py-8 md:py-8 px-4 md:px-8;
   }
+
   .container-main {
     @apply max-w-7xl mx-auto;
   }
+
+  /* Core Gradients */
+
   .gradient-primary {
     background: linear-gradient(135deg, hsl(220 90% 56%), hsl(262 83% 58%));
   }
+
   .gradient-warm {
     background: linear-gradient(135deg, hsl(32 95% 55%), hsl(340 82% 52%));
   }
+
   .gradient-teal {
     background: linear-gradient(135deg, hsl(172 66% 50%), hsl(220 90% 56%));
   }
+
+  /* Service Gradients */
+
+  .gradient-blue {
+    background: linear-gradient(135deg, #2563eb, #38bdf8);
+  }
+
+  .gradient-purple {
+    background: linear-gradient(135deg, #7c3aed, #c084fc);
+  }
+
+  .gradient-pink {
+    background: linear-gradient(135deg, #ec4899, #f472b6);
+  }
+
+  .gradient-orange {
+    background: linear-gradient(135deg, #f97316, #fb923c);
+  }
+
+  .gradient-indigo {
+    background: linear-gradient(135deg, #4f46e5, #818cf8);
+  }
+
+  .gradient-red {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+  }
+
+  /* Text Gradient */
+
   .gradient-text {
     background: linear-gradient(135deg, hsl(220 90% 56%), hsl(262 83% 58%));
     -webkit-background-clip: text;
@@ -107,3 +146,4 @@
 html {
   scroll-behavior: smooth;
 }
+
