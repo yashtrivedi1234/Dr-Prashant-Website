@@ -12,12 +12,12 @@ interface CTASectionProps {
 }
 
 const CTASection = ({
-  title = "Ready to Start Your Healing Journey?",
-  description = "Book a comprehensive consultation today and experience the transformative power of holistic homeopathic medicine.",
+  title = "Ready for Expert Medical Care?",
+  description = "Book a comprehensive consultation today for advanced ENT, Vertigo, Allergy, and Surgical treatments with an Ex-SR PGIMER specialist.",
   primaryButtonText = "Book Appointment",
   primaryButtonHref = "/contact",
   secondaryButtonText = "Emergency Call",
-  secondaryButtonHref = "tel:+911234567890"
+  secondaryButtonHref = "tel:+917658874707"
 }: CTASectionProps) => {
   return (
     <section className="section-padding">
@@ -27,7 +27,7 @@ const CTASection = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="gradient-primary rounded-[3rem] p-12  text-center text-primary-foreground shadow-2xl relative overflow-hidden"
+          className="gradient-primary rounded-[3rem] p-12 text-center text-primary-foreground shadow-2xl relative overflow-hidden"
         >
           <div className="absolute top-0 left-0 w-64 h-64 bg-white opacity-5 rounded-full -translate-x-1/2 -translate-y-1/2" />
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-white opacity-5 rounded-full translate-x-1/2 translate-y-1/2" />

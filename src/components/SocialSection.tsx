@@ -10,7 +10,7 @@ const highlights = [
 
 const SocialSection = () => (
   <section className="section-padding bg-section-alt overflow-hidden">
-    <div className="container-main grid md:grid-cols-2 gap-16 items-center">
+    <div className="container-main grid md:grid-cols-[1.25fr_0.75fr] gap-12 items-center">
       <motion.div
         initial={{ opacity: 0, x: -50 }}
         whileInView={{ opacity: 1, x: 0 }}
@@ -29,7 +29,7 @@ const SocialSection = () => (
           Through his dedicated community outreach, he has impacted over 50,000 lives, actively advocating for deafness prevention, accessible healthcare, and critical health education.
         </p>
 
-        <div className="flex flex-wrap gap-4 mb-8">
+        <div className="flex flex-wrap md:flex-nowrap gap-4 mb-8">
           {highlights.map((h, i) => (
             <motion.div
               key={h.text}
@@ -37,7 +37,7 @@ const SocialSection = () => (
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 + i * 0.1 }}
-              className="flex items-center gap-2 bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-semibold"
+              className="flex items-center gap-2 whitespace-nowrap bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-semibold"
             >
               <h.icon size={16} /> {h.text}
             </motion.div>
@@ -54,7 +54,7 @@ const SocialSection = () => (
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-        className="order-1 md:order-2 relative"
+        className="order-1 md:order-2 relative md:max-w-[420px] md:ml-auto"
       >
         <div className="absolute -top-4 -right-4 w-full h-full bg-accent rounded-2xl opacity-20" />
         <img src={socialImg} alt="Social initiatives" className="relative rounded-2xl shadow-2xl w-full object-cover aspect-[4/3] z-10" />
