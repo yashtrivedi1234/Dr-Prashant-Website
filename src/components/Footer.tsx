@@ -1,25 +1,31 @@
 import { Stethoscope, MapPin, Mail, Phone } from "lucide-react";
+import { motion } from "framer-motion";
 
 const quickLinks = ["Home", "About", "Services", "Gallery", "Testimonials", "Contact"];
 const serviceLinks = ["Gynecology", "Pediatrics", "Orthopedics", "Dental Care", "General Wellness"];
 
 const Footer = () => (
-  <footer id="contact" className="bg-footer text-footer-foreground">
-    <div className="container-main section-padding">
+  <footer id="contact" className="bg-footer text-footer-foreground relative overflow-hidden">
+    <div className="absolute inset-0 opacity-5">
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary rounded-full translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent rounded-full -translate-x-1/2 translate-y-1/2" />
+    </div>
+
+    <div className="container-main section-padding relative z-10">
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
-        {/* About */}
-        <div>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
           <div className="flex items-center gap-2 mb-4">
-            <Stethoscope className="text-primary" size={28} />
+            <div className="gradient-primary p-2 rounded-lg">
+              <Stethoscope className="text-primary-foreground" size={22} />
+            </div>
             <span className="font-heading text-xl font-bold text-primary-foreground">Dr. Prashant</span>
           </div>
           <p className="text-sm leading-relaxed opacity-80">
-            A leading homeopathy practitioner and public health advocate committed to holistic healing and community wellness for over two decades.
+            A leading homeopathy practitioner and public health advocate committed to holistic healing and community wellness.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Quick Links */}
-        <div>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}>
           <h4 className="font-heading text-lg font-semibold text-primary-foreground mb-4">Quick Links</h4>
           <ul className="space-y-2">
             {quickLinks.map((l) => (
@@ -30,10 +36,9 @@ const Footer = () => (
               </li>
             ))}
           </ul>
-        </div>
+        </motion.div>
 
-        {/* Services */}
-        <div>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}>
           <h4 className="font-heading text-lg font-semibold text-primary-foreground mb-4">Our Services</h4>
           <ul className="space-y-2">
             {serviceLinks.map((s) => (
@@ -44,10 +49,9 @@ const Footer = () => (
               </li>
             ))}
           </ul>
-        </div>
+        </motion.div>
 
-        {/* Contact */}
-        <div>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}>
           <h4 className="font-heading text-lg font-semibold text-primary-foreground mb-4">Contact Us</h4>
           <ul className="space-y-3 text-sm">
             <li className="flex items-start gap-2 opacity-80">
@@ -65,12 +69,11 @@ const Footer = () => (
               </a>
             </li>
           </ul>
-        </div>
+        </motion.div>
       </div>
     </div>
 
-    {/* Bottom strip */}
-    <div className="border-t border-primary-foreground/10 py-5 text-center text-sm opacity-60">
+    <div className="border-t border-primary-foreground/10 py-5 text-center text-sm opacity-60 relative z-10">
       © {new Date().getFullYear()} Dr. Prashant. All rights reserved.
     </div>
   </footer>
