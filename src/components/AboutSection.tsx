@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Award, Clock, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 import doctorImg from "@/assets/doctor-portrait.jpg";
 
 const stats = [
@@ -38,7 +39,7 @@ const AboutSection = () => (
         viewport={{ once: true }}
         transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
       >
-        <span className="inline-block gradient-primary text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full mb-4 tracking-wider uppercase">About Us</span>
+        <span className="inline-block gradient-primary text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase">About Us</span>
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6 leading-tight">
           Leading Homeopathy Doctor &amp; <span className="gradient-text">Healthcare Advocate</span>
         </h2>
@@ -70,12 +71,12 @@ const AboutSection = () => (
           ))}
         </div>
 
-        <a
-          href="#contact"
+        <Link
+          to="/about"
           className="inline-block gradient-primary text-primary-foreground px-8 py-3.5 rounded-full font-semibold hover:opacity-90 transition-opacity shadow-lg"
         >
           Know More
-        </a>
+        </Link>
       </motion.div>
     </div>
   </section>

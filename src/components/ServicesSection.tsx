@@ -26,7 +26,7 @@ const ServicesSection = () => (
         transition={{ duration: 0.5 }}
         className="text-center mb-14"
       >
-        <span className="inline-block gradient-warm text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full mb-4 tracking-wider uppercase">What We Offer</span>
+        <span className="inline-block gradient-warm text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase">What We Offer</span>
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">Our Best <span className="gradient-text">Services</span></h2>
       </motion.div>
 

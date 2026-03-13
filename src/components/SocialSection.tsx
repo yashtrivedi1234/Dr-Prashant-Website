@@ -18,7 +18,7 @@ const SocialSection = () => (
         transition={{ duration: 0.7, ease: "easeOut" }}
         className="order-2 md:order-1"
       >
-        <span className="inline-block bg-accent text-accent-foreground text-xs font-bold px-4 py-1.5 rounded-full mb-4 tracking-wider uppercase">Social Initiatives</span>
+        <span className="inline-block bg-accent text-accent-foreground text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase">Social Initiatives</span>
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6 leading-tight">
           A Public Figure Dedicated to <span className="gradient-text">Community Health</span>
         </h2>

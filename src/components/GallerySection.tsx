@@ -22,7 +22,7 @@ const GallerySection = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-10"
         >
-          <span className="inline-block gradient-primary text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full mb-4 tracking-wider uppercase">Media</span>
+          <span className="inline-block gradient-primary text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase">Media</span>
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">Gallery & <span className="gradient-text">Testimonials</span></h2>
         </motion.div>
 

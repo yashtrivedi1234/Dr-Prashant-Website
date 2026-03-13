@@ -20,7 +20,7 @@ const BlogSection = () => (
         transition={{ duration: 0.5 }}
         className="text-center mb-14"
       >
-        <span className="inline-block gradient-warm text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full mb-4 tracking-wider uppercase">Latest Updates</span>
+        <span className="inline-block gradient-warm text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase">Latest Updates</span>
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">Recent <span className="gradient-text">Blogs</span></h2>
       </motion.div>
 

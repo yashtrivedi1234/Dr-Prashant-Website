@@ -19,7 +19,7 @@ const WhyChooseUs = () => (
           transition={{ duration: 0.5 }}
           className="text-center mb-14"
         >
-          <span className="inline-block gradient-teal text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full mb-4 tracking-wider uppercase">Our Strengths</span>
+          <span className="inline-block gradient-teal text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase">Our Strengths</span>
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">Why <span className="gradient-text">Choose Us</span></h2>
         </motion.div>
 

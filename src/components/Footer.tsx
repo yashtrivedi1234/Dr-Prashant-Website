@@ -1,8 +1,22 @@
 import { Stethoscope, MapPin, Mail, Phone } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
-const quickLinks = ["Home", "About", "Services", "Gallery", "Testimonials", "Contact"];
-const serviceLinks = ["Gynecology", "Pediatrics", "Orthopedics", "Dental Care", "General Wellness"];
+const quickLinks = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Services", href: "/#services" },
+  { name: "Gallery", href: "/#gallery" },
+  { name: "Testimonials", href: "/#testimonials" },
+  { name: "Contact", href: "/#contact" }
+];
+const serviceLinks = [
+  { name: "Gynecology", href: "/#services" },
+  { name: "Pediatrics", href: "/#services" },
+  { name: "Orthopedics", href: "/#services" },
+  { name: "Dental Care", href: "/#services" },
+  { name: "General Wellness", href: "/#services" }
+];
 
 const Footer = () => (
   <footer id="contact" className="bg-footer text-footer-foreground relative overflow-hidden">
@@ -29,10 +43,16 @@ const Footer = () => (
           <h4 className="font-heading text-lg font-semibold text-primary-foreground mb-4">Quick Links</h4>
           <ul className="space-y-2">
             {quickLinks.map((l) => (
-              <li key={l}>
-                <a href={`#${l.toLowerCase()}`} className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-all">
-                  {l}
-                </a>
+              <li key={l.name}>
+                {l.href.startsWith("/#") ? (
+                  <a href={l.href} className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-all">
+                    {l.name}
+                  </a>
+                ) : (
+                  <Link to={l.href} className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-all">
+                    {l.name}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
@@ -42,9 +62,9 @@ const Footer = () => (
           <h4 className="font-heading text-lg font-semibold text-primary-foreground mb-4">Our Services</h4>
           <ul className="space-y-2">
             {serviceLinks.map((s) => (
-              <li key={s}>
-                <a href="#services" className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-all">
-                  {s}
+              <li key={s.name}>
+                <a href={s.href} className="text-sm opacity-80 hover:opacity-100 hover:text-primary transition-all">
+                  {s.name}
                 </a>
               </li>
             ))}
