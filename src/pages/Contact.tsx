@@ -32,7 +32,7 @@ const Contact = () => {
   return (
     <div className="bg-background">
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden bg-slate-50">
+      <section className="relative py-5 overflow-hidden bg-slate-50">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <div className="absolute top-0 right-0 w-96 h-96 bg-primary rounded-full translate-x-1/2 -translate-y-1/2 blur-3xl" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent rounded-full -translate-x-1/2 translate-y-1/2 blur-3xl" />

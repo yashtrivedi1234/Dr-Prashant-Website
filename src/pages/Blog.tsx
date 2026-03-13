@@ -74,7 +74,7 @@ const Blog = () => {
   return (
     <div className="bg-background">
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden bg-slate-50">
+      <section className="relative py-5 overflow-hidden bg-slate-50">
   <div className="absolute inset-0 opacity-10 pointer-events-none">
     <div className="absolute top-0 left-0 w-96 h-96 bg-primary rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl" />
     <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent rounded-full translate-x-1/2 translate-y-1/2 blur-3xl" />
@@ -102,18 +102,7 @@ const Blog = () => {
       Stay informed with the latest research, health tips, and educational articles on homeopathic medicine and holistic wellness.
     </p>
 
-    {/* Search */}
-    <div className="mt-10 max-w-xl mx-auto relative group">
-      <Search
-        className="absolute left-5 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors"
-        size={20}
-      />
-      <input
-        type="text"
-        placeholder="Search health topics..."
-        className="w-full bg-white border border-gray-200 rounded-full py-5 pl-14 pr-6 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-      />
-    </div>
+   
   </div>
 </section>
 
