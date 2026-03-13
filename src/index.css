@@ -7,42 +7,51 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 210 25% 15%;
+    --foreground: 220 25% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 210 25% 15%;
+    --card-foreground: 220 25% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 210 25% 15%;
+    --popover-foreground: 220 25% 12%;
 
-    --primary: 207 90% 44%;
+    --primary: 220 90% 56%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 207 60% 95%;
-    --secondary-foreground: 207 90% 30%;
+    --secondary: 260 60% 96%;
+    --secondary-foreground: 260 50% 40%;
 
-    --muted: 210 20% 96%;
-    --muted-foreground: 210 10% 50%;
+    --muted: 220 20% 96%;
+    --muted-foreground: 220 10% 46%;
 
-    --accent: 168 72% 40%;
+    --accent: 160 84% 39%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 210 20% 90%;
-    --input: 210 20% 90%;
-    --ring: 207 90% 44%;
+    --border: 220 20% 90%;
+    --input: 220 20% 90%;
+    --ring: 220 90% 56%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --topbar: 210 30% 18%;
-    --topbar-foreground: 210 20% 90%;
-    --footer: 210 30% 12%;
-    --footer-foreground: 210 15% 75%;
-    --cta: 207 90% 44%;
+    --topbar: 220 40% 14%;
+    --topbar-foreground: 220 20% 90%;
+    --footer: 220 40% 10%;
+    --footer-foreground: 220 15% 70%;
+    --cta: 220 90% 56%;
     --cta-foreground: 0 0% 100%;
-    --section-alt: 207 50% 97%;
+    --section-alt: 250 50% 97%;
+
+    --warm: 32 95% 55%;
+    --warm-foreground: 0 0% 100%;
+    --rose: 340 82% 52%;
+    --rose-foreground: 0 0% 100%;
+    --violet: 262 83% 58%;
+    --violet-foreground: 0 0% 100%;
+    --teal: 172 66% 50%;
+    --teal-foreground: 0 0% 100%;
 
     --font-heading: 'Playfair Display', serif;
     --font-body: 'DM Sans', sans-serif;
@@ -73,10 +82,25 @@
 
 @layer utilities {
   .section-padding {
-    @apply py-8 md:py-8 px-2 md:px-2;
+    @apply py-16 md:py-24 px-4 md:px-8;
   }
   .container-main {
     @apply max-w-7xl mx-auto;
+  }
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(220 90% 56%), hsl(262 83% 58%));
+  }
+  .gradient-warm {
+    background: linear-gradient(135deg, hsl(32 95% 55%), hsl(340 82% 52%));
+  }
+  .gradient-teal {
+    background: linear-gradient(135deg, hsl(172 66% 50%), hsl(220 90% 56%));
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(220 90% 56%), hsl(262 83% 58%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }
 
