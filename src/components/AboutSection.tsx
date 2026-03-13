@@ -10,7 +10,7 @@ const AboutSection = () => (
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <img src={doctorImg} alt="Dr. Homeo" className="rounded-2xl shadow-xl w-full max-w-md mx-auto object-cover aspect-[4/5]" />
+        <img src={doctorImg} alt="Dr. Prashant" className="rounded-2xl shadow-xl w-full max-w-md mx-auto object-cover aspect-[4/5]" />
       </motion.div>
 
       <motion.div
@@ -24,7 +24,7 @@ const AboutSection = () => (
           Leading Homeopathy Doctor &amp; Healthcare Advocate
         </h2>
         <p className="text-muted-foreground leading-relaxed mb-4">
-          With over 20 years of experience in homeopathic medicine, Dr. Homeo has dedicated his career to providing natural,
+          With over 20 years of experience in homeopathic medicine, Dr. Prashant has dedicated his career to providing natural,
           holistic treatments that address the root cause of illness. His patient-centric approach combines traditional
           wisdom with modern diagnostics.
         </p>

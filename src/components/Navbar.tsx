@@ -18,7 +18,7 @@ const Navbar = () => {
       <div className="container-main flex items-center justify-between py-4 px-4 md:px-8">
         <a href="#" className="flex items-center gap-2">
           <Stethoscope className="text-primary" size={32} />
-          <span className="font-heading text-xl font-bold text-foreground">Dr. Homeo</span>
+          <span className="font-heading text-xl font-bold text-foreground">Dr. Prashant</span>
         </a>
 
         {/* Desktop */}

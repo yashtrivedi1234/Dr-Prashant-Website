@@ -16,7 +16,7 @@ const SocialSection = () => (
           A Public Figure Dedicated to Community Health
         </h2>
         <p className="text-muted-foreground leading-relaxed mb-4">
-          Beyond the clinic, Dr. Homeo leads several social welfare initiatives including free medical camps
+          Beyond the clinic, Dr. Prashant leads several social welfare initiatives including free medical camps
           in rural areas, health awareness drives, and youth mentorship programs. His leadership in public
           health advocacy has earned recognition from numerous organizations.
         </p>

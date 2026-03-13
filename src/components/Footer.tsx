@@ -11,7 +11,7 @@ const Footer = () => (
         <div>
           <div className="flex items-center gap-2 mb-4">
             <Stethoscope className="text-primary" size={28} />
-            <span className="font-heading text-xl font-bold text-primary-foreground">Dr. Homeo</span>
+            <span className="font-heading text-xl font-bold text-primary-foreground">Dr. Prashant</span>
           </div>
           <p className="text-sm leading-relaxed opacity-80">
             A leading homeopathy practitioner and public health advocate committed to holistic healing and community wellness for over two decades.
@@ -55,8 +55,8 @@ const Footer = () => (
               123 Health Avenue, Medical District, Mumbai – 400001
             </li>
             <li>
-              <a href="mailto:info@drhomeo.com" className="flex items-center gap-2 opacity-80 hover:opacity-100 hover:text-primary transition-all">
-                <Mail size={16} /> info@drhomeo.com
+              <a href="mailto:info@drprashant.com" className="flex items-center gap-2 opacity-80 hover:opacity-100 hover:text-primary transition-all">
+                <Mail size={16} /> info@drprashant.com
               </a>
             </li>
             <li>
@@ -71,7 +71,7 @@ const Footer = () => (
 
     {/* Bottom strip */}
     <div className="border-t border-primary-foreground/10 py-5 text-center text-sm opacity-60">
-      © {new Date().getFullYear()} Dr. Homeo. All rights reserved.
+      © {new Date().getFullYear()} Dr. Prashant. All rights reserved.
     </div>
   </footer>
 );
