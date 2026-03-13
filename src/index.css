@@ -73,7 +73,7 @@
 
 @layer utilities {
   .section-padding {
-    @apply py-16 md:py-24 px-4 md:px-8;
+    @apply py-8 md:py-8 px-2 md:px-2;
   }
   .container-main {
     @apply max-w-7xl mx-auto;
