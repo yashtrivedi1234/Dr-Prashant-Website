@@ -50,7 +50,7 @@ const Contact = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-6"
+            className="font-heading text-4xl md:text-6xl font-bold text-foreground"
           >
             Schedule Your <span className="gradient-text">Consultation</span>
           </motion.h1>
