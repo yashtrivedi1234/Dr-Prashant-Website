@@ -4,8 +4,8 @@ import socialImg from "@/assets/social-work.jpg";
 
 const highlights = [
   { icon: Heart, text: "50K+ Lives Impacted" },
-  { icon: Globe, text: "100+ Free Camps" },
-  { icon: Award, text: "Multiple Awards" },
+  { icon: Globe, text: "100+ Free ENT Camps" },
+  { icon: Award, text: "Excellence in Care" },
 ];
 
 const SocialSection = () => (
@@ -19,16 +19,14 @@ const SocialSection = () => (
         className="order-2 md:order-1"
       >
         <span className="inline-block bg-accent text-accent-foreground text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase">Social Initiatives</span>
-        <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6 leading-tight">
-          A Public Figure Dedicated to <span className="gradient-text">Community Health</span>
+       <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6 leading-tight">
+          Dedicated to <span className="gradient-text">Community Health</span> & Awareness
         </h2>
         <p className="text-muted-foreground leading-relaxed mb-4">
-          Beyond the clinic, Dr. Prashant leads several social welfare initiatives including free medical camps
-          in rural areas, health awareness drives, and youth mentorship programs.
+          Beyond clinical practice, Dr. Prashant leads several social welfare initiatives, including free ENT screening camps, allergy awareness drives, and early-stage cancer detection programs in underserved areas.
         </p>
         <p className="text-muted-foreground leading-relaxed mb-8">
-          As the founder of the Holistic Health Foundation, he has impacted over 50,000 lives through
-          accessible healthcare and education programs.
+          Through his dedicated community outreach, he has impacted over 50,000 lives, actively advocating for deafness prevention, accessible healthcare, and critical health education.
         </p>
 
         <div className="flex flex-wrap gap-4 mb-8">

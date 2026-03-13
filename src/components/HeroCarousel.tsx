@@ -5,10 +5,12 @@ import hero1 from "@/assets/hero-1.jpg";
 import hero2 from "@/assets/hero-2.jpg";
 import hero3 from "@/assets/hero-3.jpg";
 
+import { Link } from "react-router-dom";
+
 const slides = [
-  { img: hero1, title: "Trusted Homeopathy Care", subtitle: "Healing naturally, one patient at a time" },
-  { img: hero2, title: "Compassionate Treatment", subtitle: "Personalized care for you and your family" },
-  { img: hero3, title: "Natural Remedies", subtitle: "Harnessing the power of nature for holistic health" },
+  { img: hero1, title: "Advanced ENT & Allergy Care", subtitle: "Expert clinical diagnosis and treatments by an Ex-SR PGIMER specialist." },
+  { img: hero2, title: "Vertigo & Sleep Solutions", subtitle: "State-of-the-art diagnostics including VNG and Drug-Induced Sleep Endoscopy." },
+  { img: hero3, title: "Surgical Excellence", subtitle: "Over 5 years of dedicated focus on complex ear surgeries and head & neck oncology." },
 ];
 
 const HeroCarousel = () => {
@@ -49,9 +51,9 @@ const HeroCarousel = () => {
               <p className="text-primary-foreground/90 text-lg md:text-xl max-w-xl drop-shadow mb-8">
                 {s.subtitle}
               </p>
-              <a href="#contact" className="inline-block gradient-primary text-primary-foreground px-8 py-3.5 rounded-full font-bold hover:opacity-90 transition-opacity shadow-lg">
+              <Link to="/contact" className="inline-block gradient-primary text-primary-foreground px-8 py-3.5 rounded-full font-bold hover:opacity-90 transition-opacity shadow-lg">
                 Book Appointment
-              </a>
+              </Link>
             </div>
           </div>
         </div>

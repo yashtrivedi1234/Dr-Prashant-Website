@@ -5,10 +5,10 @@ import { Link, useLocation } from "react-router-dom";
 const links = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Services", href: "/#services" },
-  { name: "Gallery", href: "/#gallery" },
-  { name: "Testimonials", href: "/#testimonials" },
-  { name: "Contact", href: "/#contact" }
+  { name: "Services", href: "/services" },
+  { name: "Gallery", href: "/gallery" },
+  { name: "Blog", href: "/blog" },
+  { name: "Contact", href: "/contact" }
 ];
 
 const Navbar = () => {
@@ -39,14 +39,14 @@ const Navbar = () => {
               {l.href.startsWith("/#") ? (
                 <a 
                   href={l.href} 
-                  className={`text-foreground/70 hover:text-primary font-medium transition-colors text-sm tracking-wide relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full ${location.hash === l.href.substring(1) ? "text-primary after:w-full" : ""}`}
+                  className={`text-foreground/70 hover:text-primary font-medium transition-colors text-lg tracking-wide relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full ${location.hash === l.href.substring(1) ? "text-primary after:w-full" : ""}`}
                 >
                   {l.name}
                 </a>
               ) : (
                 <Link 
                   to={l.href} 
-                  className={`text-foreground/70 hover:text-primary font-medium transition-colors text-sm tracking-wide relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full ${location.pathname === l.href ? "text-primary after:w-full" : ""}`}
+                  className={`text-foreground/70 hover:text-primary font-medium transition-colors text-lg tracking-wide relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full ${location.pathname === l.href ? "text-primary after:w-full" : ""}`}
                 >
                   {l.name}
                 </Link>

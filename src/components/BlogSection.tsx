@@ -1,13 +1,32 @@
 import { motion } from "framer-motion";
 import { Calendar, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
 
 const blogs = [
-  { img: blog1, date: "March 10, 2026", title: "Understanding Homeopathic Principles", excerpt: "Explore the fundamental principles that make homeopathy a unique and effective healing system.", color: "gradient-primary" },
-  { img: blog2, date: "March 5, 2026", title: "Natural Remedies for Seasonal Allergies", excerpt: "Discover how homeopathic remedies can help manage and prevent seasonal allergy symptoms naturally.", color: "gradient-warm" },
-  { img: blog3, date: "Feb 28, 2026", title: "Boosting Immunity the Holistic Way", excerpt: "Learn about natural ways to strengthen your immune system through diet, lifestyle, and homeopathy.", color: "gradient-teal" },
+  { 
+    img: blog1, 
+    date: "March 10, 2026", 
+    title: "Understanding Vertigo: Causes and Advanced Treatments", 
+    excerpt: "Explore the common triggers of dizziness and how state-of-the-art VNG testing helps in accurate diagnosis and management.", 
+    color: "gradient-primary" 
+  },
+  { 
+    img: blog2, 
+    date: "March 5, 2026", 
+    title: "Clinical Approaches to Seasonal Allergies", 
+    excerpt: "Discover how precise Skin Prick Testing and customized immunotherapy can provide lasting relief from severe environmental allergies.", 
+    color: "gradient-warm" 
+  },
+  { 
+    img: blog3, 
+    date: "Feb 28, 2026", 
+    title: "The Importance of Sleep Studies for Sleep Apnea", 
+    excerpt: "Learn how Drug-Induced Sleep Endoscopy (DISE) and comprehensive sleep studies can identify and effectively treat chronic snoring.", 
+    color: "gradient-teal" 
+  },
 ];
 
 const BlogSection = () => (
@@ -46,9 +65,9 @@ const BlogSection = () => (
                 {b.title}
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed mb-4">{b.excerpt}</p>
-              <a href="#" className="text-primary text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all">
+              <Link to="/blog" className="text-primary text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all">
                 Read More <ArrowRight size={16} />
-              </a>
+              </Link>
             </div>
           </motion.article>
         ))}

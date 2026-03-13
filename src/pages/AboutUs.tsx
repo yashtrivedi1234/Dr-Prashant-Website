@@ -1,28 +1,29 @@
 import { motion } from "framer-motion";
 import { Award, Clock, Users, Heart, Target, Lightbulb, CheckCircle2 } from "lucide-react";
 import doctorImg from "@/assets/doctor-portrait.jpg";
+import CTASection from "@/components/CTASection";
 
 const stats = [
-  { icon: Award, value: "20+", label: "Years Experience", color: "bg-primary" },
-  { icon: Users, value: "50K+", label: "Patients Treated", color: "gradient-warm" },
-  { icon: Clock, value: "24/7", label: "Available Support", color: "gradient-teal" },
+  { icon: Award, value: "14+", label: "Years Experience", color: "bg-primary" },
+  { icon: Users, value: "PGIMER", label: "Ex-Senior Resident", color: "gradient-warm" },
+  { icon: Clock, value: "24/7", label: "Dedicated Care", color: "gradient-teal" },
 ];
 
 const values = [
   {
     icon: Heart,
     title: "Compassionate Care",
-    description: "Treating every patient with dignity, respect, and deep empathy for their unique health journey."
+    description: "Treating every patient with dignity, respect, and deep empathy, ensuring personalized care for complex ENT conditions."
   },
   {
     icon: Target,
-    title: "Root Cause Focus",
-    description: "Going beyond symptoms to identify and address the underlying causes of illness through homeopathy."
+    title: "Advanced Diagnostics",
+    description: "Utilizing state-of-the-art Skin Prick Tests, VNG Tests, and Sleep Studies for accurate, root-cause assessments."
   },
   {
     icon: Lightbulb,
-    title: "Holistic Innovation",
-    description: "Combining traditional homeopathic wisdom with modern clinical insights for better patient outcomes."
+    title: "Surgical Excellence",
+    description: "Specialized in advanced Ear Surgery, Drug-Induced Sleep Endoscopy, and comprehensive Head & Neck Cancer management."
   }
 ];
 
@@ -51,7 +52,7 @@ const AboutUs = () => {
               transition={{ delay: 0.1 }}
               className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight"
             >
-              Dedicated to Your <span className="gradient-text">Holistic Wellness</span>
+              Advanced Care for <span className="gradient-text">ENT & Allergy</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -59,7 +60,7 @@ const AboutUs = () => {
               transition={{ delay: 0.2 }}
               className="text-lg text-muted-foreground leading-relaxed"
             >
-              Learn about Dr. Prashant's journey, his commitment to homeopathic excellence, and the vision that drives our healthcare practice.
+              Learn about Dr. Prashant's distinguished career, his exceptional surgical skills, and his commitment to comprehensive patient care.
             </motion.p>
           </div>
         </div>
@@ -82,10 +83,10 @@ const AboutUs = () => {
             />
             <div className="absolute -bottom-10 -right-6 lg:right-0 gradient-primary text-primary-foreground rounded-2xl p-8 shadow-2xl z-20 max-w-xs">
               <p className="text-4xl font-bold font-heading mb-1">Dr. Prashant</p>
-              <p className="text-sm opacity-90 leading-relaxed font-medium">B.H.M.S, M.D. (Homeopathy)</p>
+              <p className="text-sm opacity-90 leading-relaxed font-medium">MBBS, MS (ENT)</p>
               <div className="mt-4 pt-4 border-t border-white/20">
-                <p className="text-xs uppercase tracking-widest opacity-80 mb-1">Specialization</p>
-                <p className="text-sm font-semibold italic">Chronic Disease Specialist</p>
+                <p className="text-xs uppercase tracking-widest opacity-80 mb-1">Ex SR</p>
+                <p className="text-sm font-semibold italic">PGIMER Chandigarh</p>
               </div>
             </div>
           </motion.div>
@@ -97,23 +98,17 @@ const AboutUs = () => {
             transition={{ delay: 0.2 }}
           >
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
-              A Legacy of <span className="gradient-text">Homeopathic Excellence</span>
+              A Legacy of <span className="gradient-text">Medical Excellence</span>
             </h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed mb-8">
               <p>
-                Dr. Prashant is a distinguished homeopathy practitioner with over two decades of clinical experience. 
-                His journey in medicine began with a deep-seated belief that true healing comes from within and requires 
-                a holistic approach that respects the body's natural processes.
+                Dr. Prashant stands as one of the foremost authorities in the fields of ENT, Vertigo, Allergy, and Head & Neck Cancer specialties. His distinguished career is marked by excellence in patient care, research, and academics.
               </p>
               <p>
-                Having earned his M.D. in Homeopathy from one of the country's premier medical institutions, 
-                he has spent the last 20 years refining his practice, specializing in the treatment of persistent 
-                chronic conditions that often prove resistant to conventional treatments.
+                He completed his MBBS from PMCH, Patna in 2010, followed by an MS in ENT from IMS, B.H.U. Varanasi. As a prominent ENT Specialist formerly affiliated with the prestigious PGIMER Chandigarh, he has earned widespread recognition for his exceptional clinical skills and compassionate approach.
               </p>
               <p>
-                Beyond his private practice, Dr. Prashant is a regular speaker at international medical conferences 
-                and has published numerous papers on the efficacy of high-potency homeopathic remedies in 
-                autoimmune disorders.
+                For the last five years, Dr. Prashant has solely devoted his practice to advanced Ear Surgery, Allergy Testing & Immunotherapy, comprehensive Vertigo & VNG testing, Sleep Studies, Drug-Induced Sleep Endoscopy, and Head & Neck Cancer Surgeries.
               </p>
             </div>
 
@@ -134,7 +129,7 @@ const AboutUs = () => {
         <div className="container-main relative z-10">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">Our Core Philosophy</h2>
-            <p className="text-muted-foreground">Everything we do is guided by three fundamental principles that ensure the highest standard of patient care.</p>
+            <p className="text-muted-foreground">Everything we do is guided by three fundamental principles that ensure the highest standard of specialized ENT and Allergy care.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -168,12 +163,12 @@ const AboutUs = () => {
               </h2>
               <ul className="space-y-4">
                 {[
-                  "Personalized treatment plans tailored to your specific constitutional type.",
-                  "Comprehensive assessment including lifestyle, dietary, and emotional factors.",
-                  "Use of high-quality, ethically sourced homeopathic preparations.",
-                  "Continuous monitoring and adjustment of remedies for optimal progress.",
-                  "A patient-first approach that prioritizes education and long-term wellness.",
-                  "Modern clinic facilities designed for comfort and privacy."
+                  "Certified Allergy Expert providing advanced Skin Prick Tests & Immunotherapy.",
+                  "Certified in complete Vertigo, Vestibular, and Balance Assessment and Management.",
+                  "Proud Member of the Indian Society of Otology.",
+                  "Proud Member of the Indian Association of Sleep Apnea Surgeons.",
+                  "Specialized expertise in Drug-Induced Sleep Endoscopy and Sleep Studies.",
+                  "Over 5 years of dedicated focus on complex Head & Neck Cancer Surgeries."
                 ].map((item, i) => (
                   <motion.li 
                     key={i}
@@ -207,33 +202,7 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section-padding bg-primary text-primary-foreground relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full -translate-x-1/2 translate-y-1/2" />
-        </div>
-        <div className="container-main relative z-10 text-center">
-          <h2 className="font-heading text-3xl md:text-5xl font-bold mb-6">Ready to Start Your Healing Journey?</h2>
-          <p className="text-xl opacity-90 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-            Book a comprehensive consultation today and experience the transformative power of holistic homeopathic medicine.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="/#contact" 
-              className="bg-white text-primary px-10 py-4 rounded-full font-bold text-lg hover:bg-slate-50 transition-colors shadow-xl"
-            >
-              Book Appointment
-            </a>
-            <a 
-              href="tel:+911234567890" 
-              className="border-2 border-white/30 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-colors"
-            >
-              Emergency Call
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection />
     </>
   );
 };

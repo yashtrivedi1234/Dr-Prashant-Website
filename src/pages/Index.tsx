@@ -5,16 +5,20 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import SocialSection from "@/components/SocialSection";
 import GallerySection from "@/components/GallerySection";
 import BlogSection from "@/components/BlogSection";
+import CTASection from "@/components/CTASection";
+import StatsSection from "@/components/StatsSection";
 
 const Index = () => (
   <>
     <HeroCarousel />
     <AboutSection />
     <ServicesSection />
+    <StatsSection />
     <WhyChooseUs />
     <SocialSection />
     <GallerySection />
     <BlogSection />
+    <CTASection />
   </>
 );
 

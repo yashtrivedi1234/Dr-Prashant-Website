@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { Baby, Bone, HeartPulse, Smile, ArrowRight } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Ear, Activity, Mic, Wind, LucideIcon, ArrowRight } from 'lucide-react';
 
 interface Service {
   icon: LucideIcon;
@@ -10,10 +10,30 @@ interface Service {
 }
 
 const services: Service[] = [
-  { icon: HeartPulse, title: "Gynecology", desc: "Comprehensive women's health solutions with gentle homeopathic care and personalized treatment plans.", gradient: "gradient-primary" },
-  { icon: Baby, title: "Pediatrics", desc: "Safe and natural remedies for children's health, from common ailments to chronic conditions.", gradient: "gradient-warm" },
-  { icon: Bone, title: "Orthopedics", desc: "Holistic treatment for bone and joint issues, reducing pain through natural healing methods.", gradient: "gradient-teal" },
-  { icon: Smile, title: "Dental Care", desc: "Supportive homeopathic treatments for dental health, pain management, and oral wellness.", gradient: "gradient-primary" },
+  { 
+    icon: Ear, 
+    title: "Advanced Ear Surgery", 
+    desc: "Specialized surgical interventions like micro ear surgery, stapedectomy, and cochlear implants to restore hearing.", 
+    gradient: "gradient-primary" 
+  },
+  { 
+    icon: Activity, 
+    title: "Audiology & Hearing Aids", 
+    desc: "Comprehensive hearing assessments and advanced hearing aid fittings tailored to your specific lifestyle needs.", 
+    gradient: "gradient-warm" 
+  },
+  { 
+    icon: Mic, 
+    title: "Throat & Voice Care", 
+    desc: "Expert diagnosis and precise surgical treatments for voice disorders, chronic tonsillitis, and recurrent infections.", 
+    gradient: "gradient-teal" 
+  },
+  { 
+    icon: Wind, 
+    title: "Nose, Sinus & Sleep", 
+    desc: "Effective medical and surgical treatments for chronic sinusitis, breathing difficulties, and snoring solutions.", 
+    gradient: "gradient-primary" 
+  },
 ];
 
 const ServicesSection = () => (
@@ -49,9 +69,9 @@ const ServicesSection = () => (
             </div>
             <h3 className="font-heading text-xl font-semibold text-foreground mb-3">{s.title}</h3>
             <p className="text-muted-foreground text-sm leading-relaxed mb-4">{s.desc}</p>
-            <a href="#" className="text-primary text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all">
+            <Link to="/services" className="text-primary text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all">
               Explore More <ArrowRight size={16} />
-            </a>
+            </Link>
           </motion.div>
         ))}
       </div>

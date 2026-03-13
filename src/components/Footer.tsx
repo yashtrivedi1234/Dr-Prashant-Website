@@ -5,17 +5,18 @@ import { Link } from "react-router-dom";
 const quickLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Services", href: "/#services" },
-  { name: "Gallery", href: "/#gallery" },
-  { name: "Testimonials", href: "/#testimonials" },
-  { name: "Contact", href: "/#contact" }
+  { name: "Services", href: "/services" },
+  { name: "Gallery", href: "/gallery" },
+  { name: "Blog", href: "/blog" },
+  { name: "Contact", href: "/contact" }
 ];
+
 const serviceLinks = [
-  { name: "Gynecology", href: "/#services" },
-  { name: "Pediatrics", href: "/#services" },
-  { name: "Orthopedics", href: "/#services" },
-  { name: "Dental Care", href: "/#services" },
-  { name: "General Wellness", href: "/#services" }
+  { name: "Advanced Ear Surgery", href: "/services" },
+  { name: "Vertigo & Balance", href: "/services" },
+  { name: "Allergy & Immunology", href: "/services" },
+  { name: "Head & Neck Oncology", href: "/services" },
+  { name: "Sleep Apnea & Sinus", href: "/services" }
 ];
 
 const Footer = () => (
@@ -35,7 +36,7 @@ const Footer = () => (
             <span className="font-heading text-xl font-bold text-primary-foreground">Dr. Prashant</span>
           </div>
           <p className="text-sm leading-relaxed opacity-80">
-            A leading homeopathy practitioner and public health advocate committed to holistic healing and community wellness.
+            A leading ENT Specialist and Ex-SR PGIMER, dedicated to advanced surgical care, precise vertigo management, and comprehensive allergy treatments.
           </p>
         </motion.div>
 
@@ -73,19 +74,21 @@ const Footer = () => (
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}>
           <h4 className="font-heading text-lg font-semibold text-primary-foreground mb-4">Contact Us</h4>
-          <ul className="space-y-3 text-sm">
-            <li className="flex items-start gap-2 opacity-80">
-              <MapPin size={16} className="mt-0.5 shrink-0" />
-              123 Health Avenue, Medical District, Mumbai – 400001
+          <ul className="space-y-4 text-sm">
+            <li className="flex items-start gap-3 opacity-80">
+              <MapPin size={18} className="mt-0.5 shrink-0" />
+              <span>
+                560 V/161 Plot 3B Vijay Nagar, Kanpur Rd, Krishna Nagar, Lucknow, UP 226023
+              </span>
             </li>
             <li>
-              <a href="mailto:info@drprashant.com" className="flex items-center gap-2 opacity-80 hover:opacity-100 hover:text-primary transition-all">
-                <Mail size={16} /> info@drprashant.com
+              <a href="mailto:info@entvertigoallergy.in" className="flex items-center gap-3 opacity-80 hover:opacity-100 hover:text-primary transition-all">
+                <Mail size={16} /> info@entvertigoallergy.in
               </a>
             </li>
             <li>
-              <a href="tel:+911234567890" className="flex items-center gap-2 opacity-80 hover:opacity-100 hover:text-primary transition-all">
-                <Phone size={16} /> +91 123 456 7890
+              <a href="tel:+917658874707" className="flex items-center gap-3 opacity-80 hover:opacity-100 hover:text-primary transition-all">
+                <Phone size={16} /> +91 76588 74707
               </a>
             </li>
           </ul>
