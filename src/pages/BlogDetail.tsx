@@ -7,14 +7,13 @@ import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
 
-// Blog data - same as in Blog.tsx with full content
 const blogs = [
-  { 
+  {
     id: 1,
     slug: "understanding-vertigo-causes-and-advanced-treatments",
-    img: blog1, 
-    date: "March 10, 2026", 
-    title: "Understanding Vertigo: Causes and Advanced Treatments", 
+    img: blog1,
+    date: "March 10, 2026",
+    title: "Understanding Vertigo: Causes and Advanced Treatments",
     excerpt: "Explore the common triggers of dizziness and how state-of-the-art VNG testing helps in accurate diagnosis and management.",
     category: "Vertigo",
     author: "Dr. Prashant",
@@ -67,14 +66,14 @@ Treatment depends on the underlying cause:
 - Tympanic membrane injection for Meniere's disease
 
 Most cases of vertigo respond well to treatment, with patients experiencing significant improvement within weeks to months.`,
-    tags: ["Inner Ear", "VNG Testing", "Dizziness", "Balance Disorders"]
+    tags: ["Inner Ear", "VNG Testing", "Dizziness", "Balance Disorders"],
   },
-  { 
+  {
     id: 2,
     slug: "clinical-approaches-to-seasonal-allergies",
-    img: blog2, 
-    date: "March 5, 2026", 
-    title: "Clinical Approaches to Seasonal Allergies", 
+    img: blog2,
+    date: "March 5, 2026",
+    title: "Clinical Approaches to Seasonal Allergies",
     excerpt: "Discover how precise Skin Prick Testing and customized immunotherapy can provide lasting relief from severe environmental allergies.",
     category: "Allergies",
     author: "Dr. Prashant",
@@ -120,14 +119,14 @@ With proper diagnosis and treatment, most patients experience:
 - Prevention of complications like sinusitis and asthma
 
 Early intervention and personalized treatment plans lead to the best outcomes.`,
-    tags: ["Allergies", "Immunotherapy", "SPT Testing", "Seasonal Relief"]
+    tags: ["Allergies", "Immunotherapy", "SPT Testing", "Seasonal Relief"],
   },
-  { 
+  {
     id: 3,
     slug: "the-importance-of-sleep-studies-for-sleep-apnea",
-    img: blog3, 
-    date: "Feb 28, 2026", 
-    title: "The Importance of Sleep Studies for Sleep Apnea", 
+    img: blog3,
+    date: "Feb 28, 2026",
+    title: "The Importance of Sleep Studies for Sleep Apnea",
     excerpt: "Learn how Drug-Induced Sleep Endoscopy (DISE) and comprehensive sleep studies can identify and effectively treat chronic snoring.",
     category: "Sleep Health",
     author: "Dr. Prashant",
@@ -184,14 +183,14 @@ Based on DISE findings, we offer:
 - Nasal surgery for obstruction
 
 Early diagnosis through sleep studies prevents serious complications and significantly improves quality of life.`,
-    tags: ["Sleep Apnea", "DISE", "Snoring", "Sleep Medicine"]
+    tags: ["Sleep Apnea", "DISE", "Snoring", "Sleep Medicine"],
   },
-  { 
+  {
     id: 4,
     slug: "micro-ear-surgery-restoring-your-hearing",
-    img: blog1, 
-    date: "Feb 15, 2026", 
-    title: "Micro Ear Surgery: Restoring Your Hearing", 
+    img: blog1,
+    date: "Feb 15, 2026",
+    title: "Micro Ear Surgery: Restoring Your Hearing",
     excerpt: "A deep dive into advanced micro ear surgeries like Tympanoplasty and Stapedectomy, and what patients can expect during recovery.",
     category: "Surgery",
     author: "Dr. Prashant",
@@ -213,13 +212,13 @@ Abnormal bone growth in the middle ear fixes the stapes bone, preventing sound t
 ## Surgical Techniques
 
 **Tympanoplasty (Eardrum Repair)**
-Using an operating microscope and specialized instruments, we carefully place a tissue graft (usually fascia or cartilage) to repair the eardrum perforation. Success rates exceed 90%, with most patients experiencing improved hearing and reduced risk of infection.
+Using an operating microscope and specialized instruments, we carefully place a tissue graft to repair the eardrum perforation. Success rates exceed 90%.
 
 **Ossiculoplasty (Bone Reconstruction)**
-Damaged or missing ossicles can be replaced with prosthetic implants or the patient's own bone, restoring the sound transmission chain.
+Damaged ossicles can be replaced with prosthetic implants or the patient's own bone, restoring the sound transmission chain.
 
 **Stapes Surgery (Stapedectomy)**
-For otosclerosis, we remove the fixed stapes bone and insert a prosthetic stapes, restoring normal middle ear mechanics. This procedure often dramatically improves hearing.
+For otosclerosis, we remove the fixed stapes bone and insert a prosthetic stapes, restoring normal middle ear mechanics.
 
 ## Recovery and Outcomes
 
@@ -234,28 +233,21 @@ For otosclerosis, we remove the fixed stapes bone and insert a prosthetic stapes
 - Weeks 2-4: Gradual return to normal activity
 - Weeks 4-12: Complete healing, final hearing assessment
 
-**Success Rates**
-Most patients experience:
-- Improved hearing within weeks
-- Reduced ear infections (for perforation repair)
-- Return to normal activities
-- Long-term hearing stability
-
-Modern micro ear surgery combined with advanced imaging and magnification offers patients excellent chances for hearing restoration and improved quality of life.`,
-    tags: ["Ear Surgery", "Hearing Restoration", "Tympanoplasty", "Stapedectomy"]
+Modern micro ear surgery combined with advanced imaging offers patients excellent chances for hearing restoration.`,
+    tags: ["Ear Surgery", "Hearing Restoration", "Tympanoplasty", "Stapedectomy"],
   },
-  { 
+  {
     id: 5,
     slug: "head-and-neck-cancer-recognizing-early-signs",
-    img: blog2, 
-    date: "Feb 10, 2026", 
-    title: "Head & Neck Cancer: Recognizing Early Signs", 
+    img: blog2,
+    date: "Feb 10, 2026",
+    title: "Head & Neck Cancer: Recognizing Early Signs",
     excerpt: "Early detection is critical. Understand the warning signs of head and neck tumors and the comprehensive surgical options available.",
     category: "Oncology",
     author: "Dr. Prashant",
     readTime: "9 min read",
     color: "gradient-warm",
-    content: `Head and neck cancer represents about 4% of all cancers. Early detection significantly improves treatment outcomes and survival rates. Awareness of warning signs is crucial for timely intervention.
+    content: `Head and neck cancer represents about 4% of all cancers. Early detection significantly improves treatment outcomes and survival rates.
 
 ## Types of Head & Neck Cancer
 
@@ -267,18 +259,14 @@ Head and neck cancers can originate in:
 - Thyroid
 - Paranasal sinuses
 
-The most common type is squamous cell carcinoma, accounting for about 90% of cases.
-
 ## Warning Signs and Symptoms
 
-**Early Detection is Key:**
 - Persistent hoarseness lasting more than 2-3 weeks
 - Difficulty swallowing or throat pain
 - Unexplained neck lump or swelling
 - Chronic cough or coughing blood
 - Ear pain
 - Weight loss or loss of appetite
-- Numbness in the mouth or lip
 
 ## Risk Factors
 
@@ -286,26 +274,8 @@ The most common type is squamous cell carcinoma, accounting for about 90% of cas
 - Heavy alcohol consumption
 - HPV infection
 - Family history of cancer
-- Poor oral hygiene
-- Occupational exposures
-
-## Diagnostic Procedures
-
-**Physical Examination**
-Thorough examination of the head, neck, and oral cavity helps identify abnormalities.
-
-**Flexible Endoscopy**
-Allows direct visualization of the larynx, pharynx, and upper esophagus.
-
-**Biopsy**
-Tissue samples are taken for definitive diagnosis and pathological analysis.
-
-**Imaging Studies**
-CT and MRI help determine tumor size, location, and potential spread.
 
 ## Treatment Options
-
-Treatment depends on cancer stage, location, and patient factors:
 
 **Early-Stage Cancers**
 - Radiation therapy
@@ -317,122 +287,59 @@ Treatment depends on cancer stage, location, and patient factors:
 - Surgical resection with reconstruction
 - Immunotherapy options
 
-## Prevention Tips
-
-- Quit tobacco and limit alcohol
-- Maintain good oral hygiene
-- Get HPV vaccine if eligible
-- Protect yourself from sun exposure
-- Regular screening if high-risk
-
-Regular vigilance and prompt medical attention for any persistent symptoms can lead to early detection and excellent treatment outcomes.`,
-    tags: ["Cancer Screening", "Head & Neck Cancer", "Early Detection", "Oncology"]
+Regular vigilance and prompt medical attention for any persistent symptoms can lead to early detection and excellent outcomes.`,
+    tags: ["Cancer Screening", "Head & Neck Cancer", "Early Detection", "Oncology"],
   },
-  { 
+  {
     id: 6,
     slug: "advanced-immunotherapy-vs-antihistamines",
-    img: blog3, 
-    date: "Jan 25, 2026", 
-    title: "Advanced Immunotherapy vs. Antihistamines", 
+    img: blog3,
+    date: "Jan 25, 2026",
+    title: "Advanced Immunotherapy vs. Antihistamines",
     excerpt: "Why covering up symptoms isn't enough. Learn how clinical immunotherapy targets the root cause of allergic reactions for long-term relief.",
     category: "Treatment",
     author: "Dr. Prashant",
     readTime: "6 min read",
     color: "gradient-teal",
-    content: `Millions of allergy sufferers rely on antihistamines for symptom relief, but these medications only mask symptoms. Advanced immunotherapy addresses the root cause, offering long-term solutions for allergic diseases.
+    content: `Millions of allergy sufferers rely on antihistamines for symptom relief, but these medications only mask symptoms. Advanced immunotherapy addresses the root cause.
 
 ## How Antihistamines Work
 
-Antihistamines block the action of histamine, a chemical released during allergic reactions. While effective for symptom relief, they don't prevent histamine release or address the underlying immune dysfunction.
+Antihistamines block the action of histamine released during allergic reactions. While effective for symptom relief, they don't prevent histamine release or address the underlying immune dysfunction.
 
 **Limitations of Antihistamines:**
 - Only symptomatic relief
 - Require continuous use during allergy season
 - Tolerance can develop
 - May cause drowsiness or other side effects
-- Don't reduce disease severity over time
 
 ## Understanding Immunotherapy
 
-Immunotherapy, or hyposensitization, works by gradually retraining the immune system to tolerate allergens. This involves repeated exposure to increasing amounts of allergen.
+Immunotherapy works by gradually retraining the immune system to tolerate allergens through repeated exposure to increasing amounts of allergen.
 
 ### Types of Immunotherapy
 
-**Subcutaneous Immunotherapy (SCIT - Allergy Shots)**
+**Subcutaneous Immunotherapy (SCIT)**
 - Regular injections over 3-5 years
-- Builds gradually from low to therapeutic doses
 - Most established and widely used method
-- Effective for environmental and some food allergies
 
-**Sublingual Immunotherapy (SLIT - Allergy Tablets)**
-- Tablets dissolve under the tongue
-- Daily administration
+**Sublingual Immunotherapy (SLIT)**
+- Tablets dissolve under the tongue daily
 - Particularly effective for pollen allergies
-- More convenient than injections
 
 **Oral Immunotherapy (OIT)**
-- Gradually increasing doses of allergen (typically food)
+- Gradually increasing doses of food allergen
 - Useful for food allergy desensitization
-- More specialized and less commonly used
 
 ## Benefits of Immunotherapy
 
-**Long-Term Symptom Reduction**
 - 60-90% of patients experience significant improvement
 - Benefits persist even after discontinuing treatment
-- Reduced need for rescue medications
-
-**Prevention of Disease Progression**
 - Prevents development of new allergies
-- Reduces risk of allergic asthma development
-- Prevents anaphylaxis in food-allergic individuals
+- Improved quality of life
 
-**Quality of Life Improvement**
-- Fewer days with restricted activity
-- Better sleep quality
-- Improved concentration and productivity
-
-## Treatment Timeline
-
-**Initial Phase (Buildup Phase): 3-6 months**
-- Frequent visits (1-2 per week)
-- Gradually increasing allergen doses
-- Monitoring for adverse reactions
-
-**Maintenance Phase: 3-5 years**
-- Monthly visits for maintenance injections/tablets
-- Stable allergen dose
-- Continued symptom improvement
-
-**Post-Treatment Phase**
-- Treatment typically continued 3-5 years
-- Many patients experience long-term benefit
-- Annual monitoring recommended
-
-## Side Effects and Safety
-
-While immunotherapy is generally safe when administered properly, potential side effects include:
-- Local reactions at injection site
-- Mild systemic reactions (sneezing, itching)
-- Rare but serious anaphylaxis (requiring emergency treatment)
-
-Our clinic has emergency equipment and trained staff to manage any adverse reactions.
-
-## Who Is a Candidate?
-
-Immunotherapy is ideal for patients with:
-- Allergic rhinitis uncontrolled by medications
-- Allergic asthma
-- Documented allergen sensitivities
-- Motivation for long-term treatment
-- No severe uncontrolled asthma
-
-## Conclusion
-
-While antihistamines provide quick symptom relief, immunotherapy offers a path to long-term freedom from allergies. For many patients, immunotherapy represents a life-changing treatment that addresses the root cause of allergic disease rather than just masking symptoms.
-
-If you're struggling with allergies despite using antihistamines, ask your doctor about whether immunotherapy might be right for you.`,
-    tags: ["Immunotherapy", "Allergies", "Treatment Options", "Long-term Relief"]
+While antihistamines provide quick symptom relief, immunotherapy offers a path to long-term freedom from allergies.`,
+    tags: ["Immunotherapy", "Allergies", "Treatment Options", "Long-term Relief"],
   },
 ];
 
@@ -444,59 +351,82 @@ const BlogDetail = () => {
 
   if (!blog) {
     return (
-      <div className="bg-background min-h-screen flex flex-col items-center justify-center gap-6">
+      <div className="bg-background min-h-screen flex flex-col items-center justify-center gap-6 px-4">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-foreground mb-2">Blog Post Not Found</h1>
-          <p className="text-muted-foreground mb-6">The blog post you're looking for doesn't exist.</p>
+          <h1 className="font-bold text-foreground mb-2
+            text-2xl sm:text-3xl lg:text-4xl">
+            Blog Post Not Found
+          </h1>
+          <p className="text-muted-foreground mb-6 text-sm sm:text-base">
+            The blog post you're looking for doesn't exist.
+          </p>
           <Button onClick={() => navigate("/blog")} className="gap-2">
-            <ArrowLeft size={18} /> Back to Blog
+            <ArrowLeft size={16} /> Back to Blog
           </Button>
         </div>
       </div>
     );
   }
 
-  // Get related posts (other posts in same category)
   const relatedPosts = blogs
     .filter((b) => b.category === blog.category && b.id !== blog.id)
     .slice(0, 3);
 
   return (
     <div className="bg-background">
-  
-     
 
-   
-
-      {/* Article Header */}
+      {/* ── Article Header ── */}
       <section className="bg-slate-50 border-b border-slate-200">
-        <div className="container-main py-12">
+        <div className="container-main py-8 sm:py-10 lg:py-12 px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="max-w-4xl mx-auto"
           >
-            <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
+            {/* Back button */}
+            <button
+              onClick={() => navigate("/blog")}
+              className="flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors mb-5 sm:mb-6
+                text-xs sm:text-sm font-medium"
+            >
+              <ArrowLeft size={15} /> Back to Blog
+            </button>
+
+            {/* Category badge */}
+            <div className={`inline-block ${blog.color} text-primary-foreground text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-3 sm:mb-4`}>
+              {blog.category}
+            </div>
+
+            <h1 className="font-heading font-bold text-foreground mb-4 sm:mb-5 lg:mb-6 leading-tight
+              text-xl sm:text-3xl md:text-4xl lg:text-5xl">
               {blog.title}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground mb-6">
-              <div className="flex items-center gap-2">
-                <User size={16} /> {blog.author}
+            {/* Meta row */}
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 lg:gap-6 text-muted-foreground mb-4 sm:mb-5 lg:mb-6
+              text-xs sm:text-sm">
+              <div className="flex items-center gap-1.5">
+                <User size={13} className="sm:w-4 sm:h-4 flex-shrink-0" />
+                {blog.author}
               </div>
-              <div className="flex items-center gap-2">
-                <Calendar size={16} /> {blog.date}
+              <div className="flex items-center gap-1.5">
+                <Calendar size={13} className="sm:w-4 sm:h-4 flex-shrink-0" />
+                {blog.date}
               </div>
               <div>{blog.readTime}</div>
             </div>
 
-            <div className="flex flex-wrap gap-2">
+            {/* Tags */}
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {blog.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="inline-flex items-center gap-1 bg-white border border-slate-200 text-xs px-3 py-1 rounded-full text-muted-foreground hover:border-primary transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1 bg-white border border-slate-200 text-muted-foreground hover:border-primary transition-colors cursor-pointer
+                    text-[10px] sm:text-xs
+                    px-2.5 py-0.5 sm:px-3 sm:py-1
+                    rounded-full"
                 >
-                  <Tag size={12} /> {tag}
+                  <Tag size={10} className="sm:w-3 sm:h-3" /> {tag}
                 </span>
               ))}
             </div>
@@ -504,40 +434,41 @@ const BlogDetail = () => {
         </div>
       </section>
 
-      {/* Main Content */}
+      {/* ── Main Content ── */}
       <section className="section-padding">
-        <div className="container-main max-w-4xl">
+        <div className="container-main max-w-4xl px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="prose prose-lg max-w-none"
           >
-            <div className="bg-white rounded-2xl p-8 md:p-12 border border-slate-200">
+            <div className="bg-white border border-slate-200 rounded-xl sm:rounded-2xl
+              p-5 sm:p-8 md:p-10 lg:p-12">
               <div className="text-muted-foreground leading-relaxed">
-                {blog.content.split('\n\n').map((paragraph, idx) => {
-                  // Show first image after 3 paragraphs
-                  const showFirstImage = idx === 3;
-                  // Show second image after 7 paragraphs
+                {blog.content.split("\n\n").map((paragraph, idx) => {
+                  const showFirstImage  = idx === 3;
                   const showSecondImage = idx === 7;
-                  // Show third image after 11 paragraphs
-                  const showThirdImage = idx === 11;
+                  const showThirdImage  = idx === 11;
 
                   return (
                     <div key={idx}>
-                      <p className="whitespace-pre-wrap mb-6">{paragraph}</p>
-                      
+                      <p className="whitespace-pre-wrap mb-4 sm:mb-5 lg:mb-6
+                        text-sm sm:text-base leading-relaxed">
+                        {paragraph}
+                      </p>
+
                       {showFirstImage && (
                         <motion.div
                           initial={{ opacity: 0, scale: 0.95 }}
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
-                          className="my-12 rounded-xl overflow-hidden shadow-lg"
+                          className="my-6 sm:my-8 lg:my-12 rounded-xl overflow-hidden shadow-lg"
                         >
                           <img
                             src={blog.img}
                             alt={`${blog.title} illustration`}
-                            className="w-full h-64 object-cover"
+                            className="w-full object-cover h-40 sm:h-52 lg:h-64"
+                            loading="lazy"
                           />
                         </motion.div>
                       )}
@@ -547,12 +478,13 @@ const BlogDetail = () => {
                           initial={{ opacity: 0, scale: 0.95 }}
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
-                          className="my-12 rounded-xl overflow-hidden shadow-lg"
+                          className="my-6 sm:my-8 lg:my-12 rounded-xl overflow-hidden shadow-lg"
                         >
                           <img
                             src={blog2}
                             alt={`${blog.title} related image`}
-                            className="w-full h-64 object-cover"
+                            className="w-full object-cover h-40 sm:h-52 lg:h-64"
+                            loading="lazy"
                           />
                         </motion.div>
                       )}
@@ -562,12 +494,13 @@ const BlogDetail = () => {
                           initial={{ opacity: 0, scale: 0.95 }}
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
-                          className="my-12 rounded-xl overflow-hidden shadow-lg"
+                          className="my-6 sm:my-8 lg:my-12 rounded-xl overflow-hidden shadow-lg"
                         >
                           <img
                             src={blog3}
                             alt={`${blog.title} additional image`}
-                            className="w-full h-64 object-cover"
+                            className="w-full object-cover h-40 sm:h-52 lg:h-64"
+                            loading="lazy"
                           />
                         </motion.div>
                       )}
@@ -578,30 +511,35 @@ const BlogDetail = () => {
             </div>
           </motion.div>
 
-          {/* Share Section */}
+          {/* Share row */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-12 pt-8 border-t border-slate-200 flex items-center gap-6"
+            className="mt-8 sm:mt-10 lg:mt-12 pt-6 sm:pt-7 lg:pt-8 border-t border-slate-200 flex items-center gap-4 sm:gap-6 flex-wrap"
           >
-            <span className="font-semibold text-foreground">Share this article:</span>
-            <button className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors">
-              <Share2 size={18} /> Share
+            <span className="font-semibold text-foreground text-sm sm:text-base">
+              Share this article:
+            </span>
+            <button className="inline-flex items-center gap-1.5 sm:gap-2 text-primary hover:text-primary/80 transition-colors
+              text-sm sm:text-base">
+              <Share2 size={15} className="sm:w-[18px] sm:h-[18px]" /> Share
             </button>
           </motion.div>
         </div>
       </section>
 
-      {/* Related Posts */}
+      {/* ── Related Posts ── */}
       {relatedPosts.length > 0 && (
         <section className="section-padding bg-slate-50">
           <div className="container-main">
-            <h2 className="font-heading text-3xl font-bold text-foreground mb-12 text-center">
+            <h2 className="font-heading font-bold text-foreground text-center
+              mb-8 sm:mb-10 lg:mb-12
+              text-2xl sm:text-3xl">
               Related Articles
             </h2>
 
-            <div className="grid md:grid-cols-3 gap-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-10">
               {relatedPosts.map((post, index) => (
                 <motion.article
                   key={post.id}
@@ -612,25 +550,34 @@ const BlogDetail = () => {
                   onClick={() => navigate(`/blog/${post.slug}`)}
                   className="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100 cursor-pointer"
                 >
-                  <div className="relative overflow-hidden aspect-[16/10]">
+                  <div className="relative overflow-hidden aspect-[16/10] flex-shrink-0">
                     <img
                       src={post.img}
                       alt={post.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      loading="lazy"
                     />
-                    <div className={`absolute top-6 left-6 ${post.color} text-primary-foreground text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest`}>
+                    <div className={`
+                      absolute ${post.color} text-primary-foreground font-bold uppercase tracking-widest rounded-full
+                      top-3 left-3 text-[9px] px-2.5 py-1
+                      sm:top-4 sm:left-4 sm:text-[10px] sm:px-3 sm:py-1.5
+                    `}>
                       {post.category}
                     </div>
                   </div>
 
-                  <div className="p-6 flex flex-col flex-1">
-                    <div className="flex items-center gap-2 text-slate-400 text-xs font-semibold uppercase tracking-wider mb-3">
-                      <Calendar size={14} /> {post.date}
+                  <div className="p-4 sm:p-5 lg:p-6 flex flex-col flex-1">
+                    <div className="flex items-center gap-1.5 text-slate-400 font-semibold uppercase tracking-wider mb-2 sm:mb-3
+                      text-[10px] sm:text-xs">
+                      <Calendar size={11} className="sm:w-3.5 sm:h-3.5 flex-shrink-0" />
+                      {post.date}
                     </div>
-                    <h3 className="font-heading text-lg font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors leading-tight">
+                    <h3 className="font-heading font-bold text-slate-900 group-hover:text-primary transition-colors leading-tight mb-2 sm:mb-3
+                      text-sm sm:text-base lg:text-lg">
                       {post.title}
                     </h3>
-                    <p className="text-slate-500 text-sm leading-relaxed mb-6 flex-1">
+                    <p className="text-slate-500 leading-relaxed flex-1
+                      text-xs sm:text-sm">
                       {post.excerpt}
                     </p>
                   </div>
@@ -641,7 +588,6 @@ const BlogDetail = () => {
         </section>
       )}
 
-      {/* CTA Section */}
       <CTASection />
     </div>
   );

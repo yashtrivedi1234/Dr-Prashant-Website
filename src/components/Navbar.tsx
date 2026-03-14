@@ -7,78 +7,67 @@ const links = [
   {
     name: "About",
     submenu: [
-      { name: "About Doctor", href: "/about", desc: "Meet Dr. Prashant" },
-      {
-        name: "About Clinic",
-        href: "/clinic-about",
-        desc: "Our facility & team",
-      },
+      { name: "About Doctor", href: "/about",        desc: "Meet Dr. Prashant" },
+      { name: "About Clinic", href: "/clinic-about", desc: "Our facility & team" },
     ],
   },
   {
     name: "Allergy Clinic",
     submenu: [
-      {
-        name: "Allergy Testing",
-        href: "/allergy",
-        desc: "Comprehensive allergen testing",
-      },
-      {
-        name: "Oral Immunotherapy",
-        href: "/oral-immunotherapy",
-        desc: "Food allergy treatment",
-      },
+      { name: "Allergy Testing",     href: "/allergy",              desc: "Comprehensive allergen testing" },
+      { name: "Oral Immunotherapy",  href: "/oral-immunotherapy",   desc: "Food allergy treatment" },
     ],
   },
-  { name: "Vertigo Clinic", href: "/vertigo" },
-  { name: "Snoring Clinic", href: "/snoring" },
-  { name: "Treatments", href: "/services" },
-  { name: "Gallery", href: "/gallery" },
-  { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" },
+  { name: "Vertigo Clinic",  href: "/vertigo" },
+  { name: "Snoring Clinic",  href: "/snoring" },
+  { name: "Treatments",      href: "/services" },
+  { name: "Gallery",         href: "/gallery" },
+  { name: "Blog",            href: "/blog" },
+  { name: "Contact",         href: "/contact" },
 ];
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const [mobileOpenDropdown, setMobileOpenDropdown] = useState<string | null>(
-    null,
-  );
+  const [open, setOpen]                           = useState(false);
+  const [scrolled, setScrolled]                   = useState(false);
+  const [openDropdown, setOpenDropdown]           = useState<string | null>(null);
+  const [mobileOpenDropdown, setMobileOpenDropdown] = useState<string | null>(null);
   const dropdownRefs = useRef<Record<string, HTMLLIElement | null>>({});
   const location = useLocation();
 
+  /* Scroll shadow */
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close dropdown on outside click
+  /* Close desktop dropdown on outside click */
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      const clickedInsideAny = Object.values(dropdownRefs.current).some(
+      const inside = Object.values(dropdownRefs.current).some(
         (el) => el && el.contains(e.target as Node),
       );
-      if (!clickedInsideAny) {
-        setOpenDropdown(null);
-      }
+      if (!inside) setOpenDropdown(null);
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  // Close mobile menu on route change
+  /* Close everything on route change */
   useEffect(() => {
     setOpen(false);
     setMobileOpenDropdown(null);
   }, [location.pathname]);
 
-  const isActive = (href: string) => location.pathname === href;
-  const isAboutActive = ["/about", "/clinic-about"].includes(location.pathname);
-  const isAllergyActive = ["/allergy", "/oral-immunotherapy"].includes(
-    location.pathname,
-  );
+  /* Lock body scroll when mobile menu is open */
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  const isActive        = (href: string) => location.pathname === href;
+  const isAboutActive   = ["/about", "/clinic-about"].includes(location.pathname);
+  const isAllergyActive = ["/allergy", "/oral-immunotherapy"].includes(location.pathname);
 
   return (
     <>
@@ -89,44 +78,40 @@ const Navbar = () => {
             : "bg-background border-b border-border/30"
         }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between py-3 px-4 md:px-8">
-          {/* Logo */}
+        <div className="max-w-7xl mx-auto flex items-center justify-between py-3 px-4 sm:px-6 md:px-8">
+
+          {/* ── Logo ── */}
           <Link
             to="/"
-            className="flex items-center gap-3 group"
+            className="flex items-center gap-2 sm:gap-3 group flex-shrink-0"
             aria-label="Dr. Prashant Home"
           >
-            <div className="gradient-primary p-2 rounded-xl shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all duration-200">
-              <Stethoscope className="text-primary-foreground" size={22} />
+            <div className="gradient-primary p-1.5 sm:p-2 rounded-xl shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all duration-200 flex-shrink-0">
+              <Stethoscope className="text-primary-foreground" size={20} />
             </div>
             <div className="flex flex-col leading-tight">
-              <span className="font-heading text-lg font-bold gradient-text tracking-tight">
+              <span className="font-heading text-base sm:text-lg font-bold gradient-text tracking-tight">
                 Dr. Prashant
               </span>
-              <span className="text-[10px] text-muted-foreground font-medium tracking-widest uppercase hidden sm:block">
+              <span className="text-[9px] sm:text-[10px] text-muted-foreground font-medium tracking-widest uppercase hidden sm:block">
                 Specialist Clinic
               </span>
             </div>
           </Link>
 
-          {/* Desktop Nav */}
-          <ul className="hidden md:flex items-center gap-1" role="menubar">
+          {/* ── Desktop Nav ── */}
+          <ul className="hidden lg:flex items-center gap-0.5 xl:gap-1" role="menubar">
             {links.map((l) => {
               if ("submenu" in l) {
                 const isOpen = openDropdown === l.name;
                 const isHighlighted =
-                  l.name === "About"
-                    ? isAboutActive
-                    : l.name === "Allergy Clinic"
-                      ? isAllergyActive
-                      : false;
+                  l.name === "About"         ? isAboutActive :
+                  l.name === "Allergy Clinic" ? isAllergyActive : false;
 
                 return (
                   <li
                     key={l.name}
-                    ref={(el) => {
-                      dropdownRefs.current[l.name] = el;
-                    }}
+                    ref={(el) => { dropdownRefs.current[l.name] = el; }}
                     className="relative"
                     role="none"
                   >
@@ -137,7 +122,7 @@ const Navbar = () => {
                       onClick={() => setOpenDropdown(isOpen ? null : l.name)}
                       onMouseEnter={() => setOpenDropdown(l.name)}
                       onMouseLeave={() => setOpenDropdown(null)}
-                      className={`flex items-center gap-1.5 px-3 py-2 rounded-lg font-medium text-sm tracking-wide transition-all duration-200 ${
+                      className={`flex items-center gap-1 xl:gap-1.5 px-2 xl:px-3 py-2 rounded-lg font-medium text-xs xl:text-sm tracking-wide transition-all duration-200 whitespace-nowrap ${
                         isHighlighted
                           ? "text-primary bg-primary/8"
                           : "text-foreground/70 hover:text-primary hover:bg-primary/5"
@@ -145,12 +130,12 @@ const Navbar = () => {
                     >
                       {l.name}
                       <ChevronDown
-                        size={15}
-                        className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                        size={13}
+                        className={`transition-transform duration-200 flex-shrink-0 ${isOpen ? "rotate-180" : ""}`}
                       />
                     </button>
 
-                    {/* Dropdown */}
+                    {/* Dropdown panel */}
                     <div
                       onMouseEnter={() => setOpenDropdown(l.name)}
                       onMouseLeave={() => setOpenDropdown(null)}
@@ -160,23 +145,19 @@ const Navbar = () => {
                           : "opacity-0 scale-y-95 pointer-events-none -translate-y-1"
                       }`}
                     >
-                      <div className="bg-background border border-border rounded-xl shadow-xl shadow-primary/10 overflow-hidden min-w-[220px] py-1">
+                      <div className="bg-background border border-border rounded-xl shadow-xl shadow-primary/10 overflow-hidden min-w-[200px] xl:min-w-[220px] py-1">
                         {l.submenu?.map((item) => (
                           <Link
                             key={item.name}
                             to={item.href}
-                            className={`flex flex-col px-4 py-3 transition-all duration-150 border-l-2 mx-1 rounded-lg my-0.5 ${
+                            className={`flex flex-col px-3 xl:px-4 py-2.5 xl:py-3 transition-all duration-150 border-l-2 mx-1 rounded-lg my-0.5 ${
                               isActive(item.href)
                                 ? "border-primary bg-primary/8 text-primary"
                                 : "border-transparent hover:border-primary/40 hover:bg-primary/5 text-foreground/80 hover:text-primary"
                             }`}
                           >
-                            <span className="font-semibold text-sm">
-                              {item.name}
-                            </span>
-                            <span className="text-xs text-muted-foreground mt-0.5">
-                              {item.desc}
-                            </span>
+                            <span className="font-semibold text-xs xl:text-sm">{item.name}</span>
+                            <span className="text-[10px] xl:text-xs text-muted-foreground mt-0.5">{item.desc}</span>
                           </Link>
                         ))}
                       </div>
@@ -190,7 +171,7 @@ const Navbar = () => {
                   <Link
                     to={l.href}
                     role="menuitem"
-                    className={`px-3 py-2 rounded-lg font-medium text-sm tracking-wide transition-all duration-200 block ${
+                    className={`px-2 xl:px-3 py-2 rounded-lg font-medium text-xs xl:text-sm tracking-wide transition-all duration-200 block whitespace-nowrap ${
                       isActive(l.href)
                         ? "text-primary bg-primary/8"
                         : "text-foreground/70 hover:text-primary hover:bg-primary/5"
@@ -203,35 +184,29 @@ const Navbar = () => {
             })}
           </ul>
 
-          {/* CTA + Hamburger */}
-          <div className="flex items-center gap-3">
+          {/* ── CTA + Hamburger ── */}
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             <a
               href="/contact"
-              className="hidden md:flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-semibold shadow-sm hover:shadow-md hover:brightness-105 active:scale-95 transition-all duration-200"
+              className="hidden lg:flex items-center gap-1.5 xl:gap-2 bg-primary text-primary-foreground px-3 xl:px-4 py-2 rounded-lg text-xs xl:text-sm font-semibold shadow-sm hover:shadow-md hover:brightness-105 active:scale-95 transition-all duration-200 whitespace-nowrap"
             >
-              <Phone size={14} />
+              <Phone size={13} />
               Book Appointment
             </a>
 
+            {/* Hamburger — shown below lg */}
             <button
               onClick={() => setOpen(!open)}
-              className="md:hidden p-2 rounded-lg text-foreground hover:bg-primary/10 transition-colors"
+              className="lg:hidden p-2 rounded-lg text-foreground hover:bg-primary/10 transition-colors"
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
+              aria-controls="mobile-menu"
             >
               <div className="relative w-5 h-5">
-                <span
-                  className={`absolute inset-0 flex items-center justify-center transition-all duration-200 ${
-                    open ? "opacity-100 rotate-0" : "opacity-0 rotate-90"
-                  }`}
-                >
+                <span className={`absolute inset-0 flex items-center justify-center transition-all duration-200 ${open ? "opacity-100 rotate-0" : "opacity-0 rotate-90"}`}>
                   <X size={20} />
                 </span>
-                <span
-                  className={`absolute inset-0 flex items-center justify-center transition-all duration-200 ${
-                    open ? "opacity-0 -rotate-90" : "opacity-100 rotate-0"
-                  }`}
-                >
+                <span className={`absolute inset-0 flex items-center justify-center transition-all duration-200 ${open ? "opacity-0 -rotate-90" : "opacity-100 rotate-0"}`}>
                   <Menu size={20} />
                 </span>
               </div>
@@ -239,30 +214,29 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* ── Mobile / Tablet Menu ── */}
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-            open ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
+          className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+            open ? "max-h-[85vh] opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="bg-background border-t border-border/50 px-4 py-3 space-y-1">
+          <div className="bg-background border-t border-border/50 px-4 py-3 space-y-0.5 overflow-y-auto max-h-[calc(85vh-1px)]">
             {links.map((l) => {
               if ("submenu" in l) {
                 const isMobileOpen = mobileOpenDropdown === l.name;
                 const isHighlighted =
-                  l.name === "About"
-                    ? isAboutActive
-                    : l.name === "Allergy Clinic"
-                      ? isAllergyActive
-                      : false;
+                  l.name === "About"          ? isAboutActive :
+                  l.name === "Allergy Clinic" ? isAllergyActive : false;
 
                 return (
                   <div key={l.name}>
                     <button
-                      onClick={() =>
-                        setMobileOpenDropdown(isMobileOpen ? null : l.name)
-                      }
-                      className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg font-medium text-sm transition-colors ${
+                      onClick={() => setMobileOpenDropdown(isMobileOpen ? null : l.name)}
+                      className={`w-full flex items-center justify-between px-3 py-3 rounded-lg font-medium text-sm transition-colors ${
                         isHighlighted
                           ? "text-primary bg-primary/8"
                           : "text-foreground/80 hover:text-primary hover:bg-primary/5"
@@ -271,17 +245,14 @@ const Navbar = () => {
                       {l.name}
                       <ChevronDown
                         size={15}
-                        className={`transition-transform duration-200 ${isMobileOpen ? "rotate-180" : ""}`}
+                        className={`flex-shrink-0 transition-transform duration-200 ${isMobileOpen ? "rotate-180" : ""}`}
                       />
                     </button>
-                    <div
-                      className={`overflow-hidden transition-all duration-200 ${
-                        isMobileOpen
-                          ? "max-h-40 opacity-100"
-                          : "max-h-0 opacity-0"
-                      }`}
-                    >
-                      <div className="ml-3 mt-1 border-l-2 border-primary/30 pl-3 space-y-1">
+
+                    <div className={`overflow-hidden transition-all duration-200 ${
+                      isMobileOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
+                    }`}>
+                      <div className="ml-3 mt-0.5 mb-1 border-l-2 border-primary/30 pl-3 space-y-0.5">
                         {l.submenu?.map((item) => (
                           <Link
                             key={item.name}
@@ -292,10 +263,8 @@ const Navbar = () => {
                                 : "text-foreground/70 hover:text-primary"
                             }`}
                           >
-                            <span className="font-medium">{item.name}</span>
-                            <span className="text-xs text-muted-foreground">
-                              {item.desc}
-                            </span>
+                            <span className="font-medium text-sm">{item.name}</span>
+                            <span className="text-xs text-muted-foreground">{item.desc}</span>
                           </Link>
                         ))}
                       </div>
@@ -308,7 +277,7 @@ const Navbar = () => {
                 <Link
                   key={l.name}
                   to={l.href}
-                  className={`block px-3 py-2.5 rounded-lg font-medium text-sm transition-colors ${
+                  className={`block px-3 py-3 rounded-lg font-medium text-sm transition-colors ${
                     isActive(l.href)
                       ? "text-primary bg-primary/8"
                       : "text-foreground/80 hover:text-primary hover:bg-primary/5"

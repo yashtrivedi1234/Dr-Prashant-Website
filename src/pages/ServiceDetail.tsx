@@ -1,6 +1,9 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { CheckCircle2, ArrowLeft, ArrowRight, Zap, Activity, Ear, Mic, Wind, Moon, Volume2, Stethoscope, Smile, Phone, Calendar, Shield } from "lucide-react";
+import {
+  CheckCircle2, ArrowLeft, ArrowRight, Zap, Activity, Ear,
+  Mic, Wind, Moon, Volume2, Stethoscope, Smile, Phone, Calendar, Shield,
+} from "lucide-react";
 import CTASection from "@/components/CTASection";
 
 const mainServices = [
@@ -96,81 +99,156 @@ const ServiceDetail = () => {
 
   if (!service) {
     return (
-      <div className="bg-background min-h-screen flex flex-col items-center justify-center gap-6">
-        <h2 className="font-heading text-2xl font-bold">Service not found</h2>
-        <button onClick={() => navigate("/services")} className="text-primary font-semibold flex items-center gap-2">
-          <ArrowLeft size={18} /> Back to Services
+      <div className="bg-background min-h-screen flex flex-col items-center justify-center gap-4 px-4">
+        <h2 className="font-heading font-bold text-foreground text-xl sm:text-2xl">
+          Service not found
+        </h2>
+        <button
+          onClick={() => navigate("/services")}
+          className="text-primary font-semibold flex items-center gap-2 text-sm sm:text-base"
+        >
+          <ArrowLeft size={16} /> Back to Services
         </button>
       </div>
     );
   }
 
   const Icon = service.icon;
-  const prevService = serviceIndex > 0 ? mainServices[serviceIndex - 1] : null;
-  const nextService = serviceIndex < mainServices.length - 1 ? mainServices[serviceIndex + 1] : null;
+  const prevService    = serviceIndex > 0 ? mainServices[serviceIndex - 1] : null;
+  const nextService    = serviceIndex < mainServices.length - 1 ? mainServices[serviceIndex + 1] : null;
   const relatedServices = mainServices.filter((s) => s.id !== service.id).slice(0, 3);
 
   return (
     <div className="bg-background">
-      {/* Hero */}
-      <section className="relative py-5 overflow-hidden">
-        <div className={`absolute inset-0 ${service.gradient} opacity-[0.04] pointer-events-none`} />
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full translate-x-1/3 -translate-y-1/3 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 rounded-full -translate-x-1/3 translate-y-1/3 blur-3xl pointer-events-none" />
 
-        <div className="container-main relative z-10">
+      {/* ── Hero ── */}
+      <section className="relative py-10 sm:py-14 md:py-16 overflow-hidden">
+        <div className={`absolute inset-0 ${service.gradient} opacity-[0.04] pointer-events-none`} />
+        <div className="absolute top-0 right-0 w-48 h-48 sm:w-72 sm:h-72 lg:w-[600px] lg:h-[600px] bg-primary/5 rounded-full translate-x-1/3 -translate-y-1/3 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-40 h-40 sm:w-64 sm:h-64 lg:w-[400px] lg:h-[400px] bg-accent/5 rounded-full -translate-x-1/3 translate-y-1/3 blur-3xl pointer-events-none" />
+
+        <div className="container-main relative z-10 px-4 sm:px-6">
+
           {/* Back button */}
-          
+          <button
+            onClick={() => navigate("/services")}
+            className="flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors mb-5 sm:mb-6
+              text-xs sm:text-sm font-medium"
+          >
+            <ArrowLeft size={15} /> Back to Services
+          </button>
 
           <div className="max-w-4xl">
-            <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring", stiffness: 200 }} className="mb-6">
-              <div className={`w-20 h-20 ${service.gradient} rounded-2xl flex items-center justify-center shadow-xl`}>
-                <Icon className="text-primary-foreground" size={40} />
+            {/* Icon */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ type: "spring", stiffness: 200 }}
+              className="mb-4 sm:mb-5 lg:mb-6"
+            >
+              <div className={`
+                ${service.gradient} rounded-2xl flex items-center justify-center shadow-xl
+                w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20
+              `}>
+                <Icon className="text-primary-foreground" size={28} />
               </div>
             </motion.div>
 
-            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-heading text-4xl md:text-6xl font-bold text-foreground leading-tight mb-4">
+            {/* Heading */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="font-heading font-bold text-foreground leading-tight mb-3 sm:mb-4
+                text-2xl sm:text-3xl md:text-5xl lg:text-6xl"
+            >
               {service.title}
             </motion.h1>
 
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl">
+            {/* Long description */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-muted-foreground leading-relaxed max-w-3xl
+                text-sm sm:text-base md:text-lg lg:text-xl"
+            >
               {service.longDesc}
             </motion.p>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="flex flex-wrap gap-3 mt-6">
-              <button onClick={() => navigate("/contact")} className="gradient-primary text-primary-foreground px-6 py-3 rounded-xl font-bold hover:opacity-90 transition-opacity shadow-lg flex items-center gap-2">
-                <Calendar size={18} /> Book Appointment
+            {/* CTA buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="flex flex-col sm:flex-row gap-3 mt-5 sm:mt-6"
+            >
+              <button
+                onClick={() => navigate("/contact")}
+                className="gradient-primary text-primary-foreground font-bold rounded-xl shadow-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2
+                  px-5 py-2.5 text-sm
+                  sm:px-6 sm:py-3 sm:text-base"
+              >
+                <Calendar size={16} className="sm:w-[18px] sm:h-[18px]" />
+                Book Appointment
               </button>
-              <a href="tel:+919876543210" className="bg-card border border-border px-6 py-3 rounded-xl font-semibold hover:bg-muted transition-colors flex items-center gap-2 text-foreground">
-                <Phone size={18} /> Call Now
+              <a
+                href="tel:+919876543210"
+                className="bg-card border border-border font-semibold hover:bg-muted transition-colors flex items-center justify-center gap-2 text-foreground rounded-xl
+                  px-5 py-2.5 text-sm
+                  sm:px-6 sm:py-3 sm:text-base"
+              >
+                <Phone size={16} className="sm:w-[18px] sm:h-[18px]" />
+                Call Now
               </a>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Content Grid */}
+      {/* ── Content Grid ── */}
       <section className="section-padding">
         <div className="container-main">
-          <div className="grid lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
+
             {/* Main Content */}
-            <div className="lg:col-span-2 space-y-8">
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-card rounded-2xl p-8 border border-border/50 shadow-sm">
-                <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-6 flex items-center gap-3">
-                  <div className={`w-8 h-8 ${service.gradient} rounded-lg flex items-center justify-center`}>
-                    <Shield className="text-primary-foreground" size={16} />
+            <div className="lg:col-span-2 space-y-6 sm:space-y-8">
+
+              {/* Overview card */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-card rounded-xl sm:rounded-2xl border border-border/50 shadow-sm
+                  p-5 sm:p-6 lg:p-8"
+              >
+                <h2 className="font-heading font-bold text-foreground flex items-center gap-2 sm:gap-3
+                  text-lg sm:text-xl md:text-2xl lg:text-3xl
+                  mb-4 sm:mb-5 lg:mb-6">
+                  <div className={`${service.gradient} rounded-lg flex items-center justify-center flex-shrink-0
+                    w-7 h-7 sm:w-8 sm:h-8`}>
+                    <Shield className="text-primary-foreground" size={14} />
                   </div>
                   Comprehensive Overview
                 </h2>
-                <div className="text-muted-foreground whitespace-pre-line leading-relaxed text-[15px]">
+                <div className="text-muted-foreground whitespace-pre-line leading-relaxed
+                  text-sm sm:text-[15px]">
                   {service.fullContent}
                 </div>
               </motion.div>
 
-              {/* Features Grid */}
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
-                <h3 className="font-heading text-xl font-bold text-foreground mb-4">What We Offer</h3>
-                <div className="grid sm:grid-cols-2 gap-4">
+              {/* Features grid */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+              >
+                <h3 className="font-heading font-bold text-foreground mb-3 sm:mb-4
+                  text-base sm:text-lg lg:text-xl">
+                  What We Offer
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   {service.features.map((feature, i) => (
                     <motion.div
                       key={feature}
@@ -178,12 +256,16 @@ const ServiceDetail = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.1 }}
-                      className="flex items-center gap-3 bg-card p-4 rounded-xl border border-border/50 hover:border-primary/30 hover:shadow-md transition-all group"
+                      className="flex items-center gap-3 bg-card border border-border/50 hover:border-primary/30 hover:shadow-md transition-all group rounded-xl
+                        p-3 sm:p-4"
                     >
-                      <div className={`w-10 h-10 ${service.gradient} rounded-lg flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform`}>
-                        <Zap size={18} className="text-primary-foreground" />
+                      <div className={`${service.gradient} rounded-lg flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform
+                        w-9 h-9 sm:w-10 sm:h-10`}>
+                        <Zap size={15} className="text-primary-foreground sm:w-[18px] sm:h-[18px]" />
                       </div>
-                      <span className="text-foreground font-medium">{feature}</span>
+                      <span className="text-foreground font-medium text-xs sm:text-sm">
+                        {feature}
+                      </span>
                     </motion.div>
                   ))}
                 </div>
@@ -191,13 +273,22 @@ const ServiceDetail = () => {
             </div>
 
             {/* Sidebar */}
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-5 lg:space-y-6">
+
               {/* Benefits */}
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-card rounded-2xl p-6 border border-border/50 shadow-sm">
-                <h3 className="font-heading text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-                  <CheckCircle2 size={20} className="text-accent" /> Key Benefits
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-card rounded-xl sm:rounded-2xl border border-border/50 shadow-sm
+                  p-4 sm:p-5 lg:p-6"
+              >
+                <h3 className="font-heading font-bold text-foreground flex items-center gap-2 mb-3 sm:mb-4
+                  text-base sm:text-lg">
+                  <CheckCircle2 size={18} className="text-accent flex-shrink-0 sm:w-5 sm:h-5" />
+                  Key Benefits
                 </h3>
-                <ul className="space-y-3">
+                <ul className="space-y-2.5 sm:space-y-3">
                   {service.benefits.map((benefit, i) => (
                     <motion.li
                       key={i}
@@ -205,23 +296,42 @@ const ServiceDetail = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.08 }}
-                      className="flex items-start gap-3 group"
+                      className="flex items-start gap-2.5 sm:gap-3 group"
                     >
-                      <div className="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-accent/20 transition-colors">
-                        <CheckCircle2 size={12} className="text-accent" />
+                      <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-accent/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-accent/20 transition-colors">
+                        <CheckCircle2 size={10} className="text-accent sm:w-3 sm:h-3" />
                       </div>
-                      <span className="text-muted-foreground text-sm">{benefit}</span>
+                      <span className="text-muted-foreground text-xs sm:text-sm leading-snug">
+                        {benefit}
+                      </span>
                     </motion.li>
                   ))}
                 </ul>
               </motion.div>
 
-              {/* Quick Contact Card */}
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="gradient-primary rounded-2xl p-6 text-primary-foreground">
-                <h3 className="font-heading text-lg font-bold mb-2">Need Help?</h3>
-                <p className="text-sm opacity-90 mb-4">Talk to our specialists for personalized treatment guidance.</p>
-                <a href="tel:+919876543210" className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2.5 rounded-xl font-semibold text-sm hover:bg-white/30 transition-colors w-full justify-center">
-                  <Phone size={16} /> +91 98765 43210
+              {/* Quick contact */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="gradient-primary rounded-xl sm:rounded-2xl text-primary-foreground
+                  p-4 sm:p-5 lg:p-6"
+              >
+                <h3 className="font-heading font-bold mb-1.5 sm:mb-2
+                  text-base sm:text-lg">
+                  Need Help?
+                </h3>
+                <p className="opacity-90 mb-3 sm:mb-4 text-xs sm:text-sm">
+                  Talk to our specialists for personalized treatment guidance.
+                </p>
+                <a
+                  href="tel:+919876543210"
+                  className="flex items-center gap-2 bg-white/20 backdrop-blur-sm font-semibold hover:bg-white/30 transition-colors w-full justify-center rounded-xl
+                    px-4 py-2 text-xs
+                    sm:py-2.5 sm:text-sm"
+                >
+                  <Phone size={14} className="sm:w-4 sm:h-4" />
+                  +91 98765 43210
                 </a>
               </motion.div>
             </div>
@@ -229,42 +339,61 @@ const ServiceDetail = () => {
         </div>
       </section>
 
-      {/* Prev/Next Navigation */}
+      {/* ── Prev / Next Navigation ── */}
       <section className="section-padding border-t border-border/50">
         <div className="container-main">
-          <div className="flex flex-col sm:flex-row justify-between gap-4">
+          <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-4">
             {prevService ? (
-              <button onClick={() => navigate(`/services/${prevService.id}`)} className="flex items-center gap-3 bg-card p-4 rounded-xl border border-border/50 hover:border-primary/30 hover:shadow-md transition-all group flex-1">
-                <ArrowLeft size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
+              <button
+                onClick={() => navigate(`/services/${prevService.id}`)}
+                className="flex items-center gap-2 sm:gap-3 bg-card border border-border/50 hover:border-primary/30 hover:shadow-md transition-all group flex-1
+                  p-3 sm:p-4 rounded-xl"
+              >
+                <ArrowLeft size={16} className="text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0 sm:w-[18px] sm:h-[18px]" />
                 <div className="text-left">
-                  <span className="text-xs text-muted-foreground">Previous</span>
-                  <p className="font-semibold text-foreground text-sm">{prevService.title}</p>
+                  <span className="text-[10px] sm:text-xs text-muted-foreground">Previous</span>
+                  <p className="font-semibold text-foreground text-xs sm:text-sm leading-tight">
+                    {prevService.title}
+                  </p>
                 </div>
               </button>
-            ) : <div className="flex-1" />}
+            ) : <div className="flex-1 hidden sm:block" />}
+
             {nextService && (
-              <button onClick={() => navigate(`/services/${nextService.id}`)} className="flex items-center gap-3 bg-card p-4 rounded-xl border border-border/50 hover:border-primary/30 hover:shadow-md transition-all group flex-1 justify-end">
+              <button
+                onClick={() => navigate(`/services/${nextService.id}`)}
+                className="flex items-center gap-2 sm:gap-3 bg-card border border-border/50 hover:border-primary/30 hover:shadow-md transition-all group flex-1 justify-end
+                  p-3 sm:p-4 rounded-xl"
+              >
                 <div className="text-right">
-                  <span className="text-xs text-muted-foreground">Next</span>
-                  <p className="font-semibold text-foreground text-sm">{nextService.title}</p>
+                  <span className="text-[10px] sm:text-xs text-muted-foreground">Next</span>
+                  <p className="font-semibold text-foreground text-xs sm:text-sm leading-tight">
+                    {nextService.title}
+                  </p>
                 </div>
-                <ArrowRight size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                <ArrowRight size={16} className="text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0 sm:w-[18px] sm:h-[18px]" />
               </button>
             )}
           </div>
         </div>
       </section>
 
-      {/* Related Services */}
+      {/* ── Related Services ── */}
       <section className="section-padding bg-section-alt">
         <div className="container-main">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-8 sm:mb-10"
+          >
+            <h2 className="font-heading font-bold text-foreground
+              text-2xl sm:text-3xl">
               Other <span className="gradient-text">Services</span>
             </h2>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
             {relatedServices.map((s, i) => (
               <motion.div
                 key={s.id}
@@ -277,14 +406,22 @@ const ServiceDetail = () => {
                 className="bg-card rounded-2xl border border-border/50 overflow-hidden cursor-pointer hover:shadow-lg transition-shadow group"
               >
                 <div className={`h-1 ${s.gradient}`} />
-                <div className="p-6">
-                  <div className={`w-12 h-12 ${s.gradient} rounded-xl flex items-center justify-center mb-4 shadow-md group-hover:scale-110 transition-transform`}>
-                    <s.icon className="text-primary-foreground" size={22} />
+                <div className="p-4 sm:p-5 lg:p-6">
+                  <div className={`${s.gradient} rounded-xl flex items-center justify-center shadow-md group-hover:scale-110 transition-transform mb-3 sm:mb-4
+                    w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12`}>
+                    <s.icon className="text-primary-foreground" size={20} />
                   </div>
-                  <h3 className="font-heading text-lg font-bold text-foreground mb-2">{s.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-3">{s.desc}</p>
-                  <span className="text-primary text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
-                    Learn More <ArrowRight size={14} />
+                  <h3 className="font-heading font-bold text-foreground mb-1.5 sm:mb-2
+                    text-base sm:text-lg">
+                    {s.title}
+                  </h3>
+                  <p className="text-muted-foreground mb-2.5 sm:mb-3
+                    text-xs sm:text-sm leading-relaxed">
+                    {s.desc}
+                  </p>
+                  <span className="text-primary font-semibold flex items-center gap-1 group-hover:gap-2 transition-all
+                    text-xs sm:text-sm">
+                    Learn More <ArrowRight size={13} className="sm:w-3.5 sm:h-3.5" />
                   </span>
                 </div>
               </motion.div>

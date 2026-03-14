@@ -17,40 +17,78 @@ const CTASection = ({
   primaryButtonText = "Book Appointment",
   primaryButtonHref = "/contact",
   secondaryButtonText = "Emergency Call",
-  secondaryButtonHref = "tel:+917658874707"
+  secondaryButtonHref = "tel:+917658874707",
 }: CTASectionProps) => {
   return (
     <section className="section-padding">
       <div className="container-main">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="gradient-primary rounded-[3rem] p-12 text-center text-primary-foreground shadow-2xl relative overflow-hidden"
+          className="
+            gradient-primary text-primary-foreground shadow-2xl
+            relative overflow-hidden
+            rounded-2xl sm:rounded-[2rem] lg:rounded-[3rem]
+            px-5 py-10
+            sm:px-10 sm:py-14
+            md:px-16 md:py-16
+            lg:px-20 lg:py-20
+            text-center
+          "
         >
-          <div className="absolute top-0 left-0 w-64 h-64 bg-white opacity-5 rounded-full -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-white opacity-5 rounded-full translate-x-1/2 translate-y-1/2" />
-          
-          <h2 className="font-heading text-4xl md:text-5xl font-bold mb-8 relative z-10 leading-tight">
+          {/* Decorative blobs */}
+          <div className="absolute top-0 left-0 w-40 h-40 sm:w-56 sm:h-56 lg:w-64 lg:h-64 bg-white opacity-5 rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+          <div className="absolute bottom-0 right-0 w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96 bg-white opacity-5 rounded-full translate-x-1/2 translate-y-1/2 pointer-events-none" />
+
+          {/* Heading */}
+          <h2 className="font-heading font-bold relative z-10 leading-tight
+            mb-4 sm:mb-5 lg:mb-6
+            text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
             {title}
           </h2>
-          <p className="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto mb-12 relative z-10 font-light leading-relaxed">
+
+          {/* Description */}
+          <p className="relative z-10 font-light leading-relaxed opacity-90
+            max-w-xs sm:max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto
+            mb-8 sm:mb-10 lg:mb-12
+            text-sm sm:text-base md:text-lg lg:text-xl">
             {description}
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-6 justify-center relative z-10">
-            <Link 
-              to={primaryButtonHref} 
-              className="bg-white text-primary px-12 py-5 rounded-full font-bold text-xl hover:bg-slate-50 transition-all shadow-xl hover:-translate-y-1"
+
+          {/* Buttons */}
+          <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center
+            gap-3 sm:gap-4 lg:gap-6">
+            <Link
+              to={primaryButtonHref}
+              className="
+                w-full sm:w-auto
+                bg-white text-primary font-bold shadow-xl
+                hover:bg-slate-50 hover:-translate-y-1 transition-all
+                rounded-full
+                px-8 py-3.5 text-sm
+                sm:px-10 sm:py-4 sm:text-base
+                lg:px-12 lg:py-5 lg:text-lg
+              "
             >
               {primaryButtonText}
             </Link>
-            <a 
-              href={secondaryButtonHref} 
-              className="flex items-center justify-center gap-3 border-2 border-white/40 text-white px-12 py-5 rounded-full font-bold text-xl hover:bg-white/10 transition-all"
+
+            <a
+              href={secondaryButtonHref}
+              className="
+                w-full sm:w-auto
+                flex items-center justify-center gap-2
+                border-2 border-white/40 text-white font-bold
+                hover:bg-white/10 transition-all
+                rounded-full
+                px-8 py-3.5 text-sm
+                sm:px-10 sm:py-4 sm:text-base
+                lg:px-12 lg:py-5 lg:text-lg
+              "
             >
-              <PhoneCall size={20} />
+              <PhoneCall size={16} className="sm:w-[18px] sm:h-[18px] lg:w-5 lg:h-5 flex-shrink-0" />
               {secondaryButtonText}
             </a>
           </div>

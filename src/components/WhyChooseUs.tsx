@@ -33,23 +33,26 @@ const WhyChooseUs = () => {
     <section className="section-padding bg-background overflow-hidden">
       <div className="container-main">
 
+        {/* ── Section header ── */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-5"
+          className="text-center mb-8 sm:mb-10 lg:mb-12"
         >
-          <span className="inline-block gradient-teal text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase">
+          <span className="inline-block gradient-teal text-primary-foreground text-[10px] sm:text-xs font-bold px-3 sm:px-4 py-1 sm:py-1.5 rounded-full tracking-wider uppercase mb-3">
             Our Strengths
           </span>
 
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">
+          <h2 className="font-heading font-bold text-foreground leading-tight
+            text-2xl sm:text-3xl md:text-4xl">
             Why <span className="gradient-text">Choose Us</span>
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* ── Cards grid ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
           {clinicFeatures.map((feature, index) => (
             <motion.div
               key={index}
@@ -57,17 +60,31 @@ const WhyChooseUs = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow border border-slate-100"
+              className="
+                bg-card rounded-xl border border-border/60 shadow-md
+                hover:shadow-lg transition-shadow
+                p-5 sm:p-6
+                flex flex-col
+              "
             >
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-teal-500 rounded-lg flex items-center justify-center mb-4">
-                <feature.icon className="w-6 h-6 text-white" />
+              {/* Icon */}
+              <div className="
+                w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12
+                bg-gradient-to-r from-blue-600 to-teal-500
+                rounded-lg flex items-center justify-center mb-3 sm:mb-4 flex-shrink-0
+              ">
+                <feature.icon className="text-white w-5 h-5 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
               </div>
 
-              <h4 className="font-heading font-semibold text-foreground mb-2">
+              {/* Title */}
+              <h4 className="font-heading font-semibold text-foreground mb-2
+                text-sm sm:text-base leading-snug">
                 {feature.title}
               </h4>
 
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              {/* Description */}
+              <p className="text-muted-foreground leading-relaxed
+                text-xs sm:text-sm">
                 {feature.description}
               </p>
             </motion.div>
