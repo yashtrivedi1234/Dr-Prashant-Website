@@ -147,10 +147,10 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="mailto:info@entvertigoallergy.in"
+                  href="mailto:info@drprashantent.com"
                   className="flex items-center gap-3 opacity-80 hover:opacity-100 hover:text-primary transition-all"
                 >
-                  <Mail size={16} /> info@entvertigoallergy.in
+                  <Mail size={16} /> info@drprashantent.com
                 </a>
               </li>
               <li>

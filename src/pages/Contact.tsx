@@ -12,8 +12,8 @@ const contactInfo = [
   { 
     icon: Mail, 
     title: "Email Us", 
-    details: ["info@entvertigoallergy.in"],
-    action: "mailto:info@entvertigoallergy.in",
+    details: ["info@drprashantent.com"],
+    action: "mailto:info@drprashantent.com",
     color: "gradient-warm"
   },
 { 

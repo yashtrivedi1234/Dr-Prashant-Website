@@ -8,8 +8,8 @@ const TopBar = () => (
         <a href="tel:+917658874707" className="flex items-center gap-1.5 hover:opacity-80 transition-opacity">
           <Phone size={14} />+91 76588 74707
         </a>
-        <a href="mailto:info@entvertigoallergy.in" className="hidden sm:flex items-center gap-1.5 hover:opacity-80 transition-opacity">
-          <Mail size={14} /> info@entvertigoallergy.in
+        <a href="mailto:info@drprashantent.com" className="hidden sm:flex items-center gap-1.5 hover:opacity-80 transition-opacity">
+          <Mail size={14} /> info@drprashantent.com
         </a>
       </div>
       <Link to="/contact" className="hover:opacity-80 transition-opacity font-medium">Contact Us</Link>
