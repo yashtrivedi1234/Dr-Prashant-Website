@@ -127,14 +127,9 @@ const Gallery = () => {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors flex items-center justify-center">
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 gradient-warm rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
-                      <Play className="text-white ml-0.5 sm:ml-1" size={22} />
-                    </div>
+                    
                   </div>
-                  <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 bg-black/60 backdrop-blur-md text-white font-bold px-2 py-0.5 rounded
-                    text-[10px] sm:text-xs">
-                    {v.duration}
-                  </div>
+                
                 </div>
 
                 {/* Meta */}
