@@ -202,12 +202,19 @@ const Footer = () => {
               Contact Us
             </h4>
             <ul className="space-y-3 sm:space-y-4">
-              <li className="flex items-start gap-2.5 opacity-80">
-                <MapPin size={16} className="mt-0.5 shrink-0 sm:w-[18px] sm:h-[18px]" />
-                <span className="text-xs sm:text-sm leading-relaxed">
-                  560 V/161 Plot 3B Vijay Nagar, Kanpur Rd, Krishna Nagar,
-                  Lucknow, UP 226023
-                </span>
+              <li>
+                <a
+                  href="https://maps.app.goo.gl/NTRVAZo34EUCSi2MA"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-start gap-2.5 opacity-80 hover:opacity-100 hover:text-primary transition-all"
+                >
+                  <MapPin size={16} className="mt-0.5 shrink-0 sm:w-[18px] sm:h-[18px]" />
+                  <span className="text-xs sm:text-sm leading-relaxed">
+                    560 V/161 Plot 3B Vijay Nagar, Kanpur Rd, Krishna Nagar,
+                    Lucknow, UP 226023
+                  </span>
+                </a>
               </li>
               <li>
                 <a
