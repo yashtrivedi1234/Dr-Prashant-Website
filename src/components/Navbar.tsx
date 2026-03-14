@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Menu, X, Stethoscope, ChevronDown } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Menu, X, Stethoscope, ChevronDown, Phone } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const links = [
@@ -7,150 +7,268 @@ const links = [
   {
     name: "About",
     submenu: [
-      { name: "About Doctor", href: "/about" },
-      { name: "About Clinic", href: "/clinic-about" }
-    ]
+      { name: "About Doctor", href: "/about", desc: "Meet Dr. Prashant" },
+      { name: "About Clinic", href: "/clinic-about", desc: "Our facility & team" },
+    ],
   },
   { name: "Treatments", href: "/services" },
   { name: "Gallery", href: "/gallery" },
   { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" }
+  { name: "Contact", href: "/contact" },
 ];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [aboutDropdown, setAboutDropdown] = useState(false);
-
+  const [aboutOpen, setAboutOpen] = useState(false);
+  const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
+  const dropdownRef = useRef(null);
   const location = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  return (
-    <nav className={`sticky top-0 z-50 transition-all duration-300 bg-background ${scrolled ? "shadow-xl shadow-primary/5" : "shadow-sm"}`}>
-      <div className="container-main flex items-center justify-between py-4 px-4 md:px-8">
-        <Link to="/" className="flex items-center gap-2">
-          <div className="gradient-primary p-2 rounded-lg">
-            <Stethoscope className="text-primary-foreground" size={24} />
-          </div>
-          <span className="font-heading text-xl font-bold gradient-text">Dr. Prashant</span>
-        </Link>
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handler = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setAboutOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
-        <ul className="hidden md:flex items-center gap-8">
-          {links.map((l) => (
-            <li 
-              key={l.name}
-              onMouseEnter={() => l.name === "About" && setAboutDropdown(true)}
-              onMouseLeave={() => l.name === "About" && setAboutDropdown(false)}
-              className="relative"
-            >
-              {l.name === "About" ? (
-                <div>
-                  <button className="text-foreground/70 hover:text-primary font-medium transition-colors text-lg tracking-wide relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full flex items-center gap-2 pb-1">
-                    {l.name}
-                    <ChevronDown size={18} className={`transition-transform ${aboutDropdown ? 'rotate-180' : ''}`} />
-                  </button>
-                  
-                  {/* Dropdown Menu */}
-                  {aboutDropdown && (
-                    <div className="absolute top-full left-0 mt-2 bg-background border border-border rounded-lg shadow-lg overflow-hidden min-w-[200px] animate-in fade-in slide-in-from-top-2 duration-200">
-                      {l.submenu?.map((item) => (
-                        <Link
-                          key={item.name}
-                          to={item.href}
-                          className={`block px-4 py-3 text-foreground/80 hover:text-primary hover:bg-primary/5 transition-colors font-medium border-b border-border/30 last:border-0 ${location.pathname === item.href ? "text-primary bg-primary/5" : ""}`}
-                        >
-                          {item.name}
-                        </Link>
-                      ))}
+  // Close mobile menu on route change
+  useEffect(() => {
+    setOpen(false);
+    setMobileAboutOpen(false);
+  }, [location.pathname]);
+
+  const isActive = (href) => location.pathname === href;
+  const isAboutActive = ["/about", "/clinic-about"].includes(location.pathname);
+
+  return (
+    <>
+
+
+      <nav
+        className={`sticky top-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "bg-background/95 backdrop-blur-md shadow-lg shadow-primary/8 border-b border-border/60"
+            : "bg-background border-b border-border/30"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-between py-3 px-4 md:px-8">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-3 group" aria-label="Dr. Prashant Home">
+            <div className="gradient-primary p-2 rounded-xl shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all duration-200">
+              <Stethoscope className="text-primary-foreground" size={22} />
+            </div>
+            <div className="flex flex-col leading-tight">
+              <span className="font-heading text-lg font-bold gradient-text tracking-tight">
+                Dr. Prashant
+              </span>
+              <span className="text-[10px] text-muted-foreground font-medium tracking-widest uppercase hidden sm:block">
+                Specialist Clinic
+              </span>
+            </div>
+          </Link>
+
+          {/* Desktop Nav */}
+          <ul className="hidden md:flex items-center gap-1" role="menubar">
+            {links.map((l) => {
+              if (l.name === "About") {
+                return (
+                  <li key={l.name} ref={dropdownRef} className="relative" role="none">
+                    <button
+                      role="menuitem"
+                      aria-haspopup="true"
+                      aria-expanded={aboutOpen}
+                      onClick={() => setAboutOpen((v) => !v)}
+                      onMouseEnter={() => setAboutOpen(true)}
+                      onMouseLeave={() => setAboutOpen(false)}
+                      className={`flex items-center gap-1.5 px-3 py-2 rounded-lg font-medium text-sm tracking-wide transition-all duration-200 ${
+                        isAboutActive
+                          ? "text-primary bg-primary/8"
+                          : "text-foreground/70 hover:text-primary hover:bg-primary/5"
+                      }`}
+                    >
+                      {l.name}
+                      <ChevronDown
+                        size={15}
+                        className={`transition-transform duration-200 ${aboutOpen ? "rotate-180" : ""}`}
+                      />
+                    </button>
+
+                    {/* Dropdown */}
+                    <div
+                      onMouseEnter={() => setAboutOpen(true)}
+                      onMouseLeave={() => setAboutOpen(false)}
+                      className={`absolute top-full left-0 mt-1 transition-all duration-200 origin-top ${
+                        aboutOpen
+                          ? "opacity-100 scale-y-100 pointer-events-auto translate-y-0"
+                          : "opacity-0 scale-y-95 pointer-events-none -translate-y-1"
+                      }`}
+                    >
+                      <div className="bg-background border border-border rounded-xl shadow-xl shadow-primary/10 overflow-hidden min-w-[220px] py-1">
+                        {l.submenu?.map((item) => (
+                          <Link
+                            key={item.name}
+                            to={item.href}
+                            className={`flex flex-col px-4 py-3 transition-all duration-150 border-l-2 mx-1 rounded-lg my-0.5 ${
+                              isActive(item.href)
+                                ? "border-primary bg-primary/8 text-primary"
+                                : "border-transparent hover:border-primary/40 hover:bg-primary/5 text-foreground/80 hover:text-primary"
+                            }`}
+                          >
+                            <span className="font-semibold text-sm">{item.name}</span>
+                            <span className="text-xs text-muted-foreground mt-0.5">{item.desc}</span>
+                          </Link>
+                        ))}
+                      </div>
                     </div>
-                  )}
-                </div>
-              ) : "href" in l ? (
-                l.href.startsWith("/#") ? (
-                  <a 
-                    href={l.href} 
-                    className={`text-foreground/70 hover:text-primary font-medium transition-colors text-lg tracking-wide relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full ${location.hash === l.href.substring(1) ? "text-primary after:w-full" : ""}`}
-                  >
-                    {l.name}
-                  </a>
-                ) : (
-                  <Link 
-                    to={l.href} 
-                    className={`text-foreground/70 hover:text-primary font-medium transition-colors text-lg tracking-wide relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full ${location.pathname === l.href ? "text-primary after:w-full" : ""}`}
+                  </li>
+                );
+              }
+
+              return "href" in l ? (
+                <li key={l.name} role="none">
+                  <Link
+                    to={l.href}
+                    role="menuitem"
+                    className={`px-3 py-2 rounded-lg font-medium text-sm tracking-wide transition-all duration-200 block ${
+                      isActive(l.href)
+                        ? "text-primary bg-primary/8"
+                        : "text-foreground/70 hover:text-primary hover:bg-primary/5"
+                    }`}
                   >
                     {l.name}
                   </Link>
-                )
-              ) : null}
-            </li>
-          ))}
-        </ul>
+                </li>
+              ) : null;
+            })}
+          </ul>
 
-        <button onClick={() => setOpen(!open)} className="md:hidden text-foreground" aria-label="Toggle menu">
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
+          {/* CTA + Hamburger */}
+          <div className="flex items-center gap-3">
+            <a
+              href="/contact"
+              className="hidden md:flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-semibold shadow-sm hover:shadow-md hover:brightness-105 active:scale-95 transition-all duration-200"
+            >
+              <Phone size={14} />
+              Book Appointment
+            </a>
 
-      {open && (
-        <div className="md:hidden bg-background border-t border-border px-4 pb-4">
-          {links.map((l) => {
-            if (l.name === "About") {
-              return (
-                <div key={l.name}>
-                  <button
-                    onClick={() => setAboutDropdown(!aboutDropdown)}
-                    className="block py-3 w-full text-left text-foreground/80 hover:text-primary font-medium border-b border-border/50 flex items-center justify-between"
-                  >
-                    {l.name}
-                    <ChevronDown size={18} className={`transition-transform ${aboutDropdown ? 'rotate-180' : ''}`} />
-                  </button>
-                  {aboutDropdown && (
-                    <div className="bg-primary/5 border-l-2 border-primary">
-                      {l.submenu?.map((item) => (
-                        <Link
-                          key={item.name}
-                          to={item.href}
-                          onClick={() => setOpen(false)}
-                          className="block py-2 px-4 text-foreground/70 hover:text-primary font-medium text-sm"
-                        >
-                          {item.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              );
-            }
-            return "href" in l ? (
-              l.href.startsWith("/#") ? (
-                <a
-                  key={l.name}
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="block py-3 text-foreground/80 hover:text-primary font-medium border-b border-border/50 last:border-0"
+            <button
+              onClick={() => setOpen(!open)}
+              className="md:hidden p-2 rounded-lg text-foreground hover:bg-primary/10 transition-colors"
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+            >
+              <div className="relative w-5 h-5">
+                <span
+                  className={`absolute inset-0 flex items-center justify-center transition-all duration-200 ${
+                    open ? "opacity-100 rotate-0" : "opacity-0 rotate-90"
+                  }`}
                 >
-                  {l.name}
-                </a>
-              ) : (
+                  <X size={20} />
+                </span>
+                <span
+                  className={`absolute inset-0 flex items-center justify-center transition-all duration-200 ${
+                    open ? "opacity-0 -rotate-90" : "opacity-100 rotate-0"
+                  }`}
+                >
+                  <Menu size={20} />
+                </span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+            open ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="bg-background border-t border-border/50 px-4 py-3 space-y-1">
+            {links.map((l) => {
+              if (l.name === "About") {
+                return (
+                  <div key={l.name}>
+                    <button
+                      onClick={() => setMobileAboutOpen((v) => !v)}
+                      className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg font-medium text-sm transition-colors ${
+                        isAboutActive
+                          ? "text-primary bg-primary/8"
+                          : "text-foreground/80 hover:text-primary hover:bg-primary/5"
+                      }`}
+                    >
+                      {l.name}
+                      <ChevronDown
+                        size={15}
+                        className={`transition-transform duration-200 ${mobileAboutOpen ? "rotate-180" : ""}`}
+                      />
+                    </button>
+                    <div
+                      className={`overflow-hidden transition-all duration-200 ${
+                        mobileAboutOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+                      }`}
+                    >
+                      <div className="ml-3 mt-1 border-l-2 border-primary/30 pl-3 space-y-1">
+                        {l.submenu?.map((item) => (
+                          <Link
+                            key={item.name}
+                            to={item.href}
+                            className={`flex flex-col py-2 px-2 rounded-md text-sm transition-colors ${
+                              isActive(item.href)
+                                ? "text-primary"
+                                : "text-foreground/70 hover:text-primary"
+                            }`}
+                          >
+                            <span className="font-medium">{item.name}</span>
+                            <span className="text-xs text-muted-foreground">{item.desc}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              return "href" in l ? (
                 <Link
                   key={l.name}
                   to={l.href}
-                  onClick={() => setOpen(false)}
-                  className="block py-3 text-foreground/80 hover:text-primary font-medium border-b border-border/50 last:border-0"
+                  className={`block px-3 py-2.5 rounded-lg font-medium text-sm transition-colors ${
+                    isActive(l.href)
+                      ? "text-primary bg-primary/8"
+                      : "text-foreground/80 hover:text-primary hover:bg-primary/5"
+                  }`}
                 >
                   {l.name}
                 </Link>
-              )
-            ) : null;
-          })}
+              ) : null;
+            })}
+
+            {/* Mobile CTA */}
+            <div className="pt-2 pb-1">
+              <a
+                href="/contact"
+                className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-4 py-3 rounded-lg text-sm font-semibold w-full hover:brightness-105 active:scale-95 transition-all duration-200"
+              >
+                <Phone size={14} />
+                Book Appointment
+              </a>
+            </div>
+          </div>
         </div>
-      )}
-    </nav>
+      </nav>
+    </>
   );
 };
 

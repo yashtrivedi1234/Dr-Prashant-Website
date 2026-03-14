@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { Award, Clock, Users, Heart, Target, Lightbulb, CheckCircle2 } from "lucide-react";
 import doctorImg from "@/assets/doctor-portrait.jpg";
+import aboutVideo from "@/assets/about us.mp4";
 import CTASection from "@/components/CTASection";
+import { useRef } from "react";
 
 const stats = [
   { icon: Award, value: "14+", label: "Years Experience", color: "bg-primary" },
@@ -28,6 +30,13 @@ const values = [
 ];
 
 const AboutUs = () => {
+  const videoRef = useRef(null);
+
+const playVideo = () => {
+  if (videoRef.current) {
+    videoRef.current.play();
+  }
+};
   return (
     <>
       {/* Hero Section */}
@@ -185,18 +194,20 @@ const AboutUs = () => {
               </ul>
             </div>
             <div className="order-1 lg:order-2">
-              <div className="aspect-video bg-slate-200 rounded-3xl overflow-hidden shadow-2xl relative group">
-                <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/5 transition-colors duration-500" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-2xl cursor-pointer hover:scale-110 transition-transform">
-                    <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[18px] border-l-primary border-b-[10px] border-b-transparent ml-1" />
-                  </div>
-                </div>
-                <div className="absolute bottom-6 left-6 right-6 p-6 bg-white/90 backdrop-blur-md rounded-2xl border border-white/20">
-                  <p className="text-sm font-bold text-primary mb-1 uppercase tracking-widest">Video Overview</p>
-                  <p className="font-heading text-xl font-bold text-foreground">Meet Dr. Prashant & Explore the Clinic</p>
-                </div>
-              </div>
+    <div className="aspect-video rounded-3xl overflow-hidden shadow-2xl relative group">
+  
+  <video
+    ref={videoRef}
+    src={aboutVideo}
+    className="absolute inset-0 w-full h-full object-cover"
+    controls
+  />
+
+ 
+
+ 
+
+</div>
             </div>
           </div>
         </div>

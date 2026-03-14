@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { CheckCircle2, ShieldCheck, Zap, Activity, Ear, Mic, Wind, Stethoscope, ArrowRight, Volume2, Moon, Smile, Phone } from "lucide-react";
 import CTASection from "@/components/CTASection";
+import WhyChooseUs from "@/components/WhyChooseUs";
 
 const mainServices = [
   { id: "sinusitis-treatment", icon: Wind, title: "Sinusitis Treatment", desc: "Advanced diagnosis and modern treatments for sinus inflammation, congestion, and breathing difficulty.", gradient: "gradient-blue", color: "from-blue-500/10 to-sky-500/10" },
@@ -97,38 +98,7 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="section-padding bg-section-alt relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/3 to-accent/3 pointer-events-none" />
-        <div className="container-main relative z-10">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center max-w-2xl mx-auto mb-12">
-            <span className="inline-block gradient-primary text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase mb-4">Why Us</span>
-            <h2 className="font-heading text-3xl md:text-5xl font-bold text-foreground">
-              Why Choose <span className="gradient-text">Our Clinic</span>
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {reasons.map((r, i) => (
-              <motion.div
-                key={r.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
-                whileHover={{ y: -5 }}
-                className="bg-card p-8 rounded-2xl shadow-sm border border-border/50 hover:shadow-xl transition-all duration-300 text-center group"
-              >
-                <div className={`w-16 h-16 ${r.gradient} rounded-2xl flex items-center justify-center mb-5 mx-auto shadow-lg group-hover:scale-110 transition-transform`}>
-                  <r.icon size={30} className="text-primary-foreground" />
-                </div>
-                <h3 className="font-heading text-xl font-bold mb-3">{r.title}</h3>
-                <p className="text-muted-foreground leading-relaxed text-sm">{r.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <WhyChooseUs/>
 
     
 

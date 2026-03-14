@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Stethoscope, Star, Users, MapPin, Award, Heart, Zap } from "lucide-react";
 import clinicImg from "@/assets/clinic.jpg";
 import CTASection from "@/components/CTASection";
+import WhyChooseUs from "@/components/WhyChooseUs";
 
 const clinicFeatures = [
   {
@@ -83,7 +84,7 @@ const ClinicAbout = () => {
       {/* Main Content Section */}
       <section className="section-padding">
         <div className="container-main">
-          <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+          <div className="grid lg:grid-cols-2 gap-16 items-center mb-10">
             {/* Left - Image Placeholder */}
             <motion.div
               initial={{ opacity: 0, x: -60 }}
@@ -146,42 +147,12 @@ const ClinicAbout = () => {
           </div>
 
           {/* Features Grid */}
-          <div className="mb-20">
-            <motion.h3
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="font-heading text-3xl font-bold text-center mb-4 text-foreground"
-            >
-              Why Choose Our Clinic
-            </motion.h3>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {clinicFeatures.map((feature, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow border border-slate-100"
-                >
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-teal-500 rounded-lg flex items-center justify-center mb-4">
-                    <feature.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <h4 className="font-heading font-semibold text-foreground mb-2">
-                    {feature.title}
-                  </h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {feature.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+          
+          <WhyChooseUs/>
+          
 
           {/* Conditions We Treat */}
-          <div className="mb-20">
+          <div className="mb-5">
             <motion.h3
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
