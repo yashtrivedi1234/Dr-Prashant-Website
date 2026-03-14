@@ -31,10 +31,10 @@ const CTASection = ({
             gradient-primary text-primary-foreground shadow-2xl
             relative overflow-hidden
             rounded-2xl sm:rounded-[2rem] lg:rounded-[3rem]
-            px-5 py-10
-            sm:px-10 sm:py-14
-            md:px-16 md:py-16
-            lg:px-20 lg:py-20
+            px-5 py-5
+            sm:px-5 sm:py-7
+            md:px-8 md:py-8
+            lg:px-10 lg:py-10
             text-center
           "
         >
