@@ -252,7 +252,7 @@ const Footer = () => {
             © {new Date().getFullYear()} Dr. Prashant. All rights reserved.
           </p>
           <span className="hidden sm:inline text-xs text-primary-foreground/60">•</span>
-          <p className="text-[10px] sm:text-xs text-primary-foreground/60 uppercase tracking-widest">
+          <p className="text-[10px] sm:text-xs text-primary-foreground/60 tracking-widest">
             Design and Developed by
           </p>
           <img
