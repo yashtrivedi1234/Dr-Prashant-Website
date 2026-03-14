@@ -120,14 +120,7 @@ const ServiceDetail = () => {
 
         <div className="container-main relative z-10">
           {/* Back button */}
-          <motion.button
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            onClick={() => navigate("/services")}
-            className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8 text-sm font-medium"
-          >
-            <ArrowLeft size={16} /> Back to All Services
-          </motion.button>
+          
 
           <div className="max-w-4xl">
             <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring", stiffness: 200 }} className="mb-6">
