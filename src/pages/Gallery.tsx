@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, Image as ImageIcon, Video, Star } from "lucide-react";
+import { Play, Image as ImageIcon, Video, Star, X } from "lucide-react";
 import CTASection from "@/components/CTASection";
 import gallery1 from "@/assets/gallery-1.jpg";
 import gallery2 from "@/assets/gallery-2.jpg";
@@ -27,6 +27,11 @@ const categories = ["all", "Clinic", "Community", "Social"];
 
 const Gallery = () => {
   const [activeTab, setActiveTab] = useState("all");
+  const [selectedImage, setSelectedImage] = useState<{
+    src: string;
+    title: string;
+    subtitle?: string;
+  } | null>(null);
 
   const filteredImages =
     activeTab === "all"
@@ -105,6 +110,13 @@ const Gallery = () => {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 className="group cursor-pointer"
+                onClick={() =>
+                  setSelectedImage({
+                    src: v.thumbnail,
+                    title: v.title,
+                    subtitle: `Patient: ${v.patient}`,
+                  })
+                }
               >
                 {/* Thumbnail */}
                 <div className="relative aspect-video rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl mb-3 sm:mb-4">
@@ -205,6 +217,13 @@ const Gallery = () => {
                   transition={{ duration: 0.3 }}
                   className="group relative aspect-square overflow-hidden shadow-lg cursor-zoom-in
                     rounded-xl sm:rounded-2xl lg:rounded-[2rem]"
+                  onClick={() =>
+                    setSelectedImage({
+                      src: img.img,
+                      title: img.title,
+                      subtitle: img.category,
+                    })
+                  }
                 >
                   <img
                     src={img.img}
@@ -229,6 +248,51 @@ const Gallery = () => {
           </motion.div>
         </div>
       </section>
+
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[70] bg-black/85 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center"
+            onClick={() => setSelectedImage(null)}
+          >
+            <button
+              onClick={() => setSelectedImage(null)}
+              aria-label="Close image preview"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 h-10 w-10 rounded-full bg-white/15 text-white hover:bg-white/25 transition-colors flex items-center justify-center"
+            >
+              <X size={20} />
+            </button>
+
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="w-full max-w-5xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={selectedImage.src}
+                alt={selectedImage.title}
+                className="w-full max-h-[78vh] object-contain rounded-2xl"
+              />
+              <div className="mt-4 text-center text-white">
+                {selectedImage.subtitle && (
+                  <p className="text-xs sm:text-sm uppercase tracking-widest text-white/75 mb-1">
+                    {selectedImage.subtitle}
+                  </p>
+                )}
+                <h3 className="font-heading text-lg sm:text-xl font-bold">
+                  {selectedImage.title}
+                </h3>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <CTASection
         title="Experience the Healing"
