@@ -107,7 +107,7 @@ const AboutSection = () => (
 
         <Link
           to="/about"
-          className="inline-block gradient-primary text-primary-foreground
+          className="block w-fit mx-auto gradient-primary text-primary-foreground
             font-semibold rounded-full shadow-lg
             hover:opacity-90 active:scale-95 transition-all
             px-6 py-3 text-sm
