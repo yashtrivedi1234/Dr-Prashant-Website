@@ -22,7 +22,7 @@ const contactInfo = [
   details: [
     "Krishna Nagar: 560 V/161, Plot 3B, Vijay Nagar, Kanpur Road, Lucknow, Uttar Pradesh"
   ],
-  action: "https://www.google.com/maps/search/?api=1&query=560+V/161+Plot+3B+Vijay+Nagar+Kanpur+Road+Lucknow",
+  action: "https://maps.app.goo.gl/s9a6NZh9pwnTVoiF6",
   color: "gradient-teal"
 },
 ];
@@ -84,13 +84,13 @@ const Contact = () => {
             ))}
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
+          <div className="grid lg:grid-cols-2 gap-16 items-stretch">
             {/* Contact Form */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-white p-10 md:p-16 rounded-[3rem] shadow-2xl border border-slate-50"
+              className="bg-white p-10 md:p-16 rounded-[3rem] shadow-2xl border border-slate-50 flex flex-col"
             >
               <div className="flex items-center gap-4 mb-10">
                 <div className="w-12 h-12 gradient-primary rounded-xl flex items-center justify-center shadow-lg">
@@ -134,12 +134,12 @@ const Contact = () => {
             </motion.div>
 
             {/* Sidebar Info */}
-            <div className="space-y-12">
+            <div className="grid grid-rows-2 gap-6 h-full">
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="bg-slate-900 text-white p-10 md:p-12 rounded-[3rem] shadow-xl relative overflow-hidden"
+                className="bg-slate-900 text-white p-10 md:p-12 rounded-[3rem] shadow-xl relative overflow-hidden flex flex-col justify-between"
               >
                 <div className="absolute top-0 right-0 w-64 h-64 gradient-primary opacity-20 blur-[80px]" />
                 <h3 className="font-heading text-2xl font-bold mb-8 relative z-10 flex items-center gap-3">
@@ -173,21 +173,19 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100"
+                className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100 flex flex-col"
               >
-                <div className="aspect-video bg-slate-100 rounded-3xl overflow-hidden relative group cursor-pointer">
-                  {/* Updated map center to Lucknow */}
-                  <div className="absolute inset-0 bg-[url('https://maps.googleapis.com/maps/api/staticmap?center=Lucknow&zoom=12&size=600x300&key=YOUR_API_KEY')] bg-cover bg-center group-hover:scale-110 transition-transform duration-[2000ms]" />
-                  <div className="absolute inset-0 bg-primary/20 mix-blend-multiply opacity-30 group-hover:opacity-10 transition-opacity" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-14 h-14 gradient-teal rounded-full flex items-center justify-center shadow-xl">
-                      <Globe className="text-white" size={24} />
-                    </div>
-                  </div>
-                  <div className="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md p-4 rounded-2xl flex items-center justify-between shadow-lg">
-                    <span className="text-sm font-bold text-slate-800">Get Directions on Maps</span>
-                    <ExternalLink size={18} className="text-primary" />
-                  </div>
+                <div className="rounded-3xl overflow-hidden shadow-lg flex-1">
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3561.434278218133!2d80.8862023!3d26.7942974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bff6a3185bd5b%3A0x763a9089cd2e9e18!2sDr%20Prashant%20ENT%20Vertigo%20Allergy%20Clinic%20%7C%20ENT%20Doctor%20%7C%20Best%20Ear%20Nose%20Throat%20Specialists%20%7C%20Vertigo%20Doctor%20in%20Lucknow!5e0!3m2!1sen!2sin!4v1773482943823!5m2!1sen!2sin" 
+                    width="100%" 
+                    height="100%" 
+                    style={{ border: 0 }}
+                    allowFullScreen="" 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full h-full"
+                  />
                 </div>
               </motion.div>
             </div>

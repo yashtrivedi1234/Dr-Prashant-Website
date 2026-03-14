@@ -8,9 +8,30 @@ const links = [
     name: "About",
     submenu: [
       { name: "About Doctor", href: "/about", desc: "Meet Dr. Prashant" },
-      { name: "About Clinic", href: "/clinic-about", desc: "Our facility & team" },
+      {
+        name: "About Clinic",
+        href: "/clinic-about",
+        desc: "Our facility & team",
+      },
     ],
   },
+  {
+    name: "Allergy Clinic",
+    submenu: [
+      {
+        name: "Allergy Testing",
+        href: "/allergy",
+        desc: "Comprehensive allergen testing",
+      },
+      {
+        name: "Oral Immunotherapy",
+        href: "/oral-immunotherapy",
+        desc: "Food allergy treatment",
+      },
+    ],
+  },
+  { name: "Vertigo Clinic", href: "/vertigo" },
+  { name: "Snoring Clinic", href: "/snoring" },
   { name: "Treatments", href: "/services" },
   { name: "Gallery", href: "/gallery" },
   { name: "Blog", href: "/blog" },
@@ -20,9 +41,11 @@ const links = [
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [aboutOpen, setAboutOpen] = useState(false);
-  const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [mobileOpenDropdown, setMobileOpenDropdown] = useState<string | null>(
+    null,
+  );
+  const dropdownRefs = useRef<Record<string, HTMLLIElement | null>>({});
   const location = useLocation();
 
   useEffect(() => {
@@ -33,9 +56,12 @@ const Navbar = () => {
 
   // Close dropdown on outside click
   useEffect(() => {
-    const handler = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setAboutOpen(false);
+    const handler = (e: MouseEvent) => {
+      const clickedInsideAny = Object.values(dropdownRefs.current).some(
+        (el) => el && el.contains(e.target as Node),
+      );
+      if (!clickedInsideAny) {
+        setOpenDropdown(null);
       }
     };
     document.addEventListener("mousedown", handler);
@@ -45,16 +71,17 @@ const Navbar = () => {
   // Close mobile menu on route change
   useEffect(() => {
     setOpen(false);
-    setMobileAboutOpen(false);
+    setMobileOpenDropdown(null);
   }, [location.pathname]);
 
-  const isActive = (href) => location.pathname === href;
+  const isActive = (href: string) => location.pathname === href;
   const isAboutActive = ["/about", "/clinic-about"].includes(location.pathname);
+  const isAllergyActive = ["/allergy", "/oral-immunotherapy"].includes(
+    location.pathname,
+  );
 
   return (
     <>
-
-
       <nav
         className={`sticky top-0 z-50 transition-all duration-300 ${
           scrolled
@@ -64,7 +91,11 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between py-3 px-4 md:px-8">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group" aria-label="Dr. Prashant Home">
+          <Link
+            to="/"
+            className="flex items-center gap-3 group"
+            aria-label="Dr. Prashant Home"
+          >
             <div className="gradient-primary p-2 rounded-xl shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all duration-200">
               <Stethoscope className="text-primary-foreground" size={22} />
             </div>
@@ -81,18 +112,33 @@ const Navbar = () => {
           {/* Desktop Nav */}
           <ul className="hidden md:flex items-center gap-1" role="menubar">
             {links.map((l) => {
-              if (l.name === "About") {
+              if ("submenu" in l) {
+                const isOpen = openDropdown === l.name;
+                const isHighlighted =
+                  l.name === "About"
+                    ? isAboutActive
+                    : l.name === "Allergy Clinic"
+                      ? isAllergyActive
+                      : false;
+
                 return (
-                  <li key={l.name} ref={dropdownRef} className="relative" role="none">
+                  <li
+                    key={l.name}
+                    ref={(el) => {
+                      dropdownRefs.current[l.name] = el;
+                    }}
+                    className="relative"
+                    role="none"
+                  >
                     <button
                       role="menuitem"
                       aria-haspopup="true"
-                      aria-expanded={aboutOpen}
-                      onClick={() => setAboutOpen((v) => !v)}
-                      onMouseEnter={() => setAboutOpen(true)}
-                      onMouseLeave={() => setAboutOpen(false)}
+                      aria-expanded={isOpen}
+                      onClick={() => setOpenDropdown(isOpen ? null : l.name)}
+                      onMouseEnter={() => setOpenDropdown(l.name)}
+                      onMouseLeave={() => setOpenDropdown(null)}
                       className={`flex items-center gap-1.5 px-3 py-2 rounded-lg font-medium text-sm tracking-wide transition-all duration-200 ${
-                        isAboutActive
+                        isHighlighted
                           ? "text-primary bg-primary/8"
                           : "text-foreground/70 hover:text-primary hover:bg-primary/5"
                       }`}
@@ -100,16 +146,16 @@ const Navbar = () => {
                       {l.name}
                       <ChevronDown
                         size={15}
-                        className={`transition-transform duration-200 ${aboutOpen ? "rotate-180" : ""}`}
+                        className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
                       />
                     </button>
 
                     {/* Dropdown */}
                     <div
-                      onMouseEnter={() => setAboutOpen(true)}
-                      onMouseLeave={() => setAboutOpen(false)}
+                      onMouseEnter={() => setOpenDropdown(l.name)}
+                      onMouseLeave={() => setOpenDropdown(null)}
                       className={`absolute top-full left-0 mt-1 transition-all duration-200 origin-top ${
-                        aboutOpen
+                        isOpen
                           ? "opacity-100 scale-y-100 pointer-events-auto translate-y-0"
                           : "opacity-0 scale-y-95 pointer-events-none -translate-y-1"
                       }`}
@@ -125,8 +171,12 @@ const Navbar = () => {
                                 : "border-transparent hover:border-primary/40 hover:bg-primary/5 text-foreground/80 hover:text-primary"
                             }`}
                           >
-                            <span className="font-semibold text-sm">{item.name}</span>
-                            <span className="text-xs text-muted-foreground mt-0.5">{item.desc}</span>
+                            <span className="font-semibold text-sm">
+                              {item.name}
+                            </span>
+                            <span className="text-xs text-muted-foreground mt-0.5">
+                              {item.desc}
+                            </span>
                           </Link>
                         ))}
                       </div>
@@ -197,13 +247,23 @@ const Navbar = () => {
         >
           <div className="bg-background border-t border-border/50 px-4 py-3 space-y-1">
             {links.map((l) => {
-              if (l.name === "About") {
+              if ("submenu" in l) {
+                const isMobileOpen = mobileOpenDropdown === l.name;
+                const isHighlighted =
+                  l.name === "About"
+                    ? isAboutActive
+                    : l.name === "Allergy Clinic"
+                      ? isAllergyActive
+                      : false;
+
                 return (
                   <div key={l.name}>
                     <button
-                      onClick={() => setMobileAboutOpen((v) => !v)}
+                      onClick={() =>
+                        setMobileOpenDropdown(isMobileOpen ? null : l.name)
+                      }
                       className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg font-medium text-sm transition-colors ${
-                        isAboutActive
+                        isHighlighted
                           ? "text-primary bg-primary/8"
                           : "text-foreground/80 hover:text-primary hover:bg-primary/5"
                       }`}
@@ -211,12 +271,14 @@ const Navbar = () => {
                       {l.name}
                       <ChevronDown
                         size={15}
-                        className={`transition-transform duration-200 ${mobileAboutOpen ? "rotate-180" : ""}`}
+                        className={`transition-transform duration-200 ${isMobileOpen ? "rotate-180" : ""}`}
                       />
                     </button>
                     <div
                       className={`overflow-hidden transition-all duration-200 ${
-                        mobileAboutOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+                        isMobileOpen
+                          ? "max-h-40 opacity-100"
+                          : "max-h-0 opacity-0"
                       }`}
                     >
                       <div className="ml-3 mt-1 border-l-2 border-primary/30 pl-3 space-y-1">
@@ -231,7 +293,9 @@ const Navbar = () => {
                             }`}
                           >
                             <span className="font-medium">{item.name}</span>
-                            <span className="text-xs text-muted-foreground">{item.desc}</span>
+                            <span className="text-xs text-muted-foreground">
+                              {item.desc}
+                            </span>
                           </Link>
                         ))}
                       </div>
