@@ -113,7 +113,7 @@ const ServiceDetail = () => {
   return (
     <div className="bg-background">
       {/* Hero */}
-      <section className="relative py-16 md:py-24 overflow-hidden">
+      <section className="relative py-5 overflow-hidden">
         <div className={`absolute inset-0 ${service.gradient} opacity-[0.04] pointer-events-none`} />
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full translate-x-1/3 -translate-y-1/3 blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 rounded-full -translate-x-1/3 translate-y-1/3 blur-3xl pointer-events-none" />

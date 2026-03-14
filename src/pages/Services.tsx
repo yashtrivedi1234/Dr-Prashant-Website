@@ -36,13 +36,13 @@ const Services = () => {
   return (
     <div className="bg-background">
       {/* Hero */}
-      <section className="relative py-16 md:py-24 overflow-hidden">
+      <section className="relative py-5 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-violet/5 pointer-events-none" />
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full translate-x-1/2 -translate-y-1/2 blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 rounded-full -translate-x-1/2 translate-y-1/2 blur-3xl pointer-events-none" />
 
         <div className="container-main relative z-10 text-center">
-          <motion.span initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="inline-block gradient-warm text-primary-foreground text-xs font-bold px-5 py-1.5 rounded-full tracking-wider uppercase mb-4">
+          <motion.span initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="inline-block gradient-warm text-primary-foreground text-xs font-bold px-5 py-1.5 rounded-full tracking-wider uppercase">
             Excellence in ENT Care
           </motion.span>
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-heading text-4xl md:text-6xl font-bold text-foreground leading-tight max-w-3xl mx-auto">
@@ -130,28 +130,7 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Quick Contact Banner */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="py-10 gradient-primary"
-      >
-        <div className="container-main flex flex-col md:flex-row items-center justify-between gap-6 text-primary-foreground">
-          <div>
-            <h3 className="font-heading text-2xl md:text-3xl font-bold">Need Expert Consultation?</h3>
-            <p className="opacity-90 mt-1">Book an appointment with our ENT specialists today.</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <a href="tel:+919876543210" className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-5 py-3 rounded-xl font-semibold hover:bg-white/30 transition-colors">
-              <Phone size={18} /> Call Now
-            </a>
-            <button onClick={() => navigate("/contact")} className="bg-white text-primary px-6 py-3 rounded-xl font-bold hover:bg-white/90 transition-colors shadow-lg">
-              Book Appointment
-            </button>
-          </div>
-        </div>
-      </motion.section>
+    
 
       <CTASection
         title="Step into a Life of Wellness"

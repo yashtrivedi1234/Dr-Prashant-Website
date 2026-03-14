@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Stethoscope } from "lucide-react";
+import { Menu, X, Stethoscope, ChevronDown } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const links = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
+  {
+    name: "About",
+    submenu: [
+      { name: "About Doctor", href: "/about" },
+      { name: "About Clinic", href: "/clinic-about" }
+    ]
+  },
   { name: "Treatments", href: "/services" },
   { name: "Gallery", href: "/gallery" },
   { name: "Blog", href: "/blog" },
@@ -14,6 +20,7 @@ const links = [
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [aboutDropdown, setAboutDropdown] = useState(false);
 
   const location = useLocation();
 
@@ -35,22 +42,51 @@ const Navbar = () => {
 
         <ul className="hidden md:flex items-center gap-8">
           {links.map((l) => (
-            <li key={l.name}>
-              {l.href.startsWith("/#") ? (
-                <a 
-                  href={l.href} 
-                  className={`text-foreground/70 hover:text-primary font-medium transition-colors text-lg tracking-wide relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full ${location.hash === l.href.substring(1) ? "text-primary after:w-full" : ""}`}
-                >
-                  {l.name}
-                </a>
-              ) : (
-                <Link 
-                  to={l.href} 
-                  className={`text-foreground/70 hover:text-primary font-medium transition-colors text-lg tracking-wide relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full ${location.pathname === l.href ? "text-primary after:w-full" : ""}`}
-                >
-                  {l.name}
-                </Link>
-              )}
+            <li 
+              key={l.name}
+              onMouseEnter={() => l.name === "About" && setAboutDropdown(true)}
+              onMouseLeave={() => l.name === "About" && setAboutDropdown(false)}
+              className="relative"
+            >
+              {l.name === "About" ? (
+                <div>
+                  <button className="text-foreground/70 hover:text-primary font-medium transition-colors text-lg tracking-wide relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full flex items-center gap-2 pb-1">
+                    {l.name}
+                    <ChevronDown size={18} className={`transition-transform ${aboutDropdown ? 'rotate-180' : ''}`} />
+                  </button>
+                  
+                  {/* Dropdown Menu */}
+                  {aboutDropdown && (
+                    <div className="absolute top-full left-0 mt-2 bg-background border border-border rounded-lg shadow-lg overflow-hidden min-w-[200px] animate-in fade-in slide-in-from-top-2 duration-200">
+                      {l.submenu?.map((item) => (
+                        <Link
+                          key={item.name}
+                          to={item.href}
+                          className={`block px-4 py-3 text-foreground/80 hover:text-primary hover:bg-primary/5 transition-colors font-medium border-b border-border/30 last:border-0 ${location.pathname === item.href ? "text-primary bg-primary/5" : ""}`}
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : "href" in l ? (
+                l.href.startsWith("/#") ? (
+                  <a 
+                    href={l.href} 
+                    className={`text-foreground/70 hover:text-primary font-medium transition-colors text-lg tracking-wide relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full ${location.hash === l.href.substring(1) ? "text-primary after:w-full" : ""}`}
+                  >
+                    {l.name}
+                  </a>
+                ) : (
+                  <Link 
+                    to={l.href} 
+                    className={`text-foreground/70 hover:text-primary font-medium transition-colors text-lg tracking-wide relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full ${location.pathname === l.href ? "text-primary after:w-full" : ""}`}
+                  >
+                    {l.name}
+                  </Link>
+                )
+              ) : null}
             </li>
           ))}
         </ul>
@@ -62,27 +98,56 @@ const Navbar = () => {
 
       {open && (
         <div className="md:hidden bg-background border-t border-border px-4 pb-4">
-          {links.map((l) => (
-            l.href.startsWith("/#") ? (
-              <a
-                key={l.name}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="block py-3 text-foreground/80 hover:text-primary font-medium border-b border-border/50 last:border-0"
-              >
-                {l.name}
-              </a>
-            ) : (
-              <Link
-                key={l.name}
-                to={l.href}
-                onClick={() => setOpen(false)}
-                className="block py-3 text-foreground/80 hover:text-primary font-medium border-b border-border/50 last:border-0"
-              >
-                {l.name}
-              </Link>
-            )
-          ))}
+          {links.map((l) => {
+            if (l.name === "About") {
+              return (
+                <div key={l.name}>
+                  <button
+                    onClick={() => setAboutDropdown(!aboutDropdown)}
+                    className="block py-3 w-full text-left text-foreground/80 hover:text-primary font-medium border-b border-border/50 flex items-center justify-between"
+                  >
+                    {l.name}
+                    <ChevronDown size={18} className={`transition-transform ${aboutDropdown ? 'rotate-180' : ''}`} />
+                  </button>
+                  {aboutDropdown && (
+                    <div className="bg-primary/5 border-l-2 border-primary">
+                      {l.submenu?.map((item) => (
+                        <Link
+                          key={item.name}
+                          to={item.href}
+                          onClick={() => setOpen(false)}
+                          className="block py-2 px-4 text-foreground/70 hover:text-primary font-medium text-sm"
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            }
+            return "href" in l ? (
+              l.href.startsWith("/#") ? (
+                <a
+                  key={l.name}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="block py-3 text-foreground/80 hover:text-primary font-medium border-b border-border/50 last:border-0"
+                >
+                  {l.name}
+                </a>
+              ) : (
+                <Link
+                  key={l.name}
+                  to={l.href}
+                  onClick={() => setOpen(false)}
+                  className="block py-3 text-foreground/80 hover:text-primary font-medium border-b border-border/50 last:border-0"
+                >
+                  {l.name}
+                </Link>
+              )
+            ) : null;
+          })}
         </div>
       )}
     </nav>
