@@ -52,7 +52,7 @@ const CTASection = ({
           {/* Description */}
           <p className="relative z-10 font-light leading-relaxed opacity-90
             max-w-xs sm:max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto
-            mb-8 sm:mb-10 lg:mb-12
+            mb-4 sm:mb-5 lg:mb-6
             text-sm sm:text-base md:text-lg lg:text-xl">
             {description}
           </p>
