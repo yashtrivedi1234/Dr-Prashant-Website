@@ -466,20 +466,7 @@ const BlogDetail = () => {
   
      
 
-      {/* Featured Image */}
-      <section className="relative w-full h-96 overflow-hidden bg-slate-200">
-        <img
-          src={blog.img}
-          alt={blog.title}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/30" />
-        <div className="absolute top-6 left-6">
-          <span className={`${blog.color} text-primary-foreground text-xs font-bold px-4 py-2 rounded-full uppercase tracking-widest`}>
-            {blog.category}
-          </span>
-        </div>
-      </section>
+   
 
       {/* Article Header */}
       <section className="bg-slate-50 border-b border-slate-200">
@@ -527,8 +514,66 @@ const BlogDetail = () => {
             className="prose prose-lg max-w-none"
           >
             <div className="bg-white rounded-2xl p-8 md:p-12 border border-slate-200">
-              <div className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
-                {blog.content}
+              <div className="text-muted-foreground leading-relaxed">
+                {blog.content.split('\n\n').map((paragraph, idx) => {
+                  // Show first image after 3 paragraphs
+                  const showFirstImage = idx === 3;
+                  // Show second image after 7 paragraphs
+                  const showSecondImage = idx === 7;
+                  // Show third image after 11 paragraphs
+                  const showThirdImage = idx === 11;
+
+                  return (
+                    <div key={idx}>
+                      <p className="whitespace-pre-wrap mb-6">{paragraph}</p>
+                      
+                      {showFirstImage && (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          className="my-12 rounded-xl overflow-hidden shadow-lg"
+                        >
+                          <img
+                            src={blog.img}
+                            alt={`${blog.title} illustration`}
+                            className="w-full h-64 object-cover"
+                          />
+                        </motion.div>
+                      )}
+
+                      {showSecondImage && (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          className="my-12 rounded-xl overflow-hidden shadow-lg"
+                        >
+                          <img
+                            src={blog2}
+                            alt={`${blog.title} related image`}
+                            className="w-full h-64 object-cover"
+                          />
+                        </motion.div>
+                      )}
+
+                      {showThirdImage && (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          className="my-12 rounded-xl overflow-hidden shadow-lg"
+                        >
+                          <img
+                            src={blog3}
+                            alt={`${blog.title} additional image`}
+                            className="w-full h-64 object-cover"
+                          />
+                        </motion.div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </motion.div>
