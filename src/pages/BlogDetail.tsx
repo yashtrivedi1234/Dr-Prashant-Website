@@ -384,13 +384,7 @@ const BlogDetail = () => {
             className="max-w-4xl mx-auto"
           >
             {/* Back button */}
-            <button
-              onClick={() => navigate("/blog")}
-              className="flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors mb-5 sm:mb-6
-                text-xs sm:text-sm font-medium"
-            >
-              <ArrowLeft size={15} /> Back to Blog
-            </button>
+           
 
             {/* Category badge */}
             <div className={`inline-block ${blog.color} text-primary-foreground text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-3 sm:mb-4`}>

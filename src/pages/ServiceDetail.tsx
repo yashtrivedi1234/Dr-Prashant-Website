@@ -129,14 +129,7 @@ const ServiceDetail = () => {
 
         <div className="container-main relative z-10 px-4 sm:px-6">
 
-          {/* Back button */}
-          <button
-            onClick={() => navigate("/services")}
-            className="flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors mb-5 sm:mb-6
-              text-xs sm:text-sm font-medium"
-          >
-            <ArrowLeft size={15} /> Back to Services
-          </button>
+        
 
           <div className="max-w-4xl">
             {/* Icon */}

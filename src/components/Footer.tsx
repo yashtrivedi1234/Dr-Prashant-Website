@@ -1,4 +1,4 @@
-import { Stethoscope, MapPin, Mail, Phone, Send } from "lucide-react";
+import { Stethoscope, MapPin, Mail, Phone, Send, Facebook, Instagram, Youtube, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -62,6 +62,45 @@ const Footer = () => {
               surgical care, precise vertigo management, and comprehensive
               allergy treatments.
             </p>
+
+            <div className="mt-4 flex items-center gap-3">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Facebook"
+                className="h-9 w-9 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all"
+              >
+                <Facebook size={16} />
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram"
+                className="h-9 w-9 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all"
+              >
+                <Instagram size={16} />
+              </a>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="YouTube"
+                className="h-9 w-9 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all"
+              >
+                <Youtube size={16} />
+              </a>
+              <a
+                href="https://wa.me/7658874707"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="WhatsApp"
+                className="h-9 w-9 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all"
+              >
+                <MessageCircle size={16} />
+              </a>
+            </div>
           </motion.div>
 
           {/* Quick Links */}
