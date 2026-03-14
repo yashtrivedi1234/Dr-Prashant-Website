@@ -16,16 +16,15 @@ const contactInfo = [
     action: "mailto:info@entvertigoallergy.in",
     color: "gradient-warm"
   },
-  { 
-    icon: MapPin, 
-    title: "Visit Clinics (Lucknow)", 
-    details: [
-      "Krishna Nagar: 560 V/161 Plot 3B Vijay Nagar, Kanpur Rd", 
-      "Telibagh: 1st Floor Campus Shoes Showroom, Raibareli Rd"
-    ],
-    action: "https://maps.google.com/?q=Lucknow",
-    color: "gradient-teal"
-  },
+{ 
+  icon: MapPin, 
+  title: "Visit Clinic (Lucknow)", 
+  details: [
+    "Krishna Nagar: 560 V/161, Plot 3B, Vijay Nagar, Kanpur Road, Lucknow, Uttar Pradesh"
+  ],
+  action: "https://www.google.com/maps/search/?api=1&query=560+V/161+Plot+3B+Vijay+Nagar+Kanpur+Road+Lucknow",
+  color: "gradient-teal"
+},
 ];
 
 const Contact = () => {
