@@ -22,7 +22,6 @@ const links = [
   { name: "Snoring Clinic",  href: "/snoring" },
   { name: "Treatments",      href: "/services" },
   { name: "Gallery",         href: "/gallery" },
-  { name: "Blog",            href: "/blog" },
   { name: "Contact",         href: "/contact" },
 ];
 
@@ -186,13 +185,7 @@ const Navbar = () => {
 
           {/* ── CTA + Hamburger ── */}
           <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-            <a
-              href="/contact"
-              className="hidden lg:flex items-center gap-1.5 xl:gap-2 bg-primary text-primary-foreground px-3 xl:px-4 py-2 rounded-lg text-xs xl:text-sm font-semibold shadow-sm hover:shadow-md hover:brightness-105 active:scale-95 transition-all duration-200 whitespace-nowrap"
-            >
-              <Phone size={13} />
-              Book Appointment
-            </a>
+           
 
             {/* Hamburger — shown below lg */}
             <button
