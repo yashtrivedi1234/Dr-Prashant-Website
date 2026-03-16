@@ -56,7 +56,7 @@ const Services = () => {
             className="font-heading font-bold text-foreground leading-tight max-w-3xl mx-auto
               text-2xl sm:text-3xl md:text-5xl lg:text-6xl"
           >
-            Our <span className="gradient-text">Treatments</span> &amp; Services
+            Our <span className="gradient-text">Treatments</span>
           </motion.h1>
 
           <motion.p

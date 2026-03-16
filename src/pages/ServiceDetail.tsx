@@ -156,13 +156,13 @@ const ServiceDetail = () => {
     return (
       <div className="bg-background min-h-screen flex flex-col items-center justify-center gap-4 px-4">
         <h2 className="font-heading font-bold text-foreground text-xl sm:text-2xl">
-          Service not found
+          Treatment not found
         </h2>
         <button
           onClick={() => navigate("/services")}
           className="text-primary font-semibold flex items-center gap-2 text-sm sm:text-base"
         >
-          <ArrowLeft size={16} /> Back to Services
+          <ArrowLeft size={16} /> Back to Treatments
         </button>
       </div>
     );
@@ -494,7 +494,7 @@ const ServiceDetail = () => {
           >
             <h2 className="font-heading font-bold text-foreground
               text-2xl sm:text-3xl">
-              Other <span className="gradient-text">Services</span>
+              Other <span className="gradient-text">Treatments</span>
             </h2>
           </motion.div>
 
