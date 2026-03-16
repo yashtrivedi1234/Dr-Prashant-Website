@@ -16,6 +16,12 @@ const mainServices = [
     fullContent: `Sinusitis can significantly affect your daily life. Our ENT specialists provide comprehensive care including:\n\n• Accurate diagnosis using nasal endoscopy\n• Medical management with antibiotics and anti-allergy medication\n• Balloon sinuplasty for minimally invasive sinus opening\n• Endoscopic sinus surgery for chronic cases\n• Lifestyle and allergy management guidance\n\nOur goal is to restore comfortable breathing and prevent recurring infections.`,
     benefits: ["Relief from sinus pressure", "Improved breathing", "Reduced headaches", "Minimally invasive procedures", "Long-term sinus health"],
     gradient: "gradient-blue",
+    faqs: [
+      { q: "What are the common symptoms of sinusitis?", a: "Common symptoms include nasal congestion, facial pain or pressure, thick nasal discharge, reduced sense of smell, headache, and sometimes fever or fatigue." },
+      { q: "How is sinusitis diagnosed?", a: "Diagnosis involves a physical examination, nasal endoscopy, and in some cases CT scans to assess the extent of sinus inflammation." },
+      { q: "Is sinus surgery painful?", a: "Modern endoscopic sinus surgery is minimally invasive. Patients typically experience mild discomfort, and recovery is usually quick with proper post-operative care." },
+      { q: "How long does sinusitis treatment take?", a: "Acute sinusitis may resolve in 2-4 weeks with medication. Chronic sinusitis may require longer treatment or surgical intervention depending on severity." },
+    ],
   },
   {
     id: "snoring-treatment", icon: Moon, title: "Snoring Treatment",
@@ -25,6 +31,12 @@ const mainServices = [
     fullContent: `Snoring occurs when airflow through the mouth and nose is obstructed during sleep.\n\nOur treatment includes:\n\n• Nasal blockage correction\n• Sleep apnea diagnosis\n• Lifestyle and weight management advice\n• CPAP therapy guidance\n• Surgical options when required\n\nProper treatment improves sleep quality and overall health.`,
     benefits: ["Better sleep quality", "Reduced fatigue", "Improved breathing", "Lower sleep apnea risk", "Healthier lifestyle"],
     gradient: "gradient-purple",
+    faqs: [
+      { q: "Is snoring dangerous?", a: "Snoring itself may not be dangerous, but it can be a sign of obstructive sleep apnea (OSA), which can lead to serious health issues like high blood pressure and heart problems." },
+      { q: "What causes snoring?", a: "Snoring is caused by narrowing of the airway due to relaxed throat muscles, nasal congestion, obesity, or structural issues like a deviated septum." },
+      { q: "Can snoring be cured permanently?", a: "Many cases can be significantly improved or resolved through lifestyle changes, nasal treatments, or minimally invasive surgical procedures." },
+      { q: "Do I need a sleep study?", a: "A sleep study may be recommended if sleep apnea is suspected. It helps determine the severity and guides the most effective treatment plan." },
+    ],
   },
   {
     id: "tonsillitis-treatment", icon: Smile, title: "Tonsillitis Care",
@@ -34,6 +46,12 @@ const mainServices = [
     fullContent: `Tonsillitis is commonly caused by viral or bacterial infections.\n\nOur care includes:\n\n• Accurate throat examination\n• Antibiotic therapy for bacterial infections\n• Pain and inflammation management\n• Tonsillectomy for recurrent infections\n• Post-surgery recovery guidance\n\nTreatment helps reduce recurring throat infections and improve quality of life.`,
     benefits: ["Relief from throat pain", "Reduced infection frequency", "Improved swallowing", "Better breathing", "Long-term throat health"],
     gradient: "gradient-pink",
+    faqs: [
+      { q: "When is tonsil removal necessary?", a: "Tonsillectomy is recommended when a patient experiences 7+ infections in one year, or 5+ per year for two consecutive years, or if enlarged tonsils cause breathing difficulties." },
+      { q: "Is tonsillectomy safe for children?", a: "Yes, tonsillectomy is one of the most common and safe surgical procedures for children. Recovery typically takes 7-10 days." },
+      { q: "How long is the recovery after tonsil surgery?", a: "Most patients recover within 10-14 days. A soft diet and rest are recommended during the healing period." },
+      { q: "Can tonsillitis recur after surgery?", a: "Once tonsils are fully removed, tonsillitis cannot recur. However, other throat infections may still occur." },
+    ],
   },
   {
     id: "voice-disorder-surgeries", icon: Mic, title: "Voice Surgeries",
@@ -43,6 +61,12 @@ const mainServices = [
     fullContent: `Voice problems may affect speaking or singing ability.\n\nOur voice treatment services include:\n\n• Laryngeal stroboscopy diagnosis\n• Vocal cord polyp or nodule removal\n• Microsurgical vocal cord procedures\n• Voice rehabilitation therapy\n• Post-surgery voice care\n\nThese treatments help restore clear and strong voice function.`,
     benefits: ["Improved voice quality", "Better communication", "Professional voice recovery", "Advanced microsurgery", "Faster recovery"],
     gradient: "gradient-orange",
+    faqs: [
+      { q: "What causes voice disorders?", a: "Voice disorders can be caused by vocal cord nodules, polyps, cysts, laryngitis, acid reflux, overuse of voice, or neurological conditions." },
+      { q: "Will I be able to speak normally after voice surgery?", a: "Most patients regain normal voice function after surgery and voice therapy. Recovery time and outcomes depend on the specific condition treated." },
+      { q: "How long should I rest my voice after surgery?", a: "Typically, complete voice rest is recommended for 1-2 weeks after surgery, followed by gradual voice therapy." },
+      { q: "Is voice therapy necessary after surgery?", a: "Yes, voice therapy is an important part of recovery. It helps retrain the vocal cords and prevents recurrence of the condition." },
+    ],
   },
   {
     id: "micro-ear-surgery", icon: Ear, title: "Micro Ear Surgery",
@@ -52,6 +76,12 @@ const mainServices = [
     fullContent: `Micro ear surgery allows surgeons to repair delicate ear structures with precision.\n\nProcedures include:\n\n• Tympanic membrane repair\n• Middle ear bone reconstruction\n• Removal of infected tissue\n• Hearing restoration procedures\n\nThese techniques ensure precise treatment and better hearing outcomes.`,
     benefits: ["Restored ear function", "Improved hearing", "Minimal tissue damage", "Quick recovery", "Advanced surgical precision"],
     gradient: "gradient-teal",
+    faqs: [
+      { q: "What is micro ear surgery?", a: "Micro ear surgery uses high-powered operating microscopes to perform precise surgical procedures on the tiny structures of the ear." },
+      { q: "How long does the surgery take?", a: "Most micro ear surgeries take 1-3 hours depending on the complexity of the procedure." },
+      { q: "Will my hearing improve after surgery?", a: "In many cases, hearing improves significantly after surgery, especially in tympanoplasty and ossicular reconstruction procedures." },
+      { q: "What is the recovery period?", a: "Recovery typically takes 2-4 weeks. Patients should avoid water exposure to the ear and heavy physical activity during this period." },
+    ],
   },
   {
     id: "digital-hearing-aids", icon: Volume2, title: "Digital Hearing Aids",
@@ -61,6 +91,12 @@ const mainServices = [
     fullContent: `Our audiology department provides modern digital hearing solutions.\n\nServices include:\n\n• Complete hearing evaluation\n• Selection of suitable hearing aids\n• Custom ear molds\n• Device tuning and maintenance\n• Follow-up hearing assessments\n\nOur goal is to restore comfortable hearing for everyday life.`,
     benefits: ["Better communication", "Improved sound clarity", "Discreet modern devices", "Personalized fitting", "Ongoing support"],
     gradient: "gradient-indigo",
+    faqs: [
+      { q: "How do I know if I need a hearing aid?", a: "If you frequently ask people to repeat themselves, turn up the TV volume, or struggle to hear in noisy environments, a hearing evaluation is recommended." },
+      { q: "Are digital hearing aids visible?", a: "Modern digital hearing aids are very discreet. Many styles fit completely inside the ear canal and are virtually invisible." },
+      { q: "How long do hearing aids last?", a: "With proper care, digital hearing aids typically last 5-7 years. Regular maintenance and check-ups help extend their lifespan." },
+      { q: "Can hearing aids restore normal hearing?", a: "Hearing aids significantly improve hearing ability but do not restore it to normal. They amplify and process sounds to make communication easier." },
+    ],
   },
   {
     id: "stapedectomy-ear-surgery", icon: Ear, title: "Stapedectomy",
@@ -70,6 +106,12 @@ const mainServices = [
     fullContent: `Stapedectomy is performed when the stapes bone becomes fixed due to otosclerosis.\n\nThe procedure includes:\n\n• Removal of the damaged stapes bone\n• Placement of a prosthetic implant\n• Restoration of sound transmission\n• Microscope-assisted precision surgery\n\nPatients often experience significant improvement in hearing.`,
     benefits: ["Improved hearing ability", "Permanent hearing restoration", "Advanced microsurgery", "High success rate", "Minimal recovery time"],
     gradient: "gradient-primary",
+    faqs: [
+      { q: "What is otosclerosis?", a: "Otosclerosis is a condition where abnormal bone growth in the middle ear prevents the stapes bone from vibrating properly, causing hearing loss." },
+      { q: "What is the success rate of stapedectomy?", a: "Stapedectomy has a high success rate of approximately 90-95% in improving hearing significantly." },
+      { q: "Is stapedectomy performed under general anesthesia?", a: "It can be performed under local or general anesthesia depending on patient preference and surgeon recommendation." },
+      { q: "When can I return to normal activities?", a: "Most patients can resume normal activities within 1-2 weeks, though heavy lifting and air travel should be avoided for a few weeks." },
+    ],
   },
   {
     id: "cochlear-implant-hearing-restoration", icon: Activity, title: "Cochlear Implantation",
@@ -79,6 +121,12 @@ const mainServices = [
     fullContent: `Cochlear implants are used for patients with severe or profound hearing loss.\n\nTreatment process includes:\n\n• Detailed hearing evaluation\n• Surgical implantation of the device\n• External processor fitting\n• Speech and hearing therapy\n\nThis technology enables patients to perceive sound and improve communication.`,
     benefits: ["Restored sound perception", "Improved communication ability", "Advanced hearing technology", "Speech development support", "Long-term hearing improvement"],
     gradient: "gradient-warm",
+    faqs: [
+      { q: "Who is a candidate for cochlear implants?", a: "Candidates typically have severe to profound sensorineural hearing loss in both ears and receive limited benefit from hearing aids." },
+      { q: "How does a cochlear implant work?", a: "A cochlear implant bypasses damaged hair cells and directly stimulates the auditory nerve, sending sound signals to the brain." },
+      { q: "Is cochlear implant surgery risky?", a: "Cochlear implant surgery is generally safe with a very low complication rate. It is performed under general anesthesia and usually takes 2-3 hours." },
+      { q: "How long does it take to hear after implantation?", a: "The device is activated 2-4 weeks after surgery. Hearing improvement is gradual and requires regular therapy sessions over several months." },
+    ],
   },
   {
     id: "throat-cancer-treatment", icon: Stethoscope, title: "Throat Cancer",
@@ -88,6 +136,12 @@ const mainServices = [
     fullContent: `Throat cancer may affect the voice box or surrounding throat structures.\n\nOur treatment includes:\n\n• Endoscopic tumor evaluation\n• Biopsy and imaging diagnosis\n• Surgical tumor removal\n• Radiation and oncology referral\n• Voice rehabilitation therapy\n\nOur multidisciplinary team ensures comprehensive cancer care.`,
     benefits: ["Early cancer detection", "Advanced surgical treatment", "Improved survival outcomes", "Voice preservation techniques", "Comprehensive oncology care"],
     gradient: "gradient-red",
+    faqs: [
+      { q: "What are the early signs of throat cancer?", a: "Early signs include persistent hoarseness, difficulty swallowing, unexplained weight loss, a lump in the neck, and chronic sore throat lasting more than 2 weeks." },
+      { q: "How is throat cancer diagnosed?", a: "Diagnosis involves physical examination, laryngoscopy, biopsy of suspicious tissue, and imaging tests such as CT or MRI scans." },
+      { q: "What are the treatment options?", a: "Treatment depends on the stage and may include surgery, radiation therapy, chemotherapy, or a combination. Early-stage cancers often have excellent outcomes." },
+      { q: "Can throat cancer be prevented?", a: "Avoiding tobacco and excessive alcohol use significantly reduces risk. Regular check-ups help with early detection, especially for those with risk factors." },
+    ],
   },
 ];
 
