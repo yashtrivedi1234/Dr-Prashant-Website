@@ -494,7 +494,7 @@ const ServiceDetail = () => {
           >
             <h2 className="font-heading font-bold text-foreground
               text-2xl sm:text-3xl">
-              Other <span className="gradient-text">Services</span>
+              Other <span className="gradient-text">Treatments</span>
             </h2>
           </motion.div>
 
