@@ -2,8 +2,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   CheckCircle2, ArrowLeft, ArrowRight, Zap, Activity, Ear,
-  Mic, Wind, Moon, Volume2, Stethoscope, Smile, Phone, Calendar, Shield,
+  Mic, Wind, Moon, Volume2, Stethoscope, Smile, Phone, Calendar, Shield, HelpCircle,
 } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import CTASection from "@/components/CTASection";
 
 const mainServices = [
