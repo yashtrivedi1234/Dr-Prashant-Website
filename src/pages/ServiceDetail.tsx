@@ -156,7 +156,7 @@ const ServiceDetail = () => {
     return (
       <div className="bg-background min-h-screen flex flex-col items-center justify-center gap-4 px-4">
         <h2 className="font-heading font-bold text-foreground text-xl sm:text-2xl">
-          Service not found
+          Treatment not found
         </h2>
         <button
           onClick={() => navigate("/services")}
