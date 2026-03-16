@@ -27,7 +27,7 @@ const AboutSection = () => (
         <img
           src={doctorImg}
           alt="Dr. Prashant"
-          className="relative rounded-2xl shadow-2xl w-full object-cover aspect-[4/5] z-10"
+          className="relative rounded-2xl shadow-2xl w-full h-[320px] sm:h-[360px] lg:h-[420px] object-cover z-10"
         />
 
         {/* Floating badge */}
