@@ -1,10 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import gallery1 from "@/assets/gallery-1.jpg";
-import gallery2 from "@/assets/gallery-2.jpg";
-
-const galleryImages = [gallery1, gallery2, gallery1, gallery2];
+import gallery1 from "@/assets/Gallery/2.jpeg";
+import gallery2 from "@/assets/Gallery/4.jpeg";
+import gallery3 from "@/assets/Gallery/5.jpeg";
+import gallery4 from "@/assets/Gallery/6.jpeg";
+const galleryImages = [gallery1, gallery2, gallery3, gallery4];
 
 const GallerySection = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
