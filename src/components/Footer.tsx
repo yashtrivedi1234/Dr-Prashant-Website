@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import ccLogo from "@/assets/cc-logo.png";
-
+import logo from "@/assets/logo.png";
 const quickLinks = [
   { name: "Home",       href: "/" },
   { name: "About",      href: "/about" },
@@ -49,13 +49,22 @@ const Footer = () => {
             transition={{ duration: 0.5 }}
             className="sm:col-span-2 lg:col-span-1"
           >
-            <div className="flex items-center gap-2 mb-3 sm:mb-4">
-              <div className="gradient-primary p-2 rounded-lg flex-shrink-0">
-                <Stethoscope className="text-primary-foreground" size={20} />
-              </div>
-              <span className="font-heading text-lg sm:text-xl font-bold text-primary-foreground">
-                Dr. Prashant
-              </span>
+            <div className="flex items-center gap-2 mb-3 sm:mb-4 ">
+             <Link
+            to="/"
+            className="flex items-center gap-2 sm:gap-3 group flex-shrink-0 bg-white"
+            aria-label="Dr. Prashant Home"
+          >
+           
+             <img
+  src={logo}
+  alt="Dr. Prashant Logo"
+  className="h-[52px] w-auto object-contain"
+/>
+            
+           
+          </Link>
+             
             </div>
             <p className="text-xs sm:text-sm leading-relaxed opacity-80 max-w-xs">
               A leading ENT Specialist and Ex-SR PGIMER, dedicated to advanced

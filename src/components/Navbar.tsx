@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, Stethoscope, ChevronDown, Phone } from "lucide-react";
+import { Menu, X, ChevronDown, Phone } from "lucide-react";
+import logo from "@/assets/logo.png";
 import { Link, useLocation } from "react-router-dom";
 
 const links = [
@@ -85,17 +86,14 @@ const Navbar = () => {
             className="flex items-center gap-2 sm:gap-3 group flex-shrink-0"
             aria-label="Dr. Prashant Home"
           >
-            <div className="gradient-primary p-1.5 sm:p-2 rounded-xl shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all duration-200 flex-shrink-0">
-              <Stethoscope className="text-primary-foreground" size={20} />
-            </div>
-            <div className="flex flex-col leading-tight">
-              <span className="font-heading text-base sm:text-lg font-bold gradient-text tracking-tight">
-                Dr. Prashant
-              </span>
-              <span className="text-[9px] sm:text-[10px] text-muted-foreground font-medium tracking-widest uppercase hidden sm:block">
-                Specialist Clinic
-              </span>
-            </div>
+           
+             <img
+  src={logo}
+  alt="Dr. Prashant Logo"
+  className="h-[52px] w-auto object-contain"
+/>
+            
+           
           </Link>
 
           {/* ── Desktop Nav ── */}
