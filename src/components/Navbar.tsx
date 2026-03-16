@@ -19,7 +19,7 @@ const links = [
       { name: "Oral Immunotherapy",  href: "/oral-immunotherapy",   desc: "Food allergy treatment" },
     ],
   },
-  { name: "Vertigo Clinic",  href: "/vertigo" },
+  { name: "Vertigo Clinic",  href: "/vertigo-info" },
   { name: "Snoring Clinic",  href: "/snoring" },
   { name: "Treatments",      href: "/treatment" },
   { name: "Gallery",         href: "/gallery" },

@@ -59,17 +59,17 @@ const Footer = () => {
             className="sm:col-span-2 lg:col-span-1"
           >
             <div className="flex items-center gap-2 mb-3 sm:mb-4 ">
-             <Link
-  to="/"
-  className="flex items-center gap-2 sm:gap-3 group flex-shrink-0 bg-white p-[10px] rounded-[8px]"
-  aria-label="Dr. Prashant Home"
->
-  <img
-    src={logo}
-    alt="Dr. Prashant Logo"
-    className="h-[52px] w-auto object-contain"
-  />
-</Link>
+              <Link
+                to="/"
+                className="flex items-center gap-2 sm:gap-3 group flex-shrink-0 bg-white p-[10px] rounded-[8px]"
+                aria-label="Dr. Prashant Home"
+              >
+                <img
+                  src={logo}
+                  alt="Dr. Prashant Logo"
+                  className="h-[52px] w-auto object-contain"
+                />
+              </Link>
             </div>
             <p className="text-xs sm:text-sm leading-relaxed opacity-80 max-w-xs">
               A leading ENT Specialist and Ex-SR PGIMER, dedicated to advanced
