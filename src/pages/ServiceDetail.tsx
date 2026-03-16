@@ -387,6 +387,63 @@ const ServiceDetail = () => {
         </div>
       </section>
 
+      {/* ── FAQ Section ── */}
+      {service.faqs && service.faqs.length > 0 && (
+        <section className="section-padding bg-section-alt">
+          <div className="container-main">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-8 sm:mb-10"
+            >
+              <div className="flex items-center justify-center gap-2 mb-3">
+                <div className={`${service.gradient} rounded-lg flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9`}>
+                  <HelpCircle className="text-primary-foreground" size={16} />
+                </div>
+              </div>
+              <h2 className="font-heading font-bold text-foreground text-2xl sm:text-3xl">
+                Frequently Asked <span className="gradient-text">Questions</span>
+              </h2>
+              <p className="text-muted-foreground mt-2 text-sm sm:text-base max-w-2xl mx-auto">
+                Common questions about {service.title.toLowerCase()} answered by our specialists
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-3xl mx-auto"
+            >
+              <Accordion type="single" collapsible className="space-y-3">
+                {service.faqs.map((faq, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 }}
+                  >
+                    <AccordionItem
+                      value={`faq-${i}`}
+                      className="bg-card border border-border/50 rounded-xl px-4 sm:px-5 overflow-hidden hover:border-primary/30 transition-colors"
+                    >
+                      <AccordionTrigger className="text-left font-semibold text-foreground text-sm sm:text-base hover:no-underline py-4">
+                        {faq.q}
+                      </AccordionTrigger>
+                      <AccordionContent className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
+                        {faq.a}
+                      </AccordionContent>
+                    </AccordionItem>
+                  </motion.div>
+                ))}
+              </Accordion>
+            </motion.div>
+          </div>
+        </section>
+      )}
+
       {/* ── Prev / Next Navigation ── */}
       <section className="section-padding border-t border-border/50">
         <div className="container-main">
