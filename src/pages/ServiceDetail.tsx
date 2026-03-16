@@ -162,7 +162,7 @@ const ServiceDetail = () => {
           onClick={() => navigate("/services")}
           className="text-primary font-semibold flex items-center gap-2 text-sm sm:text-base"
         >
-          <ArrowLeft size={16} /> Back to Services
+          <ArrowLeft size={16} /> Back to Treatments
         </button>
       </div>
     );
