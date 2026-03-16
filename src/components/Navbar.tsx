@@ -78,7 +78,7 @@ const Navbar = () => {
             : "bg-background border-b border-border/30"
         }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between py-3 px-4 sm:px-6 md:px-8">
+        <div className="max-w-7xl mx-auto flex items-center justify-between  px-4 sm:px-6 md:px-8">
 
           {/* ── Logo ── */}
           <Link
@@ -90,7 +90,7 @@ const Navbar = () => {
              <img
   src={logo}
   alt="Dr. Prashant Logo"
-  className="h-[52px] w-auto object-contain"
+  className="h-[60px] w-auto object-contain"
 />
             
            

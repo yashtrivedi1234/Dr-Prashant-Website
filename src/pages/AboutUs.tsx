@@ -104,11 +104,11 @@ const AboutUs = () => {
           >
             <div className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-full h-full gradient-primary rounded-2xl opacity-10 pointer-events-none" />
 
-            <img
-              src={doctorImg}
-              alt="Dr. Prashant"
-              className="relative rounded-2xl shadow-2xl w-full object-cover aspect-[4/5] z-10"
-            />
+           <img
+  src={doctorImg}
+  alt="Dr. Prashant"
+  className="relative rounded-2xl shadow-2xl w-full h-[320px] sm:h-[360px] lg:h-[420px] object-cover z-10"
+/>
 
             {/* Floating credential card */}
             <div className="
