@@ -3,6 +3,7 @@ import TopBar from "./TopBar";
 import Navbar from "./Navbar";
 import BreadcrumbBar from "./BreadcrumbBar";
 import Footer from "./Footer";
+import FloatingButtons from "./FloatingButtons";
 
 const Layout = () => {
   return (
@@ -14,6 +15,7 @@ const Layout = () => {
         <Outlet />
       </main>
       <Footer />
+      <FloatingButtons />
     </div>
   );
 };
