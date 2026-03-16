@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Award, Clock, Users } from "lucide-react";
 import { Link } from "react-router-dom";
-import doctorImg from "@/assets/doctor-portrait.jpg";
+import doctorImg from "@/assets/doctor-portrait.jpeg";
 
 const stats = [
   { icon: Award,  value: "14+",   label: "Years Experience",   color: "bg-primary" },
@@ -68,15 +68,9 @@ const AboutSection = () => (
         </h2>
 
         <p className="text-muted-foreground leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base">
-          With over 14 years of medical excellence, Dr. Prashant is a highly regarded specialist
-          in ENT, Vertigo, Allergy, and Head &amp; Neck Cancer, dedicated to providing advanced
-          clinical and surgical care.
+        Dr. Prashant did MBBS from Govt Medical College PMCH, Patna and MS (ENT) from IMS, BHU Varanasi. He did senior residency from PGIMER, Chandigarh. He had done advance course on allergy testing and immunotherapy from Baroda. He had done fellowship course on vertigo, imbalance and vestibular assessment and management from Yenelova University Mangalore. He had done certificate course in Sleep Medicine from Hind Medical Institute Barabanki.
         </p>
-        <p className="text-muted-foreground leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">
-          An alumnus of PMCH Patna and IMS B.H.U. Varanasi, and a former Senior Resident at
-          PGIMER Chandigarh, he brings exceptional expertise in complex Ear Surgeries, Sleep
-          Studies, and Immunotherapy to his patients.
-        </p>
+        
 
         {/* Stats grid */}
         <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-6 sm:mb-8">

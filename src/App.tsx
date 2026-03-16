@@ -19,6 +19,8 @@ import OralImmunotherapyClinic from "./pages/OralImmunotherapyClinic.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Layout from "./components/Layout.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
+import Treatment from "./pages/Treatment.tsx";
+import TreatmentDetail from "./pages/TreatmentDetail.tsx";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +46,8 @@ const App = () => (
             <Route path="/snoring" element={<SnoringClinic />} />
             <Route path="/allergy" element={<AllergyClinic />} />
             <Route path="/oral-immunotherapy" element={<OralImmunotherapyClinic />} />
+            <Route path="/treatment" element={<Treatment />} />
+            <Route path="/treatment/:slug" element={<TreatmentDetail />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

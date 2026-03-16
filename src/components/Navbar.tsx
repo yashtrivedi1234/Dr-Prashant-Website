@@ -20,7 +20,7 @@ const links = [
   },
   { name: "Vertigo Clinic",  href: "/vertigo" },
   { name: "Snoring Clinic",  href: "/snoring" },
-  { name: "Treatments",      href: "/services" },
+  { name: "Treatments",      href: "/treatment" },
   { name: "Gallery",         href: "/gallery" },
   { name: "Contact",         href: "/contact" },
 ];

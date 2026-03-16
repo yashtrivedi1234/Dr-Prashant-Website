@@ -1,3 +1,4 @@
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   Breadcrumb,
@@ -19,6 +20,7 @@ const routeLabelMap: Record<string, string> = {
   snoring: "Snoring Clinic",
   allergy: "Allergy Clinic",
   "oral-immunotherapy": "Oral Immunotherapy",
+  "conditions-treated": "Conditions Treated",
 };
 
 const blogTitleMap: Record<string, string> = {
@@ -86,16 +88,18 @@ const BreadcrumbBar = () => {
             </BreadcrumbItem>
 
             {crumbs.map((crumb) => (
-              <BreadcrumbItem key={crumb.href}>
+              <React.Fragment key={crumb.href}>
                 <BreadcrumbSeparator />
-                {crumb.isLast ? (
-                  <BreadcrumbPage>{crumb.label}</BreadcrumbPage>
-                ) : (
-                  <BreadcrumbLink asChild>
-                    <Link to={crumb.href}>{crumb.label}</Link>
-                  </BreadcrumbLink>
-                )}
-              </BreadcrumbItem>
+                <BreadcrumbItem>
+                  {crumb.isLast ? (
+                    <BreadcrumbPage>{crumb.label}</BreadcrumbPage>
+                  ) : (
+                    <BreadcrumbLink asChild>
+                      <Link to={crumb.href}>{crumb.label}</Link>
+                    </BreadcrumbLink>
+                  )}
+                </BreadcrumbItem>
+              </React.Fragment>
             ))}
           </BreadcrumbList>
         </Breadcrumb>

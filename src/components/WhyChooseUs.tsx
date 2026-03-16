@@ -1,30 +1,30 @@
-import { Award, Heart, Zap, MapPin } from "lucide-react";
+import { Microscope, Stethoscope, Syringe, HeartHandshake } from "lucide-react";
 import { motion } from "framer-motion";
 
 const clinicFeatures = [
   {
-    icon: Award,
-    title: "State-of-the-Art Facility",
+    icon: Microscope,
+    title: "Comprehensive Testing",
     description:
-      "Equipped with the latest advancements in medical technology and techniques for accurate diagnoses.",
+      "Our experts use a thorough, personalized approach to allergy testing — helping families and individuals live life to the fullest, free from allergies.",
   },
   {
-    icon: Heart,
-    title: "Patient-Centered Care",
+    icon: Stethoscope,
+    title: "Lifestyle & Trigger Guidance",
     description:
-      "Personalized attention and tailored treatment plans to meet each patient's unique needs.",
+      "We explain lifestyle measures to help you identify and avoid your allergy triggers, empowering you with the knowledge to manage your condition day-to-day.",
   },
   {
-    icon: Zap,
-    title: "Specialized Expertise",
+    icon: Syringe,
+    title: "Advanced Immunotherapy",
     description:
-      "Expert team of otolaryngologists dedicated to exceptional ENT care and comprehensive services.",
+      "Patients receive personalized allergy shot plans with faster results than traditional immunotherapy. Allergy shots and drops work to decrease immune response and mitigate symptoms.",
   },
   {
-    icon: MapPin,
-    title: "Convenient Location",
+    icon: HeartHandshake,
+    title: "Compassionate Year-Round Care",
     description:
-      "Easily accessible in Lucknow with a comfortable and welcoming environment for all patients.",
+      "From medication to sublingual immunotherapy (allergy drops), we offer tailored treatment options with expert, compassionate care available all year round.",
   },
 ];
 
@@ -49,6 +49,10 @@ const WhyChooseUs = () => {
             text-2xl sm:text-3xl md:text-4xl">
             Why <span className="gradient-text">Choose Us</span>
           </h2>
+
+          <p className="mt-3 sm:mt-4 text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            Our team of experts uses a comprehensive approach to testing and personalized treatment plans — so you and your family can live life to the fullest, free from allergies.
+          </p>
         </motion.div>
 
         {/* ── Cards grid ── */}

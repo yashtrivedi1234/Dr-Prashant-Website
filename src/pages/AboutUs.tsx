@@ -3,7 +3,7 @@ import {
   Award, Clock, Users, Heart, Target,
   Lightbulb, CheckCircle2,
 } from "lucide-react";
-import doctorImg from "@/assets/doctor-portrait.jpg";
+import doctorImg from "@/assets/doctor-portrait.jpeg";
 import aboutVideo from "@/assets/about us.mp4";
 import CTASection from "@/components/CTASection";
 import { useRef } from "react";
@@ -157,25 +157,9 @@ const AboutUs = () => {
             <div className="space-y-3 sm:space-y-4 text-muted-foreground leading-relaxed
               text-sm sm:text-base mb-4 sm:mb-6">
               <p>
-                Dr. Prashant stands as one of the foremost authorities in the
-                fields of ENT, Vertigo, Allergy, and Head &amp; Neck Cancer
-                specialties. His distinguished career is marked by excellence in
-                patient care, research, and academics.
+               Dr. Prashant did MBBS from Govt Medical College PMCH, Patna and MS (ENT) from IMS, BHU Varanasi. He did senior residency from PGIMER, Chandigarh. He had done advance course on allergy testing and immunotherapy from Baroda. He had done fellowship course on vertigo, imbalance and vestibular assessment and management from Yenelova University Mangalore. He had done certificate course in Sleep Medicine from Hind Medical Institute Barabanki.
               </p>
-              <p>
-                He completed his MBBS from PMCH, Patna in 2010, followed by an
-                MS in ENT from IMS, B.H.U. Varanasi. As a prominent ENT
-                Specialist formerly affiliated with the prestigious PGIMER
-                Chandigarh, he has earned widespread recognition for his
-                exceptional clinical skills and compassionate approach.
-              </p>
-              <p>
-                For the last five years, Dr. Prashant has solely devoted his
-                practice to advanced Ear Surgery, Allergy Testing &amp;
-                Immunotherapy, comprehensive Vertigo &amp; VNG testing, Sleep
-                Studies, Drug-Induced Sleep Endoscopy, and Head &amp; Neck
-                Cancer Surgeries.
-              </p>
+             
             </div>
 
             {/* Stats */}
