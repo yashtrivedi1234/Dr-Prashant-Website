@@ -22,6 +22,7 @@ import ScrollToTop from "./components/ScrollToTop.tsx";
 import Treatment from "./pages/Treatment.tsx";
 import TreatmentDetail from "./pages/TreatmentDetail.tsx";
 import VertigoDetail from "./pages/vertigo/VertigoDetail.tsx";
+import BookAppointment from "./pages/BookAppointment";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,7 @@ const App = () => (
             <Route path="/treatment" element={<Treatment />} />
             <Route path="/treatment/:slug" element={<TreatmentDetail />} />
             <Route path="/vertigo-info" element={<VertigoDetail />} />
+            <Route path="/book-appointment" element={<BookAppointment />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

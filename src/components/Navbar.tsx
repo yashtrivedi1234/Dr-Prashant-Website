@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronDown, Phone } from "lucide-react";
+import { Menu, X, ChevronDown, Phone, Calendar } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { Link, useLocation } from "react-router-dom";
 
@@ -183,7 +183,14 @@ const Navbar = () => {
 
           {/* ── CTA + Hamburger ── */}
           <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-           
+            {/* Book Appointment Button — shown on lg and up */}
+            <Link
+              to="/book-appointment"
+              className="hidden lg:flex items-center gap-1.5 xl:gap-2 px-3 xl:px-4 py-2 rounded-lg font-semibold text-xs xl:text-sm gradient-primary text-white hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 whitespace-nowrap"
+            >
+            
+            Book Appointment
+            </Link>
 
             {/* Hamburger — shown below lg */}
             <button
@@ -281,13 +288,13 @@ const Navbar = () => {
 
             {/* Mobile CTA */}
             <div className="pt-2 pb-1">
-              <a
-                href="/contact"
+              <Link
+                to="/book-appointment"
                 className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-4 py-3 rounded-lg text-sm font-semibold w-full hover:brightness-105 active:scale-95 transition-all duration-200"
               >
-                <Phone size={14} />
+            
                 Book Appointment
-              </a>
+              </Link>
             </div>
           </div>
         </div>

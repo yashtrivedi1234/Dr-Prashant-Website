@@ -123,7 +123,7 @@ const HeroCarousel = () => {
                 transition={{ delay: 0.5 }}
               >
                 <Link
-                  to="/contact"
+                  to="/book-appointment"
                   className="inline-block gradient-primary text-primary-foreground
                     font-bold rounded-full shadow-lg
                     hover:opacity-90 active:scale-95 transition-all
