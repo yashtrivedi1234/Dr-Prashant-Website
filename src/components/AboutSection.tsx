@@ -11,7 +11,7 @@ const stats = [
 
 const AboutSection = () => (
   <section id="about" className="section-padding bg-background overflow-hidden">
-    <div className="container-main grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-14 lg:gap-20 items-center">
+    <div className="container-main grid grid-cols-1 md:grid-cols-2 items-center">
 
       {/* ── Image column ── */}
       <motion.div
@@ -19,15 +19,15 @@ const AboutSection = () => (
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="relative mx-auto w-full max-w-xs sm:max-w-sm md:max-w-full"
+        className="relative w-[380px] max-w-sm sm:max-w-md md:max-w-full"
       >
         {/* Decorative background tile */}
-        <div className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-full h-full gradient-primary rounded-2xl opacity-20 pointer-events-none" />
+        <div className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-[380px] h-full gradient-primary rounded-2xl opacity-20 pointer-events-none" />
 
         <img
           src={doctorImg}
           alt="Dr. Prashant"
-          className="relative rounded-2xl shadow-2xl w-full h-[320px] sm:h-[360px] lg:h-[420px] object-cover z-10"
+          className="relative rounded-2xl shadow-2xl w-[380px] h-[380px] sm:h-[420px] lg:h-[480px] object-cover z-10"
         />
 
         {/* Floating badge */}
@@ -55,14 +55,14 @@ const AboutSection = () => (
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-        className="pt-6 sm:pt-8 md:pt-0"   /* offset so badge doesn't clip on mobile */
+        className="pt-6 sm:pt-8 md:pt-0"
       >
         <span className="inline-block gradient-primary text-primary-foreground text-[10px] sm:text-xs font-bold px-3 sm:px-4 py-1 sm:py-1.5 rounded-full tracking-wider uppercase mb-3 sm:mb-4">
           About Dr. Prashant
         </span>
 
-        <h2 className="font-heading font-bold text-foreground leading-tight mb-4 sm:mb-6
-          text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem]">
+        <h2 className="font-heading font-bold text-foreground leading-tight mb-4 sm:mb-5
+          text-xl sm:text-2xl md:text-3xl lg:text-[2rem]">
           Leading ENT Specialist &amp;{" "}
           <span className="gradient-text">Surgeon</span>
         </h2>
@@ -70,7 +70,6 @@ const AboutSection = () => (
         <p className="text-muted-foreground leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base">
         Dr. Prashant did MBBS from Govt Medical College PMCH, Patna and MS (ENT) from IMS, BHU Varanasi. He did senior residency from PGIMER, Chandigarh. He had done advance course on allergy testing and immunotherapy from Baroda. He had done fellowship course on vertigo, imbalance and vestibular assessment and management from Yenelova University Mangalore. He had done certificate course in Sleep Medicine from Hind Medical Institute Barabanki.
         </p>
-        
 
         {/* Stats grid */}
         <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-6 sm:mb-8">

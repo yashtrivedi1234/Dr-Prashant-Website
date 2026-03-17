@@ -7,12 +7,14 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import GallerySection from "@/components/GallerySection";
 import BlogSection from "@/components/BlogSection";
 import CTASection from "@/components/CTASection";
+import StatsSection from "@/components/StatsSection";
 
 const Index = () => (
   <>
     <HeroCarousel />
     <AboutSection />
     {/* <ServicesSection /> */}
+    <StatsSection />
     <TreatmentSection />
     <WhyChooseUs />
     <GallerySection />
