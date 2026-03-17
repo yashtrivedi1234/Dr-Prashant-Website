@@ -25,7 +25,7 @@ import {
 const VertigoDetail = () => (
   <div className="vertigo-page">
     <VertigoHero />
-
+       
     <div className="vd-body">
       <VertigoMeaning />
       <VertigoDefinition />
