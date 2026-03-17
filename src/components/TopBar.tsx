@@ -1,7 +1,7 @@
 import { Phone, Mail } from "lucide-react";
 
 const TopBar = () => (
-  <div className="gradient-primary text-primary-foreground text-sm py-1.5 px-1">
+  <div className="bg-gradient-to-r from-[rgb(26,79,171)] to-[rgb(40,100,200)] text-white text-sm py-1.5 px-1">
     <div className="container-main flex justify-between items-center">
       <div className="flex items-center gap-4">
         <a href="tel:+917658874707" className="flex items-center gap-1.5 hover:opacity-80 transition-opacity">
