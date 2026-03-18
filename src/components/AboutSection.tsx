@@ -119,6 +119,9 @@ const AboutSection = () => {
       <div className="absolute -top-32 -right-20 w-[480px] h-[480px] rounded-full bg-primary/5 blur-3xl pointer-events-none" />
       <div className="absolute -bottom-24 -left-16 w-[360px] h-[360px] rounded-full bg-accent/5 blur-3xl pointer-events-none" />
 
+      {/* Top ticker */}
+      <Ticker />
+
       {/* ── Main grid ── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
         {/* ── LEFT: Image ── */}
@@ -266,9 +269,6 @@ const AboutSection = () => {
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Bottom ticker */}
-      <Ticker />
     </section>
   );
 };

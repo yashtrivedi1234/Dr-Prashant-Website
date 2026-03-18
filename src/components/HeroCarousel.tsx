@@ -126,7 +126,7 @@ const HeroCarousel = () => {
       <section
         id="home"
         className="relative w-full overflow-hidden bg-foreground"
-        style={{ height: "100svh", minHeight: 560, maxHeight: 960 }}
+        style={{ height: "85svh", minHeight: 560, maxHeight: 960 }}
       >
         {/* ── Accent bar (left edge) ── */}
         <motion.div

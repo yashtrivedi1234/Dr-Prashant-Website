@@ -193,7 +193,7 @@ const TreatmentSection = () => {
                        transition-all duration-300 hover:-translate-y-0.5
                        hover:shadow-primary/40 active:scale-95"
           >
-            View All Conditions
+            View All Treatments
             <ArrowRight className="w-4 h-4" />
           </Link>
 
