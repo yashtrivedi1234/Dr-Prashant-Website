@@ -6,8 +6,25 @@ import {
   MapPin,
   PhoneCall,
   CheckCircle2,
+  AlertCircle,
+  Loader2,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { useCreateAppointmentMutation } from "../store";
+
+interface ValidationError {
+  field: string;
+  message: string;
+  value?: string;
+}
+
+interface ErrorResponse {
+  data?: {
+    message?: string;
+    errors?: ValidationError[];
+  };
+  message?: string;
+}
 
 const services = [
   "ENT Consultation",
@@ -38,15 +55,135 @@ const timeSlots = [
 ];
 
 const BookAppointment = () => {
-  const [selectedDate, setSelectedDate] = useState("");
-  const [selectedTime, setSelectedTime] = useState("");
-  const [selectedService, setSelectedService] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    service: "",
+    date: "",
+    time: "",
+    notes: "",
+  });
+  const [successMessage, setSuccessMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [createAppointment, { isLoading, isError, error }] =
+    useCreateAppointmentMutation();
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    let filteredValue = value;
+
+    // Name field: Only allow letters, spaces, hyphens, and apostrophes
+    if (name === "name") {
+      filteredValue = value.replace(/[^a-zA-Z\s'-]/g, "");
+    }
+
+    // Phone field: Only allow digits 0-9
+    if (name === "phone") {
+      filteredValue = value.replace(/[^0-9]/g, "");
+      // Limit to 15 digits
+      if (filteredValue.length > 15) {
+        filteredValue = filteredValue.slice(0, 15);
+      }
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: filteredValue,
+    }));
+    setErrorMessage(""); // Clear general error when user starts typing
+    // Clear field-specific error for this field
+    if (fieldErrors[name]) {
+      setFieldErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
+  };
+
+  const handleTimeSelect = (time: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      time,
+    }));
+    // Clear time error when user selects a time
+    if (fieldErrors.time) {
+      setFieldErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors.time;
+        return newErrors;
+      });
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
+    setErrorMessage("");
+    console.log("🔄 Form submitted with data:", formData);
+
+    // Validation
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.service ||
+      !formData.date ||
+      !formData.time
+    ) {
+      setErrorMessage("Please fill in all required fields");
+      console.error("❌ Validation failed - missing fields");
+      return;
+    }
+
+    try {
+      console.log("📡 Calling createAppointment mutation...");
+      const result = await createAppointment(formData).unwrap();
+      console.log("✅ API Response:", result);
+      if (result.success) {
+        setSuccessMessage(true);
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          service: "",
+          date: "",
+          time: "",
+          notes: "",
+        });
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+          setSuccessMessage(false);
+        }, 5000);
+      }
+    } catch (err) {
+      console.error("❌ API Error:", err);
+      const error = err as ErrorResponse;
+      
+      // Handle field-specific validation errors
+      if (error?.data?.errors && Array.isArray(error.data.errors)) {
+        const fieldErrorMap: Record<string, string> = {};
+        error.data.errors.forEach((fieldError: ValidationError) => {
+          fieldErrorMap[fieldError.field] = fieldError.message;
+        });
+        setFieldErrors(fieldErrorMap);
+        setErrorMessage("Please fix the validation errors below.");
+        console.log("📋 Field Errors:", fieldErrorMap);
+      } else {
+        // Handle general errors
+        const errorMsg =
+          error?.data?.message ||
+          error?.message ||
+          "Failed to book appointment. Please try again.";
+        setErrorMessage(errorMsg);
+      }
+    }
   };
 
   return (
@@ -115,72 +252,131 @@ const BookAppointment = () => {
                 </h2>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 lg:space-y-6">
+              <form onSubmit={handleSubmit} ref={formRef} className="space-y-4 sm:space-y-5 lg:space-y-6">
+                {/* ── Error Message ── */}
+                {errorMessage && (
+                  <div className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-lg sm:rounded-xl p-4 text-red-700">
+                    <AlertCircle size={20} className="flex-shrink-0" />
+                    <p className="text-sm sm:text-base font-medium">{errorMessage}</p>
+                  </div>
+                )}
+
+                {/* ── Success Message ── */}
+                {successMessage && (
+                  <div className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-lg sm:rounded-xl p-4 text-green-700">
+                    <CheckCircle2 size={20} className="flex-shrink-0" />
+                    <p className="text-sm sm:text-base font-medium">
+                      Appointment booked successfully! Check your email for confirmation.
+                    </p>
+                  </div>
+                )}
+
                 {/* ── Name & Phone ── */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
                   <div className="space-y-1.5 sm:space-y-2">
                     <label className="text-xs sm:text-sm font-bold text-slate-700 ml-1">
-                      Full Name
+                      Full Name *
                     </label>
                     <input
                       type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
                       placeholder="John Doe"
                       required
-                      className="w-full bg-slate-50 border border-slate-100 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all
+                      className={`w-full bg-slate-50 border focus:outline-none focus:ring-2 transition-all
                         rounded-xl sm:rounded-2xl
                         py-3 px-4 text-sm
                         sm:py-3.5 sm:px-5
-                        lg:py-4 lg:px-6"
+                        lg:py-4 lg:px-6
+                        ${fieldErrors.name
+                          ? "border-red-500 focus:ring-red-500/20"
+                          : "border-slate-100 focus:ring-primary/20"
+                        }`}
                     />
+                    {fieldErrors.name && (
+                      <p className="text-xs sm:text-sm text-red-600 ml-1 flex items-center gap-1">
+                        <AlertCircle size={14} /> {fieldErrors.name}
+                      </p>
+                    )}
                   </div>
                   <div className="space-y-1.5 sm:space-y-2">
                     <label className="text-xs sm:text-sm font-bold text-slate-700 ml-1">
-                      Phone Number
+                      Phone Number *
                     </label>
                     <input
                       type="tel"
-                      placeholder="+91 00000 00000"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="6000000000"
                       required
-                      className="w-full bg-slate-50 border border-slate-100 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all
+                      className={`w-full bg-slate-50 border focus:outline-none focus:ring-2 transition-all
                         rounded-xl sm:rounded-2xl
                         py-3 px-4 text-sm
                         sm:py-3.5 sm:px-5
-                        lg:py-4 lg:px-6"
+                        lg:py-4 lg:px-6
+                        ${fieldErrors.phone
+                          ? "border-red-500 focus:ring-red-500/20"
+                          : "border-slate-100 focus:ring-primary/20"
+                        }`}
                     />
+                    {fieldErrors.phone && (
+                      <p className="text-xs sm:text-sm text-red-600 ml-1 flex items-center gap-1">
+                        <AlertCircle size={14} /> {fieldErrors.phone}
+                      </p>
+                    )}
                   </div>
                 </div>
 
                 {/* ── Email ── */}
                 <div className="space-y-1.5 sm:space-y-2">
                   <label className="text-xs sm:text-sm font-bold text-slate-700 ml-1">
-                    Email Address
+                    Email Address *
                   </label>
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     placeholder="john@example.com"
                     required
-                    className="w-full bg-slate-50 border border-slate-100 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all
+                    className={`w-full bg-slate-50 border focus:outline-none focus:ring-2 transition-all
                       rounded-xl sm:rounded-2xl
                       py-3 px-4 text-sm
                       sm:py-3.5 sm:px-5
-                      lg:py-4 lg:px-6"
+                      lg:py-4 lg:px-6
+                      ${fieldErrors.email
+                        ? "border-red-500 focus:ring-red-500/20"
+                        : "border-slate-100 focus:ring-primary/20"
+                      }`}
                   />
+                  {fieldErrors.email && (
+                    <p className="text-xs sm:text-sm text-red-600 ml-1 flex items-center gap-1">
+                      <AlertCircle size={14} /> {fieldErrors.email}
+                    </p>
+                  )}
                 </div>
 
                 {/* ── Service Selection ── */}
                 <div className="space-y-1.5 sm:space-y-2">
                   <label className="text-xs sm:text-sm font-bold text-slate-700 ml-1">
-                    Service/Department
+                    Service/Department *
                   </label>
                   <select
-                    value={selectedService}
-                    onChange={(e) => setSelectedService(e.target.value)}
+                    name="service"
+                    value={formData.service}
+                    onChange={handleInputChange}
                     required
-                    className="w-full bg-slate-50 border border-slate-100 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all appearance-none
+                    className={`w-full bg-slate-50 border focus:outline-none focus:ring-2 transition-all appearance-none
                       rounded-xl sm:rounded-2xl
                       py-3 px-4 text-sm
                       sm:py-3.5 sm:px-5
-                      lg:py-4 lg:px-6"
+                      lg:py-4 lg:px-6
+                      ${fieldErrors.service
+                        ? "border-red-500 focus:ring-red-500/20"
+                        : "border-slate-100 focus:ring-primary/20"
+                      }`}
                   >
                     <option value="">-- Select a Service --</option>
                     {services.map((service) => (
@@ -189,39 +385,54 @@ const BookAppointment = () => {
                       </option>
                     ))}
                   </select>
+                  {fieldErrors.service && (
+                    <p className="text-xs sm:text-sm text-red-600 ml-1 flex items-center gap-1">
+                      <AlertCircle size={14} /> {fieldErrors.service}
+                    </p>
+                  )}
                 </div>
 
                 {/* ── Date ── */}
                 <div className="space-y-1.5 sm:space-y-2">
                   <label className="text-xs sm:text-sm font-bold text-slate-700 ml-1">
-                    Preferred Date
+                    Preferred Date *
                   </label>
                   <input
                     type="date"
-                    value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
+                    name="date"
+                    value={formData.date}
+                    onChange={handleInputChange}
                     required
-                    className="w-full bg-slate-50 border border-slate-100 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all
+                    className={`w-full bg-slate-50 border focus:outline-none focus:ring-2 transition-all
                       rounded-xl sm:rounded-2xl
                       py-3 px-4 text-sm
                       sm:py-3.5 sm:px-5
-                      lg:py-4 lg:px-6"
+                      lg:py-4 lg:px-6
+                      ${fieldErrors.date
+                        ? "border-red-500 focus:ring-red-500/20"
+                        : "border-slate-100 focus:ring-primary/20"
+                      }`}
                   />
+                  {fieldErrors.date && (
+                    <p className="text-xs sm:text-sm text-red-600 ml-1 flex items-center gap-1">
+                      <AlertCircle size={14} /> {fieldErrors.date}
+                    </p>
+                  )}
                 </div>
 
                 {/* ── Time Slots ── */}
                 <div className="space-y-1.5 sm:space-y-2">
                   <label className="text-xs sm:text-sm font-bold text-slate-700 ml-1">
-                    Preferred Time
+                    Preferred Time *
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
                     {timeSlots.map((time) => (
                       <button
                         key={time}
                         type="button"
-                        onClick={() => setSelectedTime(time)}
+                        onClick={() => handleTimeSelect(time)}
                         className={`py-2 px-3 text-xs sm:text-sm font-medium rounded-lg transition-all
-                          ${selectedTime === time
+                          ${formData.time === time
                             ? "gradient-primary text-white shadow-lg"
                             : "bg-slate-50 border border-slate-100 text-slate-700 hover:border-primary hover:bg-primary/5"
                           }`}
@@ -230,6 +441,11 @@ const BookAppointment = () => {
                       </button>
                     ))}
                   </div>
+                  {fieldErrors.time && (
+                    <p className="text-xs sm:text-sm text-red-600 ml-1 flex items-center gap-1">
+                      <AlertCircle size={14} /> {fieldErrors.time}
+                    </p>
+                  )}
                 </div>
 
                 {/* ── Message ── */}
@@ -238,19 +454,32 @@ const BookAppointment = () => {
                     Additional Notes (Optional)
                   </label>
                   <textarea
+                    name="notes"
+                    value={formData.notes}
+                    onChange={handleInputChange}
                     rows={3}
                     placeholder="Any specific concerns or medical history we should know?"
-                    className="w-full bg-slate-50 border border-slate-100 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all resize-none
+                    className={`w-full bg-slate-50 border focus:outline-none focus:ring-2 transition-all resize-none
                       rounded-xl sm:rounded-2xl
                       py-3 px-4 text-sm
                       sm:py-3.5 sm:px-5
-                      lg:py-4 lg:px-6"
+                      lg:py-4 lg:px-6
+                      ${fieldErrors.notes
+                        ? "border-red-500 focus:ring-red-500/20"
+                        : "border-slate-100 focus:ring-primary/20"
+                      }`}
                   />
+                  {fieldErrors.notes && (
+                    <p className="text-xs sm:text-sm text-red-600 ml-1 flex items-center gap-1">
+                      <AlertCircle size={14} /> {fieldErrors.notes}
+                    </p>
+                  )}
                 </div>
 
                 {/* ── Submit Button ── */}
                 <button
                   type="submit"
+                  disabled={isLoading || successMessage}
                   className="
                     w-full gradient-primary text-white font-bold
                     rounded-xl sm:rounded-2xl
@@ -259,9 +488,15 @@ const BookAppointment = () => {
                     py-3.5 text-sm
                     sm:py-4 sm:text-base
                     lg:py-5 lg:text-base
+                    disabled:opacity-50 disabled:cursor-not-allowed
                   "
                 >
-                  {isSubmitted ? (
+                  {isLoading ? (
+                    <>
+                      <Loader2 size={18} className="sm:w-5 sm:h-5 animate-spin" />
+                      Booking...
+                    </>
+                  ) : successMessage ? (
                     <>
                       <CheckCircle2 size={18} className="sm:w-5 sm:h-5" />
                       Appointment Booked!
