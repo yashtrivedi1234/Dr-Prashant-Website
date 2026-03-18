@@ -1,7 +1,12 @@
 import { motion } from "framer-motion";
 import {
-  Award, Clock, Users, Heart, Target,
-  Lightbulb, CheckCircle2,
+  Award,
+  Clock,
+  Users,
+  Heart,
+  Target,
+  Lightbulb,
+  CheckCircle2,
 } from "lucide-react";
 import doctorImg from "@/assets/doctor-portrait.jpeg";
 import aboutVideo from "@/assets/about us.mp4";
@@ -9,9 +14,19 @@ import CTASection from "@/components/CTASection";
 import { useRef } from "react";
 
 const stats = [
-  { icon: Award, value: "14+",    label: "Years Experience",   color: "bg-primary" },
-  { icon: Users, value: "PGIMER", label: "Ex-Senior Resident", color: "gradient-warm" },
-  { icon: Clock, value: "24/7",   label: "Dedicated Care",     color: "gradient-teal" },
+  { icon: Award, value: "14+", label: "Years Experience", color: "bg-primary" },
+  {
+    icon: Users,
+    value: "PGIMER",
+    label: "Ex-Senior Resident",
+    color: "gradient-warm",
+  },
+  {
+    icon: Clock,
+    value: "24/7",
+    label: "Dedicated Care",
+    color: "gradient-teal",
+  },
 ];
 
 const values = [
@@ -71,10 +86,9 @@ const AboutUs = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
               className="font-heading font-bold text-foreground mb-3 leading-tight
-                text-2xl sm:text-3xl md:text-5xl lg:text-6xl"
+                text-2xl sm:text-3xl md:text-5xl lg:text-6xl whitespace-nowrap"
             >
-              Advanced Care for{" "}
-              <span className="gradient-text">ENT &amp; Allergy</span>
+              Advanced Care for <span className="gradient-text">ENT &amp; Allergy</span>
             </motion.h1>
 
             <motion.p
@@ -94,7 +108,6 @@ const AboutUs = () => {
       {/* ── Bio ── */}
       <section className="section-padding overflow-hidden">
         <div className="container-main grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-14 lg:gap-16 items-center">
-
           {/* Image */}
           <motion.div
             initial={{ opacity: 0, x: -60 }}
@@ -104,36 +117,46 @@ const AboutUs = () => {
           >
             <div className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-full h-full gradient-primary rounded-2xl opacity-10 pointer-events-none" />
 
-           <img
-  src={doctorImg}
-  alt="Dr. Prashant"
-  className="relative rounded-2xl shadow-2xl w-full h-[320px] sm:h-[360px] lg:h-[420px] object-cover z-10"
-/>
+            <img
+              src={doctorImg}
+              alt="Dr. Prashant"
+              className="relative rounded-2xl shadow-2xl w-full h-[320px] sm:h-[360px] lg:h-[420px] object-cover z-10"
+            />
 
             {/* Floating credential card */}
-            <div className="
+            <div
+              className="
               absolute z-20 gradient-primary text-primary-foreground rounded-2xl shadow-2xl
               -bottom-6 -right-3
               sm:-bottom-8 sm:-right-4
               lg:-bottom-10 lg:right-0
               p-4 sm:p-5 lg:p-8
               max-w-[160px] sm:max-w-[200px] lg:max-w-xs
-            ">
-              <p className="font-bold font-heading leading-tight
-                text-lg sm:text-2xl lg:text-4xl mb-0.5 sm:mb-1">
+            "
+            >
+              <p
+                className="font-bold font-heading leading-tight
+                text-lg sm:text-2xl lg:text-4xl mb-0.5 sm:mb-1"
+              >
                 Dr. Prashant
               </p>
-              <p className="opacity-90 font-medium
-                text-xs sm:text-sm">
+              <p
+                className="opacity-90 font-medium
+                text-xs sm:text-sm"
+              >
                 MBBS, MS (ENT)
               </p>
               <div className="mt-3 pt-3 border-t border-white/20">
-                <p className="uppercase tracking-widest opacity-80 mb-0.5
-                  text-[9px] sm:text-xs">
+                <p
+                  className="uppercase tracking-widest opacity-80 mb-0.5
+                  text-[9px] sm:text-xs"
+                >
                   Ex SR
                 </p>
-                <p className="font-semibold italic
-                  text-xs sm:text-sm">
+                <p
+                  className="font-semibold italic
+                  text-xs sm:text-sm"
+                >
                   PGIMER Chandigarh
                 </p>
               </div>
@@ -148,30 +171,44 @@ const AboutUs = () => {
             transition={{ delay: 0.2 }}
             className="pt-8 sm:pt-10 lg:pt-0"
           >
-            <h2 className="font-heading font-bold text-foreground mb-3 sm:mb-4 leading-tight
-              text-2xl sm:text-3xl md:text-4xl">
+            <h2
+              className="font-heading font-bold text-foreground mb-3 sm:mb-4 leading-tight
+              text-2xl sm:text-3xl md:text-4xl"
+            >
               A Legacy of{" "}
               <span className="gradient-text">Medical Excellence</span>
             </h2>
 
-            <div className="space-y-3 sm:space-y-4 text-muted-foreground leading-relaxed
-              text-sm sm:text-base mb-4 sm:mb-6">
+            <div
+              className="space-y-3 sm:space-y-4 text-muted-foreground leading-relaxed
+              text-sm sm:text-base mb-4 sm:mb-6"
+            >
               <p>
-               Dr. Prashant did MBBS from Govt Medical College PMCH, Patna and MS (ENT) from IMS, BHU Varanasi. He did senior residency from PGIMER, Chandigarh. He had done advance course on allergy testing and immunotherapy from Baroda. He had done fellowship course on vertigo, imbalance and vestibular assessment and management from Yenelova University Mangalore. He had done certificate course in Sleep Medicine from Hind Medical Institute Barabanki.
+                Dr. Prashant did MBBS from Govt Medical College PMCH, Patna and
+                MS (ENT) from IMS, BHU Varanasi. He did senior residency from
+                PGIMER, Chandigarh. He had done advance course on allergy
+                testing and immunotherapy from Baroda. He had done fellowship
+                course on vertigo, imbalance and vestibular assessment and
+                management from Yenelova University Mangalore. He had done
+                certificate course in Sleep Medicine from Hind Medical Institute
+                Barabanki.
               </p>
-             
             </div>
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-3 sm:gap-6 py-4 sm:py-6 border-y border-border/50">
               {stats.map((s) => (
                 <div key={s.label} className="text-center">
-                  <p className="font-bold text-foreground mb-0.5 sm:mb-1
-                    text-xl sm:text-2xl md:text-3xl">
+                  <p
+                    className="font-bold text-foreground mb-0.5 sm:mb-1
+                    text-xl sm:text-2xl md:text-3xl"
+                  >
                     {s.value}
                   </p>
-                  <p className="text-muted-foreground font-medium uppercase tracking-wider
-                    text-[9px] sm:text-xs leading-tight">
+                  <p
+                    className="text-muted-foreground font-medium uppercase tracking-wider
+                    text-[9px] sm:text-xs leading-tight"
+                  >
                     {s.label}
                   </p>
                 </div>
@@ -184,14 +221,17 @@ const AboutUs = () => {
       {/* ── Philosophy ── */}
       <section className="section-padding bg-slate-50 relative overflow-hidden">
         <div className="container-main relative z-10">
-
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10 lg:mb-12 px-2">
-            <h2 className="font-heading font-bold text-foreground mb-3 leading-tight
-              text-2xl sm:text-3xl md:text-4xl">
+            <h2
+              className="font-heading font-bold text-foreground mb-3 leading-tight
+              text-2xl sm:text-3xl md:text-4xl"
+            >
               Our Core Philosophy
             </h2>
-            <p className="text-muted-foreground leading-relaxed
-              text-sm sm:text-base">
+            <p
+              className="text-muted-foreground leading-relaxed
+              text-sm sm:text-base"
+            >
               Everything we do is guided by three fundamental principles that
               ensure the highest standard of specialized ENT and Allergy care.
             </p>
@@ -208,16 +248,22 @@ const AboutUs = () => {
                 className="bg-background rounded-2xl border border-border/50 shadow-sm hover:shadow-md transition-shadow
                   p-5 sm:p-6 lg:p-8"
               >
-                <div className="gradient-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 mb-4 sm:mb-6
-                  w-11 h-11 sm:w-12 sm:h-12 lg:w-14 lg:h-14">
+                <div
+                  className="gradient-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 mb-4 sm:mb-6
+                  w-11 h-11 sm:w-12 sm:h-12 lg:w-14 lg:h-14"
+                >
                   <v.icon className="text-primary-foreground" size={22} />
                 </div>
-                <h3 className="font-heading font-bold mb-2 sm:mb-3
-                  text-base sm:text-lg lg:text-xl">
+                <h3
+                  className="font-heading font-bold mb-2 sm:mb-3
+                  text-base sm:text-lg lg:text-xl"
+                >
                   {v.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed
-                  text-xs sm:text-sm lg:text-base">
+                <p
+                  className="text-muted-foreground leading-relaxed
+                  text-xs sm:text-sm lg:text-base"
+                >
                   {v.description}
                 </p>
               </motion.div>
@@ -230,11 +276,12 @@ const AboutUs = () => {
       <section className="section-padding">
         <div className="container-main">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
-
             {/* List */}
             <div className="order-2 lg:order-1">
-              <h2 className="font-heading font-bold text-foreground mb-5 sm:mb-6 leading-tight
-                text-2xl sm:text-3xl md:text-4xl">
+              <h2
+                className="font-heading font-bold text-foreground mb-5 sm:mb-6 leading-tight
+                text-2xl sm:text-3xl md:text-4xl"
+              >
                 Why Patients Trust{" "}
                 <span className="gradient-text">Our Practice</span>
               </h2>
@@ -253,8 +300,10 @@ const AboutUs = () => {
                       className="text-primary shrink-0 mt-0.5"
                       size={16}
                     />
-                    <span className="text-foreground/80 font-medium leading-snug
-                      text-xs sm:text-sm">
+                    <span
+                      className="text-foreground/80 font-medium leading-snug
+                      text-xs sm:text-sm"
+                    >
                       {item}
                     </span>
                   </motion.li>
@@ -274,7 +323,6 @@ const AboutUs = () => {
                 />
               </div>
             </div>
-
           </div>
         </div>
       </section>

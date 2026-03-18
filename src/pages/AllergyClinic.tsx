@@ -106,7 +106,7 @@ const AllergyClinic = () => {
               <span className="bg-gradient-to-r from-green-600 to-emerald-500 bg-clip-text text-transparent">
                 Allergy Specialist Clinic
               </span>{" "}
-              in Telibagh Lucknow
+              in Lucknow
             </motion.h1>
 
             <motion.p
