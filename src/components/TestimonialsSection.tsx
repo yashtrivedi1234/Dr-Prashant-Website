@@ -34,7 +34,7 @@ const TestimonialsSection = () => {
       id="testimonials"
       className="section-padding bg-background overflow-hidden"
     >
-      <div className="container-main">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
 
         {/* ── Section header ── */}
         <motion.div

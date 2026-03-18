@@ -1,196 +1,209 @@
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
-import {
-  Eye, AlertTriangle, Wind, UtensilsCrossed, LucideIcon,
-  ArrowRight, CheckCircle2,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, Wind, Waves, MoonStar } from "lucide-react";
+import { useRef } from "react";
 
-interface Treatment {
-  category: string;
-  icon: LucideIcon;
-  color: string;
-  textColor: string;
-  badgeColor: string;
-  description: string;
-  highlight: string;
-  slug: string;
-}
-
-const treatments: Treatment[] = [
+const treatments = [
   {
-    category: "ENT & Eye Allergy",
-    icon: Eye,
-    color: "from-blue-500/10 to-sky-500/10",
-    textColor: "text-blue-600",
-    badgeColor: "bg-blue-100 text-blue-700",
-    description: "Expert treatment for allergic rhinitis, conjunctivitis, and seasonal allergies affecting your nose and eyes.",
-    highlight: "7+ conditions treated",
-    slug: "treatment",
-  },
-  {
-    category: "Skin Allergy",
-    icon: AlertTriangle,
-    color: "from-pink-500/10 to-rose-500/10",
-    textColor: "text-pink-600",
-    badgeColor: "bg-pink-100 text-pink-700",
-    description: "Comprehensive care for urticaria, eczema, atopic dermatitis, and other skin allergic reactions.",
-    highlight: "7+ conditions treated",
-    slug: "treatment",
-  },
-  {
-    category: "Lungs Allergy",
+    category: "Allergy Clinic",
     icon: Wind,
-    color: "from-purple-500/10 to-violet-500/10",
-    textColor: "text-purple-600",
-    badgeColor: "bg-purple-100 text-purple-700",
-    description: "Specialized management of allergic asthma and chronic allergy-related cough for better breathing.",
-    highlight: "Advanced immunotherapy",
-    slug: "treatment",
+    slug: "allergy",
+    tagline: "Breathe Easy. Live Better.",
+    description:
+      "Comprehensive diagnosis and management of allergic rhinitis, skin allergies, food intolerances, asthma, and immunotherapy — all under one roof.",
+    highlights: [
+      "Allergic Rhinitis & Sinusitis",
+      "Skin & Food Allergies",
+      "Allergy Immunotherapy",
+      "Asthma Management",
+    ],
+    gradient: "from-primary/10 via-sky/10 to-transparent",
+    iconBg: "bg-primary/10 border-primary/20",
+    iconColor: "text-primary",
+    accentBar: "gradient-primary",
+    badge: "Most Visited",
   },
   {
-    category: "Gastrointestinal",
-    icon: UtensilsCrossed,
-    color: "from-orange-500/10 to-amber-500/10",
-    textColor: "text-orange-600",
-    badgeColor: "bg-orange-100 text-orange-700",
-    description: "Treatment for food allergies, intolerances, and eosinophilic esophagitis with dietary guidance.",
-    highlight: "Oral immunotherapy available",
-   slug: "treatment",
+    category: "Vertigo Clinic",
+    icon: Waves,
+    slug: "vertigo-info",
+    tagline: "Regain Your Balance. Reclaim Life.",
+    description:
+      "Advanced vestibular diagnostics including VNG testing, BPPV repositioning maneuvers, and personalised rehabilitation for dizziness and balance disorders.",
+    highlights: [
+      "BPPV & Labyrinthitis",
+      "VNG Diagnostic Testing",
+      "Vestibular Rehabilitation",
+      "Migraine-Related Vertigo",
+    ],
+    gradient: "from-teal/10 via-accent/10 to-transparent",
+    iconBg: "bg-teal/10 border-teal/20",
+    iconColor: "text-teal",
+    accentBar: "gradient-teal",
+    badge: "Speciality Care",
+  },
+  {
+    category: "Snoring Clinic",
+    icon: MoonStar,
+    slug: "snoring",
+    tagline: "Sleep Silently. Wake Refreshed.",
+    description:
+      "Expert evaluation and treatment of snoring and obstructive sleep apnea using Drug-Induced Sleep Endoscopy (DISE), CPAP therapy, and surgical interventions.",
+    highlights: [
+      "Obstructive Sleep Apnea",
+      "Drug-Induced Sleep Endoscopy",
+      "CPAP & Oral Appliances",
+      "Surgical Solutions",
+    ],
+    gradient: "from-violet/10 via-primary/5 to-transparent",
+    iconBg: "bg-violet/10 border-violet/20",
+    iconColor: "text-violet",
+    accentBar: "gradient-purple",
+    badge: "Advanced Diagnostics",
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" },
-  },
-};
+const ease = [0.22, 1, 0.36, 1];
 
 const TreatmentSection = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
   return (
-    <section className="section-padding relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-10 right-10 w-40 h-40 sm:w-56 sm:h-56 lg:w-80 lg:h-80 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute -bottom-10 -left-10 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-accent/5 rounded-full blur-3xl" />
-      </div>
+    <section className="section-padding relative overflow-hidden bg-background" ref={ref}>
+
+      {/* ── Background blobs ── */}
+      <div className="absolute top-10 right-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-10 -left-10 w-80 h-80 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="container-main relative z-10">
-        {/* Section Header */}
+
+        {/* ── Section Header ── */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-8 sm:mb-10 lg:mb-12"
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.65, ease }}
+          className="text-center mb-12"
         >
-          <span className="inline-block gradient-warm text-primary-foreground text-[10px] sm:text-xs font-bold px-3 sm:px-4 py-1 sm:py-1.5 rounded-full tracking-wider uppercase mb-3 sm:mb-4">
-            Complete Allergy Care
+          <span className="inline-flex items-center gap-2 gradient-warm text-primary-foreground
+                           text-[10px] font-bold px-4 py-1.5 rounded-full tracking-widest uppercase mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-white/70" />
+            Speciality Clinics
           </span>
 
-          <h2 className="font-heading font-bold text-foreground leading-tight mb-3 sm:mb-4
-            text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
-           Our <span className="gradient-text">Treatments</span>
+          <h2 className="font-heading font-bold text-foreground leading-tight mb-4
+                         text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+            Our <span className="gradient-text">Core Treatments</span>
           </h2>
 
-          <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto
-            text-sm sm:text-base md:text-lg">
-            We specialize in diagnosing and treating a comprehensive range of allergic conditions
-            across all body systems, from respiratory to gastrointestinal allergies.
+          <p className="text-muted-foreground leading-relaxed max-w-xl mx-auto text-sm sm:text-base">
+            Three dedicated clinics, each backed by advanced diagnostics and 14+ years of specialist expertise — designed around your specific needs.
           </p>
         </motion.div>
 
-        {/* Treatment Cards Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-5"
-        >
-          {treatments.map((treatment, index) => {
-            const IconComponent = treatment.icon;
-            return (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="group relative h-full"
-              >
-                <Link to={`/${treatment.slug}`}>
-                  <div
-                    className={`bg-gradient-to-br ${treatment.color} 
-                      border border-border/50 hover:border-border/80
-                      rounded-2xl p-5 sm:p-6 lg:p-7
-                      transition-all duration-300 hover:shadow-lg hover:scale-105
-                      h-full flex flex-col cursor-pointer group/card`}
-                  >
-                    {/* Icon */}
-                    <div className={`${treatment.badgeColor} rounded-xl w-fit p-2.5 sm:p-3 mb-3 sm:mb-4 group-hover/card:scale-110 transition-transform duration-300`}>
-                      <IconComponent className="w-6 h-6 sm:w-7 sm:h-7" />
-                    </div>
+        {/* ── Treatment Cards ── */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          {treatments.map((t, i) => (
+            <motion.div
+              key={t.slug}
+              initial={{ opacity: 0, y: 32 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.65, delay: i * 0.12, ease }}
+              className="group relative"
+            >
+              <div className={`relative h-full flex flex-col rounded-2xl border border-border/60
+                               bg-gradient-to-br ${t.gradient}
+                               overflow-hidden transition-all duration-300
+                               hover:shadow-xl hover:-translate-y-1 hover:border-border`}>
 
-                    {/* Title */}
-                    <h3 className={`font-heading font-bold ${treatment.textColor} leading-tight mb-2 sm:mb-3
-                      text-base sm:text-lg lg:text-xl`}>
-                      {treatment.category}
-                    </h3>
+                {/* Top accent bar */}
+                <span className={`absolute top-0 left-0 right-0 h-[3px] ${t.accentBar} opacity-80
+                                  group-hover:opacity-100 transition-opacity duration-300`} />
 
-                    {/* Description */}
-                    <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-4 sm:mb-5 flex-grow">
-                      {treatment.description}
-                    </p>
+                {/* Badge */}
+                <span className="absolute top-4 right-4 text-[10px] font-bold tracking-widest uppercase
+                                 bg-foreground/5 border border-border/50 text-muted-foreground
+                                 rounded-full px-2.5 py-1">
+                  {t.badge}
+                </span>
 
-                    {/* Highlight badge */}
-                    <div className="flex items-center gap-2 mb-4 sm:mb-5">
-                      <CheckCircle2 className={`w-4 h-4 ${treatment.textColor}`} />
-                      <span className="text-xs sm:text-sm font-medium text-foreground">
-                        {treatment.highlight}
-                      </span>
-                    </div>
+                <div className="p-6 sm:p-7 flex flex-col flex-1">
 
-                    {/* View More Link */}
-                    <div className="flex items-center gap-2 text-primary font-semibold text-sm sm:text-base
-                      group-hover/card:gap-3 transition-all duration-300">
-                      View Details
-                      <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-                    </div>
+                  {/* Icon */}
+                  <div className={`w-12 h-12 rounded-xl border flex items-center justify-center mb-5
+                                   ${t.iconBg} transition-transform duration-300 group-hover:scale-110`}>
+                    <t.icon className={`w-5 h-5 ${t.iconColor}`} />
                   </div>
-                </Link>
-              </motion.div>
-            );
-          })}
-        </motion.div>
 
-        {/* CTA Button */}
+                  {/* Title + tagline */}
+                  <h3 className="font-heading font-bold text-foreground text-xl sm:text-2xl leading-tight mb-1">
+                    {t.category}
+                  </h3>
+                  <p className={`text-xs font-semibold tracking-wide uppercase mb-3 ${t.iconColor}`}>
+                    {t.tagline}
+                  </p>
+
+                  {/* Description */}
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-grow">
+                    {t.description}
+                  </p>
+
+                  {/* Highlights */}
+                  <ul className="flex flex-col gap-2 mb-6">
+                    {t.highlights.map((h) => (
+                      <li key={h} className="flex items-center gap-2 text-xs text-foreground/80">
+                        <CheckCircle2 className={`w-3.5 h-3.5 shrink-0 ${t.iconColor}`} />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* CTA */}
+                  <Link
+                    to={`/${t.slug}`}
+                    className={`inline-flex items-center gap-2 font-semibold text-sm
+                                ${t.iconColor} group/link
+                                transition-all duration-200 hover:gap-3`}
+                  >
+                    Learn More & Book
+                    <span className="w-7 h-7 rounded-full border border-current/30 bg-current/5
+                                     flex items-center justify-center
+                                     transition-transform duration-200 group-hover/link:translate-x-1">
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* ── Bottom CTA ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="flex justify-center mt-10 sm:mt-12 lg:mt-14"
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.5, duration: 0.55, ease }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12"
         >
           <Link
             to="/treatment"
-            className="gradient-primary text-primary-foreground font-bold rounded-xl shadow-lg
-              px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base
-              hover:opacity-90 transition-opacity flex items-center gap-2"
+            className="inline-flex items-center gap-2 gradient-primary text-primary-foreground
+                       font-semibold rounded-full shadow-lg shadow-primary/25
+                       px-7 py-3.5 text-sm
+                       transition-all duration-300 hover:-translate-y-0.5
+                       hover:shadow-primary/40 active:scale-95"
           >
-            Explore All Conditions
-            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+            View All Conditions
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+
+          <Link
+            to="/book-appointment"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary
+                       border border-primary/30 rounded-full px-7 py-3.5
+                       hover:bg-primary/5 hover:border-primary/60 transition-all duration-300"
+          >
+            Book Appointment
           </Link>
         </motion.div>
       </div>

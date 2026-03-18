@@ -8,29 +8,43 @@ const links = [
   {
     name: "About",
     submenu: [
-      { name: "About Doctor", href: "/about",        desc: "Meet Dr. Prashant" },
-      { name: "About Clinic", href: "/clinic-about", desc: "Our facility & team" },
+      { name: "About Doctor", href: "/about", desc: "Meet Dr. Prashant" },
+      {
+        name: "About Clinic",
+        href: "/clinic-about",
+        desc: "Our facility & team",
+      },
     ],
   },
   {
     name: "Allergy Clinic",
     submenu: [
-      { name: "Allergy Testing",     href: "/allergy",              desc: "Comprehensive allergen testing" },
-      { name: "Oral Immunotherapy",  href: "/oral-immunotherapy",   desc: "Food allergy treatment" },
+      {
+        name: "Allergy Testing",
+        href: "/allergy",
+        desc: "Comprehensive allergen testing",
+      },
+      {
+        name: "Oral Immunotherapy",
+        href: "/oral-immunotherapy",
+        desc: "Food allergy treatment",
+      },
     ],
   },
-  { name: "Vertigo Clinic",  href: "/vertigo-info" },
-  { name: "Snoring Clinic",  href: "/snoring" },
-  { name: "Treatments",      href: "/treatment" },
-  { name: "Gallery",         href: "/gallery" },
-  { name: "Contact",         href: "/contact" },
+  { name: "Vertigo Clinic", href: "/vertigo-info" },
+  { name: "Snoring Clinic", href: "/snoring" },
+  { name: "Treatments", href: "/treatment" },
+  { name: "Gallery", href: "/gallery" },
+  { name: "Contact", href: "/contact" },
 ];
 
 const Navbar = () => {
-  const [open, setOpen]                           = useState(false);
-  const [scrolled, setScrolled]                   = useState(false);
-  const [openDropdown, setOpenDropdown]           = useState<string | null>(null);
-  const [mobileOpenDropdown, setMobileOpenDropdown] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [mobileOpenDropdown, setMobileOpenDropdown] = useState<string | null>(
+    null,
+  );
   const dropdownRefs = useRef<Record<string, HTMLLIElement | null>>({});
   const location = useLocation();
 
@@ -62,12 +76,16 @@ const Navbar = () => {
   /* Lock body scroll when mobile menu is open */
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open]);
 
-  const isActive        = (href: string) => location.pathname === href;
-  const isAboutActive   = ["/about", "/clinic-about"].includes(location.pathname);
-  const isAllergyActive = ["/allergy", "/oral-immunotherapy"].includes(location.pathname);
+  const isActive = (href: string) => location.pathname === href;
+  const isAboutActive = ["/about", "/clinic-about"].includes(location.pathname);
+  const isAllergyActive = ["/allergy", "/oral-immunotherapy"].includes(
+    location.pathname,
+  );
 
   return (
     <>
@@ -79,36 +97,40 @@ const Navbar = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between  px-4 sm:px-6 md:px-8">
-
           {/* ── Logo ── */}
           <Link
             to="/"
             className="flex items-center gap-2 sm:gap-3 group flex-shrink-0"
             aria-label="Dr. Prashant Home"
           >
-           
-             <img
-  src={logo}
-  alt="Dr. Prashant Logo"
-  className="h-[60px] w-auto object-contain"
-/>
-            
-           
+            <img
+              src={logo}
+              alt="Dr. Prashant Logo"
+              className="h-[80px] w-auto object-contain"
+            />
           </Link>
 
           {/* ── Desktop Nav ── */}
-          <ul className="hidden lg:flex items-center gap-0.5 xl:gap-1" role="menubar">
+          <ul
+            className="hidden lg:flex items-center gap-0.5 xl:gap-1"
+            role="menubar"
+          >
             {links.map((l) => {
               if ("submenu" in l) {
                 const isOpen = openDropdown === l.name;
                 const isHighlighted =
-                  l.name === "About"         ? isAboutActive :
-                  l.name === "Allergy Clinic" ? isAllergyActive : false;
+                  l.name === "About"
+                    ? isAboutActive
+                    : l.name === "Allergy Clinic"
+                      ? isAllergyActive
+                      : false;
 
                 return (
                   <li
                     key={l.name}
-                    ref={(el) => { dropdownRefs.current[l.name] = el; }}
+                    ref={(el) => {
+                      dropdownRefs.current[l.name] = el;
+                    }}
                     className="relative"
                     role="none"
                   >
@@ -153,8 +175,12 @@ const Navbar = () => {
                                 : "border-transparent hover:border-primary/40 hover:bg-primary/5 text-foreground/80 hover:text-primary"
                             }`}
                           >
-                            <span className="font-semibold text-xs xl:text-sm">{item.name}</span>
-                            <span className="text-[10px] xl:text-xs text-muted-foreground mt-0.5">{item.desc}</span>
+                            <span className="font-semibold text-xs xl:text-sm">
+                              {item.name}
+                            </span>
+                            <span className="text-[10px] xl:text-xs text-muted-foreground mt-0.5">
+                              {item.desc}
+                            </span>
                           </Link>
                         ))}
                       </div>
@@ -183,8 +209,13 @@ const Navbar = () => {
 
           {/* ── CTA + Hamburger ── */}
           <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-  
-         
+            {/* Desktop CTA - Book Appointment */}
+            <Link
+              to="/book-appointment"
+              className="hidden lg:flex items-center gap-1.5 xl:gap-2 px-3 xl:px-4 py-2 rounded-lg font-semibold text-xs xl:text-sm gradient-primary text-white hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 whitespace-nowrap"
+            >
+              Book Appointment
+            </Link>
 
             {/* Hamburger — shown below lg */}
             <button
@@ -195,10 +226,14 @@ const Navbar = () => {
               aria-controls="mobile-menu"
             >
               <div className="relative w-5 h-5">
-                <span className={`absolute inset-0 flex items-center justify-center transition-all duration-200 ${open ? "opacity-100 rotate-0" : "opacity-0 rotate-90"}`}>
+                <span
+                  className={`absolute inset-0 flex items-center justify-center transition-all duration-200 ${open ? "opacity-100 rotate-0" : "opacity-0 rotate-90"}`}
+                >
                   <X size={20} />
                 </span>
-                <span className={`absolute inset-0 flex items-center justify-center transition-all duration-200 ${open ? "opacity-0 -rotate-90" : "opacity-100 rotate-0"}`}>
+                <span
+                  className={`absolute inset-0 flex items-center justify-center transition-all duration-200 ${open ? "opacity-0 -rotate-90" : "opacity-100 rotate-0"}`}
+                >
                   <Menu size={20} />
                 </span>
               </div>
@@ -221,13 +256,18 @@ const Navbar = () => {
               if ("submenu" in l) {
                 const isMobileOpen = mobileOpenDropdown === l.name;
                 const isHighlighted =
-                  l.name === "About"          ? isAboutActive :
-                  l.name === "Allergy Clinic" ? isAllergyActive : false;
+                  l.name === "About"
+                    ? isAboutActive
+                    : l.name === "Allergy Clinic"
+                      ? isAllergyActive
+                      : false;
 
                 return (
                   <div key={l.name}>
                     <button
-                      onClick={() => setMobileOpenDropdown(isMobileOpen ? null : l.name)}
+                      onClick={() =>
+                        setMobileOpenDropdown(isMobileOpen ? null : l.name)
+                      }
                       className={`w-full flex items-center justify-between px-3 py-3 rounded-lg font-medium text-sm transition-colors ${
                         isHighlighted
                           ? "text-primary bg-primary/8"
@@ -241,9 +281,13 @@ const Navbar = () => {
                       />
                     </button>
 
-                    <div className={`overflow-hidden transition-all duration-200 ${
-                      isMobileOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
-                    }`}>
+                    <div
+                      className={`overflow-hidden transition-all duration-200 ${
+                        isMobileOpen
+                          ? "max-h-48 opacity-100"
+                          : "max-h-0 opacity-0"
+                      }`}
+                    >
                       <div className="ml-3 mt-0.5 mb-1 border-l-2 border-primary/30 pl-3 space-y-0.5">
                         {l.submenu?.map((item) => (
                           <Link
@@ -255,8 +299,12 @@ const Navbar = () => {
                                 : "text-foreground/70 hover:text-primary"
                             }`}
                           >
-                            <span className="font-medium text-sm">{item.name}</span>
-                            <span className="text-xs text-muted-foreground">{item.desc}</span>
+                            <span className="font-medium text-sm">
+                              {item.name}
+                            </span>
+                            <span className="text-xs text-muted-foreground">
+                              {item.desc}
+                            </span>
                           </Link>
                         ))}
                       </div>
@@ -286,7 +334,6 @@ const Navbar = () => {
                 to="/book-appointment"
                 className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-4 py-3 rounded-lg text-sm font-semibold w-full hover:brightness-105 active:scale-95 transition-all duration-200"
               >
-            
                 Book Appointment
               </Link>
             </div>

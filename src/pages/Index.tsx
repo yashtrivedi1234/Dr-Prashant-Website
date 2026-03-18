@@ -8,6 +8,7 @@ import GallerySection from "@/components/GallerySection";
 import BlogSection from "@/components/BlogSection";
 import CTASection from "@/components/CTASection";
 import StatsSection from "@/components/StatsSection";
+import PatientJourney from "@/components/PatientJourney";
 
 const Index = () => (
   <>
@@ -18,6 +19,7 @@ const Index = () => (
     <TreatmentSection />
     <WhyChooseUs />
     <GallerySection />
+    <PatientJourney />
     <TestimonialsSection />
     <BlogSection />
     <CTASection />

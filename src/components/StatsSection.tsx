@@ -31,9 +31,9 @@ const stats = [
 
 const StatsSection = () => {
   return (
-    <section className="py-8 bg-primary relative overflow-hidden text-white">
+    <section className="pt-8 pb-8 bg-primary relative overflow-hidden text-white">
       {/* Premium Multi-stop Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-primary via-violet/50 to-teal/30" />
+      <div className="absolute inset-0 gradient-primary" />
       
       {/* Dynamic Animated Background Blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -58,7 +58,7 @@ const StatsSection = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05)_0%,transparent_70%)]" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container-main relative z-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
             <motion.div
