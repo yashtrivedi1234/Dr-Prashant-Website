@@ -198,19 +198,6 @@ const WhyChooseUs = () => {
                 </div>
               </motion.div>
             </div>
-
-            {/* Side floating badge */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: 0.75, duration: 0.5 }}
-              className="absolute top-8 -left-6 z-10
-                         bg-card border border-border rounded-xl px-4 py-3
-                         shadow-lg flex items-center gap-2.5"
-            >
-              <span className="w-2.5 h-2.5 rounded-full bg-accent animate-pulse" />
-              <span className="text-xs font-semibold text-foreground whitespace-nowrap">PGIMER Trained</span>
-            </motion.div>
           </motion.div>
 
         </div>
