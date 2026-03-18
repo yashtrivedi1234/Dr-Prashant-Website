@@ -185,7 +185,7 @@ const PatientJourney = () => {
   const handleLeave = useCallback(() => setHoveredIndex(-1), []);
 
   return (
-    <section ref={ref} className="section-padding bg-background relative overflow-hidden">
+    <section ref={ref} className="section-padding bg-slate-50 relative overflow-hidden">
 
       {/* ── Background ── */}
       <div

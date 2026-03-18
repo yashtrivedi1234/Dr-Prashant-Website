@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, Image as ImageIcon, Video, Star, X } from "lucide-react";
+import { Play, Image as ImageIcon, Video, Star, X, ChevronLeft, ChevronRight } from "lucide-react";
 import CTASection from "@/components/CTASection";
 
 // Dynamically import all images from Gallery folder
@@ -20,16 +20,22 @@ const galleryData: GalleryImage[] = Object.keys(galleryImages).map((key, idx) =>
 
 const Gallery = () => {
   const [activeTab, setActiveTab] = useState("all");
-  const [selectedImage, setSelectedImage] = useState<{
-    src: string;
-    title: string;
-    subtitle?: string;
-  } | null>(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
 
   const filteredImages =
     activeTab === "all"
       ? galleryData
       : galleryData.filter((img) => img.category === activeTab);
+
+  const handlePrevious = () => {
+    if (selectedImageIndex === null) return;
+    setSelectedImageIndex(selectedImageIndex === 0 ? filteredImages.length - 1 : selectedImageIndex - 1);
+  };
+
+  const handleNext = () => {
+    if (selectedImageIndex === null) return;
+    setSelectedImageIndex(selectedImageIndex === filteredImages.length - 1 ? 0 : selectedImageIndex + 1);
+  };
 
   return (
     <div className="bg-background">
@@ -117,13 +123,7 @@ const Gallery = () => {
                   transition={{ duration: 0.3 }}
                   className="group relative aspect-square overflow-hidden shadow-lg cursor-zoom-in
                     rounded-xl sm:rounded-2xl lg:rounded-[2rem]"
-                  onClick={() =>
-                    setSelectedImage({
-                      src: img.img,
-                      title: img.title,
-                      subtitle: img.category,
-                    })
-                  }
+                  onClick={() => setSelectedImageIndex(i)}
                 >
                   <img
                     src={img.img}
@@ -150,20 +150,44 @@ const Gallery = () => {
       </section>
 
       <AnimatePresence>
-        {selectedImage && (
+        {selectedImageIndex !== null && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[70] bg-black/85 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center"
-            onClick={() => setSelectedImage(null)}
+            onClick={() => setSelectedImageIndex(null)}
           >
             <button
-              onClick={() => setSelectedImage(null)}
+              onClick={() => setSelectedImageIndex(null)}
               aria-label="Close image preview"
               className="absolute top-4 right-4 sm:top-6 sm:right-6 h-10 w-10 rounded-full bg-white/15 text-white hover:bg-white/25 transition-colors flex items-center justify-center"
             >
               <X size={20} />
+            </button>
+
+            {/* Left Navigation Button */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handlePrevious();
+              }}
+              aria-label="Previous image"
+              className="absolute left-4 sm:left-6 h-12 w-12 rounded-full bg-white/15 text-white hover:bg-white/25 transition-colors flex items-center justify-center z-10"
+            >
+              <ChevronLeft size={24} />
+            </button>
+
+            {/* Right Navigation Button */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNext();
+              }}
+              aria-label="Next image"
+              className="absolute right-4 sm:right-6 h-12 w-12 rounded-full bg-white/15 text-white hover:bg-white/25 transition-colors flex items-center justify-center z-10"
+            >
+              <ChevronRight size={24} />
             </button>
 
             <motion.div
@@ -175,18 +199,18 @@ const Gallery = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <img
-                src={selectedImage.src}
-                alt={selectedImage.title}
+                src={filteredImages[selectedImageIndex].img}
+                alt={filteredImages[selectedImageIndex].title}
                 className="w-full max-h-[78vh] object-contain rounded-2xl"
               />
               <div className="mt-4 text-center text-white">
-                {selectedImage.subtitle && (
+                {filteredImages[selectedImageIndex].category && (
                   <p className="text-xs sm:text-sm uppercase tracking-widest text-white/75 mb-1">
-                    {selectedImage.subtitle}
+                    {filteredImages[selectedImageIndex].category}
                   </p>
                 )}
                 <h3 className="font-heading text-lg sm:text-xl font-bold">
-                  {selectedImage.title}
+                  {filteredImages[selectedImageIndex].title}
                 </h3>
               </div>
             </motion.div>
