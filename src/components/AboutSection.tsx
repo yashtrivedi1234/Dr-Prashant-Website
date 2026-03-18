@@ -38,7 +38,7 @@ const tags = [
 
 /* ─── Ticker ──────────────────────────────────────────────── */
 const Ticker = () => (
-  <div className="absolute bottom-0 left-0 right-0 overflow-hidden border-t border-primary/10 bg-primary/5 py-3">
+  <div className="absolute top-0 left-0 right-0 overflow-hidden border-b border-primary/10 bg-primary/5 py-3 z-20">
     <div
       className="flex items-center w-max"
       style={{ animation: "ticker-scroll 26s linear infinite" }}
@@ -54,7 +54,6 @@ const Ticker = () => (
       ))}
     </div>
 
-    {/* keyframe injected once — minimal, not "custom CSS" for the layout */}
     <style>{`
       @keyframes ticker-scroll {
         from { transform: translateX(0); }
@@ -105,7 +104,7 @@ const AboutSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-section-alt overflow-hidden pt-8 pb-16 px-6"
+      className="relative bg-section-alt overflow-hidden pt-16 pb-16 px-6"
     >
       {/* ── Background decoration ── */}
       <div
