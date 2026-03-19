@@ -4,6 +4,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import {
   LayoutDashboard,
   Calendar,
+  Mail,
   BarChart3,
   Settings,
   LogOut,
@@ -21,6 +22,7 @@ const AdminLayout = () => {
   const menuItems = [
     { icon: LayoutDashboard, label: 'Dashboard', href: '/admin/dashboard' },
     { icon: Calendar, label: 'Appointments', href: '/admin/appointments' },
+    { icon: Mail, label: 'Contacts', href: '/admin/contacts' },
     { icon: BarChart3, label: 'Analytics', href: '/admin/analytics' },
     { icon: Settings, label: 'Settings', href: '/admin/settings' },
   ];

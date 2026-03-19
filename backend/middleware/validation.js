@@ -10,6 +10,8 @@ const ALLOWED_SERVICES = [
   'General Check-up',
 ];
 
+const ALLOWED_CONTACT_SUBJECTS = [...ALLOWED_SERVICES, 'Other'];
+
 // Valid time slots
 const VALID_TIME_SLOTS = [
   '10:00 AM', '10:15 AM', '10:30 AM', '10:45 AM',
@@ -90,6 +92,55 @@ export const validateAppointment = [
     .trim()
     .isLength({ max: 500 })
     .withMessage('Notes cannot exceed 500 characters'),
+];
+
+export const validateContact = [
+  body('name')
+    .trim()
+    .notEmpty()
+    .withMessage('Name is required')
+    .isLength({ min: 2, max: 100 })
+    .withMessage('Name must be between 2 and 100 characters')
+    .matches(/^[a-zA-Z\s'-]+$/)
+    .withMessage('Name can only contain letters, spaces, hyphens, and apostrophes'),
+
+  body('email')
+    .trim()
+    .notEmpty()
+    .withMessage('Email address is required')
+    .isEmail()
+    .withMessage('Please provide a valid email address')
+    .normalizeEmail(),
+
+  body('phone')
+    .trim()
+    .notEmpty()
+    .withMessage('Phone number is required')
+    .matches(/^[6-9]\d{9,14}$/)
+    .withMessage('Phone number must start with 6-9 and contain only 10-15 digits'),
+
+  body('subject')
+    .trim()
+    .notEmpty()
+    .withMessage('Subject is required')
+    .isIn(ALLOWED_CONTACT_SUBJECTS)
+    .withMessage(`Subject must be one of: ${ALLOWED_CONTACT_SUBJECTS.join(', ')}`),
+
+  body('message')
+    .trim()
+    .notEmpty()
+    .withMessage('Message is required')
+    .isLength({ min: 10, max: 1000 })
+    .withMessage('Message must be between 10 and 1000 characters'),
+];
+
+export const validateContactStatus = [
+  body('status')
+    .trim()
+    .notEmpty()
+    .withMessage('Status is required')
+    .isIn(['new', 'read', 'replied'])
+    .withMessage('Status must be one of: new, read, replied'),
 ];
 
 // Middleware to handle validation errors

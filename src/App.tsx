@@ -32,6 +32,7 @@ import AdminLogin from "./pages/admin/AdminLogin";
 import AdminLayout from "./pages/admin/AdminLayout";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminAppointments from "./pages/admin/AdminAppointments";
+import AdminContacts from "./pages/admin/AdminContacts";
 import AdminAnalytics from "./pages/admin/AdminAnalytics";
 import AdminSettings from "./pages/admin/AdminSettings";
 
@@ -58,6 +59,7 @@ const App = () => (
               >
                 <Route path="/admin/dashboard" element={<AdminDashboard />} />
                 <Route path="/admin/appointments" element={<AdminAppointments />} />
+                <Route path="/admin/contacts" element={<AdminContacts />} />
                 <Route path="/admin/analytics" element={<AdminAnalytics />} />
                 <Route path="/admin/settings" element={<AdminSettings />} />
               </Route>

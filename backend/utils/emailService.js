@@ -173,3 +173,141 @@ export const sendAdminNotificationEmail = async (appointmentData) => {
     throw new Error('Failed to send admin notification');
   }
 };
+
+// Send contact form confirmation email to user
+export const sendContactConfirmationEmail = async (contactData) => {
+  const { name, email, subject, message } = contactData;
+
+  const mailOptions = {
+    from: `"${process.env.FROM_NAME}" <${process.env.FROM_EMAIL}>`,
+    to: email,
+    subject: 'We received your message - Dr. Prashant',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 8px 8px 0 0; color: white;">
+          <h2 style="margin: 0;">Message Received ✓</h2>
+          <p style="margin: 5px 0 0 0; opacity: 0.9;">Dr. Prashant's Clinic</p>
+        </div>
+        
+        <div style="padding: 30px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 0 0 8px 8px;">
+          <p>Dear <strong>${name}</strong>,</p>
+          
+          <p>Thank you for reaching out to us! We have successfully received your message and appreciate you contacting Dr. Prashant's Clinic.</p>
+          
+          <div style="background: white; padding: 20px; border-left: 4px solid #667eea; margin: 20px 0;">
+            <p style="margin: 5px 0;"><strong>Subject:</strong> ${subject}</p>
+            <p style="margin: 5px 0;"><strong>Submitted on:</strong> ${new Date().toLocaleDateString('en-IN', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+            })}</p>
+          </div>
+          
+          <h3 style="color: #333;">Your Message:</h3>
+          <p style="background: #f5f5f5; padding: 15px; border-radius: 4px; color: #666; line-height: 1.6;">${message}</p>
+          
+          <h3 style="color: #333;">What's Next?</h3>
+          <ul style="color: #666; line-height: 1.8;">
+            <li>Our team will review your message within 24 hours</li>
+            <li>We will get back to you via email or phone</li>
+            <li>For urgent matters, please call us directly at <strong>${process.env.CLINIC_PHONE || '+91 76588 74707'}</strong></li>
+          </ul>
+          
+          <div style="background: #f0f7ff; padding: 15px; border-radius: 4px; margin: 20px 0;">
+            <p style="margin: 0; color: #0066cc; font-size: 14px;">
+              <strong>Clinic Hours:</strong> Mon-Fri (10 AM - 8 PM) | Sat (10 AM - 4 PM) | Sun (Emergency Only)
+            </p>
+          </div>
+          
+          <p>Thank you for choosing Dr. Prashant's Clinic. We're here to help you!</p>
+          
+          <p style="color: #999; font-size: 12px; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd;">
+            This is an automated email. Please do not reply directly. For urgent inquiries, call us or use the contact form again.
+          </p>
+        </div>
+      </div>
+    `,
+  };
+
+  try {
+    await getTransporter().sendMail(mailOptions);
+    console.log(`Contact confirmation email sent to ${email}`);
+    return { success: true };
+  } catch (error) {
+    console.error('Error sending contact confirmation email:', error);
+    throw new Error('Failed to send confirmation email');
+  }
+};
+
+// Send contact form notification to admin
+export const sendContactAdminEmail = async (contactData) => {
+  const { name, email, phone, subject, message } = contactData;
+
+  const mailOptions = {
+    from: `"${process.env.FROM_NAME}" <${process.env.FROM_EMAIL}>`,
+    to: process.env.ADMIN_EMAIL,
+    subject: `New Contact Form Submission - ${subject}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 8px 8px 0 0; color: white;">
+          <h2 style="margin: 0;">New Contact Form Submission</h2>
+          <p style="margin: 5px 0 0 0; opacity: 0.9;">Admin Notification</p>
+        </div>
+        
+        <div style="padding: 30px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 0 0 8px 8px;">
+          <h3>Contact Information:</h3>
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr style="border-bottom: 1px solid #ddd;">
+              <td style="padding: 10px; font-weight: bold; width: 120px;">Name:</td>
+              <td style="padding: 10px;">${name}</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ddd;">
+              <td style="padding: 10px; font-weight: bold;">Email:</td>
+              <td style="padding: 10px;"><a href="mailto:${email}">${email}</a></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ddd;">
+              <td style="padding: 10px; font-weight: bold;">Phone:</td>
+              <td style="padding: 10px;"><a href="tel:${phone}">${phone}</a></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ddd;">
+              <td style="padding: 10px; font-weight: bold;">Subject:</td>
+              <td style="padding: 10px;">${subject}</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px; font-weight: bold;">Submitted:</td>
+              <td style="padding: 10px;">${new Date().toLocaleDateString('en-IN', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+              })}</td>
+            </tr>
+          </table>
+          
+          <h3 style="margin-top: 20px; color: #333;">Message:</h3>
+          <div style="background: white; padding: 15px; border-left: 4px solid #667eea; margin: 15px 0; border-radius: 4px;">
+            <p style="color: #666; line-height: 1.6; margin: 0; white-space: pre-wrap;">${message}</p>
+          </div>
+          
+          <div style="margin-top: 30px; padding: 15px; background: #e7f3ff; border-left: 4px solid #0066cc; border-radius: 4px;">
+            <p style="margin: 0; color: #0066cc;"><strong>Action Required:</strong> Please respond to this inquiry as soon as possible.</p>
+          </div>
+        </div>
+      </div>
+    `,
+  };
+
+  try {
+    await getTransporter().sendMail(mailOptions);
+    console.log(`Contact admin notification email sent to ${process.env.ADMIN_EMAIL}`);
+    return { success: true };
+  } catch (error) {
+    console.error('Error sending contact admin email:', error);
+    throw new Error('Failed to send admin notification');
+  }
+};

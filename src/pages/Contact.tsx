@@ -1,8 +1,34 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Mail, Phone, MapPin, Clock,
-  Send, MessageSquare, PhoneCall,
+  Send, MessageSquare, PhoneCall, AlertCircle, CheckCircle2,
 } from "lucide-react";
+import { useSubmitContactMutation } from "../store/contactApi";
+
+interface ValidationError {
+  field: string;
+  message: string;
+  value?: string;
+}
+
+interface ErrorResponse {
+  data?: {
+    message?: string;
+    errors?: ValidationError[];
+  };
+  message?: string;
+}
+
+const ALLOWED_SUBJECTS = [
+  "ENT Consultation",
+  "Vertigo Treatment",
+  "Allergy Clinic",
+  "Oral Immunotherapy",
+  "Snoring Treatment",
+  "General Check-up",
+  "Other",
+];
 
 const contactInfo = [
   {
@@ -31,6 +57,144 @@ const contactInfo = [
 ];
 
 const Contact = () => {
+  const [submitContact, { isLoading }] = useSubmitContactMutation();
+
+  // Form state
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    subject: "ENT Consultation",
+    message: "",
+  });
+
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState(false);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    let filteredValue = value;
+
+    if (name === "name") {
+      filteredValue = value.replace(/[^a-zA-Z\s'-]/g, "");
+    }
+
+    if (name === "phone") {
+      filteredValue = value.replace(/[^0-9]/g, "");
+      if (filteredValue.length > 15) {
+        filteredValue = filteredValue.slice(0, 15);
+      }
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: filteredValue,
+    }));
+    setErrorMessage("");
+
+    if (fieldErrors[name]) {
+      setFieldErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
+  };
+
+  const validateForm = () => {
+    const errors: Record<string, string> = {};
+
+    if (!formData.name.trim()) {
+      errors.name = "Name is required";
+    } else if (formData.name.trim().length < 2 || formData.name.trim().length > 100) {
+      errors.name = "Name must be between 2 and 100 characters";
+    } else if (!/^[a-zA-Z\s'-]+$/.test(formData.name.trim())) {
+      errors.name = "Name can only contain letters, spaces, hyphens, and apostrophes";
+    }
+
+    if (!formData.phone.trim()) {
+      errors.phone = "Phone number is required";
+    } else if (!/^[6-9]\d{9,14}$/.test(formData.phone.trim())) {
+      errors.phone = "Phone number must start with 6-9 and contain only 10-15 digits";
+    }
+
+    if (!formData.email.trim()) {
+      errors.email = "Email address is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = "Please provide a valid email address";
+    }
+
+    if (!formData.subject) {
+      errors.subject = "Subject is required";
+    } else if (!ALLOWED_SUBJECTS.includes(formData.subject)) {
+      errors.subject = `Subject must be one of: ${ALLOWED_SUBJECTS.join(", ")}`;
+    }
+
+    if (!formData.message.trim()) {
+      errors.message = "Message is required";
+    } else if (formData.message.trim().length < 10) {
+      errors.message = "Message must be at least 10 characters";
+    } else if (formData.message.trim().length > 1000) {
+      errors.message = "Message must be between 10 and 1000 characters";
+    }
+
+    return errors;
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setErrorMessage("");
+
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      setErrorMessage("Please fix the validation errors below.");
+      return;
+    }
+
+    try {
+      const response = await submitContact(formData).unwrap();
+
+      if (response.success) {
+        setSuccessMessage(true);
+
+        setFormData({
+          name: "",
+          phone: "",
+          email: "",
+          subject: "ENT Consultation",
+          message: "",
+        });
+        setFieldErrors({});
+
+        setTimeout(() => {
+          setSuccessMessage(false);
+        }, 5000);
+      }
+    } catch (err: unknown) {
+      const error = err as ErrorResponse;
+      console.error("Error submitting contact form:", error);
+
+      if (error?.data?.errors && Array.isArray(error.data.errors)) {
+        const fieldErrorMap: Record<string, string> = {};
+        error.data.errors.forEach((fieldError: ValidationError) => {
+          fieldErrorMap[fieldError.field] = fieldError.message;
+        });
+        setFieldErrors(fieldErrorMap);
+        setErrorMessage("Please fix the validation errors below.");
+      } else {
+        setErrorMessage(
+          error?.data?.message ||
+            error?.message ||
+            "Failed to send message. Please try again."
+        );
+      }
+    }
+  };
+
   return (
     <div className="bg-background">
 
@@ -146,93 +310,173 @@ const Contact = () => {
                 </h2>
               </div>
 
-              <form className="space-y-4 sm:space-y-5 lg:space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 lg:space-y-6">
+                {errorMessage && (
+                  <div className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-lg sm:rounded-xl p-4 text-red-700">
+                    <AlertCircle size={20} className="flex-shrink-0" />
+                    <p className="text-sm sm:text-base font-medium">{errorMessage}</p>
+                  </div>
+                )}
+
+                {successMessage && (
+                  <div className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-lg sm:rounded-xl p-4 text-green-700">
+                    <CheckCircle2 size={20} className="flex-shrink-0" />
+                    <p className="text-sm sm:text-base font-medium">
+                      Thank you for contacting us! We will get back to you soon.
+                    </p>
+                  </div>
+                )}
+
                 {/* Name + Phone */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
                   <div className="space-y-1.5 sm:space-y-2">
                     <label className="text-xs sm:text-sm font-bold text-slate-700 ml-1">
-                      Full Name
+                      Full Name *
                     </label>
                     <input
                       type="text"
+                      name="name"
                       placeholder="John Doe"
-                      className="w-full bg-slate-50 border border-slate-100 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required
+                      disabled={isLoading}
+                      className={`w-full bg-slate-50 border focus:outline-none focus:ring-2 transition-all
                         rounded-xl sm:rounded-2xl
                         py-3 px-4 text-sm
                         sm:py-3.5 sm:px-5
-                        lg:py-4 lg:px-6"
+                        lg:py-4 lg:px-6
+                        disabled:opacity-50 disabled:cursor-not-allowed
+                        ${fieldErrors.name ? "border-red-500 focus:ring-red-500/20" : "border-slate-100 focus:ring-primary/20"}`}
                     />
+                    {fieldErrors.name && (
+                      <p className="text-xs sm:text-sm text-red-600 ml-1 flex items-center gap-1">
+                        <AlertCircle size={14} /> {fieldErrors.name}
+                      </p>
+                    )}
                   </div>
                   <div className="space-y-1.5 sm:space-y-2">
                     <label className="text-xs sm:text-sm font-bold text-slate-700 ml-1">
-                      Phone Number
+                      Phone Number *
                     </label>
                     <input
                       type="tel"
-                      placeholder="+91 00000 00000"
-                      className="w-full bg-slate-50 border border-slate-100 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all
+                      name="phone"
+                      placeholder="6000000000"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      required
+                      disabled={isLoading}
+                      className={`w-full bg-slate-50 border focus:outline-none focus:ring-2 transition-all
                         rounded-xl sm:rounded-2xl
                         py-3 px-4 text-sm
                         sm:py-3.5 sm:px-5
-                        lg:py-4 lg:px-6"
+                        lg:py-4 lg:px-6
+                        disabled:opacity-50 disabled:cursor-not-allowed
+                        ${fieldErrors.phone ? "border-red-500 focus:ring-red-500/20" : "border-slate-100 focus:ring-primary/20"}`}
                     />
+                    {fieldErrors.phone && (
+                      <p className="text-xs sm:text-sm text-red-600 ml-1 flex items-center gap-1">
+                        <AlertCircle size={14} /> {fieldErrors.phone}
+                      </p>
+                    )}
                   </div>
                 </div>
 
                 {/* Email */}
                 <div className="space-y-1.5 sm:space-y-2">
                   <label className="text-xs sm:text-sm font-bold text-slate-700 ml-1">
-                    Email Address
+                    Email Address *
                   </label>
                   <input
                     type="email"
+                    name="email"
                     placeholder="john@example.com"
-                    className="w-full bg-slate-50 border border-slate-100 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    disabled={isLoading}
+                    className={`w-full bg-slate-50 border focus:outline-none focus:ring-2 transition-all
                       rounded-xl sm:rounded-2xl
                       py-3 px-4 text-sm
                       sm:py-3.5 sm:px-5
-                      lg:py-4 lg:px-6"
+                      lg:py-4 lg:px-6
+                      disabled:opacity-50 disabled:cursor-not-allowed
+                      ${fieldErrors.email ? "border-red-500 focus:ring-red-500/20" : "border-slate-100 focus:ring-primary/20"}`}
                   />
+                  {fieldErrors.email && (
+                    <p className="text-xs sm:text-sm text-red-600 ml-1 flex items-center gap-1">
+                      <AlertCircle size={14} /> {fieldErrors.email}
+                    </p>
+                  )}
                 </div>
 
                 {/* Subject */}
                 <div className="space-y-1.5 sm:space-y-2">
                   <label className="text-xs sm:text-sm font-bold text-slate-700 ml-1">
-                    Subject
+                    Subject *
                   </label>
                   <select
-                    className="w-full bg-slate-50 border border-slate-100 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all appearance-none
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                    required
+                    disabled={isLoading}
+                    className={`w-full bg-slate-50 border focus:outline-none focus:ring-2 transition-all appearance-none
                       rounded-xl sm:rounded-2xl
                       py-3 px-4 text-sm
                       sm:py-3.5 sm:px-5
-                      lg:py-4 lg:px-6"
+                      lg:py-4 lg:px-6
+                      disabled:opacity-50 disabled:cursor-not-allowed
+                      ${fieldErrors.subject ? "border-red-500 focus:ring-red-500/20" : "border-slate-100 focus:ring-primary/20"}`}
                   >
-                    <option>General Inquiry</option>
-                    <option>Book Appointment</option>
-                    <option>Surgery Consultation</option>
+                    <option>ENT Consultation</option>
+                    <option>Vertigo Treatment</option>
+                    <option>Allergy Clinic</option>
+                    <option>Oral Immunotherapy</option>
+                    <option>Snoring Treatment</option>
+                    <option>General Check-up</option>
                     <option>Other</option>
                   </select>
+                  {fieldErrors.subject && (
+                    <p className="text-xs sm:text-sm text-red-600 ml-1 flex items-center gap-1">
+                      <AlertCircle size={14} /> {fieldErrors.subject}
+                    </p>
+                  )}
                 </div>
 
                 {/* Message */}
                 <div className="space-y-1.5 sm:space-y-2">
                   <label className="text-xs sm:text-sm font-bold text-slate-700 ml-1">
-                    Your Message
+                    Your Message *
                   </label>
                   <textarea
+                    name="message"
                     rows={4}
                     placeholder="How can we help you today?"
-                    className="w-full bg-slate-50 border border-slate-100 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all resize-none
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                    disabled={isLoading}
+                    className={`w-full bg-slate-50 border focus:outline-none focus:ring-2 transition-all resize-none
                       rounded-xl sm:rounded-2xl
                       py-3 px-4 text-sm
                       sm:py-3.5 sm:px-5
-                      lg:py-4 lg:px-6"
+                      lg:py-4 lg:px-6
+                      disabled:opacity-50 disabled:cursor-not-allowed
+                      ${fieldErrors.message ? "border-red-500 focus:ring-red-500/20" : "border-slate-100 focus:ring-primary/20"}`}
                   />
+                  {fieldErrors.message && (
+                    <p className="text-xs sm:text-sm text-red-600 ml-1 flex items-center gap-1">
+                      <AlertCircle size={14} /> {fieldErrors.message}
+                    </p>
+                  )}
                 </div>
 
                 {/* Submit */}
                 <button
                   type="submit"
+                  disabled={isLoading}
                   className="
                     w-full gradient-primary text-white font-bold
                     rounded-xl sm:rounded-2xl
@@ -241,9 +485,11 @@ const Contact = () => {
                     py-3.5 text-sm
                     sm:py-4 sm:text-base
                     lg:py-5 lg:text-base
+                    disabled:opacity-50 disabled:cursor-not-allowed
                   "
                 >
-                  Send Message <Send size={16} className="sm:w-5 sm:h-5" />
+                  {isLoading ? "Sending..." : "Send Message"}
+                  <Send size={16} className="sm:w-5 sm:h-5" />
                 </button>
               </form>
             </motion.div>
