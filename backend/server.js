@@ -22,17 +22,7 @@ const corsOptions = {
   origin: (origin, callback) => {
     const allowedOrigins = process.env.CORS_ORIGINS
       ? process.env.CORS_ORIGINS.split(',').map(url => url.trim())
-      : [
-          'http://localhost:5173',
-          'http://localhost:8080',
-          'http://localhost:3000',
-          'http://127.0.0.1:5173',
-          'http://127.0.0.1:8080',
-          'http://127.0.0.1:3000',
-          'https://dr-prashant.vercel.app',
-          'https://drprashantent.com',
-          'https://api.drprashantent.com',
-        ];
+      : [];
     
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
@@ -41,7 +31,7 @@ const corsOptions = {
     }
   },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
 app.use(cors(corsOptions));
@@ -105,7 +95,7 @@ app.listen(PORT, () => {
    ✅ Admin Email: ${process.env.ADMIN_EMAIL || 'Not set'}
 
 🌐 CORS CONFIGURATION:
-   ✅ Frontend URL: ${process.env.FRONTEND_URL || 'http://localhost:8080'}
+   ✅ Frontend URL: ${process.env.FRONTEND_URL || 'Not configured'}
 
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║              Server is ready! Waiting for appointments... 🚀                  ║
