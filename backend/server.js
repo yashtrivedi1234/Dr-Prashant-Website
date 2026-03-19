@@ -112,8 +112,7 @@ app.listen(PORT, () => {
    ✅ MongoDB URI: ${process.env.MONGODB_URI ? '✓ Configured' : '❌ Not configured'}
 
 📧 EMAIL SERVICE:
-   ✅ SMTP Host: ${process.env.SMTP_HOST || 'Not set'}
-   ✅ SMTP Port: ${process.env.SMTP_PORT || 'Not set'}
+   ✅ Service: Gmail
    ✅ SMTP User: ${process.env.SMTP_USER ? process.env.SMTP_USER.substring(0, 5) + '****' : 'Not set'}
    ✅ From Email: ${process.env.FROM_EMAIL || 'Not set'}
    ✅ Admin Email: ${process.env.ADMIN_EMAIL || 'Not set'}
