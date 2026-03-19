@@ -11,6 +11,7 @@ import {
   Menu,
   ChevronRight,
   Stethoscope,
+  Newspaper,
 } from 'lucide-react';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
 import { useState } from 'react';
@@ -20,6 +21,7 @@ const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard',    href: '/admin/dashboard',    color: 'text-sky-400' },
   { icon: Calendar,        label: 'Appointments', href: '/admin/appointments', color: 'text-emerald-400' },
   { icon: Mail,            label: 'Contacts',     href: '/admin/contacts',     color: 'text-violet-400' },
+  { icon: Newspaper,       label: 'Newsletter',   href: '/admin/newsletter',   color: 'text-cyan-400' },
   { icon: BarChart3,       label: 'Analytics',    href: '/admin/analytics',    color: 'text-amber-400' },
   { icon: Settings,        label: 'Settings',     href: '/admin/settings',     color: 'text-rose-400' },
 ];

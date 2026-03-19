@@ -35,6 +35,7 @@ import AdminAppointments from "./pages/admin/AdminAppointments";
 import AdminContacts from "./pages/admin/AdminContacts";
 import AdminAnalytics from "./pages/admin/AdminAnalytics";
 import AdminSettings from "./pages/admin/AdminSettings";
+import AdminNewsletter from "./pages/admin/AdminNewsletter";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +61,7 @@ const App = () => (
                 <Route path="/admin/dashboard" element={<AdminDashboard />} />
                 <Route path="/admin/appointments" element={<AdminAppointments />} />
                 <Route path="/admin/contacts" element={<AdminContacts />} />
+                <Route path="/admin/newsletter" element={<AdminNewsletter />} />
                 <Route path="/admin/analytics" element={<AdminAnalytics />} />
                 <Route path="/admin/settings" element={<AdminSettings />} />
               </Route>

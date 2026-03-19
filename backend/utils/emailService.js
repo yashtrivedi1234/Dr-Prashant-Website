@@ -402,3 +402,69 @@ export const sendContactAdminEmail = async (contactData) => {
     throw new Error('Failed to send admin notification');
   }
 };
+
+// Send newsletter welcome email
+export const sendNewsletterWelcomeEmail = async (subscriberData) => {
+  const { email } = subscriberData;
+
+  const mailOptions = {
+    from: `"${process.env.FROM_NAME}" <${process.env.FROM_EMAIL}>`,
+    to: email,
+    subject: 'Welcome to Dr. Prashant\'s Newsletter!',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 8px 8px 0 0; color: white;">
+          <h2 style="margin: 0;">Welcome to Our Newsletter! 🎉</h2>
+          <p style="margin: 5px 0 0 0; opacity: 0.9;">Dr. Prashant's Clinic</p>
+        </div>
+        
+        <div style="padding: 30px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 0 0 8px 8px;">
+          <p>Dear Subscriber,</p>
+          
+          <p>Thank you for subscribing to Dr. Prashant's Newsletter! We're thrilled to have you on board.</p>
+          
+          <h3 style="color: #333; margin-top: 25px;">What You'll Get:</h3>
+          <ul style="color: #666; line-height: 2;">
+            <li>✓ Regular health tips and wellness articles</li>
+            <li>✓ Updates on new treatments and services</li>
+            <li>✓ Exclusive offers and promotions</li>
+            <li>✓ Latest news from our clinic</li>
+            <li>✓ Expert advice on oral health</li>
+          </ul>
+          
+          <div style="background: #e7f3ff; padding: 15px; border-left: 4px solid #0066cc; border-radius: 4px; margin-top: 25px;">
+            <p style="margin: 0; color: #0066cc;">
+              <strong>Unsubscribe Anytime:</strong> We respect your inbox. You can unsubscribe from our newsletter at any time using the link in any email we send.
+            </p>
+          </div>
+          
+          <h3 style="color: #333; margin-top: 25px;">Get in Touch</h3>
+          <p style="color: #666;">
+            Have questions or suggestions? We'd love to hear from you!<br/>
+            <strong>Email:</strong> ${process.env.FROM_EMAIL}<br/>
+            <strong>Phone:</strong> ${process.env.CLINIC_PHONE || '+91 76588 74707'}<br/>
+            <strong>Hours:</strong> Mon-Fri (10 AM - 8 PM) | Sat (10 AM - 4 PM)
+          </p>
+          
+          <p style="margin-top: 30px; color: #333;">
+            Thank you for choosing Dr. Prashant's Clinic. We're committed to your health and wellness!
+          </p>
+          
+          <p style="color: #999; font-size: 12px; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd;">
+            This is an automated email. Please do not reply directly. For inquiries, use the contact form or call us.
+          </p>
+        </div>
+      </div>
+    `,
+  };
+
+  try {
+    await getTransporter().sendMail(mailOptions);
+    console.log(`Newsletter welcome email sent to ${email}`);
+    return { success: true };
+  } catch (error) {
+    console.error('Error sending newsletter welcome email:', error);
+    throw new Error('Failed to send welcome email');
+  }
+};
+
