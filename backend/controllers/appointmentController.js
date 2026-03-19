@@ -320,6 +320,29 @@ export const cancelAppointment = async (req, res, next) => {
   }
 };
 
+// Delete appointment (permanently remove from database)
+export const deleteAppointment = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const appointment = await Appointment.findByIdAndDelete(id);
+
+    if (!appointment) {
+      return res.status(404).json({
+        success: false,
+        message: 'Appointment not found',
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Appointment deleted successfully',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // Get appointments statistics
 export const getAppointmentStats = async (req, res, next) => {
   try {

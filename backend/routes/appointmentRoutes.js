@@ -6,6 +6,7 @@ import {
   getAppointmentById,
   updateAppointmentStatus,
   cancelAppointment,
+  deleteAppointment,
   getAppointmentStats,
 } from '../controllers/appointmentController.js';
 import {
@@ -32,5 +33,6 @@ router.get('/', adminAuth, getAllAppointments);
 router.get('/:id', adminAuth, getAppointmentById);
 router.patch('/:id/status', adminAuth, updateAppointmentStatus);
 router.delete('/:id/cancel', adminAuth, cancelAppointment);
+router.delete('/:id', adminAuth, deleteAppointment);
 
 export default router;
