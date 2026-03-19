@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Loader2, Calendar, CheckCircle, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 interface DashboardStats {
   totalAppointments: number;
   pendingAppointments: number;
@@ -22,7 +24,7 @@ const AdminDashboard = () => {
     const fetchStats = async () => {
       try {
         const token = localStorage.getItem('adminToken');
-        const response = await fetch('http://localhost:5000/api/appointments/stats', {
+        const response = await fetch(`${API_URL}/appointments/stats`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -29,6 +29,8 @@ import { Label } from '@/components/ui/label';
 import { Loader2, Trash2, Edit2, Eye } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 interface Appointment {
   _id: string;
   name: string;
@@ -57,7 +59,7 @@ const AdminAppointments = () => {
     try {
       setIsLoading(true);
       const token = localStorage.getItem('adminToken');
-      const response = await fetch('http://localhost:5000/api/appointments', {
+      const response = await fetch(`${API_URL}/appointments`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -96,7 +98,7 @@ const AdminAppointments = () => {
     try {
       setIsUpdating(true);
       const token = localStorage.getItem('adminToken');
-      const response = await fetch(`http://localhost:5000/api/appointments/${selectedAppointment._id}/status`, {
+      const response = await fetch(`${API_URL}/appointments/${selectedAppointment._id}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -132,7 +134,7 @@ const AdminAppointments = () => {
 
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch(`http://localhost:5000/api/appointments/${id}/cancel`, {
+      const response = await fetch(`${API_URL}/appointments/${id}/cancel`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,

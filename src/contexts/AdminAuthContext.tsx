@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 interface AdminUser {
   id: string;
   email: string;
@@ -41,7 +43,7 @@ export const AdminAuthProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('http://localhost:5000/api/admin/login', {
+      const response = await fetch(`${API_URL}/admin/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -3,6 +3,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 interface AnalyticsData {
   totalAppointments: number;
   pendingAppointments: number;
@@ -23,7 +25,7 @@ const AdminAnalytics = () => {
     const fetchAnalytics = async () => {
       try {
         const token = localStorage.getItem('adminToken');
-        const response = await fetch('http://localhost:5000/api/appointments/stats', {
+        const response = await fetch(`${API_URL}/appointments/stats`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
