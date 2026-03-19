@@ -12,8 +12,8 @@ const getTransporter = () => {
     transporter = nodemailer.createTransport({
       service: 'gmail',
       host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT || 587,
-      secure: process.env.SMTP_SECURE === 'true' || false, // true for 465, false for 587
+      port: 587,
+      secure: false,
       requireTLS: true,
       auth: {
         user: process.env.SMTP_USER,
@@ -42,7 +42,7 @@ export const verifySmtpConnection = async (retries = 3) => {
   console.log('🔍 Checking SMTP connection...');
   console.log(`📌 Configuration:`);
   console.log(`   - Host: ${process.env.SMTP_HOST}`);
-  console.log(`   - Port: ${process.env.SMTP_PORT || 587}`);
+  console.log(`   - Port: 587`);
   console.log(`   - User: ${process.env.SMTP_USER ? process.env.SMTP_USER.substring(0, 5) + '****' : 'Not set'}`);
   console.log(`   - Environment: ${process.env.NODE_ENV || 'development'}`);
   
