@@ -28,7 +28,7 @@ Welcome to the official website of **Dr. Prashant**, a leading Homeopathy Doctor
 - **Animations**: Framer Motion
 - **Testing**: Vitest
 - **Linting**: ESLint
-- **Package Manager**: Bun
+- **Package Manager**: npm
 
 ## 📁 Project Structure
 
@@ -67,7 +67,7 @@ src/
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 16+ or Bun installed
+- Node.js 16+ installed
 
 ### Installation
 
@@ -77,37 +77,37 @@ src/
    cd Dr-Prashant-Website
    ```
 
-2. Install dependencies using Bun:
+2. Install dependencies using npm:
    ```bash
-   bun install
+   npm install
    ```
 
 ### Development
 
 Start the development server:
 ```bash
-bun run dev
+npm run dev
 ```
 The site will be available at `http://localhost:5173`
 
 ### Build for Production
 
 ```bash
-bun run build
+npm run build
 ```
 
 ### Testing
 
 Run tests with:
 ```bash
-bun run test
+npm run test
 ```
 
 ### Linting
 
 Check code quality:
 ```bash
-bun run lint
+npm run lint
 ```
 
 ## 🌐 Deployment
