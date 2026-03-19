@@ -89,7 +89,7 @@ const Footer = () => {
                 <Facebook size={16} />
               </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/dr_ent_lucknow?igsh=MTRoeHM0M3RidGhldQ%3D%3D"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Instagram"
@@ -98,7 +98,7 @@ const Footer = () => {
                 <Instagram size={16} />
               </a>
               <a
-                href="https://youtube.com"
+                href="https://www.youtube.com/@drprashantent/videos"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="YouTube"
