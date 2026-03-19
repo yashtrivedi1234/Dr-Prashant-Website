@@ -2,6 +2,7 @@ import Appointment from '../models/Appointment.js';
 import {
   sendUserConfirmationEmail,
   sendAdminNotificationEmail,
+  sendAppointmentStatusUpdateEmail,
 } from '../utils/emailService.js';
 
 // Available time slots
@@ -247,17 +248,38 @@ export const updateAppointmentStatus = async (req, res, next) => {
       });
     }
 
-    const appointment = await Appointment.findByIdAndUpdate(
-      id,
-      { status },
-      { new: true, runValidators: true }
-    );
+    const appointment = await Appointment.findById(id);
 
     if (!appointment) {
       return res.status(404).json({
         success: false,
         message: 'Appointment not found',
       });
+    }
+
+    if (appointment.status === status) {
+      return res.status(200).json({
+        success: true,
+        message: 'Appointment status is already up to date',
+        appointment,
+      });
+    }
+
+    appointment.status = status;
+    await appointment.save();
+
+    // Email notification should not block status update success.
+    try {
+      await sendAppointmentStatusUpdateEmail({
+        name: appointment.name,
+        email: appointment.email,
+        service: appointment.service,
+        date: appointment.date,
+        time: appointment.time,
+        status: appointment.status,
+      });
+    } catch (emailError) {
+      console.error('Failed to send appointment status update email:', emailError);
     }
 
     res.status(200).json({

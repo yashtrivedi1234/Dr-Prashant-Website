@@ -174,6 +174,97 @@ export const sendAdminNotificationEmail = async (appointmentData) => {
   }
 };
 
+// Send appointment status update email to user
+export const sendAppointmentStatusUpdateEmail = async (appointmentData) => {
+  const { name, email, service, date, time, status } = appointmentData;
+
+  const formattedDate = new Date(date).toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  const statusLabelMap = {
+    pending: 'Pending',
+    confirmed: 'Confirmed',
+    completed: 'Completed',
+    cancelled: 'Cancelled',
+  };
+
+  const statusColorMap = {
+    pending: '#856404',
+    confirmed: '#0f5132',
+    completed: '#0c5460',
+    cancelled: '#842029',
+  };
+
+  const statusBgMap = {
+    pending: '#fff3cd',
+    confirmed: '#d1e7dd',
+    completed: '#d1ecf1',
+    cancelled: '#f8d7da',
+  };
+
+  const statusLabel = statusLabelMap[status] || status;
+  const statusColor = statusColorMap[status] || '#333333';
+  const statusBg = statusBgMap[status] || '#f1f1f1';
+
+  const mailOptions = {
+    from: `"${process.env.FROM_NAME}" <${process.env.FROM_EMAIL}>`,
+    to: email,
+    subject: `Appointment Status Updated - ${statusLabel}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 8px 8px 0 0; color: white;">
+          <h2 style="margin: 0;">Appointment Status Updated</h2>
+          <p style="margin: 5px 0 0 0; opacity: 0.9;">Dr. Prashant's Clinic</p>
+        </div>
+
+        <div style="padding: 30px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 0 0 8px 8px;">
+          <p>Dear <strong>${name}</strong>,</p>
+
+          <p>Your appointment status has been updated. Please find the details below:</p>
+
+          <div style="background: white; padding: 20px; border-left: 4px solid #667eea; margin: 20px 0;">
+            <p><strong>Service:</strong> ${service}</p>
+            <p><strong>Date:</strong> ${formattedDate}</p>
+            <p><strong>Time:</strong> ${time}</p>
+            <p>
+              <strong>Status:</strong>
+              <span style="display: inline-block; margin-left: 8px; background: ${statusBg}; color: ${statusColor}; padding: 4px 10px; border-radius: 14px; font-weight: 600;">
+                ${statusLabel}
+              </span>
+            </p>
+          </div>
+
+          <div style="background: #f0f7ff; padding: 15px; border-radius: 4px; margin: 20px 0;">
+            <p style="margin: 0; color: #0066cc;">
+              <strong>Need help?</strong><br/>
+              If you have any questions regarding this update, please contact our clinic.
+            </p>
+          </div>
+
+          <p>Thank you for choosing Dr. Prashant's Clinic.</p>
+
+          <p style="color: #999; font-size: 12px; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd;">
+            This is an automated email. Please do not reply directly.
+          </p>
+        </div>
+      </div>
+    `,
+  };
+
+  try {
+    await getTransporter().sendMail(mailOptions);
+    console.log(`Status update email sent to ${email}`);
+    return { success: true };
+  } catch (error) {
+    console.error('Error sending status update email:', error);
+    throw new Error('Failed to send status update email');
+  }
+};
+
 // Send contact form confirmation email to user
 export const sendContactConfirmationEmail = async (contactData) => {
   const { name, email, subject, message } = contactData;
