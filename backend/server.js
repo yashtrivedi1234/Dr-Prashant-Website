@@ -8,7 +8,7 @@ import adminRoutes from './routes/adminRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
 import newsletterRoutes from './routes/newsletterRoutes.js';
 import { errorHandler } from './middleware/validation.js';
-import { verifySmtpConnection } from './utils/emailService.js';
+import { verifyEmailService } from './utils/emailService.js';
 
 // Load environment variables
 dotenv.config();
@@ -67,16 +67,16 @@ app.get('/health', (req, res) => {
 // SMTP Test endpoint
 app.get('/api/test-smtp', async (req, res) => {
   try {
-    const isConnected = await verifySmtpConnection(2);
+    const isConnected = await verifyEmailService();
     res.status(isConnected ? 200 : 500).json({
       success: isConnected,
-      message: isConnected ? 'SMTP connection successful' : 'SMTP connection failed',
+      message: isConnected ? 'Email service is ready' : 'Email service verification failed',
       timestamp: new Date().toISOString(),
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'SMTP test failed',
+      message: 'Email service test failed',
       error: error.message,
       timestamp: new Date().toISOString(),
     });
@@ -112,8 +112,8 @@ app.listen(PORT, () => {
    ✅ MongoDB URI: ${process.env.MONGODB_URI ? '✓ Configured' : '❌ Not configured'}
 
 📧 EMAIL SERVICE:
-   ✅ Service: Gmail
-   ✅ SMTP User: ${process.env.SMTP_USER ? process.env.SMTP_USER.substring(0, 5) + '****' : 'Not set'}
+   ✅ Service: Resend
+   ✅ API Key: ${process.env.RESEND_API_KEY ? '✓ Configured' : '❌ Not configured'}
    ✅ From Email: ${process.env.FROM_EMAIL || 'Not set'}
    ✅ Admin Email: ${process.env.ADMIN_EMAIL || 'Not set'}
 
@@ -125,9 +125,9 @@ app.listen(PORT, () => {
 ╚══════════════════════════════════════════════════════════════════════════════╝
   `);
 
-  // Verify SMTP connection in the background (non-blocking)
-  verifySmtpConnection().catch(err => {
-    console.error('Background SMTP check error:', err.message);
+  // Verify email service in the background (non-blocking)
+  verifyEmailService().catch(err => {
+    console.error('Background email service check error:', err.message);
   });
 });
 
