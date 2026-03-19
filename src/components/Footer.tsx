@@ -47,8 +47,8 @@ const Footer = () => {
         description: "Thanks for subscribing to our newsletter!",
       });
       setTimeout(() => setSubmitted(false), 3000);
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : "Failed to subscribe";
+    } catch (error: any) {
+      const errorMessage = error?.data?.message || error?.message || "Failed to subscribe";
       toast({
         title: "Error",
         description: errorMessage,
