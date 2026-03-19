@@ -64,6 +64,25 @@ app.get('/health', (req, res) => {
   });
 });
 
+// SMTP Test endpoint
+app.get('/api/test-smtp', async (req, res) => {
+  try {
+    const isConnected = await verifySmtpConnection(2);
+    res.status(isConnected ? 200 : 500).json({
+      success: isConnected,
+      message: isConnected ? 'SMTP connection successful' : 'SMTP connection failed',
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'SMTP test failed',
+      error: error.message,
+      timestamp: new Date().toISOString(),
+    });
+  }
+});
+
 // 404 Handler
 app.use((req, res) => {
   res.status(404).json({

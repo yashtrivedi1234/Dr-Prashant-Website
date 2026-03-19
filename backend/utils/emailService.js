@@ -13,16 +13,16 @@ const getTransporter = () => {
       service: 'gmail',
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT || 587,
-      secure: false, // true for 465, false for other ports
+      secure: process.env.SMTP_SECURE === 'true' || false, // true for 465, false for 587
       requireTLS: true,
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       },
       connectionUrl: false,
-      // Add timeout configuration
-      connectionTimeout: 5000,
-      socketTimeout: 5000,
+      // Increased timeout for cloud environments like Render
+      connectionTimeout: 15000,
+      socketTimeout: 15000,
       pool: {
         maxConnections: 1,
         maxMessages: 100,
@@ -37,21 +37,45 @@ const getTransporter = () => {
   return transporter;
 };
 
-// Verify SMTP connection
-export const verifySmtpConnection = async () => {
-  try {
-    console.log('🔍 Checking SMTP connection...');
-    const transporter = getTransporter();
-    await transporter.verify();
-    console.log('✅ SMTP Connected Successfully!');
-    console.log(`📧 Connected as: ${process.env.SMTP_USER}`);
-    return true;
-  } catch (error) {
-    console.error('❌ SMTP Connection Failed!');
-    console.error(`Error: ${error.message}`);
-    return false;
+// Verify SMTP connection with retry logic
+export const verifySmtpConnection = async (retries = 3) => {
+  console.log('🔍 Checking SMTP connection...');
+  console.log(`📌 Configuration:`);
+  console.log(`   - Host: ${process.env.SMTP_HOST}`);
+  console.log(`   - Port: ${process.env.SMTP_PORT || 587}`);
+  console.log(`   - User: ${process.env.SMTP_USER ? process.env.SMTP_USER.substring(0, 5) + '****' : 'Not set'}`);
+  console.log(`   - Environment: ${process.env.NODE_ENV || 'development'}`);
+  
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      console.log(`\n⏳ Attempt ${attempt}/${retries}...`);
+      const transporter = getTransporter();
+      await transporter.verify();
+      console.log('✅ SMTP Connected Successfully!');
+      console.log(`📧 Connected as: ${process.env.SMTP_USER}`);
+      return true;
+    } catch (error) {
+      console.error(`❌ Attempt ${attempt} failed: ${error.message}`);
+      
+      if (attempt < retries) {
+        const delay = 2000 * attempt; // Exponential backoff: 2s, 4s, 6s
+        console.log(`⏰ Retrying in ${delay}ms...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+      } else {
+        console.error(`\n⚠️  SMTP Connection Failed after ${retries} attempts`);
+        console.error(`\n🔧 Troubleshooting suggestions:`);
+        console.error(`   1. Check SMTP credentials are correct`);
+        console.error(`   2. Verify SMTP_HOST and SMTP_PORT are correct`);
+        console.error(`   3. On Render/Cloud: Port 587 might be blocked, try port 465 with SMTP_SECURE=true`);
+        console.error(`   4. Less secure apps must be enabled for Gmail`);
+        console.error(`   5. Gmail: Use App Password instead of regular password`);
+        console.error(`   6. Check firewall rules allow outbound SMTP`);
+        return false;
+      }
+    }
   }
 };
+
 
 // Retry logic for email sending
 const sendEmailWithRetry = async (mailOptions, retries = 3, delay = 1000) => {
