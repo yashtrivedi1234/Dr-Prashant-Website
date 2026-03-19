@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { useAdminAuth } from '@/contexts/AdminAuthContext';
+import { useAdminAuth } from '@/hooks/useAdminAuth';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;

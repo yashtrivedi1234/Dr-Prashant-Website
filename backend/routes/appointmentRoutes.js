@@ -27,8 +27,8 @@ router.post(
 router.get('/available-slots', getAvailableSlots);
 
 // Admin routes (protected)
-router.get('/', adminAuth, getAllAppointments);
 router.get('/stats', adminAuth, getAppointmentStats);
+router.get('/', adminAuth, getAllAppointments);
 router.get('/:id', adminAuth, getAppointmentById);
 router.patch('/:id/status', adminAuth, updateAppointmentStatus);
 router.delete('/:id/cancel', adminAuth, cancelAppointment);
