@@ -126,8 +126,10 @@ app.listen(PORT, () => {
 ╚══════════════════════════════════════════════════════════════════════════════╝
   `);
 
-  // Verify SMTP connection
-  verifySmtpConnection();
+  // Verify SMTP connection in the background (non-blocking)
+  verifySmtpConnection().catch(err => {
+    console.error('Background SMTP check error:', err.message);
+  });
 });
 
 // Handle unhandled promise rejections
