@@ -8,6 +8,7 @@ import adminRoutes from './routes/adminRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
 import newsletterRoutes from './routes/newsletterRoutes.js';
 import { errorHandler } from './middleware/validation.js';
+import { verifySmtpConnection } from './utils/emailService.js';
 
 // Load environment variables
 dotenv.config();
@@ -105,6 +106,9 @@ app.listen(PORT, () => {
 ║              Server is ready! Waiting for appointments... 🚀                  ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
   `);
+
+  // Verify SMTP connection
+  verifySmtpConnection();
 });
 
 // Handle unhandled promise rejections

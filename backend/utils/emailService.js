@@ -37,6 +37,22 @@ const getTransporter = () => {
   return transporter;
 };
 
+// Verify SMTP connection
+export const verifySmtpConnection = async () => {
+  try {
+    console.log('🔍 Checking SMTP connection...');
+    const transporter = getTransporter();
+    await transporter.verify();
+    console.log('✅ SMTP Connected Successfully!');
+    console.log(`📧 Connected as: ${process.env.SMTP_USER}`);
+    return true;
+  } catch (error) {
+    console.error('❌ SMTP Connection Failed!');
+    console.error(`Error: ${error.message}`);
+    return false;
+  }
+};
+
 // Retry logic for email sending
 const sendEmailWithRetry = async (mailOptions, retries = 3, delay = 1000) => {
   let lastError;
