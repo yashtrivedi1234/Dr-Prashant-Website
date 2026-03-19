@@ -43,7 +43,14 @@ export const verifySmtpConnection = async (retries = 3) => {
     try {
       console.log(`⏳ Attempt ${attempt}/${retries}...`);
       const transporter = getTransporter();
-      await transporter.verify();
+      
+      // Create a promise that rejects after timeout
+      const verifyPromise = transporter.verify();
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('SMTP verification timeout')), 10000)
+      );
+      
+      await Promise.race([verifyPromise, timeoutPromise]);
       console.log('✅ SMTP Connected Successfully!\n');
       return true;
     } catch (error) {
@@ -51,10 +58,10 @@ export const verifySmtpConnection = async (retries = 3) => {
       
       if (attempt < retries) {
         const delay = 2000 * attempt;
-        console.log(`⏰ Retrying in ${delay}ms...\n`);
+        console.log(`⏰ Retrying in ${delay}ms...`);
         await new Promise(resolve => setTimeout(resolve, delay));
       } else {
-        console.error(`\n⚠️  SMTP Connection Failed after ${retries} attempts\n`);
+        console.error(`⚠️  SMTP Connection Failed after ${retries} attempts\n`);
         return false;
       }
     }
