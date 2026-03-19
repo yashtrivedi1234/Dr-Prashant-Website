@@ -12,15 +12,46 @@ const getTransporter = () => {
     transporter = nodemailer.createTransport({
       service: 'gmail',
       host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
+      port: process.env.SMTP_PORT || 587,
       secure: false, // true for 465, false for other ports
+      requireTLS: true,
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       },
+      connectionUrl: false,
+      // Add timeout configuration
+      connectionTimeout: 5000,
+      socketTimeout: 5000,
+      pool: {
+        maxConnections: 1,
+        maxMessages: 100,
+        rateDelta: 1000,
+        rateLimit: 50,
+      },
+      tls: {
+        rejectUnauthorized: false,
+      },
     });
   }
   return transporter;
+};
+
+// Retry logic for email sending
+const sendEmailWithRetry = async (mailOptions, retries = 3, delay = 1000) => {
+  let lastError;
+  for (let i = 0; i < retries; i++) {
+    try {
+      return await getTransporter().sendMail(mailOptions);
+    } catch (error) {
+      lastError = error;
+      console.error(`Attempt ${i + 1}/${retries} failed:`, error.message);
+      if (i < retries - 1) {
+        await new Promise(resolve => setTimeout(resolve, delay * (i + 1)));
+      }
+    }
+  }
+  throw lastError;
 };
 
 // Send confirmation email to user
@@ -82,7 +113,7 @@ export const sendUserConfirmationEmail = async (appointmentData) => {
   };
 
   try {
-    await getTransporter().sendMail(mailOptions);
+    await sendEmailWithRetry(mailOptions);
     console.log(`Confirmation email sent to ${email}`);
     return { success: true };
   } catch (error) {
@@ -165,7 +196,7 @@ export const sendAdminNotificationEmail = async (appointmentData) => {
   };
 
   try {
-    await getTransporter().sendMail(mailOptions);
+    await sendEmailWithRetry(mailOptions);
     console.log(`Admin notification email sent to ${process.env.ADMIN_EMAIL}`);
     return { success: true };
   } catch (error) {
@@ -256,7 +287,7 @@ export const sendAppointmentStatusUpdateEmail = async (appointmentData) => {
   };
 
   try {
-    await getTransporter().sendMail(mailOptions);
+    await sendEmailWithRetry(mailOptions);
     console.log(`Status update email sent to ${email}`);
     return { success: true };
   } catch (error) {
@@ -324,7 +355,7 @@ export const sendContactConfirmationEmail = async (contactData) => {
   };
 
   try {
-    await getTransporter().sendMail(mailOptions);
+    await sendEmailWithRetry(mailOptions);
     console.log(`Contact confirmation email sent to ${email}`);
     return { success: true };
   } catch (error) {
@@ -394,7 +425,7 @@ export const sendContactAdminEmail = async (contactData) => {
   };
 
   try {
-    await getTransporter().sendMail(mailOptions);
+    await sendEmailWithRetry(mailOptions);
     console.log(`Contact admin notification email sent to ${process.env.ADMIN_EMAIL}`);
     return { success: true };
   } catch (error) {
@@ -459,7 +490,7 @@ export const sendNewsletterWelcomeEmail = async (subscriberData) => {
   };
 
   try {
-    await getTransporter().sendMail(mailOptions);
+    await sendEmailWithRetry(mailOptions);
     console.log(`Newsletter welcome email sent to ${email}`);
     return { success: true };
   } catch (error) {
