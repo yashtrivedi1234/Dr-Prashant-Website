@@ -252,6 +252,18 @@ const Footer = () => {
                   +91 76588 74707
                 </a>
               </li>
+              <li>
+                <a
+                  href="/admin/login"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-primary-foreground/10 hover:bg-primary hover:text-white border border-primary-foreground/20 hover:border-primary text-primary-foreground text-xs sm:text-sm font-medium transition-all duration-300 w-fit"
+                  aria-label="Admin Login"
+                >
+                  <LogIn size={15} className="shrink-0 sm:w-4 sm:h-4" />
+                  Admin Login
+                </a>
+              </li>
             </ul>
           </motion.div>
         </div>
@@ -269,19 +281,6 @@ const Footer = () => {
           <p className="text-[10px] sm:text-xs text-primary-foreground/60">
             © {new Date().getFullYear()} Dr. Prashant. All rights reserved.
           </p>
-          <span className="hidden sm:inline text-xs text-primary-foreground/60">
-            •
-          </span>
-          <a
-            href="/admin/login"
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary-foreground/10 hover:bg-primary hover:text-white border border-primary-foreground/20 hover:border-primary text-primary-foreground text-[10px] sm:text-xs font-medium transition-all duration-300"
-            aria-label="Admin Login"
-          >
-            <LogIn size={13} className="sm:w-4 sm:h-4" />
-            Admin Login
-          </a>
           <span className="hidden sm:inline text-xs text-primary-foreground/60">
             •
           </span>
