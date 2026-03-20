@@ -77,9 +77,9 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="sm:col-span-2 lg:col-span-1"
+            className="sm:col-span-2 lg:col-span-1 text-center sm:text-left"
           >
-            <div className="flex items-center gap-2 mb-3 sm:mb-4">
+            <div className="flex items-center justify-center sm:justify-start gap-2 mb-3 sm:mb-4">
               <Link
                 to="/"
                 className="inline-flex items-center gap-2 sm:gap-3 group flex-shrink-0 bg-white p-2 sm:p-[10px] rounded-[8px]"
@@ -92,13 +92,13 @@ const Footer = () => {
                 />
               </Link>
             </div>
-            <p className="text-xs sm:text-sm leading-relaxed opacity-80 max-w-sm">
+            <p className="text-xs sm:text-sm leading-relaxed opacity-80 max-w-sm mx-auto sm:mx-0">
               A leading ENT Specialist and Ex-SR PGIMER, dedicated to advanced
               surgical care, precise vertigo management, and comprehensive
               allergy treatments.
             </p>
 
-            <div className="mt-4 flex flex-wrap items-center gap-3">
+            <div className="mt-4 flex flex-wrap items-center justify-center sm:justify-start gap-3">
               <a
                 href="https://facebook.com"
                 target="_blank"
@@ -152,6 +152,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-center sm:text-left"
           >
             <h4 className="font-heading text-base sm:text-lg font-semibold text-primary-foreground mb-3 sm:mb-4">
               Quick Links
@@ -185,6 +186,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-center sm:text-left"
           >
             <h4 className="font-heading text-base sm:text-lg font-semibold text-primary-foreground mb-3 sm:mb-4">
               Newsletter
@@ -214,7 +216,7 @@ const Footer = () => {
                   type="submit"
                   aria-label="Subscribe"
                   disabled={isLoading}
-                  className="flex-shrink-0 px-3 py-2 rounded-lg gradient-primary hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity flex items-center justify-center sm:min-w-[44px]"
+                  className="w-full sm:w-auto flex-shrink-0 px-3 py-2 rounded-lg gradient-primary hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity flex items-center justify-center sm:min-w-[44px]"
                 >
                   {isLoading ? (
                     <span className="animate-spin">⏳</span>
@@ -237,6 +239,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-center sm:text-left"
           >
             <h4 className="font-heading text-base sm:text-lg font-semibold text-primary-foreground mb-3 sm:mb-4">
               Contact Us
@@ -247,7 +250,7 @@ const Footer = () => {
                   href="https://maps.app.goo.gl/NTRVAZo34EUCSi2MA"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-start gap-2.5 opacity-80 hover:opacity-100 hover:text-primary transition-all"
+                  className="flex items-start justify-center sm:justify-start gap-2.5 opacity-80 hover:opacity-100 hover:text-primary transition-all text-left"
                 >
                   <MapPin
                     size={16}
@@ -262,7 +265,7 @@ const Footer = () => {
               <li>
                 <a
                   href="mailto:info@drprashantent.com"
-                  className="flex items-center gap-2.5 opacity-80 hover:opacity-100 hover:text-primary transition-all text-xs sm:text-sm break-all"
+                  className="flex items-center justify-center sm:justify-start gap-2.5 opacity-80 hover:opacity-100 hover:text-primary transition-all text-xs sm:text-sm break-all"
                 >
                   <Mail size={15} className="shrink-0 sm:w-4 sm:h-4" />
                   info@drprashantent.com
@@ -271,7 +274,7 @@ const Footer = () => {
               <li>
                 <a
                   href="tel:+918081773201"
-                  className="flex items-center gap-2.5 opacity-80 hover:opacity-100 hover:text-primary transition-all text-xs sm:text-sm"
+                  className="flex items-center justify-center sm:justify-start gap-2.5 opacity-80 hover:opacity-100 hover:text-primary transition-all text-xs sm:text-sm"
                 >
                   <Phone size={15} className="shrink-0 sm:w-4 sm:h-4" />
                   +91 80817 73201
@@ -282,7 +285,7 @@ const Footer = () => {
                   href="/admin/login"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-primary-foreground/10 hover:bg-primary hover:text-white border border-primary-foreground/20 hover:border-primary text-primary-foreground text-xs sm:text-sm font-medium transition-all duration-300 w-fit"
+                  className="flex items-center justify-center sm:justify-start gap-2.5 px-3 py-2 rounded-lg bg-primary-foreground/10 hover:bg-primary hover:text-white border border-primary-foreground/20 hover:border-primary text-primary-foreground text-xs sm:text-sm font-medium transition-all duration-300 w-full sm:w-fit"
                   aria-label="Admin Login"
                 >
                   <LogIn size={15} className="shrink-0 sm:w-4 sm:h-4" />

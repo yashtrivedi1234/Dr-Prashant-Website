@@ -12,17 +12,17 @@ const TopBar = () => (
           <Mail size={14} className="shrink-0" /> <span className="truncate">info@drprashantent.com</span>
         </a>
       </div>
-      <div className="hidden sm:flex items-center gap-2 ml-auto">
+      <div className="flex w-full sm:w-auto items-center gap-2 ml-0 sm:ml-auto">
         <Link
           to="/book-appointment"
-          className="hidden lg:flex items-center gap-1.5 xl:gap-2 bg-white text-primary px-3 xl:px-4 py-1.5 rounded-lg text-xs xl:text-sm font-semibold shadow-sm hover:shadow-md hover:bg-primary-foreground active:scale-95 transition-all duration-200 whitespace-nowrap"
+          className="flex flex-1 sm:flex-none justify-center items-center gap-1.5 xl:gap-2 bg-white text-primary px-3 xl:px-4 py-1.5 rounded-lg text-xs xl:text-sm font-semibold shadow-sm hover:shadow-md hover:bg-primary-foreground active:scale-95 transition-all duration-200 whitespace-nowrap"
         >
           <Calendar size={13} />
           Book Appointment
         </Link>
         <a
           href="tel:+918081773201"
-          className="hidden lg:flex items-center gap-1.5 xl:gap-2 bg-white text-primary px-3 xl:px-4 py-1.5 rounded-lg text-xs xl:text-sm font-semibold shadow-sm hover:shadow-md hover:bg-primary-foreground active:scale-95 transition-all duration-200 whitespace-nowrap"
+          className="flex flex-1 sm:flex-none justify-center items-center gap-1.5 xl:gap-2 bg-white text-primary px-3 xl:px-4 py-1.5 rounded-lg text-xs xl:text-sm font-semibold shadow-sm hover:shadow-md hover:bg-primary-foreground active:scale-95 transition-all duration-200 whitespace-nowrap"
         >
           <Phone size={13} />
           Enquiry Now
