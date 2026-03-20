@@ -2,9 +2,32 @@ import { motion } from "framer-motion";
 import {
   AlertCircle, Clock, Zap, DollarSign,
   ClipboardList, Pill, Apple, HelpCircle,
+  Lightbulb,
+  Target,
+  Heart,
 } from "lucide-react";
 import CTASection from "@/components/CTASection";
-
+const values = [
+  {
+    icon: Heart,
+    title: "Compassionate Care",
+    description:
+      "Treating every patient with dignity, respect, and deep empathy, ensuring personalized care for complex ENT conditions.",
+  },
+  {
+    icon: Target,
+    title: "Advanced Diagnostics",
+    description:
+      "Utilizing state-of-the-art Skin Prick Tests, VNG Tests, and Sleep Studies for accurate, root-cause assessments.",
+  },
+  {
+    icon: Lightbulb,
+    title: "Surgical Excellence",
+    description:
+      "Specialized in advanced Ear Surgery, Drug-Induced Sleep Endoscopy, and comprehensive Head & Neck Cancer management.",
+  },
+];
+  
 const faqs = [
   {
     icon: Clock,

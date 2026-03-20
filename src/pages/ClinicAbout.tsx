@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Star } from "lucide-react";
+import { Star, Heart, Target, Lightbulb } from "lucide-react";
 import clinicImg from "@/assets/clinic.jpg";
 import WhyChooseUs from "@/components/WhyChooseUs";
 
@@ -11,6 +11,27 @@ const conditions = [
   "Ear Infections",
   "Balance Disorders",
   "Voice Problems",
+];
+
+const values = [
+  {
+    icon: Heart,
+    title: "Compassionate Care",
+    description:
+      "Every patient receives attentive guidance, clear communication, and personalized treatment planning.",
+  },
+  {
+    icon: Target,
+    title: "Advanced Diagnostics",
+    description:
+      "Modern ENT, allergy, and balance assessment tools support accurate diagnosis and better treatment decisions.",
+  },
+  {
+    icon: Lightbulb,
+    title: "Specialized Expertise",
+    description:
+      "Our clinic focuses on ENT disorders, vertigo, allergy care, and advanced procedural management.",
+  },
 ];
 
 const ClinicAbout = () => {
@@ -189,6 +210,59 @@ const ClinicAbout = () => {
               ))}
             </div>
           </div>
+<section className="section-padding bg-slate-50 relative overflow-hidden">
+        <div className="container-main relative z-10">
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10 lg:mb-12 px-2">
+            <h2
+              className="font-heading font-bold text-foreground mb-3 leading-tight
+              text-2xl sm:text-3xl md:text-4xl"
+            >
+              Our Core Philosophy
+            </h2>
+            <p
+              className="text-muted-foreground leading-relaxed
+              text-sm sm:text-base"
+            >
+              Everything we do is guided by three fundamental principles that
+              ensure the highest standard of specialized ENT and Allergy care.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+            {values.map((v, i) => (
+              <motion.div
+                key={v.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group relative overflow-hidden bg-background rounded-2xl border border-border/50 shadow-sm hover:shadow-lg transition-all
+                  p-5 sm:p-6 lg:p-8"
+              >
+                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-500 opacity-80" />
+                <div
+                  className="gradient-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 mb-4 sm:mb-6
+                  w-11 h-11 sm:w-12 sm:h-12 lg:w-14 lg:h-14"
+                >
+                  <v.icon className="text-primary-foreground" size={22} />
+                </div>
+                <h3
+                  className="font-heading font-bold mb-2 sm:mb-3
+                  text-base sm:text-lg lg:text-xl"
+                >
+                  {v.title}
+                </h3>
+                <p
+                  className="text-muted-foreground leading-relaxed
+                  text-xs sm:text-sm lg:text-base"
+                >
+                  {v.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
           {/* Commitment banner */}
           <motion.div
