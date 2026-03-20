@@ -106,7 +106,7 @@ const Navbar = () => {
             <img
               src={logo}
               alt="Dr. Prashant Logo"
-              className="h-[58px] sm:h-[66px] lg:h-[80px] w-auto object-contain"
+              className="h-[55px] sm:h-[60px] lg:h-[65px] w-auto object-contain"
             />
           </Link>
 

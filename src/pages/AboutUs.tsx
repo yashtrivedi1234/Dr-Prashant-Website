@@ -59,6 +59,15 @@ const expertise = [
   "Over 5 years of dedicated focus on complex Head & Neck Cancer Surgeries.",
 ];
 
+const conditions = [
+  "Hearing Loss",
+  "Sinusitis",
+  "Throat Disorders",
+  "Ear Infections",
+  "Balance Disorders",
+  "Voice Problems",
+];
+
 const AboutUs = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -215,6 +224,39 @@ const AboutUs = () => {
               ))}
             </div>
           </motion.div>
+        </div>
+
+        <div className="container-main">
+          <div className="mt-12 sm:mt-14">
+            <motion.h3
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="font-heading font-bold text-center text-foreground mb-6 sm:mb-8
+                text-2xl sm:text-3xl"
+            >
+              Comprehensive Services for ENT Conditions
+            </motion.h3>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+              {conditions.map((condition, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                  className="flex items-center gap-3 bg-gradient-to-r from-blue-50 to-teal-50 border border-blue-100 rounded-lg
+                    p-3 sm:p-4"
+                >
+                  <div className="w-2 h-2 bg-gradient-to-r from-blue-600 to-teal-500 rounded-full flex-shrink-0" />
+                  <span className="font-medium text-foreground text-sm sm:text-base">
+                    {condition}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
