@@ -189,7 +189,7 @@ const BookAppointment = () => {
   return (
     <div className="bg-background">
       {/* ── Hero Section ── */}
-      <section className="relative py-10 sm:py-14 md:py-16 overflow-hidden bg-slate-50">
+      <section className="relative py-8 sm:py-12 md:py-16 overflow-hidden bg-slate-50">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <div className="absolute top-0 right-0 w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96 bg-primary rounded-full translate-x-1/2 -translate-y-1/2 blur-3xl" />
           <div className="absolute bottom-0 left-0 w-40 h-40 sm:w-56 sm:h-56 lg:w-64 lg:h-64 bg-accent rounded-full -translate-x-1/2 translate-y-1/2 blur-3xl" />
@@ -219,7 +219,7 @@ const BookAppointment = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-muted-foreground max-w-2xl mx-auto leading-relaxed
+            className="text-muted-foreground max-w-2xl mx-auto leading-relaxed px-1 sm:px-0
               text-sm sm:text-base md:text-lg"
           >
             Book an appointment with Dr. Prashant for expert ENT, Vertigo, and
@@ -240,14 +240,14 @@ const BookAppointment = () => {
               className="lg:col-span-2 
                 bg-white border border-slate-50 shadow-2xl flex flex-col
                 rounded-2xl sm:rounded-3xl lg:rounded-[3rem]
-                p-5 sm:p-8 md:p-10 lg:p-12"
+                p-4 sm:p-8 md:p-10 lg:p-12"
             >
               <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8 lg:mb-10">
                 <div className="w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 gradient-primary rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
                   <Calendar className="text-white" size={20} />
                 </div>
                 <h2 className="font-heading font-bold text-foreground
-                  text-xl sm:text-2xl lg:text-3xl">
+                  text-lg sm:text-2xl lg:text-3xl leading-tight">
                   Appointment Details
                 </h2>
               </div>
@@ -255,7 +255,7 @@ const BookAppointment = () => {
               <form onSubmit={handleSubmit} ref={formRef} className="space-y-4 sm:space-y-5 lg:space-y-6">
                 {/* ── Error Message ── */}
                 {errorMessage && (
-                  <div className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-lg sm:rounded-xl p-4 text-red-700">
+                  <div className="flex items-start sm:items-center gap-3 bg-red-50 border border-red-200 rounded-lg sm:rounded-xl p-3 sm:p-4 text-red-700">
                     <AlertCircle size={20} className="flex-shrink-0" />
                     <p className="text-sm sm:text-base font-medium">{errorMessage}</p>
                   </div>
@@ -263,7 +263,7 @@ const BookAppointment = () => {
 
                 {/* ── Success Message ── */}
                 {successMessage && (
-                  <div className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-lg sm:rounded-xl p-4 text-green-700">
+                  <div className="flex items-start sm:items-center gap-3 bg-green-50 border border-green-200 rounded-lg sm:rounded-xl p-3 sm:p-4 text-green-700">
                     <CheckCircle2 size={20} className="flex-shrink-0" />
                     <p className="text-sm sm:text-base font-medium">
                       Appointment booked successfully! Check your email for confirmation.
@@ -431,7 +431,7 @@ const BookAppointment = () => {
                         key={time}
                         type="button"
                         onClick={() => handleTimeSelect(time)}
-                        className={`py-2 px-3 text-xs sm:text-sm font-medium rounded-lg transition-all
+                        className={`min-h-[42px] py-2 px-2.5 sm:px-3 text-xs sm:text-sm font-medium rounded-lg transition-all
                           ${formData.time === time
                             ? "gradient-primary text-white shadow-lg"
                             : "bg-slate-50 border border-slate-100 text-slate-700 hover:border-primary hover:bg-primary/5"
@@ -602,7 +602,7 @@ const BookAppointment = () => {
                     bg-primary text-white font-bold
                     rounded-lg sm:rounded-xl
                     px-4 sm:px-5 py-2 sm:py-3
-                    text-xs sm:text-sm
+                    text-xs sm:text-sm w-full justify-center
                     hover:bg-primary/90 transition-all"
                 >
                   <Phone size={16} className="sm:w-5 sm:h-5" />
@@ -663,10 +663,10 @@ const BookAppointment = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white border border-slate-100 shadow-sm rounded-2xl p-5 sm:p-6 lg:p-7
+                className="bg-white border border-slate-100 shadow-sm rounded-2xl p-5 sm:p-6 lg:p-7 text-center sm:text-left
                   hover:shadow-lg hover:-translate-y-1 transition-all"
               >
-                <div className="w-10 h-10 sm:w-12 sm:h-12 gradient-primary rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 gradient-primary rounded-lg flex items-center justify-center mb-3 sm:mb-4 mx-auto sm:mx-0">
                   <item.icon className="text-white" size={20} />
                 </div>
                 <h3 className="font-heading font-bold text-sm sm:text-base lg:text-lg text-foreground mb-2 sm:mb-3">

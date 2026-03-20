@@ -196,7 +196,7 @@ const Contact = () => {
 
   return (
     <div className="bg-background">
-      <section className="relative py-10 sm:py-14 md:py-16 overflow-hidden bg-slate-50">
+      <section className="relative py-8 sm:py-12 md:py-16 overflow-hidden bg-slate-50">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <div className="absolute top-0 right-0 w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96 bg-primary rounded-full translate-x-1/2 -translate-y-1/2 blur-3xl" />
           <div className="absolute bottom-0 left-0 w-40 h-40 sm:w-56 sm:h-56 lg:w-64 lg:h-64 bg-accent rounded-full -translate-x-1/2 translate-y-1/2 blur-3xl" />
@@ -224,7 +224,7 @@ const Contact = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-muted-foreground max-w-2xl mx-auto leading-relaxed text-sm sm:text-base md:text-lg"
+            className="text-muted-foreground max-w-2xl mx-auto leading-relaxed text-sm sm:text-base md:text-lg px-1 sm:px-0"
           >
             Have questions about our ENT, Vertigo, or Allergy treatments, or
             want to book an appointment? Reach out to us through any of the
@@ -235,7 +235,7 @@ const Contact = () => {
 
       <section className="section-padding">
         <div className="container-main">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-10 sm:mb-14 lg:mb-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-10 sm:mb-14 lg:mb-20">
             {contactInfo.map((info, i) => (
               <motion.a
                 key={info.title}
@@ -246,16 +246,16 @@ const Contact = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white border border-border/50 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group flex flex-col rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] p-6 sm:p-7 lg:p-10"
+                className="bg-white border border-border/50 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group flex flex-col rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] p-5 sm:p-7 lg:p-10 text-center sm:text-left"
               >
-                <div className={`${info.color} rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg shadow-primary/10 group-hover:scale-110 transition-transform flex-shrink-0 w-12 h-12 sm:w-13 sm:h-13 lg:w-16 lg:h-16 mb-4 sm:mb-5 lg:mb-6`}>
+                <div className={`${info.color} rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg shadow-primary/10 group-hover:scale-110 transition-transform flex-shrink-0 w-12 h-12 sm:w-13 sm:h-13 lg:w-16 lg:h-16 mb-4 sm:mb-5 lg:mb-6 mx-auto sm:mx-0`}>
                   <info.icon className="text-primary-foreground" size={22} />
                 </div>
                 <h3 className="font-heading font-bold mb-2 sm:mb-3 lg:mb-4 text-base sm:text-lg lg:text-2xl">
                   {info.title}
                 </h3>
                 {info.details.map((d, id) => (
-                  <p key={id} className="text-muted-foreground font-medium leading-relaxed text-xs sm:text-sm">
+                  <p key={id} className="text-muted-foreground font-medium leading-relaxed text-xs sm:text-sm break-words">
                     {d}
                   </p>
                 ))}
@@ -268,27 +268,27 @@ const Contact = () => {
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-white border border-slate-50 shadow-2xl flex flex-col rounded-2xl sm:rounded-3xl lg:rounded-[3rem] p-5 sm:p-8 md:p-10 lg:p-16"
+              className="bg-white border border-slate-50 shadow-2xl flex flex-col rounded-2xl sm:rounded-3xl lg:rounded-[3rem] p-4 sm:p-8 md:p-10 lg:p-16"
             >
               <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8 lg:mb-10">
                 <div className="w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 gradient-primary rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
                   <MessageSquare className="text-primary-foreground" size={20} />
                 </div>
-                <h2 className="font-heading font-bold text-foreground text-xl sm:text-2xl lg:text-3xl">
+                <h2 className="font-heading font-bold text-foreground text-lg sm:text-2xl lg:text-3xl leading-tight">
                   Write to Us
                 </h2>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 lg:space-y-6">
                 {errorMessage && (
-                  <div className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-lg sm:rounded-xl p-4 text-red-700">
+                  <div className="flex items-start sm:items-center gap-3 bg-red-50 border border-red-200 rounded-lg sm:rounded-xl p-3 sm:p-4 text-red-700">
                     <AlertCircle size={20} className="flex-shrink-0" />
                     <p className="text-sm sm:text-base font-medium">{errorMessage}</p>
                   </div>
                 )}
 
                 {successMessage && (
-                  <div className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-lg sm:rounded-xl p-4 text-green-700">
+                  <div className="flex items-start sm:items-center gap-3 bg-green-50 border border-green-200 rounded-lg sm:rounded-xl p-3 sm:p-4 text-green-700">
                     <CheckCircle2 size={20} className="flex-shrink-0" />
                     <p className="text-sm sm:text-base font-medium">
                       Thank you for contacting us! We will get back to you soon.
@@ -423,9 +423,9 @@ const Contact = () => {
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-white border border-slate-100 shadow-sm flex flex-col rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] p-3 sm:p-5 lg:p-8 min-h-[320px] sm:min-h-[440px] lg:min-h-[680px]"
+              className="bg-white border border-slate-100 shadow-sm flex flex-col rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] p-3 sm:p-5 lg:p-8 min-h-[280px] sm:min-h-[440px] lg:min-h-[680px]"
             >
-              <div className="rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden flex-1 min-h-[280px] sm:min-h-[400px] lg:min-h-[620px]">
+              <div className="rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden flex-1 min-h-[260px] sm:min-h-[400px] lg:min-h-[620px]">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3561.434278218133!2d80.8862023!3d26.7942974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bff6a3185bd5b%3A0x763a9089cd2e9e18!2sDr%20Prashant%20ENT%20Vertigo%20Allergy%20Clinic%20%7C%20ENT%20Doctor%20%7C%20Best%20Ear%20Nose%20Throat%20Specialists%20%7C%20Vertigo%20Doctor%20in%20Lucknow!5e0!3m2!1sen!2sin!4v1773482943823!5m2!1sen!2sin"
                   width="100%"
@@ -434,7 +434,7 @@ const Contact = () => {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="w-full h-full"
+                  className="w-full h-full min-h-[260px] sm:min-h-[400px] lg:min-h-[620px]"
                   title="Clinic Location Map"
                 />
               </div>

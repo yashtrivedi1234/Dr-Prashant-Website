@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Star, MapPin, Award, Heart, Zap } from "lucide-react";
+import { Star } from "lucide-react";
 import clinicImg from "@/assets/clinic.jpg";
-import CTASection from "@/components/CTASection";
 import WhyChooseUs from "@/components/WhyChooseUs";
 
 const conditions = [
@@ -18,14 +17,14 @@ const ClinicAbout = () => {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="relative py-10 sm:py-14 md:py-16 overflow-hidden bg-gradient-to-b from-slate-50 to-white">
+      <section className="relative py-8 sm:py-12 md:py-16 overflow-hidden bg-gradient-to-b from-slate-50 to-white">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <div className="absolute top-0 left-0 w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96 bg-blue-500 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl" />
           <div className="absolute bottom-0 right-0 w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96 bg-teal-400 rounded-full  translate-x-1/2  translate-y-1/2  blur-3xl" />
         </div>
 
         <div className="container-main relative z-10 px-4 sm:px-6">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="max-w-4xl mx-auto text-center px-1 sm:px-2">
 
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -84,17 +83,17 @@ const ClinicAbout = () => {
               <img
                 src={clinicImg}
                 alt="Tanu ENT Clinic"
-                className="relative rounded-2xl sm:rounded-3xl shadow-2xl w-full object-cover aspect-[4/3]"
+                className="relative rounded-2xl sm:rounded-3xl shadow-2xl w-full object-cover aspect-[4/3] min-h-[280px] sm:min-h-0"
               />
 
               {/* Rating badge */}
               <div className="
                 absolute z-10 bg-white rounded-xl sm:rounded-2xl shadow-xl
                 p-3 sm:p-4 lg:p-6
-                -bottom-4 -right-2
+                -bottom-4 right-2
                 sm:-bottom-5 sm:-right-4
                 lg:-bottom-6 lg:-right-6
-                max-w-[150px] sm:max-w-[180px] lg:max-w-xs
+                max-w-[145px] sm:max-w-[180px] lg:max-w-xs
               ">
                 <div className="flex items-center gap-1.5 sm:gap-2 mb-1 sm:mb-2">
                   <Star className="fill-amber-400 text-amber-400 w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
@@ -113,7 +112,7 @@ const ClinicAbout = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="pt-6 sm:pt-8 lg:pt-0"
+              className="pt-6 sm:pt-8 lg:pt-0 text-center lg:text-left"
             >
               <h2 className="font-heading font-bold text-foreground mb-3 sm:mb-4 leading-tight
                 text-2xl sm:text-3xl md:text-4xl">
@@ -144,7 +143,7 @@ const ClinicAbout = () => {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link
                   to="/contact"
-                  className="inline-block bg-gradient-to-r from-blue-600 to-teal-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-shadow
+                  className="inline-flex w-full sm:w-auto justify-center bg-gradient-to-r from-blue-600 to-teal-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-shadow
                     px-6 py-2.5 text-sm
                     sm:px-8 sm:py-3 sm:text-base"
                 >
@@ -155,7 +154,9 @@ const ClinicAbout = () => {
           </div>
 
           {/* Why Choose Us */}
-          <WhyChooseUs />
+          <div className="overflow-hidden">
+            <WhyChooseUs />
+          </div>
 
           {/* Conditions We Treat */}
           <div className="mb-8 sm:mb-10 mt-8 sm:mt-10">
@@ -196,7 +197,7 @@ const ClinicAbout = () => {
             viewport={{ once: true }}
             className="bg-gradient-to-r from-blue-600 to-teal-500 text-white text-center
               rounded-2xl sm:rounded-3xl
-              px-5 py-8
+              px-4 py-7
               sm:px-8 sm:py-10
               md:px-12 md:py-12"
           >

@@ -74,14 +74,14 @@ const AboutUs = () => {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="relative py-10 sm:py-14 md:py-16 overflow-hidden bg-slate-50">
+      <section className="relative py-8 sm:py-12 md:py-16 overflow-hidden bg-slate-50">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <div className="absolute top-0 left-0 w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96 bg-primary rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl" />
           <div className="absolute bottom-0 right-0 w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96 bg-accent  rounded-full  translate-x-1/2  translate-y-1/2  blur-3xl" />
         </div>
 
         <div className="container-main relative z-10">
-          <div className="max-w-3xl mx-auto text-center px-2">
+          <div className="max-w-4xl mx-auto text-center px-2 sm:px-4">
             <motion.span
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -95,7 +95,7 @@ const AboutUs = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
               className="font-heading font-bold text-foreground mb-3 leading-tight
-                text-2xl sm:text-3xl md:text-5xl lg:text-6xl whitespace-nowrap"
+                text-2xl sm:text-3xl md:text-5xl lg:text-6xl"
             >
               Advanced Care for <span className="gradient-text">ENT &amp; Allergy</span>
             </motion.h1>
@@ -129,23 +129,23 @@ const AboutUs = () => {
             <img
               src={doctorImg}
               alt="Dr. Prashant"
-              className="relative rounded-2xl shadow-2xl w-full h-[320px] sm:h-[360px] lg:h-[420px] object-cover z-10"
+              className="relative rounded-2xl shadow-2xl w-full h-[300px] sm:h-[360px] lg:h-[420px] object-cover z-10"
             />
 
             {/* Floating credential card */}
             <div
               className="
               absolute z-20 gradient-primary text-primary-foreground rounded-2xl shadow-2xl
-              -bottom-6 -right-3
+              -bottom-5 right-2
               sm:-bottom-8 sm:-right-4
               lg:-bottom-10 lg:right-0
-              p-4 sm:p-5 lg:p-8
-              max-w-[160px] sm:max-w-[200px] lg:max-w-xs
+              p-3 sm:p-5 lg:p-8
+              max-w-[150px] sm:max-w-[200px] lg:max-w-xs
             "
             >
               <p
                 className="font-bold font-heading leading-tight
-                text-lg sm:text-2xl lg:text-4xl mb-0.5 sm:mb-1"
+                text-base sm:text-2xl lg:text-4xl mb-0.5 sm:mb-1"
               >
                 Dr. Prashant
               </p>
@@ -178,7 +178,7 @@ const AboutUs = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="pt-8 sm:pt-10 lg:pt-0"
+            className="pt-6 sm:pt-10 lg:pt-0 text-center lg:text-left"
           >
             <h2
               className="font-heading font-bold text-foreground mb-3 sm:mb-4 leading-tight
@@ -205,7 +205,7 @@ const AboutUs = () => {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-6 py-4 sm:py-6 border-y border-border/50">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 py-4 sm:py-6 border-y border-border/50">
               {stats.map((s) => (
                 <div key={s.label} className="text-center">
                   <p
@@ -279,7 +279,7 @@ const AboutUs = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {values.map((v, i) => (
               <motion.div
                 key={v.title}
@@ -317,9 +317,9 @@ const AboutUs = () => {
       {/* ── Expertise + Video ── */}
       <section className="section-padding">
         <div className="container-main">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
             {/* List */}
-            <div className="order-2 lg:order-1">
+            <div className="order-2 lg:order-1 text-center lg:text-left">
               <h2
                 className="font-heading font-bold text-foreground mb-5 sm:mb-6 leading-tight
                 text-2xl sm:text-3xl md:text-4xl"
@@ -328,7 +328,7 @@ const AboutUs = () => {
                 <span className="gradient-text">Our Practice</span>
               </h2>
 
-              <ul className="space-y-2.5 sm:space-y-3">
+              <ul className="space-y-2.5 sm:space-y-3 max-w-2xl mx-auto lg:mx-0">
                 {expertise.map((item, i) => (
                   <motion.li
                     key={i}
@@ -336,7 +336,7 @@ const AboutUs = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.05 }}
-                    className="flex items-start gap-2.5 sm:gap-3"
+                    className="flex items-start text-left gap-2.5 sm:gap-3"
                   >
                     <CheckCircle2
                       className="text-primary shrink-0 mt-0.5"
@@ -355,7 +355,7 @@ const AboutUs = () => {
 
             {/* Video */}
             <div className="order-1 lg:order-2">
-              <div className="aspect-video rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl">
+              <div className="aspect-video min-h-[220px] sm:min-h-0 rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl">
                 <video
                   ref={videoRef}
                   src={aboutVideo}
