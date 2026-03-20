@@ -92,6 +92,7 @@ const QuickContactStrip = () => {
                     target={action.newTab ? "_blank" : undefined}
                     rel={action.newTab ? "noreferrer" : undefined}
                     aria-label={action.title}
+                    className="block h-full"
                   >
                     {content}
                   </a>
@@ -99,7 +100,7 @@ const QuickContactStrip = () => {
               }
 
               return (
-                <Link key={action.title} to={action.href} aria-label={action.title}>
+                <Link key={action.title} to={action.href} aria-label={action.title} className="block h-full">
                   {content}
                 </Link>
               );

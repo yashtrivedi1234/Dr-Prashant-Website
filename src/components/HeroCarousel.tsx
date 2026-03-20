@@ -126,7 +126,7 @@ const HeroCarousel = () => {
       <section
         id="home"
         className="relative w-full overflow-hidden bg-foreground"
-        style={{ height: "85svh", minHeight: 560, maxHeight: 960 }}
+        style={{ height: "min(85svh, 960px)", minHeight: 460 }}
       >
         {/* ── Accent bar (left edge) ── */}
         <motion.div
@@ -152,7 +152,7 @@ const HeroCarousel = () => {
               src={slide.img}
               alt={slide.title.join(" ")}
               loading={current === 0 ? "eager" : "lazy"}
-              className="w-full h-full object-contia object-center"
+              className="w-full h-full object-cover object-center"
             />
             {/* Layered overlays */}
             <div
@@ -192,8 +192,7 @@ const HeroCarousel = () => {
       
         {/* ── Bottom control bar ── */}
         <div
-          className="absolute bottom-0 left-0 right-0 z-20 flex items-center gap-5 pb-6 pt-4"
-          style={{ padding: "24px clamp(24px,7vw,120px)" }}
+          className="absolute bottom-0 left-0 right-0 z-20 flex items-center gap-3 sm:gap-5 px-4 sm:px-8 lg:px-[clamp(24px,7vw,120px)] pb-4 sm:pb-6 pt-4"
         >
           {/* Progress segments */}
           <div className="flex flex-1 gap-2 items-center">
@@ -206,7 +205,7 @@ const HeroCarousel = () => {
           <button
             onClick={() => handleNav(prev)}
             aria-label="Previous"
-            className="w-11 h-11 sm:w-11 sm:h-11 w-9 h-9 rounded-full border border-white/20 bg-white/[0.06]
+            className="w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-white/20 bg-white/[0.06]
                        backdrop-blur-md text-white flex items-center justify-center shrink-0
                        transition-all duration-200 hover:bg-white/[0.18] hover:border-white/45 hover:scale-105
                        active:scale-95 cursor-pointer"
@@ -216,7 +215,7 @@ const HeroCarousel = () => {
           <button
             onClick={() => handleNav(next)}
             aria-label="Next"
-            className="w-11 h-11 sm:w-11 sm:h-11 w-9 h-9 rounded-full border border-white/20 bg-white/[0.06]
+            className="w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-white/20 bg-white/[0.06]
                        backdrop-blur-md text-white flex items-center justify-center shrink-0
                        transition-all duration-200 hover:bg-white/[0.18] hover:border-white/45 hover:scale-105
                        active:scale-95 cursor-pointer"

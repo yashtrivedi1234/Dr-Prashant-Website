@@ -190,7 +190,7 @@ const AboutSection = () => {
             transition={{ delay: 0.35, duration: 0.5 }}
           >
             <span className="w-8 h-0.5 rounded-full gradient-primary" />
-            About the Doctor
+            About Doctor Prashant
           </motion.span>
 
           {/* Heading */}
@@ -259,7 +259,7 @@ const AboutSection = () => {
             </Link>
 
             <Link
-              to="/contact"
+              to="/book-appointment"
               className="inline-flex items-center gap-1 text-sm font-semibold text-primary
                          transition-all duration-200 hover:gap-2"
             >

@@ -31,7 +31,7 @@ const stats = [
 
 const StatsSection = () => {
   return (
-    <section className="pt-8 pb-8 bg-primary relative overflow-hidden text-white">
+    <section className="py-2 sm:py-3 bg-primary relative overflow-hidden text-white">
       {/* Premium Multi-stop Gradient Background */}
       <div className="absolute inset-0 gradient-primary" />
       
@@ -59,7 +59,7 @@ const StatsSection = () => {
       </div>
 
       <div className="container-main relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 lg:gap-4">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
@@ -67,15 +67,15 @@ const StatsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="flex flex-col items-center text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors duration-300"
+              className="flex flex-col items-center text-center p-2.5 sm:p-3 rounded-xl sm:rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors duration-300"
             >
-              <div className="mb-4 p-3 bg-white/10 rounded-full">
+              <div className="mb-2 p-2 bg-white/10 rounded-full">
                 {stat.icon}
               </div>
-              <div className="text-3xl md:text-4xl font-bold mb-2">
+              <div className="text-xl sm:text-2xl md:text-[1.75rem] font-bold mb-1">
                 <CountUp end={stat.value} suffix={stat.suffix} />
               </div>
-              <p className="text-blue-100 font-medium">{stat.label}</p>
+              <p className="text-blue-100 font-medium text-[11px] sm:text-xs leading-snug">{stat.label}</p>
             </motion.div>
           ))}
         </div>

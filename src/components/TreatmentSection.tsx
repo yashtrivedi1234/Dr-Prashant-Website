@@ -5,7 +5,7 @@ import { useRef } from "react";
 
 const treatments = [
   {
-    category: "Allergy Clinic",
+    category: "Allergy",
     icon: Wind,
     slug: "allergy",
     tagline: "Breathe Easy. Live Better.",
@@ -24,7 +24,7 @@ const treatments = [
     badge: "Most Visited",
   },
   {
-    category: "Vertigo Clinic",
+    category: "Vertigo",
     icon: Waves,
     slug: "vertigo-info",
     tagline: "Regain Your Balance. Reclaim Life.",
@@ -43,7 +43,7 @@ const treatments = [
     badge: "Speciality Care",
   },
   {
-    category: "Snoring Clinic",
+    category: "Snoring",
     icon: MoonStar,
     slug: "snoring",
     tagline: "Sleep Silently. Wake Refreshed.",

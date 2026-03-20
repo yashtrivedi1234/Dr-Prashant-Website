@@ -1,4 +1,4 @@
-import { Phone, Mail } from "lucide-react";
+import { Phone, Mail, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const TopBar = () => (
@@ -13,6 +13,13 @@ const TopBar = () => (
         </a>
       </div>
       <div className="flex items-center gap-2">
+        <Link
+          to="/book-appointment"
+          className="hidden lg:flex items-center gap-1.5 xl:gap-2 bg-white text-primary px-3 xl:px-4 py-2 rounded-lg text-xs xl:text-sm font-semibold shadow-sm hover:shadow-md hover:bg-primary-foreground active:scale-95 transition-all duration-200 whitespace-nowrap"
+        >
+          <Calendar size={13} />
+          Book Appointment
+        </Link>
         <a
           href="tel:+917658874707"
           className="hidden lg:flex items-center gap-1.5 xl:gap-2 bg-white text-primary px-3 xl:px-4 py-2 rounded-lg text-xs xl:text-sm font-semibold shadow-sm hover:shadow-md hover:bg-primary-foreground active:scale-95 transition-all duration-200 whitespace-nowrap"

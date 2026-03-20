@@ -56,7 +56,7 @@ const ClinicInfoSection = () => {
               This reduces friction for first-time patients and urgent consultations.
             </p>
 
-            <div className="mt-7 grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="mt-7 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
               {timings.map((item, index) => (
                 <motion.div
                   key={item.day}
@@ -64,7 +64,7 @@ const ClinicInfoSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.08 }}
-                  className="rounded-2xl border border-border/70 bg-background p-4"
+                  className="rounded-2xl border border-border/70 bg-background p-4 sm:min-h-[108px]"
                 >
                   <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">{item.day}</p>
                   <p className="mt-2 font-heading text-base font-bold text-foreground">{item.hours}</p>
@@ -95,7 +95,7 @@ const ClinicInfoSection = () => {
 
             <a
               href="tel:+917658874707"
-              className="mt-7 inline-flex items-center gap-2 rounded-full gradient-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-primary/40"
+              className="mt-7 inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full gradient-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-primary/40"
             >
               <PhoneCall className="w-4 h-4" />
               Call for Directions or Booking
@@ -107,18 +107,18 @@ const ClinicInfoSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.08 }}
-            className="rounded-[30px] overflow-hidden border border-border bg-card shadow-xl min-h-[420px]"
+            className="rounded-[30px] overflow-hidden border border-border bg-card shadow-xl min-h-[280px] sm:min-h-[360px] lg:min-h-[420px]"
           >
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3561.434278218133!2d80.8862023!3d26.7942974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bff6a3185bd5b%3A0x763a9089cd2e9e18!2sDr%20Prashant%20ENT%20Vertigo%20Allergy%20Clinic%20%7C%20ENT%20Doctor%20%7C%20Best%20Ear%20Nose%20Throat%20Specialists%20%7C%20Vertigo%20Doctor%20in%20Lucknow!5e0!3m2!1sen!2sin!4v1773482943823!5m2!1sen!2sin"
               width="100%"
               height="100%"
-              style={{ border: 0, minHeight: "420px" }}
+              style={{ border: 0, minHeight: "280px" }}
               loading="lazy"
               allowFullScreen
               referrerPolicy="no-referrer-when-downgrade"
               title="Dr. Prashant Clinic Map"
-              className="w-full h-full"
+              className="w-full h-[280px] sm:h-[360px] lg:h-full"
             />
           </motion.div>
         </div>

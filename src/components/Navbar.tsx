@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronDown, Phone, Calendar } from "lucide-react";
+import { Menu, X, ChevronDown, Phone } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { Link, useLocation } from "react-router-dom";
 
@@ -96,11 +96,11 @@ const Navbar = () => {
             : "bg-background border-b border-border/30"
         }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between  px-4 sm:px-6 md:px-8">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 py-0">
           {/* ── Logo ── */}
           <Link
             to="/"
-            className="flex items-center gap-2 sm:gap-3 group flex-shrink-0"
+            className="flex items-center gap-1.5 sm:gap-2 group flex-shrink-0"
             aria-label="Dr. Prashant Home"
           >
             <img
@@ -141,7 +141,7 @@ const Navbar = () => {
                       onClick={() => setOpenDropdown(isOpen ? null : l.name)}
                       onMouseEnter={() => setOpenDropdown(l.name)}
                       onMouseLeave={() => setOpenDropdown(null)}
-                      className={`flex items-center gap-1 xl:gap-1.5 px-2 xl:px-3 py-2 rounded-lg font-medium text-xs xl:text-sm tracking-wide transition-all duration-200 whitespace-nowrap ${
+                      className={`flex items-center gap-1 xl:gap-1.5 px-2 xl:px-3 py-0 rounded-lg font-medium text-xs xl:text-sm tracking-wide transition-all duration-200 whitespace-nowrap ${
                         isHighlighted
                           ? "text-primary bg-primary/8"
                           : "text-foreground/70 hover:text-primary hover:bg-primary/5"
@@ -194,7 +194,7 @@ const Navbar = () => {
                   <Link
                     to={l.href}
                     role="menuitem"
-                    className={`px-2 xl:px-3 py-2 rounded-lg font-medium text-xs xl:text-sm tracking-wide transition-all duration-200 block whitespace-nowrap ${
+                    className={`px-2 xl:px-3 py-0 rounded-lg font-medium text-xs xl:text-sm tracking-wide transition-all duration-200 block whitespace-nowrap ${
                       isActive(l.href)
                         ? "text-primary bg-primary/8"
                         : "text-foreground/70 hover:text-primary hover:bg-primary/5"
@@ -209,18 +209,10 @@ const Navbar = () => {
 
           {/* ── CTA + Hamburger ── */}
           <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-            {/* Desktop CTA - Book Appointment */}
-            <Link
-              to="/book-appointment"
-              className="hidden lg:flex items-center gap-1.5 xl:gap-2 px-3 xl:px-4 py-2 rounded-lg font-semibold text-xs xl:text-sm gradient-primary text-white hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 whitespace-nowrap"
-            >
-              Book Appointment
-            </Link>
-
             {/* Hamburger — shown below lg */}
             <button
               onClick={() => setOpen(!open)}
-              className="lg:hidden p-2 rounded-lg text-foreground hover:bg-primary/10 transition-colors"
+              className="lg:hidden p-0 rounded-lg text-foreground hover:bg-primary/10 transition-colors"
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               aria-controls="mobile-menu"

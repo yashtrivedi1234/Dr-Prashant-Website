@@ -316,7 +316,7 @@ const PatientJourney = () => {
           <Link
             to="/book-appointment"
             className="inline-flex items-center gap-2.5 gradient-primary text-primary-foreground
-                       font-semibold rounded-full px-8 py-4 text-sm shadow-lg shadow-primary/25
+                       w-full sm:w-auto justify-center font-semibold rounded-full px-8 py-4 text-sm shadow-lg shadow-primary/25
                        transition-all duration-300 hover:-translate-y-0.5 hover:shadow-primary/40 active:scale-95"
           >
             <CalendarCheck className="w-4 h-4" />

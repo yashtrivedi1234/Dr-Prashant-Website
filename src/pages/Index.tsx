@@ -20,21 +20,25 @@ import LocalSeoSection from "@/components/LocalSeoSection";
 const Index = () => (
   <>
     <HeroCarousel />
-    <QuickContactStrip />
-    <UrgentCareBanner />
     <AboutSection />
-    <StatsSection />
+     <StatsSection />
+      <TreatmentSection />
+        <UrgentCareBanner />
+    {/* <QuickContactStrip /> */}
+  
+    
+   
     <SymptomsSection />
-    <TreatmentSection />
-    <WhyChooseUs />
-    <CredentialsStrip />
+   
+    {/* <WhyChooseUs /> */}
+    {/* <CredentialsStrip /> */}
     <ClinicInfoSection />
     <FacilitiesSection />
     <PatientJourney />
     <TestimonialsSection />
     <FAQSection />
     <GallerySection />
-    <LocalSeoSection />
+    {/* <LocalSeoSection /> */}
     <BlogSection />
     <CTASection />
   </>
