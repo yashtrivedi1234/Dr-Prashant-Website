@@ -122,52 +122,39 @@ const AboutUs = () => {
             initial={{ opacity: 0, x: -60 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="relative mx-auto w-full max-w-xs sm:max-w-sm lg:max-w-full"
+            className="relative mx-auto flex flex-col items-center w-full"
           >
-            <div className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-full h-full gradient-primary rounded-2xl opacity-10 pointer-events-none" />
+            <span className="absolute -top-4 -left-2 sm:-left-4 w-16 sm:w-20 h-16 sm:h-20 border-t-[3px] border-l-[3px] border-primary rounded-tl-xl pointer-events-none z-10" />
+            <span className="absolute -bottom-4 -right-2 sm:-right-4 w-16 sm:w-20 h-16 sm:h-20 border-b-[3px] border-r-[3px] border-accent rounded-br-xl pointer-events-none z-10 hidden sm:block" />
 
-            <img
-              src={doctorImg}
-              alt="Dr. Prashant"
-              className="relative rounded-2xl shadow-2xl w-full h-[300px] sm:h-[360px] lg:h-[420px] object-cover z-10"
-            />
+            <div className="relative w-full max-w-[320px] sm:max-w-[400px] rounded-[24px] sm:rounded-[28px] overflow-hidden aspect-[4/5] shadow-2xl">
+              <img
+                src={doctorImg}
+                alt="Dr. Prashant"
+                className="w-full h-full object-cover object-top"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-foreground/50" />
 
-            {/* Floating credential card */}
-            <div
-              className="
-              absolute z-20 gradient-primary text-primary-foreground rounded-2xl shadow-2xl
-              -bottom-5 right-2
-              sm:-bottom-8 sm:-right-4
-              lg:-bottom-10 lg:right-0
-              p-3 sm:p-5 lg:p-8
-              max-w-[150px] sm:max-w-[200px] lg:max-w-xs
-            "
-            >
-              <p
-                className="font-bold font-heading leading-tight
-                text-base sm:text-2xl lg:text-4xl mb-0.5 sm:mb-1"
+              <div
+                className="absolute bottom-4 left-4 right-4 z-10
+                flex items-center gap-3
+                bg-white/10 backdrop-blur-md border border-white/25
+                rounded-2xl px-4 py-3"
               >
-                Dr. Prashant
-              </p>
-              <p
-                className="opacity-90 font-medium
-                text-xs sm:text-sm"
-              >
-                MBBS, MS (ENT)
-              </p>
-              <div className="mt-3 pt-3 border-t border-white/20">
-                <p
-                  className="uppercase tracking-widest opacity-80 mb-0.5
-                  text-[9px] sm:text-xs"
+                <div
+                  className="gradient-primary w-10 h-10 rounded-full flex items-center justify-center
+                  font-heading text-lg font-bold text-white shrink-0"
                 >
-                  Ex SR
-                </p>
-                <p
-                  className="font-semibold italic
-                  text-xs sm:text-sm"
-                >
-                  PGIMER Chandigarh
-                </p>
+                  P
+                </div>
+                <div>
+                  <p className="font-heading text-[15px] font-bold text-white leading-tight">
+                    Dr. Prashant
+                  </p>
+                  <p className="text-[11px] text-white/75 mt-0.5">
+                    ENT Specialist &amp; Surgeon
+                  </p>
+                </div>
               </div>
             </div>
           </motion.div>
