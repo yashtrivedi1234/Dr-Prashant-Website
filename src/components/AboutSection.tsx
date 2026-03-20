@@ -38,7 +38,7 @@ const tags = [
 
 /* ─── Ticker ──────────────────────────────────────────────── */
 const Ticker = () => (
-  <div className="absolute top-0 left-0 right-0 overflow-hidden border-b border-primary/10 bg-primary/5 py-3 z-20">
+  <div className="absolute top-0 left-0 right-0 overflow-hidden border-b border-primary/10 bg-primary/5 py-2.5 sm:py-3 z-20">
     <div
       className="flex items-center w-max"
       style={{ animation: "ticker-scroll 26s linear infinite" }}
@@ -46,7 +46,7 @@ const Ticker = () => (
       {[...tags, ...tags].map((t, i) => (
         <span
           key={i}
-          className="inline-flex items-center gap-2.5 px-7 text-xs font-semibold tracking-widest uppercase text-primary whitespace-nowrap"
+          className="inline-flex items-center gap-2 px-4 sm:px-7 text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-primary whitespace-nowrap"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
           {t}
@@ -104,7 +104,7 @@ const AboutSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-section-alt overflow-hidden pt-16 pb-16 px-6"
+      className="relative bg-section-alt overflow-hidden pt-14 sm:pt-16 pb-12 sm:pb-16 px-4 sm:px-6"
     >
       {/* ── Background decoration ── */}
       <div
@@ -122,7 +122,7 @@ const AboutSection = () => {
       <Ticker />
 
       {/* ── Main grid ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-20 items-center">
         {/* ── LEFT: Image ── */}
         <motion.div
           className="relative flex flex-col items-center"
@@ -137,7 +137,7 @@ const AboutSection = () => {
           {/* Image frame */}
           <motion.div
             style={{ y: imgY }}
-            className="relative w-full max-w-[400px] rounded-[28px] overflow-hidden aspect-[4/5] shadow-2xl"
+            className="relative w-full max-w-[320px] sm:max-w-[400px] rounded-[24px] sm:rounded-[28px] overflow-hidden aspect-[4/5] shadow-2xl"
           >
             <img
               src={doctorImg}
@@ -184,18 +184,18 @@ const AboutSection = () => {
         >
           {/* Eyebrow */}
           <motion.span
-            className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.14em] uppercase text-primary mb-2"
+            className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-semibold tracking-[0.14em] uppercase text-primary mb-2"
             initial={{ opacity: 0, y: 10 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.35, duration: 0.5 }}
           >
             <span className="w-8 h-0.5 rounded-full gradient-primary" />
-            About Doctor Prashant
+            About Dr. Prashant
           </motion.span>
 
           {/* Heading */}
           <motion.h2
-            className="font-heading text-3xl md:text-4xl xl:text-[44px] font-bold text-foreground leading-[1.15] mb-2"
+            className="font-heading text-2xl sm:text-3xl md:text-4xl xl:text-[44px] font-bold text-foreground leading-[1.15] mb-3"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.42, duration: 0.65 }}
@@ -207,7 +207,7 @@ const AboutSection = () => {
 
           {/* Bio */}
           <motion.p
-            className="text-[15px] leading-relaxed text-muted-foreground mb-2 font-light"
+            className="text-sm sm:text-[15px] leading-relaxed text-muted-foreground mb-3 font-light"
             initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.52, duration: 0.6 }}
@@ -219,11 +219,11 @@ const AboutSection = () => {
           </motion.p>
 
           {/* Credentials */}
-          <ul className="flex flex-col gap-2 mb-2">
+          <ul className="flex flex-col gap-2 mb-3">
             {credentials.map((c, i) => (
               <motion.li
                 key={i}
-                className="flex items-center gap-3 text-[13.5px] text-foreground/75"
+                className="flex items-start gap-3 text-[13px] sm:text-[13.5px] text-foreground/75"
                 initial={{ opacity: 0, x: -16 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ delay: 0.58 + i * 0.08, duration: 0.5 }}
@@ -241,14 +241,14 @@ const AboutSection = () => {
 
           {/* CTA row */}
           <motion.div
-            className="flex flex-wrap items-center gap-4"
+            className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 sm:gap-4"
             initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.9, duration: 0.55 }}
           >
             <Link
               to="/about"
-              className="inline-flex items-center gap-2 px-7 py-3.5
+              className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-7 py-3.5
                          gradient-primary text-primary-foreground font-semibold text-sm
                          rounded-full shadow-lg shadow-primary/30
                          transition-all duration-300 hover:-translate-y-0.5 hover:shadow-primary/50
@@ -260,7 +260,7 @@ const AboutSection = () => {
 
             <Link
               to="/book-appointment"
-              className="inline-flex items-center gap-1 text-sm font-semibold text-primary
+              className="inline-flex w-full sm:w-auto justify-center items-center gap-1 text-sm font-semibold text-primary
                          transition-all duration-200 hover:gap-2"
             >
               Book Appointment <ChevronRight size={14} />

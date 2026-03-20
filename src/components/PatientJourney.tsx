@@ -245,7 +245,7 @@ const PatientJourney = () => {
           ))}
 
           {/* Step cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-4 relative z-10">
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 lg:gap-4 relative z-10">
             {steps.map((step, i) => (
               <motion.div
                 key={i}
@@ -290,7 +290,7 @@ const PatientJourney = () => {
                   {step.title}
                 </h3>
 
-                <p className="text-muted-foreground text-xs sm:text-[13px] leading-relaxed max-w-[180px]">
+                <p className="text-muted-foreground text-[11px] sm:text-[13px] leading-relaxed max-w-[180px]">
                   {step.description}
                 </p>
 

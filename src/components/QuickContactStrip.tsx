@@ -6,7 +6,7 @@ const actions = [
   {
     title: "Call Now",
     description: "Speak with the clinic directly for urgent guidance.",
-    href: "tel:+917658874707",
+    href: "tel:+918081773201",
     icon: PhoneCall,
     className:
       "bg-white text-foreground border border-border hover:border-primary/30 hover:shadow-xl",
@@ -17,7 +17,7 @@ const actions = [
   {
     title: "WhatsApp",
     description: "Chat quickly for appointments and basic queries.",
-    href: "https://wa.me/917658874707",
+    href: "https://wa.me/918081773201",
     icon: MessageCircleMore,
     className:
       "bg-emerald-50 text-foreground border border-emerald-200/70 hover:border-emerald-400 hover:shadow-xl",

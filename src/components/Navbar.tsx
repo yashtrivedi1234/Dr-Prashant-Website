@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronDown, Phone } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { Link, useLocation } from "react-router-dom";
 
@@ -8,11 +8,11 @@ const links = [
   {
     name: "About",
     submenu: [
-      { name: "About Doctor", href: "/about", desc: "Meet Dr. Prashant" },
+      { name: "About Doctor", href: "/about", desc: "Know About Dr. Prashant" },
       {
         name: "About Clinic",
         href: "/clinic-about",
-        desc: "Our facility & team",
+        desc: "Meet Our Specialist ENT Clinic",
       },
     ],
   },
@@ -96,17 +96,17 @@ const Navbar = () => {
             : "bg-background border-b border-border/30"
         }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 py-0">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 px-4 sm:px-6 md:px-8 py-0.5">
           {/* ── Logo ── */}
           <Link
             to="/"
-            className="flex items-center gap-1.5 sm:gap-2 group flex-shrink-0"
+            className="flex items-center gap-1.5 sm:gap-2 group flex-shrink-0 min-w-0"
             aria-label="Dr. Prashant Home"
           >
             <img
               src={logo}
               alt="Dr. Prashant Logo"
-              className="h-[80px] w-auto object-contain"
+              className="h-[58px] sm:h-[66px] lg:h-[80px] w-auto object-contain"
             />
           </Link>
 
@@ -212,7 +212,7 @@ const Navbar = () => {
             {/* Hamburger — shown below lg */}
             <button
               onClick={() => setOpen(!open)}
-              className="lg:hidden p-0 rounded-lg text-foreground hover:bg-primary/10 transition-colors"
+              className="lg:hidden p-1.5 rounded-lg text-foreground hover:bg-primary/10 transition-colors"
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               aria-controls="mobile-menu"
@@ -260,7 +260,7 @@ const Navbar = () => {
                       onClick={() =>
                         setMobileOpenDropdown(isMobileOpen ? null : l.name)
                       }
-                      className={`w-full flex items-center justify-between px-3 py-3 rounded-lg font-medium text-sm transition-colors ${
+                      className={`w-full flex items-center justify-between px-3 py-3.5 rounded-lg font-medium text-sm transition-colors ${
                         isHighlighted
                           ? "text-primary bg-primary/8"
                           : "text-foreground/80 hover:text-primary hover:bg-primary/5"
@@ -285,7 +285,7 @@ const Navbar = () => {
                           <Link
                             key={item.name}
                             to={item.href}
-                            className={`flex flex-col py-2 px-2 rounded-md text-sm transition-colors ${
+                            className={`flex flex-col py-2.5 px-2 rounded-md text-sm transition-colors ${
                               isActive(item.href)
                                 ? "text-primary"
                                 : "text-foreground/70 hover:text-primary"
@@ -309,7 +309,7 @@ const Navbar = () => {
                 <Link
                   key={l.name}
                   to={l.href}
-                  className={`block px-3 py-3 rounded-lg font-medium text-sm transition-colors ${
+                  className={`block px-3 py-3.5 rounded-lg font-medium text-sm transition-colors ${
                     isActive(l.href)
                       ? "text-primary bg-primary/8"
                       : "text-foreground/80 hover:text-primary hover:bg-primary/5"

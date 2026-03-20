@@ -41,7 +41,7 @@ const FloatingButtons = () => {
     <>
       {/* WhatsApp Button - Bottom Left */}
       <motion.a
-        href="https://wa.me/7658874707"
+        href="https://wa.me/918081773201"
         target="_blank"
         rel="noopener noreferrer"
         initial={{ opacity: 0, x: -50 }}

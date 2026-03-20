@@ -1,5 +1,4 @@
 import {
-  Stethoscope,
   MapPin,
   Mail,
   Phone,
@@ -7,7 +6,6 @@ import {
   Facebook,
   Instagram,
   Youtube,
-  MessageCircle,
   LogIn,
 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -72,7 +70,7 @@ const Footer = () => {
 
       {/* ── Main grid ── */}
       <div className="container-main section-padding relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-8 lg:gap-10">
           {/* Brand */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -81,26 +79,26 @@ const Footer = () => {
             transition={{ duration: 0.5 }}
             className="sm:col-span-2 lg:col-span-1"
           >
-            <div className="flex items-center gap-2 mb-3 sm:mb-4 ">
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
               <Link
                 to="/"
-                className="flex items-center gap-2 sm:gap-3 group flex-shrink-0 bg-white p-[10px] rounded-[8px]"
+                className="inline-flex items-center gap-2 sm:gap-3 group flex-shrink-0 bg-white p-2 sm:p-[10px] rounded-[8px]"
                 aria-label="Dr. Prashant Home"
               >
                 <img
                   src={logo}
                   alt="Dr. Prashant Logo"
-                  className="h-[52px] w-auto object-contain"
+                  className="h-[44px] sm:h-[52px] w-auto object-contain"
                 />
               </Link>
             </div>
-            <p className="text-xs sm:text-sm leading-relaxed opacity-80 max-w-xs">
+            <p className="text-xs sm:text-sm leading-relaxed opacity-80 max-w-sm">
               A leading ENT Specialist and Ex-SR PGIMER, dedicated to advanced
               surgical care, precise vertigo management, and comprehensive
               allergy treatments.
             </p>
 
-            <div className="mt-4 flex items-center gap-3">
+            <div className="mt-4 flex flex-wrap items-center gap-3">
               <a
                 href="https://facebook.com"
                 target="_blank"
@@ -129,7 +127,7 @@ const Footer = () => {
                 <Youtube size={16} />
               </a>
               <a
-                href="https://wa.me/7658874707"
+                href="https://wa.me/918081773201"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="WhatsApp"
@@ -195,7 +193,7 @@ const Footer = () => {
               Get health tips and updates delivered to your inbox.
             </p>
             <form onSubmit={handleSubscribe} className="space-y-2">
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="email"
                   placeholder="Your email"
@@ -216,7 +214,7 @@ const Footer = () => {
                   type="submit"
                   aria-label="Subscribe"
                   disabled={isLoading}
-                  className="flex-shrink-0 px-3 py-2 rounded-lg gradient-primary hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity flex items-center justify-center"
+                  className="flex-shrink-0 px-3 py-2 rounded-lg gradient-primary hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity flex items-center justify-center sm:min-w-[44px]"
                 >
                   {isLoading ? (
                     <span className="animate-spin">⏳</span>
@@ -272,11 +270,11 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="tel:+917658874707"
+                  href="tel:+918081773201"
                   className="flex items-center gap-2.5 opacity-80 hover:opacity-100 hover:text-primary transition-all text-xs sm:text-sm"
                 >
                   <Phone size={15} className="shrink-0 sm:w-4 sm:h-4" />
-                  +91 76588 74707
+                  +91 80817 73201
                 </a>
               </li>
               <li>
@@ -303,7 +301,7 @@ const Footer = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="container-main flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 flex-wrap text-center"
+          className="container-main flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 flex-wrap text-center px-4"
         >
           <p className="text-[10px] sm:text-xs text-primary-foreground/60">
             © {new Date().getFullYear()} Dr. Prashant. All rights reserved.

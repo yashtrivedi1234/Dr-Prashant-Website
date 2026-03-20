@@ -597,7 +597,7 @@ const BookAppointment = () => {
                 </p>
 
                 <a
-                  href="tel:+917658874707"
+                  href="tel:+918081773201"
                   className="relative z-10 inline-flex items-center gap-2 sm:gap-3
                     bg-primary text-white font-bold
                     rounded-lg sm:rounded-xl
@@ -606,7 +606,7 @@ const BookAppointment = () => {
                     hover:bg-primary/90 transition-all"
                 >
                   <Phone size={16} className="sm:w-5 sm:h-5" />
-                  +91 76588 74707
+                  +91 80817 73201
                 </a>
               </motion.div>
             </div>

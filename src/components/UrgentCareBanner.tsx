@@ -91,7 +91,7 @@ const UrgentCareBanner = () => {
 
               <div className="flex flex-col gap-3 sm:flex-row xl:flex-col 2xl:flex-row w-full">
                 <a
-                  href="tel:+917658874707"
+                  href="tel:+918081773201"
                   className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-foreground px-6 py-4 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-foreground/90"
                 >
                   <PhoneCall className="h-4 w-4" />

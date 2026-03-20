@@ -241,7 +241,7 @@ const ServiceDetail = () => {
                 Book Appointment
               </button>
               <a
-                href="tel:+919876543210"
+                href="tel:+918081773201"
                 className="bg-card border border-border font-semibold hover:bg-muted transition-colors flex items-center justify-center gap-2 text-foreground rounded-xl
                   px-5 py-2.5 text-sm
                   sm:px-6 sm:py-3 sm:text-base"
@@ -373,7 +373,7 @@ const ServiceDetail = () => {
                   Talk to our specialists for personalized treatment guidance.
                 </p>
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+918081773201"
                   className="flex items-center gap-2 bg-white/20 backdrop-blur-sm font-semibold hover:bg-white/30 transition-colors w-full justify-center rounded-xl
                     px-4 py-2 text-xs
                     sm:py-2.5 sm:text-sm"

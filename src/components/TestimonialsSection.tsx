@@ -61,10 +61,10 @@ const TestimonialsSection = () => {
             src="https://widgets.sociablekit.com/google-reviews/iframe/25665003"
             frameBorder="0"
             width="100%"
-            height="600px"
+            height="520px"
             title="Google Reviews"
             loading="lazy"
-            style={{ display: "block" }}
+            style={{ display: "block", minHeight: "420px" }}
           />
         </motion.div>
 

@@ -1,6 +1,13 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import gallery1 from "@/assets/Gallery/2.jpeg";
 import gallery2 from "@/assets/Gallery/4.jpeg";
 import gallery3 from "@/assets/Gallery/5.jpeg";
@@ -63,32 +70,47 @@ const GallerySection = () => {
             </h2>
           </motion.div>
 
-          {/* ── Grid ── */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4">
-            {galleryImages.map((img, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                whileHover={{ scale: 1.03 }}
-                className="rounded-xl sm:rounded-2xl overflow-hidden aspect-square group shadow-md sm:shadow-lg cursor-pointer"
-                onClick={() => openModal(i)}
-                role="button"
-                aria-label={`Open gallery image ${i + 1}`}
-                tabIndex={0}
-                onKeyDown={(e) => e.key === "Enter" && openModal(i)}
-              >
-                <img
-                  src={img}
-                  alt={`Gallery ${i + 1}`}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  loading="lazy"
-                />
-              </motion.div>
-            ))}
-          </div>
+          {/* ── Carousel ── */}
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="relative px-10 sm:px-12"
+          >
+            <CarouselContent className="-ml-2 sm:-ml-3 lg:-ml-4">
+              {galleryImages.map((img, i) => (
+                <CarouselItem
+                  key={i}
+                  className="pl-2 sm:pl-3 lg:pl-4 basis-[78%] sm:basis-1/2 lg:basis-1/4"
+                >
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08, duration: 0.45 }}
+                    whileHover={{ scale: 1.03 }}
+                    className="rounded-xl sm:rounded-2xl overflow-hidden aspect-square group shadow-md sm:shadow-lg cursor-pointer"
+                    onClick={() => openModal(i)}
+                    role="button"
+                    aria-label={`Open gallery image ${i + 1}`}
+                    tabIndex={0}
+                    onKeyDown={(e) => e.key === "Enter" && openModal(i)}
+                  >
+                    <img
+                      src={img}
+                      alt={`Gallery ${i + 1}`}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </motion.div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+
+            <CarouselPrevious className="left-0 sm:left-1 h-9 w-9 sm:h-10 sm:w-10 border-border bg-background/90 hover:bg-background" />
+            <CarouselNext className="right-0 sm:right-1 h-9 w-9 sm:h-10 sm:w-10 border-border bg-background/90 hover:bg-background" />
+          </Carousel>
         </div>
       </section>
 

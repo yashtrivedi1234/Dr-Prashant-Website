@@ -334,7 +334,7 @@ export const sendContactConfirmationEmail = async (contactData) => {
         <ul style="color: #666; line-height: 1.8;">
           <li>Our team will review your message within 24 hours</li>
           <li>We will get back to you via email or phone</li>
-          <li>For urgent matters, please call us directly at <strong>${process.env.CLINIC_PHONE || '+91 76588 74707'}</strong></li>
+          <li>For urgent matters, please call us directly at <strong>${process.env.CLINIC_PHONE || '+91 80817 73201'}</strong></li>
         </ul>
         
         <div style="background: #f0f7ff; padding: 15px; border-radius: 4px; margin: 20px 0;">
@@ -484,7 +484,7 @@ export const sendNewsletterWelcomeEmail = async (subscriberData) => {
         <p style="color: #666;">
           Have questions or suggestions? We'd love to hear from you!<br/>
           <strong>Email:</strong> ${process.env.FROM_EMAIL}<br/>
-          <strong>Phone:</strong> ${process.env.CLINIC_PHONE || '+91 76588 74707'}<br/>
+          <strong>Phone:</strong> ${process.env.CLINIC_PHONE || '+91 80817 73201'}<br/>
           <strong>Hours:</strong> Mon-Fri (10 AM - 8 PM) | Sat (10 AM - 4 PM)
         </p>
         

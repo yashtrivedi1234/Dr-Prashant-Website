@@ -50,17 +50,7 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="section-padding bg-background relative overflow-hidden">
-      <div
-        className="absolute inset-0 pointer-events-none opacity-50"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, hsl(var(--primary)/0.08) 1px, transparent 1px)",
-          backgroundSize: "34px 34px",
-        }}
-      />
-      <div className="absolute -top-16 right-0 w-80 h-80 bg-primary/5 blur-3xl rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-accent/5 blur-3xl rounded-full pointer-events-none" />
+    <section className="section-padding bg-section-alt relative overflow-hidden">
 
       <div className="container-main relative z-10">
         <motion.div

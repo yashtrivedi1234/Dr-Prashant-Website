@@ -394,7 +394,7 @@ const TreatmentDetail = () => {
                 Book Appointment
               </button>
               <a
-                href="tel:+919876543210"
+                href="tel:+918081773201"
                 className="bg-card border border-border font-semibold hover:bg-muted transition-colors flex items-center justify-center gap-2 text-foreground rounded-xl
                   px-5 py-2.5 text-sm
                   sm:px-6 sm:py-3 sm:text-base"
@@ -517,7 +517,7 @@ const TreatmentDetail = () => {
                     Book Appointment
                   </button>
                   <a
-                    href="tel:+919876543210"
+                    href="tel:+918081773201"
                     className="w-full bg-card border border-border text-foreground font-semibold rounded-lg py-2.5 text-sm sm:text-base hover:bg-muted transition-colors flex items-center justify-center gap-2"
                   >
                     <Phone size={14} />

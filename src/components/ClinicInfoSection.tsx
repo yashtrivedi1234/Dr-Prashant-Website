@@ -94,7 +94,7 @@ const ClinicInfoSection = () => {
             </div>
 
             <a
-              href="tel:+917658874707"
+              href="tel:+918081773201"
               className="mt-7 inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full gradient-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-primary/40"
             >
               <PhoneCall className="w-4 h-4" />

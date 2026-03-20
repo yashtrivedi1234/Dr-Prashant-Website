@@ -17,7 +17,7 @@ const CTASection = ({
   primaryButtonText = "Book Appointment",
   primaryButtonHref = "/book-appointment",
   secondaryButtonText = "Emergency Call",
-  secondaryButtonHref = "tel:+917658874707",
+  secondaryButtonHref = "tel:+918081773201",
 }: CTASectionProps) => {
   return (
     <section className="section-padding">

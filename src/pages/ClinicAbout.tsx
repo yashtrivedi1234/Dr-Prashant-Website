@@ -221,7 +221,7 @@ const ClinicAbout = () => {
         </div>
       </section>
 
-      <CTASection />
+      {/* <CTASection /> */}
     </>
   );
 };

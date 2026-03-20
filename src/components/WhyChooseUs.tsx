@@ -1,209 +1,137 @@
-import { Microscope, Stethoscope, Syringe, HeartHandshake } from "lucide-react";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
-import doctorImg from "@/assets/doctor-portrait.jpeg"; // swap with your preferred image
+import { motion } from "framer-motion";
+import { CreditCard, Smartphone, Activity, Microscope, CalendarClock, ShieldPlus } from "lucide-react";
 
-const features = [
+const facilities = [
   {
+    title: "Smooth Payment Options",
+    text: "Convenient card, cash, and UPI payment support makes consultations and follow-up visits easier for patients and attendants.",
+    icon: Smartphone,
+    accent: "text-primary bg-primary/10 border-primary/20",
+    gradient: "from-primary/10 via-sky/10 to-transparent",
+    accentBar: "gradient-primary",
+    badge: "Easy Payments",
+    textColor: "text-primary",
+  },
+  {
+    title: "Advanced Diagnostics",
+    text: "VNG testing, allergy evaluation, and endoscopic ENT assessment support more precise clinical decisions when required.",
     icon: Microscope,
-    title: "Comprehensive Testing",
-    description:
-      "Thorough, personalized allergy testing using advanced diagnostics — helping you identify triggers with precision.",
-    color: "text-primary",
-    bg: "bg-primary/10 border-primary/20",
+    accent: "text-teal bg-teal/10 border-teal/20",
+    gradient: "from-teal/10 via-accent/10 to-transparent",
+    accentBar: "gradient-teal",
+    badge: "Precision Care",
+    textColor: "text-teal",
   },
   {
-    icon: Stethoscope,
-    title: "Lifestyle & Trigger Guidance",
-    description:
-      "Expert advice on identifying and avoiding allergy triggers — empowering you to manage your condition every day.",
-    color: "text-teal",
-    bg: "bg-teal/10 border-teal/20",
+    title: "Urgent Slot Requests",
+    text: "Same-day consultation requests can be considered based on clinical need and schedule availability.",
+    icon: CalendarClock,
+    accent: "text-amber-700 bg-amber-500/10 border-amber-400/20",
+    gradient: "from-amber-500/10 via-orange-500/10 to-transparent",
+    accentBar: "gradient-warm",
+    badge: "Fast Access",
+    textColor: "text-amber-700",
   },
   {
-    icon: Syringe,
-    title: "Advanced Immunotherapy",
-    description:
-      "Personalized allergy shots and sublingual drops designed for faster results and lasting immune tolerance.",
-    color: "text-accent",
-    bg: "bg-accent/10 border-accent/20",
+    title: "Structured Treatment Flow",
+    text: "Patients benefit from organised evaluation, diagnosis, treatment planning, and follow-up across ENT, vertigo, and allergy care.",
+    icon: Activity,
+    accent: "text-accent bg-accent/10 border-accent/20",
+    gradient: "from-accent/10 via-primary/5 to-transparent",
+    accentBar: "gradient-purple",
+    badge: "Clear Process",
+    textColor: "text-accent",
   },
   {
-    icon: HeartHandshake,
-    title: "Compassionate Year-Round Care",
-    description:
-      "Tailored treatment plans with expert, caring support available all year — because your health never takes a break.",
-    color: "text-warm",
-    bg: "bg-warm/10 border-warm/20",
+    title: "Clear Patient Guidance",
+    text: "Booking support, report review direction, and consultation guidance help reduce confusion before the visit.",
+    icon: ShieldPlus,
+    accent: "text-violet-600 bg-violet-500/10 border-violet-200",
+    gradient: "from-violet-500/10 via-primary/5 to-transparent",
+    accentBar: "gradient-purple",
+    badge: "Patient Support",
+    textColor: "text-violet-600",
+  },
+  {
+    title: "Flexible Payment Desk",
+    text: "Cash, card, and standard digital collection options improve convenience for routine clinic visits.",
+    icon: CreditCard,
+    accent: "text-sky-600 bg-sky-500/10 border-sky-200",
+    gradient: "from-sky-500/10 via-primary/10 to-transparent",
+    accentBar: "gradient-primary",
+    badge: "Clinic Convenience",
+    textColor: "text-sky-600",
   },
 ];
 
-const ease = [0.22, 1, 0.36, 1];
-
-const WhyChooseUs = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
+const FacilitiesSection = () => {
   return (
-    <section ref={ref} className="section-padding bg-section-alt overflow-hidden relative">
-
-      {/* ── Subtle background dot grid ── */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-40"
-        style={{
-          backgroundImage: "radial-gradient(circle, hsl(var(--primary)/0.10) 1px, transparent 1px)",
-          backgroundSize: "38px 38px",
-        }}
-      />
-      <div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="container-main relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-
-          {/* ── LEFT: Text content ── */}
-          <div className="flex flex-col">
-
-            {/* Eyebrow */}
-            <motion.span
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, ease }}
-              className="inline-flex items-center gap-2 w-fit gradient-warm text-primary-foreground
-                         text-[10px] font-bold px-4 py-1.5 rounded-full tracking-widest uppercase mb-5"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-white/70" />
+    <section className="section-padding bg-background">
+      <div className="container-main">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55 }}
+          className="text-center mb-10 sm:mb-12"
+        >
+          <div className="max-w-2xl mx-auto">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/5 px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-primary mb-4">
               Why Choose Us
-            </motion.span>
-
-            {/* Heading */}
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.65, delay: 0.08, ease }}
-              className="font-heading font-bold text-foreground leading-tight mb-4
-                         text-2xl sm:text-3xl md:text-4xl lg:text-[42px]"
-            >
-              Your Trusted Partner in{" "}
-              <span className="gradient-text">ENT & Allergy Care</span>
-            </motion.h2>
-
-            {/* Sub-text */}
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.16, ease }}
-              className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-8 max-w-lg"
-            >
-              With 14+ years of specialist expertise, Dr. Prashant delivers advanced, compassionate care — combining precision diagnostics with personalised treatment plans that put you first.
-            </motion.p>
-
-            {/* Feature list */}
-            <div className="flex flex-col gap-5">
-              {features.map((f, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.55, delay: 0.22 + i * 0.1, ease }}
-                  className="flex items-start gap-4 group"
-                >
-                  {/* Icon bubble */}
-                  <div className={`shrink-0 w-11 h-11 rounded-xl border flex items-center justify-center
-                                   ${f.bg} transition-transform duration-300 group-hover:scale-110`}>
-                    <f.icon className={`w-5 h-5 ${f.color}`} />
-                  </div>
-
-                  {/* Text */}
-                  <div>
-                    <h4 className="font-heading font-semibold text-foreground text-sm sm:text-base leading-snug mb-0.5">
-                      {f.title}
-                    </h4>
-                    <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
-                      {f.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.55, delay: 0.7, ease }}
-              className="flex flex-wrap items-center gap-4 mt-8"
-            >
-              <Link
-                to="/book-appointment"
-                className="inline-flex items-center gap-2 gradient-primary text-primary-foreground
-                           font-semibold rounded-full px-7 py-3.5 text-sm shadow-lg shadow-primary/25
-                           transition-all duration-300 hover:-translate-y-0.5 hover:shadow-primary/40 active:scale-95"
-              >
-                Book Appointment
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                to="/about"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary
-                           transition-all duration-200 hover:gap-2.5"
-              >
-                Learn About Dr. Prashant <ArrowRight className="w-4 h-4" />
-              </Link>
-            </motion.div>
+            </span>
+            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+              Practical Reasons Patients
+              <span className="gradient-text"> Prefer This Clinic</span>
+            </h2>
           </div>
+        </motion.div>
 
-          {/* ── RIGHT: Image ── */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.9, delay: 0.15, ease }}
-            className="relative hidden lg:block"
-          >
-            {/* Corner accents */}
-            <span className="absolute -top-4 -right-4 w-20 h-20 border-t-[3px] border-r-[3px] border-primary rounded-tr-xl pointer-events-none z-10" />
-            <span className="absolute -bottom-4 -left-4 w-20 h-20 border-b-[3px] border-l-[3px] border-accent rounded-bl-xl pointer-events-none z-10" />
-
-            {/* Main image */}
-            <div className="relative rounded-2xl overflow-hidden aspect-[4/5] shadow-2xl max-w-[440px] ml-auto">
-              <img
-                src={doctorImg}
-                alt="Dr. Prashant — ENT Specialist"
-                className="w-full h-full object-cover object-top"
-              />
-              {/* Subtle gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 via-transparent to-transparent" />
-
-              {/* Floating stat card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.65, duration: 0.6 }}
-                className="absolute bottom-5 left-5 right-5 z-10
-                           bg-white/12 backdrop-blur-md border border-white/25 rounded-2xl
-                           px-5 py-4 flex items-center gap-4"
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+          {facilities.map((item, index) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: index * 0.06 }}
+              className="group relative"
+            >
+              <div
+                className={`relative h-full flex flex-col rounded-[26px] border border-border/60
+                           bg-gradient-to-br ${item.gradient} overflow-hidden p-6
+                           shadow-lg shadow-slate-900/5 transition-all duration-300
+                           hover:-translate-y-1 hover:shadow-xl hover:border-border`}
               >
-                <div className="gradient-primary w-11 h-11 rounded-xl flex items-center justify-center shrink-0 font-heading font-bold text-white text-lg">
-                  P
-                </div>
-                <div>
-                  <p className="font-heading font-bold text-white text-sm leading-tight">Dr. Prashant</p>
-                  <p className="text-white/70 text-[11px] mt-0.5">ENT Specialist · 14+ yrs experience</p>
-                </div>
-                <div className="ml-auto text-right">
-                  <p className="font-heading font-bold text-white text-lg leading-none">5K+</p>
-                  <p className="text-white/60 text-[10px] mt-0.5">Patients</p>
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
+                <span
+                  className={`absolute top-0 left-0 right-0 h-[3px] ${item.accentBar} opacity-80
+                             group-hover:opacity-100 transition-opacity duration-300`}
+                />
 
+                <span className="absolute top-4 right-4 text-[10px] font-bold tracking-widest uppercase
+                                 bg-foreground/5 border border-border/50 text-muted-foreground
+                                 rounded-full px-2.5 py-1">
+                  {item.badge}
+                </span>
+
+                <div className={`w-12 h-12 rounded-2xl border flex items-center justify-center ${item.accent}`}>
+                  <item.icon className="w-5 h-5" />
+                </div>
+
+                <h3 className="mt-5 font-heading text-xl font-bold text-foreground">{item.title}</h3>
+                <p className={`mt-2 text-xs font-semibold tracking-wide uppercase ${item.textColor}`}>
+                  Why Patients Notice This
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {item.text}
+                </p>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
   );
 };
 
-export default WhyChooseUs;
+export default FacilitiesSection;
+  
