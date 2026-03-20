@@ -95,7 +95,7 @@ const AboutUs = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
               className="font-heading font-bold text-foreground mb-3 leading-tight
-                text-2xl sm:text-3xl md:text-5xl lg:text-6xl"
+                text-xl sm:text-3xl md:text-5xl lg:text-6xl whitespace-nowrap"
             >
               Advanced Care for <span className="gradient-text">ENT &amp; Allergy</span>
             </motion.h1>
