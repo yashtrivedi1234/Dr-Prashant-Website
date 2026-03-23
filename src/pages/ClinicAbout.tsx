@@ -133,7 +133,7 @@ const ClinicAbout = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="pt-6 sm:pt-8 lg:pt-0 text-center lg:text-left"
+              className="pt-6 sm:pt-8 lg:pt-0 text-left"
             >
               <h2 className="font-heading font-bold text-foreground mb-3 sm:mb-4 leading-tight
                 text-2xl sm:text-3xl md:text-4xl">

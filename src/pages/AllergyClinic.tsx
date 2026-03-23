@@ -27,7 +27,7 @@ const values = [
       "Specialized in advanced Ear Surgery, Drug-Induced Sleep Endoscopy, and comprehensive Head & Neck Cancer management.",
   },
 ];
-  
+
 const faqs = [
   {
     icon: Clock,
@@ -62,29 +62,29 @@ const faqs = [
 ];
 
 const allergenCategories = [
-  { title: "Tree Pollen Allergens",   items: ["Oak", "Maple", "Birch", "Cedar", "Pine"] },
-  { title: "Weed Allergens",          items: ["Ragweed", "Tumbleweed", "Lamb's Quarters", "Goosefoot"] },
-  { title: "Pet & Dust Allergens",    items: ["Cat Dander", "Dog Dander", "Dust Mites", "Cockroach"] },
+  { title: "Tree Pollen Allergens", items: ["Oak", "Maple", "Birch", "Cedar", "Pine"] },
+  { title: "Weed Allergens", items: ["Ragweed", "Tumbleweed", "Lamb's Quarters", "Goosefoot"] },
+  { title: "Pet & Dust Allergens", items: ["Cat Dander", "Dog Dander", "Dust Mites", "Cockroach"] },
   { title: "Mold & Fungal Allergens", items: ["Alternaria", "Aspergillus", "Cladosporium", "Penicillium"] },
-  { title: "Grass Allergens",         items: ["Timothy Grass", "Bermuda Grass", "Orchard Grass"] },
-  { title: "Other Allergens",         items: ["Feathers", "Plant Pollens", "Environmental Triggers"] },
+  { title: "Grass Allergens", items: ["Timothy Grass", "Bermuda Grass", "Orchard Grass"] },
+  { title: "Other Allergens", items: ["Feathers", "Plant Pollens", "Environmental Triggers"] },
 ];
 
 const treatments = [
-  { name: "Allergy Shots",        desc: "Immunotherapy injections that gradually desensitize your immune system to allergens." },
-  { name: "Allergy Drops",        desc: "Sublingual immunotherapy drops placed under the tongue for allergen desensitization." },
-  { name: "ExACT Immunoplasty",   desc: "Advanced immunotherapy technique for targeted allergen treatment." },
-  { name: "Antihistamines",       desc: "Medications to reduce allergic symptoms and reactions." },
-  { name: "Decongestants",        desc: "Medications to clear nasal passages and improve breathing." },
-  { name: "Nasal Corticosteroids",desc: "Nasal sprays to reduce inflammation and allergic symptoms." },
+  { name: "Allergy Shots", desc: "Immunotherapy injections that gradually desensitize your immune system to allergens." },
+  { name: "Allergy Drops", desc: "Sublingual immunotherapy drops placed under the tongue for allergen desensitization." },
+  { name: "ExACT Immunoplasty", desc: "Advanced immunotherapy technique for targeted allergen treatment." },
+  { name: "Antihistamines", desc: "Medications to reduce allergic symptoms and reactions." },
+  { name: "Decongestants", desc: "Medications to clear nasal passages and improve breathing." },
+  { name: "Nasal Corticosteroids", desc: "Nasal sprays to reduce inflammation and allergic symptoms." },
 ];
 
 const testingProcess = [
   { step: "1", title: "Initial Consultation", desc: "Meet with our allergist to discuss your symptoms and allergic history." },
-  { step: "2", title: "Allergy Testing",       desc: "Undergo comprehensive skin prick testing or blood tests for up to 58 allergens." },
-  { step: "3", title: "Analysis & Results",    desc: "Our specialists analyze your results to identify your specific allergens." },
-  { step: "4", title: "Treatment Planning",    desc: "Create a personalized treatment plan based on your allergy profile." },
-  { step: "5", title: "Follow-Up Care",        desc: "Regular monitoring and adjustments to ensure optimal allergy management." },
+  { step: "2", title: "Allergy Testing", desc: "Undergo comprehensive skin prick testing or blood tests for up to 58 allergens." },
+  { step: "3", title: "Analysis & Results", desc: "Our specialists analyze your results to identify your specific allergens." },
+  { step: "4", title: "Treatment Planning", desc: "Create a personalized treatment plan based on your allergy profile." },
+  { step: "5", title: "Follow-Up Care", desc: "Regular monitoring and adjustments to ensure optimal allergy management." },
 ];
 
 const containerVariants = {
@@ -191,9 +191,9 @@ const AllergyClinic = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="font-heading font-bold text-foreground text-center
-                mb-8 sm:mb-10 lg:mb-12
-                text-2xl sm:text-3xl md:text-4xl"
+              className="font-heading font-bold text-foreground text-left sm:text-center
+  mb-8 sm:mb-10 lg:mb-12
+  text-2xl sm:text-3xl md:text-4xl"
             >
               Our Testing Process
             </motion.h2>

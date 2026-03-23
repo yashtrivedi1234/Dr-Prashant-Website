@@ -326,7 +326,7 @@ const PatientJourney = () => {
             Schedule Your Visit
             <ArrowRight className="w-4 h-4" />
           </Link>
-          <p className="text-muted-foreground text-xs">
+          <p className="text-muted-foreground text-xs text-center">
             Experience the difference with Dr. Prashant's personalised ENT care
           </p>
         </motion.div>

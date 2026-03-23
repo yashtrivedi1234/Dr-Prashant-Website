@@ -45,7 +45,7 @@ const CTASection = ({
           {/* Heading */}
           <h2 className="font-heading font-bold relative z-10 leading-tight
             mb-4 sm:mb-5 lg:mb-6
-            text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+       text-base sm:text-xl md:text-2xl lg:text-3xl">
             {title}
           </h2>
 

@@ -152,7 +152,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-center sm:text-left"
+            className="text-left"
           >
             <h4 className="font-heading text-base sm:text-lg font-semibold text-primary-foreground mb-3 sm:mb-4">
               Quick Links

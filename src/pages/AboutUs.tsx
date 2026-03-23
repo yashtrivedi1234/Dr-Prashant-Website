@@ -262,7 +262,7 @@ const AboutUs = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.28 }}
-              className="mt-6 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3"
+             className="mt-6 grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-2 sm:gap-3"
             >
               {trustBadges.map((badge) => (
                 <span
@@ -328,23 +328,29 @@ const AboutUs = () => {
             className="pt-6 sm:pt-10 lg:pt-0 text-center lg:text-left"
           >
             <h2
-              className="font-heading font-bold text-foreground mb-3 sm:mb-4 leading-tight
-              text-2xl sm:text-3xl md:text-4xl"
+             className="font-heading font-bold text-foreground mb-3 sm:mb-4 leading-tight
+              text-xl sm:text-2xl md:text-3xl"
             >
               A Legacy of{" "}
               <span className="gradient-text">Medical Excellence</span>
             </h2>
 
-            <div className="mb-5 flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm lg:justify-start">
-              <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3.5 py-2 font-semibold text-primary">
-                <Building2 size={14} />
-                Ex-Senior Resident, PGIMER
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3.5 py-2 font-semibold text-teal-700">
-                <MapPin size={14} />
-                Chandigarh
-              </span>
-            </div>
+           <div className="mb-5 flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm lg:justify-start">
+  {/* Mobile: single combined badge */}
+  <span className="inline-flex sm:hidden items-center gap-2 rounded-full bg-primary/10 px-3.5 py-2 font-semibold text-primary whitespace-nowrap">
+    <Building2 size={14} />
+    Ex-Senior Resident, PGIMER, Chandigarh
+  </span>
+  {/* Desktop: two separate badges */}
+  <span className="hidden sm:inline-flex items-center gap-2 rounded-full bg-primary/10 px-3.5 py-2 font-semibold text-primary">
+    <Building2 size={14} />
+    Ex-Senior Resident, PGIMER
+  </span>
+  <span className="hidden sm:inline-flex items-center gap-2 rounded-full bg-teal-50 px-3.5 py-2 font-semibold text-teal-700">
+    <MapPin size={14} />
+    Chandigarh
+  </span>
+</div>
 
             <div
               className="space-y-3 sm:space-y-4 text-muted-foreground leading-relaxed
@@ -362,22 +368,22 @@ const AboutUs = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+         <div className="grid grid-cols-3 gap-2 sm:gap-4">
               {stats.map((s) => (
                 <div
-                  key={s.label}
-                  className="rounded-2xl border border-slate-200 bg-white px-4 py-5 text-center shadow-sm"
-                >
-                  <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <s.icon size={18} />
-                  </div>
-                  <p className="font-bold text-foreground mb-0.5 sm:mb-1 text-xl sm:text-2xl md:text-3xl">
-                    {s.value}
-                  </p>
-                  <p className="text-muted-foreground font-medium uppercase tracking-wider text-[9px] sm:text-xs leading-tight">
-                    {s.label}
-                  </p>
-                </div>
+  key={s.label}
+  className="rounded-2xl border border-slate-200 bg-white px-2 py-4 sm:px-4 sm:py-5 text-center shadow-sm"
+>
+  <div className="mx-auto mb-2 sm:mb-3 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+    <s.icon size={16} className="sm:w-[18px] sm:h-[18px]" />
+  </div>
+  <p className="font-bold text-foreground mb-0.5 text-base sm:text-2xl md:text-3xl">
+    {s.value}
+  </p>
+  <p className="text-muted-foreground font-medium uppercase tracking-wider text-[8px] sm:text-xs leading-tight">
+    {s.label}
+  </p>
+</div>
               ))}
             </div>
           </motion.div>

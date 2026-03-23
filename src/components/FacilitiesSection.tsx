@@ -79,7 +79,7 @@ const FacilitiesSection = () => {
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/5 px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-primary mb-4">
               Why Choose Us
             </span>
-            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+            <h2 className="font-heading text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
               Practical Reasons Patients
               <span className="gradient-text"> Prefer This Clinic</span>
             </h2>

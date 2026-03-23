@@ -86,7 +86,7 @@ const UrgentCareBanner = () => {
               {/* Headline */}
               <motion.div variants={fadeUp}>
                 <h2 className="font-heading font-extrabold leading-[1.1] tracking-tight text-foreground">
-                  <span className="block text-[1.75rem] sm:text-[2.1rem] lg:text-[2.6rem] xl:text-[2.9rem]">
+                  <span className="block text-[1.2rem] sm:text-[2.1rem] lg:text-[2.6rem] xl:text-[2.9rem]">
                     Severe dizziness?
                     <br className="xs:hidden" />
                     {" "}Sudden hearing problem?
