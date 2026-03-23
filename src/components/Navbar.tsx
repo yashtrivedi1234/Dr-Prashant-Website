@@ -112,7 +112,7 @@ const Navbar = () => {
 
           {/* ── Desktop Nav ── */}
           <ul
-            className="hidden lg:flex items-center gap-0.5 xl:gap-1"
+            className="hidden lg:ml-auto lg:flex items-center justify-end gap-0.5 xl:gap-1"
             role="menubar"
           >
             {links.map((l) => {
@@ -141,7 +141,7 @@ const Navbar = () => {
                       onClick={() => setOpenDropdown(isOpen ? null : l.name)}
                       onMouseEnter={() => setOpenDropdown(l.name)}
                       onMouseLeave={() => setOpenDropdown(null)}
-                      className={`flex items-center gap-1 xl:gap-1.5 px-2 xl:px-3 py-0 rounded-lg font-medium text-xs xl:text-sm tracking-wide transition-all duration-200 whitespace-nowrap ${
+                      className={`flex items-center gap-1 xl:gap-1.5 px-2 xl:px-3 py-0 rounded-lg font-medium text-sm xl:text-base tracking-wide transition-all duration-200 whitespace-nowrap ${
                         isHighlighted
                           ? "text-primary bg-primary/8"
                           : "text-foreground/70 hover:text-primary hover:bg-primary/5"
@@ -194,7 +194,7 @@ const Navbar = () => {
                   <Link
                     to={l.href}
                     role="menuitem"
-                    className={`px-2 xl:px-3 py-0 rounded-lg font-medium text-xs xl:text-sm tracking-wide transition-all duration-200 block whitespace-nowrap ${
+                    className={`px-2 xl:px-3 py-0 rounded-lg font-medium text-sm xl:text-base tracking-wide transition-all duration-200 block whitespace-nowrap ${
                       isActive(l.href)
                         ? "text-primary bg-primary/8"
                         : "text-foreground/70 hover:text-primary hover:bg-primary/5"

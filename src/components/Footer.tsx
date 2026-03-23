@@ -69,7 +69,7 @@ const Footer = () => {
       </div>
 
       {/* ── Main grid ── */}
-      <div className="container-main section-padding relative z-10">
+      <div className="container-main pl-0 sm:pl-4 md:pl-6 lg:pl-8 pt-8 pb-8 relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-8 lg:gap-10">
           {/* Brand */}
           <motion.div

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Star, Heart, Target, Lightbulb } from "lucide-react";
-import clinicImg from "@/assets/clinic.jpg";
+import clinicImg from "@/assets/clinic.jpeg";
 import WhyChooseUs from "@/components/WhyChooseUs";
 
 const conditions = [
