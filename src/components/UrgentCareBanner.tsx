@@ -39,11 +39,16 @@ const UrgentCareBanner = () => {
                 <AlertTriangle className="h-3.5 w-3.5" />
                 Priority Consultation
               </div>
-
-              <h2 className="mt-4 font-heading text-2xl font-bold leading-tight text-foreground sm:text-3xl lg:text-[2.5rem]">
-                Severe dizziness? Sudden hearing problem?
-                <span className="block text-amber-700"> Same-day consultation may be available.</span>
-              </h2>
+<h2 className="mt-4 font-heading font-bold leading-tight text-foreground">
+  <span className="block text-2xl sm:whitespace-nowrap sm:text-2xl lg:text-[2.5rem]">
+    Severe dizziness?
+    <br className="sm:hidden" />
+    Sudden hearing problem?
+  </span>
+  <span className="block text-2xl text-amber-700 sm:text-2xl lg:text-[2.5rem]">
+    Same-day consultation may be available.
+  </span>
+</h2>
 
               <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
                 When symptoms feel sudden, intense, or rapidly worsening, early assessment matters.

@@ -12,17 +12,20 @@ import gallery1 from "@/assets/Gallery/2.jpeg";
 import gallery2 from "@/assets/Gallery/4.jpeg";
 import gallery3 from "@/assets/Gallery/5.jpeg";
 import gallery4 from "@/assets/Gallery/6.jpeg";
+
 const galleryImages = [gallery1, gallery2, gallery3, gallery4];
 
 const GallerySection = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const openModal  = (index: number) => setSelectedIndex(index);
+  const openModal = (index: number) => setSelectedIndex(index);
   const closeModal = () => setSelectedIndex(null);
 
   const goPrev = () =>
     setSelectedIndex((prev) =>
-      prev !== null ? (prev - 1 + galleryImages.length) % galleryImages.length : null
+      prev !== null
+        ? (prev - 1 + galleryImages.length) % galleryImages.length
+        : null
     );
 
   const goNext = () =>
@@ -30,36 +33,36 @@ const GallerySection = () => {
       prev !== null ? (prev + 1) % galleryImages.length : null
     );
 
-  /* Keyboard navigation */
   useEffect(() => {
     if (selectedIndex === null) return;
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape")     closeModal();
-      if (e.key === "ArrowLeft")  goPrev();
+      if (e.key === "Escape") closeModal();
+      if (e.key === "ArrowLeft") goPrev();
       if (e.key === "ArrowRight") goNext();
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [selectedIndex]);
 
-  /* Prevent body scroll while modal is open */
   useEffect(() => {
     document.body.style.overflow = selectedIndex !== null ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [selectedIndex]);
 
   return (
     <>
       <section id="gallery" className="section-padding bg-background overflow-hidden">
-        <div className="container-main">
+        <div className="container-main px-0 sm:px-4">
 
-          {/* ── Section header ── */}
+          {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-8 sm:mb-10 lg:mb-12"
+            className="text-center mb-8 sm:mb-10 lg:mb-12 px-4 sm:px-0"
           >
             <span className="inline-block gradient-primary text-primary-foreground text-[10px] sm:text-xs font-bold px-3 sm:px-4 py-1 sm:py-1.5 rounded-full tracking-wider uppercase mb-3">
               Media
@@ -70,19 +73,19 @@ const GallerySection = () => {
             </h2>
           </motion.div>
 
-          {/* ── Carousel ── */}
+          {/* Carousel */}
           <Carousel
             opts={{
               align: "start",
               loop: true,
             }}
-            className="relative px-10 sm:px-12"
+            className="relative px-0 sm:px-12"
           >
-            <CarouselContent className="-ml-2 sm:-ml-3 lg:-ml-4">
+            <CarouselContent className="ml-0 sm:-ml-3 lg:-ml-4">
               {galleryImages.map((img, i) => (
                 <CarouselItem
                   key={i}
-                  className="pl-2 sm:pl-3 lg:pl-4 basis-[78%] sm:basis-1/2 lg:basis-1/4"
+                  className="pl-0 sm:pl-3 lg:pl-4 basis-full sm:basis-1/2 lg:basis-1/4"
                 >
                   <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -92,10 +95,6 @@ const GallerySection = () => {
                     whileHover={{ scale: 1.03 }}
                     className="rounded-xl sm:rounded-2xl overflow-hidden aspect-square group shadow-md sm:shadow-lg cursor-pointer"
                     onClick={() => openModal(i)}
-                    role="button"
-                    aria-label={`Open gallery image ${i + 1}`}
-                    tabIndex={0}
-                    onKeyDown={(e) => e.key === "Enter" && openModal(i)}
                   >
                     <img
                       src={img}
@@ -108,13 +107,14 @@ const GallerySection = () => {
               ))}
             </CarouselContent>
 
-            <CarouselPrevious className="left-0 sm:left-1 h-9 w-9 sm:h-10 sm:w-10 border-border bg-background/90 hover:bg-background" />
-            <CarouselNext className="right-0 sm:right-1 h-9 w-9 sm:h-10 sm:w-10 border-border bg-background/90 hover:bg-background" />
+            {/* Hide arrows on mobile */}
+            <CarouselPrevious className="hidden sm:flex left-1 h-10 w-10 border-border bg-background/90" />
+            <CarouselNext className="hidden sm:flex right-1 h-10 w-10 border-border bg-background/90" />
           </Carousel>
         </div>
       </section>
 
-      {/* ── Lightbox modal ── */}
+      {/* Modal */}
       <AnimatePresence>
         {selectedIndex !== null && (
           <motion.div
@@ -123,90 +123,46 @@ const GallerySection = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            {/* Backdrop */}
             <motion.div
               className="absolute inset-0 bg-black/85 backdrop-blur-sm"
               onClick={closeModal}
             />
 
-            {/* Modal content */}
             <motion.div
-              className="
-                relative z-10 flex items-center
-                w-full
-                px-2 sm:px-4 md:px-8
-                gap-2 sm:gap-3 md:gap-4
-                max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-5xl
-                mx-auto
-              "
+              className="relative z-10 flex items-center w-full px-2 sm:px-4 md:px-8 gap-2 sm:gap-3 md:gap-4 max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-5xl mx-auto"
               initial={{ scale: 0.88, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.88, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
             >
-              {/* Prev */}
               <button
                 onClick={goPrev}
-                aria-label="Previous image"
-                className="
-                  shrink-0 rounded-full bg-white/10 hover:bg-white/25
-                  text-white flex items-center justify-center transition-colors
-                  w-8 h-8 sm:w-10 sm:h-10
-                "
+                className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 text-white flex items-center justify-center"
               >
-                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+                <ChevronLeft />
               </button>
 
-              {/* Image */}
-              <div className="flex-1 rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl bg-black">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={selectedIndex}
-                    src={galleryImages[selectedIndex]}
-                    alt={`Gallery ${selectedIndex + 1}`}
-                    className="w-full object-contain
-                      max-h-[60vh] sm:max-h-[72vh] md:max-h-[80vh]"
-                    initial={{ opacity: 0, x: 40 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -40 }}
-                    transition={{ duration: 0.25 }}
-                  />
-                </AnimatePresence>
+              <div className="flex-1 rounded-xl overflow-hidden bg-black">
+                <motion.img
+                  key={selectedIndex}
+                  src={galleryImages[selectedIndex]}
+                  className="w-full object-contain max-h-[70vh]"
+                />
               </div>
 
-              {/* Next */}
               <button
                 onClick={goNext}
-                aria-label="Next image"
-                className="
-                  shrink-0 rounded-full bg-white/10 hover:bg-white/25
-                  text-white flex items-center justify-center transition-colors
-                  w-8 h-8 sm:w-10 sm:h-10
-                "
+                className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 text-white flex items-center justify-center"
               >
-                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                <ChevronRight />
               </button>
             </motion.div>
 
-            {/* Close button */}
             <button
               onClick={closeModal}
-              aria-label="Close gallery"
-              className="
-                absolute top-3 right-3 sm:top-4 sm:right-4 z-20
-                rounded-full bg-white/10 hover:bg-white/25
-                text-white flex items-center justify-center transition-colors
-                w-8 h-8 sm:w-10 sm:h-10
-              "
+              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center"
             >
-              <X className="w-4 h-4 sm:w-5 sm:h-5" />
+              <X />
             </button>
-
-            {/* Counter */}
-            <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2
-              text-white/70 text-xs sm:text-sm tabular-nums">
-              {selectedIndex + 1} / {galleryImages.length}
-            </div>
           </motion.div>
         )}
       </AnimatePresence>

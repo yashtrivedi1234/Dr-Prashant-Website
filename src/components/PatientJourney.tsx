@@ -254,8 +254,11 @@ const PatientJourney = () => {
                 transition={{ duration: 0.6, delay: 0.15 + i * 0.12, ease }}
                 onMouseEnter={() => handleEnter(i)}
                 onMouseLeave={handleLeave}
-                className={`group flex flex-col items-center text-center cursor-default
-                            ${step.featured ? "lg:-mt-4" : ""}`}
+              className={`group flex flex-col items-center text-center cursor-default
+            ${step.featured ? "lg:-mt-4" : ""}
+            ${i === steps.length - 1 
+              ? "col-span-2 sm:col-span-1 justify-self-center" 
+              : ""}`}
               >
                 {/* Icon circle */}
                 <div className="relative mb-4">

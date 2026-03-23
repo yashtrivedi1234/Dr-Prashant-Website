@@ -18,7 +18,8 @@ const blogs = [
     img: blog1,
     date: "March 10, 2026",
     title: "Understanding Vertigo: Causes and Advanced Treatments",
-    excerpt: "Explore the common triggers of dizziness and how state-of-the-art VNG testing helps in accurate diagnosis and management.",
+    excerpt:
+      "Explore the common triggers of dizziness and how state-of-the-art VNG testing helps in accurate diagnosis and management.",
     color: "gradient-primary",
   },
   {
@@ -26,7 +27,8 @@ const blogs = [
     img: blog2,
     date: "March 5, 2026",
     title: "Clinical Approaches to Seasonal Allergies",
-    excerpt: "Discover how precise Skin Prick Testing and customized immunotherapy can provide lasting relief from severe environmental allergies.",
+    excerpt:
+      "Discover how precise Skin Prick Testing and customized immunotherapy can provide lasting relief from severe environmental allergies.",
     color: "gradient-warm",
   },
   {
@@ -34,7 +36,8 @@ const blogs = [
     img: blog3,
     date: "Feb 28, 2026",
     title: "The Importance of Sleep Studies for Sleep Apnea",
-    excerpt: "Learn how Drug-Induced Sleep Endoscopy (DISE) and comprehensive sleep studies can identify and effectively treat chronic snoring.",
+    excerpt:
+      "Learn how Drug-Induced Sleep Endoscopy (DISE) and comprehensive sleep studies can identify and effectively treat chronic snoring.",
     color: "gradient-teal",
   },
 ];
@@ -44,15 +47,15 @@ const BlogSection = () => {
 
   return (
     <section className="section-padding bg-section-alt overflow-hidden">
-      <div className="container-main">
+      <div className="container-main px-0 sm:px-4">
 
-        {/* ── Section header ── */}
+        {/* ── Header ── */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-8 sm:mb-10 lg:mb-12"
+          className="text-center mb-8 sm:mb-10 lg:mb-12 px-4 sm:px-0"
         >
           <span className="inline-block gradient-warm text-primary-foreground text-[10px] sm:text-xs font-bold px-3 sm:px-4 py-1 sm:py-1.5 rounded-full tracking-wider uppercase mb-3">
             Latest Updates
@@ -69,13 +72,13 @@ const BlogSection = () => {
             align: "start",
             loop: true,
           }}
-          className="relative px-10 sm:px-12"
+          className="relative px-0 sm:px-12"
         >
-          <CarouselContent className="-ml-4 sm:-ml-6 lg:-ml-8">
+          <CarouselContent className="ml-0 sm:-ml-6 lg:-ml-8">
             {blogs.map((b, i) => (
               <CarouselItem
                 key={b.slug}
-                className="pl-4 sm:pl-6 lg:pl-8 basis-[88%] sm:basis-1/2 lg:basis-1/3"
+                className="pl-0 sm:pl-6 lg:pl-8 basis-full sm:basis-1/2 lg:basis-1/3"
               >
                 <motion.article
                   initial={{ opacity: 0, y: 40 }}
@@ -90,44 +93,60 @@ const BlogSection = () => {
                     group cursor-pointer flex flex-col h-full
                   "
                 >
-                  {/* Thumbnail */}
-                  <div className="overflow-hidden aspect-[16/10] relative flex-shrink-0">
+                  {/* Image */}
+                  <div className="overflow-hidden aspect-[16/10] relative">
                     <img
                       src={b.img}
                       alt={b.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       loading="lazy"
                     />
-                    {/* Date badge */}
-                    <div className={`
+
+                    {/* Date */}
+                    <div
+                      className={`
                       absolute top-3 left-3 sm:top-4 sm:left-4
                       ${b.color} text-primary-foreground font-bold
                       px-2.5 py-1 sm:px-3 sm:py-1
                       rounded-full flex items-center gap-1
                       text-[10px] sm:text-xs
-                    `}>
-                      <Calendar size={10} className="sm:w-3 sm:h-3 flex-shrink-0" />
+                    `}
+                    >
+                      <Calendar
+                        size={10}
+                        className="sm:w-3 sm:h-3 flex-shrink-0"
+                      />
                       {b.date}
                     </div>
                   </div>
 
-                  {/* Body */}
+                  {/* Content */}
                   <div className="p-4 sm:p-5 lg:p-6 flex flex-col flex-1">
-                    <h3 className="font-heading font-semibold text-foreground
+                    <h3
+                      className="font-heading font-semibold text-foreground
                       group-hover:text-primary transition-colors mb-2 leading-snug
-                      text-base sm:text-lg">
+                      text-base sm:text-lg"
+                    >
                       {b.title}
                     </h3>
 
-                    <p className="text-muted-foreground leading-relaxed flex-1 mb-4
-                      text-xs sm:text-sm">
+                    <p
+                      className="text-muted-foreground leading-relaxed flex-1 mb-4
+                      text-xs sm:text-sm"
+                    >
                       {b.excerpt}
                     </p>
 
-                    <div className="text-primary font-semibold flex items-center gap-1
+                    <div
+                      className="text-primary font-semibold flex items-center gap-1
                       group-hover:gap-2 transition-all mt-auto
-                      text-xs sm:text-sm">
-                      Read More <ArrowRight size={14} className="sm:w-4 sm:h-4" />
+                      text-xs sm:text-sm"
+                    >
+                      Read More{" "}
+                      <ArrowRight
+                        size={14}
+                        className="sm:w-4 sm:h-4"
+                      />
                     </div>
                   </div>
                 </motion.article>
@@ -135,10 +154,10 @@ const BlogSection = () => {
             ))}
           </CarouselContent>
 
-          <CarouselPrevious className="left-0 sm:left-1 h-9 w-9 sm:h-10 sm:w-10 border-border bg-background/90 hover:bg-background" />
-          <CarouselNext className="right-0 sm:right-1 h-9 w-9 sm:h-10 sm:w-10 border-border bg-background/90 hover:bg-background" />
+          {/* Hide arrows on mobile */}
+          <CarouselPrevious className="hidden sm:flex left-1 h-10 w-10 border-border bg-background/90 hover:bg-background" />
+          <CarouselNext className="hidden sm:flex right-1 h-10 w-10 border-border bg-background/90 hover:bg-background" />
         </Carousel>
-
       </div>
     </section>
   );

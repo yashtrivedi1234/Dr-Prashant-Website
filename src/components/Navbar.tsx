@@ -321,14 +321,7 @@ const Navbar = () => {
             })}
 
             {/* Mobile CTA */}
-            <div className="pt-2 pb-1">
-              <Link
-                to="/book-appointment"
-                className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-4 py-3 rounded-lg text-sm font-semibold w-full hover:brightness-105 active:scale-95 transition-all duration-200"
-              >
-                Book Appointment
-              </Link>
-            </div>
+           
           </div>
         </div>
       </nav>
