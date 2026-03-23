@@ -58,7 +58,7 @@ const TestimonialsSection = () => {
           className="rounded-2xl overflow-hidden shadow-xl border border-border"
         >
           <iframe
-            src="https://widgets.sociablekit.com/google-reviews/iframe/25665003"
+            src="https://widgets.sociablekit.com/google-reviews/iframe/25665651"
             frameBorder="0"
             width="100%"
             height="520px"

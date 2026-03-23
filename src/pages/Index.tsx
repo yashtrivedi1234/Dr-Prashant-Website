@@ -35,7 +35,7 @@ const Index = () => (
     {/* <ClinicInfoSection /> */}
     <FacilitiesSection />
     <PatientJourney />
-    {/* <TestimonialsSection /> */}
+    <TestimonialsSection />
     <FAQSection />
     <GallerySection />
     {/* <LocalSeoSection /> */}
