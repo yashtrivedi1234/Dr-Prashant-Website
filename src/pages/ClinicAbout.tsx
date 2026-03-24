@@ -163,7 +163,7 @@ const ClinicAbout = () => {
 
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link
-                  to="/contact"
+                  to="/book-appointment"
                   className="inline-flex w-full sm:w-auto justify-center bg-gradient-to-r from-blue-600 to-teal-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-shadow
                     px-6 py-2.5 text-sm
                     sm:px-8 sm:py-3 sm:text-base"
