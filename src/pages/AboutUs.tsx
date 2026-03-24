@@ -84,19 +84,10 @@ const trustBadges = [
 ];
 
 const profileFacts = [
-  { label: "Doctor Name", value: "Dr. Shiv Jee Prashant" },
-  { label: "Father's Name", value: "Shri Shiv Jee Choudhary" },
   { label: "Date of Birth", value: "16th Feb. 1984" },
   { label: "Sex", value: "Male" },
   { label: "Nationality", value: "Indian" },
-  { label: "Residential Address", value: "H.No-15 Sec 15 A Chandigarh" },
-  { label: "Present Address", value: "Same as Above" },
   { label: "Email", value: "drshiv707@gmail.com" },
-];
-
-const registrations = [
-  "DMC Reg. No. : 51670 / 28th April 2011",
-  "MCI Reg. No. : 39854 / 08th April 2011",
 ];
 
 const objectiveText =
@@ -425,12 +416,12 @@ const AboutUs = () => {
 
       <section className="section-padding bg-white">
         <div className="container-main">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[1.15fr_0.85fr]">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
+              className="h-full rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
             >
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
@@ -463,30 +454,9 @@ const AboutUs = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.08 }}
-              className="space-y-6"
+              className="h-full"
             >
-              <div className="rounded-[28px] border border-slate-200 bg-gradient-to-br from-sky-50 to-white p-6 shadow-sm sm:p-8">
-                <div className="mb-5 flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-teal-100 text-teal-700">
-                    <ShieldCheck size={20} />
-                  </div>
-                  <h3 className="font-heading text-2xl font-bold text-foreground">
-                    Registrations
-                  </h3>
-                </div>
-                <div className="space-y-3">
-                  {registrations.map((item) => (
-                    <div
-                      key={item}
-                      className="rounded-2xl bg-white px-4 py-4 ring-1 ring-slate-100"
-                    >
-                      <p className="text-sm font-medium text-foreground">{item}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+              <div className="flex h-full flex-col rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
                 <div className="mb-5 flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                     <Target size={20} />
@@ -495,7 +465,7 @@ const AboutUs = () => {
                     Objective
                   </h3>
                 </div>
-                <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+                <p className="flex-1 text-sm leading-relaxed text-muted-foreground sm:text-base">
                   {objectiveText}
                 </p>
               </div>
@@ -806,5 +776,3 @@ const AboutUs = () => {
 };
 
 export default AboutUs;
-
-

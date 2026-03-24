@@ -1,21 +1,25 @@
 import { motion } from "framer-motion";
 import {
-  Calendar,
-  Clock,
-  Phone,
-  MapPin,
-  PhoneCall,
-  CheckCircle2,
   AlertCircle,
+  Calendar,
+  CheckCircle2,
+  Clock,
   Loader2,
+  MapPin,
+  Phone,
+  PhoneCall,
 } from "lucide-react";
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import { useCreateAppointmentMutation } from "../store";
 
 interface ValidationError {
   field: string;
   message: string;
   value?: string;
+}
+
+interface AppointmentResult {
+  success?: boolean;
 }
 
 interface ErrorResponse {
@@ -69,24 +73,22 @@ const BookAppointment = () => {
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const formRef = useRef<HTMLFormElement>(null);
 
-  const [createAppointment, { isLoading, isError, error }] =
-    useCreateAppointmentMutation();
+  const [createAppointment, { isLoading }] = useCreateAppointmentMutation();
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { name, value } = e.target;
     let filteredValue = value;
 
-    // Name field: Only allow letters, spaces, hyphens, and apostrophes
     if (name === "name") {
       filteredValue = value.replace(/[^a-zA-Z\s'-]/g, "");
     }
 
-    // Phone field: Only allow digits 0-9
     if (name === "phone") {
       filteredValue = value.replace(/[^0-9]/g, "");
-      // Limit to 15 digits
       if (filteredValue.length > 15) {
         filteredValue = filteredValue.slice(0, 15);
       }
@@ -96,8 +98,8 @@ const BookAppointment = () => {
       ...prev,
       [name]: filteredValue,
     }));
-    setErrorMessage(""); // Clear general error when user starts typing
-    // Clear field-specific error for this field
+    setErrorMessage("");
+
     if (fieldErrors[name]) {
       setFieldErrors((prev) => {
         const newErrors = { ...prev };
@@ -112,7 +114,7 @@ const BookAppointment = () => {
       ...prev,
       time,
     }));
-    // Clear time error when user selects a time
+
     if (fieldErrors.time) {
       setFieldErrors((prev) => {
         const newErrors = { ...prev };
@@ -125,9 +127,8 @@ const BookAppointment = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage("");
-    console.log("🔄 Form submitted with data:", formData);
+    setFieldErrors({});
 
-    // Validation
     if (
       !formData.name ||
       !formData.email ||
@@ -137,17 +138,26 @@ const BookAppointment = () => {
       !formData.time
     ) {
       setErrorMessage("Please fill in all required fields");
-      console.error("❌ Validation failed - missing fields");
+      return;
+    }
+
+    const selectedDate = new Date(formData.date);
+    const today = new Date();
+    const maxDate = new Date();
+    maxDate.setMonth(today.getMonth() + 6);
+
+    if (selectedDate > maxDate) {
+      setFieldErrors({
+        date: "Appointments can only be booked up to 6 months in advance",
+      });
       return;
     }
 
     try {
-      console.log("📡 Calling createAppointment mutation...");
-      const result = await createAppointment(formData).unwrap();
-      console.log("✅ API Response:", result);
+      const result = (await createAppointment(formData).unwrap()) as AppointmentResult;
+
       if (result.success) {
         setSuccessMessage(true);
-        // Reset form
         setFormData({
           name: "",
           email: "",
@@ -157,49 +167,60 @@ const BookAppointment = () => {
           time: "",
           notes: "",
         });
-        // Hide success message after 5 seconds
+
         setTimeout(() => {
           setSuccessMessage(false);
         }, 5000);
       }
     } catch (err) {
-      console.error("❌ API Error:", err);
-      const error = err as ErrorResponse;
-      
-      // Handle field-specific validation errors
-      if (error?.data?.errors && Array.isArray(error.data.errors)) {
-        const fieldErrorMap: Record<string, string> = {};
-        error.data.errors.forEach((fieldError: ValidationError) => {
-          fieldErrorMap[fieldError.field] = fieldError.message;
+      const apiError = err as ErrorResponse;
+
+      if (apiError?.data?.errors && Array.isArray(apiError.data.errors)) {
+        const nextFieldErrors: Record<string, string> = {};
+        const generalErrors: string[] = [];
+
+        apiError.data.errors.forEach((fieldError) => {
+          if (fieldError.field) {
+            nextFieldErrors[fieldError.field] = fieldError.message;
+            return;
+          }
+
+          if (fieldError.message?.toLowerCase().includes("6 months")) {
+            nextFieldErrors.date = fieldError.message;
+            return;
+          }
+
+          generalErrors.push(fieldError.message);
         });
-        setFieldErrors(fieldErrorMap);
-        setErrorMessage("Please fix the validation errors below.");
-        console.log("📋 Field Errors:", fieldErrorMap);
-      } else {
-        // Handle general errors
-        const errorMsg =
-          error?.data?.message ||
-          error?.message ||
-          "Failed to book appointment. Please try again.";
-        setErrorMessage(errorMsg);
+
+        setFieldErrors(nextFieldErrors);
+        setErrorMessage(
+          generalErrors.length > 0 ? generalErrors.join(", ") : ""
+        );
+        return;
       }
+
+      setErrorMessage(
+        apiError?.data?.message ||
+          apiError?.message ||
+          "Something went wrong while booking the appointment"
+      );
     }
   };
 
   return (
     <div className="bg-background">
-      {/* ── Hero Section ── */}
-      <section className="relative py-8 sm:py-12 md:py-16 overflow-hidden bg-slate-50">
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
-          <div className="absolute top-0 right-0 w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96 bg-primary rounded-full translate-x-1/2 -translate-y-1/2 blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-40 h-40 sm:w-56 sm:h-56 lg:w-64 lg:h-64 bg-accent rounded-full -translate-x-1/2 translate-y-1/2 blur-3xl" />
+      <section className="relative overflow-hidden bg-slate-50 py-8 sm:py-12 md:py-16">
+        <div className="pointer-events-none absolute inset-0 opacity-10">
+          <div className="absolute right-0 top-0 h-56 w-56 translate-x-1/2 -translate-y-1/2 rounded-full bg-primary blur-3xl sm:h-72 sm:w-72 lg:h-96 lg:w-96" />
+          <div className="absolute bottom-0 left-0 h-40 w-40 -translate-x-1/2 translate-y-1/2 rounded-full bg-accent blur-3xl sm:h-56 sm:w-56 lg:h-64 lg:w-64" />
         </div>
 
-        <div className="container-main relative z-10 text-center px-4 sm:px-6">
+        <div className="container-main relative z-10 px-4 text-center sm:px-6">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-block gradient-primary text-white text-[10px] sm:text-xs font-bold px-3 sm:px-4 py-1 sm:py-1.5 rounded-full tracking-wider uppercase mb-3 sm:mb-4"
+            className="gradient-primary mb-3 inline-block rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white sm:mb-4 sm:px-4 sm:py-1.5 sm:text-xs"
           >
             Book Your Appointment
           </motion.span>
@@ -208,8 +229,7 @@ const BookAppointment = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="font-heading font-bold text-foreground mb-3 sm:mb-4 leading-tight
-              text-2xl sm:text-3xl md:text-5xl lg:text-6xl"
+            className="mb-3 font-heading text-2xl font-bold leading-tight text-foreground sm:mb-4 sm:text-3xl md:text-5xl lg:text-6xl"
           >
             Schedule Your{" "}
             <span className="gradient-text">Consultation Today</span>
@@ -219,8 +239,7 @@ const BookAppointment = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-muted-foreground max-w-2xl mx-auto leading-relaxed px-1 sm:px-0
-              text-sm sm:text-base md:text-lg"
+            className="mx-auto max-w-2xl px-1 text-sm leading-relaxed text-muted-foreground sm:px-0 sm:text-base md:text-lg"
           >
             Book an appointment with Dr. Prashant for expert ENT, Vertigo, and
             Allergy treatments. Quick, easy, and convenient appointment booking.
@@ -228,53 +247,51 @@ const BookAppointment = () => {
         </div>
       </section>
 
-      {/* ── Booking Form Section ── */}
       <section className="section-padding">
         <div className="container-main">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 items-start">
-            {/* ── Main Form ── */}
+          <div className="grid grid-cols-1 items-start gap-6 sm:gap-8 lg:grid-cols-3 lg:gap-12">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="lg:col-span-2 
-                bg-white border border-slate-50 shadow-2xl flex flex-col
-                rounded-2xl sm:rounded-3xl lg:rounded-[3rem]
-                p-4 sm:p-8 md:p-10 lg:p-12"
+              className="flex flex-col rounded-2xl border border-slate-50 bg-white p-4 shadow-2xl sm:rounded-3xl sm:p-8 md:p-10 lg:col-span-2 lg:rounded-[3rem] lg:p-12"
             >
-              <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8 lg:mb-10">
-                <div className="w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 gradient-primary rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
+              <div className="mb-6 flex items-center gap-3 sm:mb-8 sm:gap-4 lg:mb-10">
+                <div className="gradient-primary flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl shadow-lg sm:h-11 sm:w-11 lg:h-12 lg:w-12">
                   <Calendar className="text-white" size={20} />
                 </div>
-                <h2 className="font-heading font-bold text-foreground
-                  text-lg sm:text-2xl lg:text-3xl leading-tight">
+                <h2 className="font-heading text-lg font-bold leading-tight text-foreground sm:text-2xl lg:text-3xl">
                   Appointment Details
                 </h2>
               </div>
 
-              <form onSubmit={handleSubmit} ref={formRef} className="space-y-4 sm:space-y-5 lg:space-y-6">
-                {/* ── Error Message ── */}
+              <form
+                onSubmit={handleSubmit}
+                ref={formRef}
+                className="space-y-4 sm:space-y-5 lg:space-y-6"
+              >
                 {errorMessage && (
-                  <div className="flex items-start sm:items-center gap-3 bg-red-50 border border-red-200 rounded-lg sm:rounded-xl p-3 sm:p-4 text-red-700">
+                  <div className="flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-3 text-red-700 sm:items-center sm:rounded-xl sm:p-4">
                     <AlertCircle size={20} className="flex-shrink-0" />
-                    <p className="text-sm sm:text-base font-medium">{errorMessage}</p>
-                  </div>
-                )}
-
-                {/* ── Success Message ── */}
-                {successMessage && (
-                  <div className="flex items-start sm:items-center gap-3 bg-green-50 border border-green-200 rounded-lg sm:rounded-xl p-3 sm:p-4 text-green-700">
-                    <CheckCircle2 size={20} className="flex-shrink-0" />
-                    <p className="text-sm sm:text-base font-medium">
-                      Appointment booked successfully! Check your email for confirmation.
+                    <p className="text-sm font-medium sm:text-base">
+                      {errorMessage}
                     </p>
                   </div>
                 )}
 
-                {/* ── Name & Phone ── */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
+                {successMessage && (
+                  <div className="flex items-start gap-3 rounded-lg border border-green-200 bg-green-50 p-3 text-green-700 sm:items-center sm:rounded-xl sm:p-4">
+                    <CheckCircle2 size={20} className="flex-shrink-0" />
+                    <p className="text-sm font-medium sm:text-base">
+                      Appointment booked successfully! Check your email for
+                      confirmation.
+                    </p>
+                  </div>
+                )}
+
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:gap-6">
                   <div className="space-y-1.5 sm:space-y-2">
-                    <label className="text-xs sm:text-sm font-bold text-slate-700 ml-1">
+                    <label className="ml-1 text-xs font-bold text-slate-700 sm:text-sm">
                       Full Name *
                     </label>
                     <input
@@ -284,24 +301,21 @@ const BookAppointment = () => {
                       onChange={handleInputChange}
                       placeholder="John Doe"
                       required
-                      className={`w-full bg-slate-50 border focus:outline-none focus:ring-2 transition-all
-                        rounded-xl sm:rounded-2xl
-                        py-3 px-4 text-sm
-                        sm:py-3.5 sm:px-5
-                        lg:py-4 lg:px-6
-                        ${fieldErrors.name
+                      className={`w-full rounded-xl border bg-slate-50 px-4 py-3 text-sm transition-all focus:outline-none focus:ring-2 sm:rounded-2xl sm:px-5 sm:py-3.5 lg:px-6 lg:py-4 ${
+                        fieldErrors.name
                           ? "border-red-500 focus:ring-red-500/20"
                           : "border-slate-100 focus:ring-primary/20"
-                        }`}
+                      }`}
                     />
                     {fieldErrors.name && (
-                      <p className="text-xs sm:text-sm text-red-600 ml-1 flex items-center gap-1">
+                      <p className="ml-1 flex items-center gap-1 text-xs text-red-600 sm:text-sm">
                         <AlertCircle size={14} /> {fieldErrors.name}
                       </p>
                     )}
                   </div>
+
                   <div className="space-y-1.5 sm:space-y-2">
-                    <label className="text-xs sm:text-sm font-bold text-slate-700 ml-1">
+                    <label className="ml-1 text-xs font-bold text-slate-700 sm:text-sm">
                       Phone Number *
                     </label>
                     <input
@@ -311,27 +325,22 @@ const BookAppointment = () => {
                       onChange={handleInputChange}
                       placeholder="6000000000"
                       required
-                      className={`w-full bg-slate-50 border focus:outline-none focus:ring-2 transition-all
-                        rounded-xl sm:rounded-2xl
-                        py-3 px-4 text-sm
-                        sm:py-3.5 sm:px-5
-                        lg:py-4 lg:px-6
-                        ${fieldErrors.phone
+                      className={`w-full rounded-xl border bg-slate-50 px-4 py-3 text-sm transition-all focus:outline-none focus:ring-2 sm:rounded-2xl sm:px-5 sm:py-3.5 lg:px-6 lg:py-4 ${
+                        fieldErrors.phone
                           ? "border-red-500 focus:ring-red-500/20"
                           : "border-slate-100 focus:ring-primary/20"
-                        }`}
+                      }`}
                     />
                     {fieldErrors.phone && (
-                      <p className="text-xs sm:text-sm text-red-600 ml-1 flex items-center gap-1">
+                      <p className="ml-1 flex items-center gap-1 text-xs text-red-600 sm:text-sm">
                         <AlertCircle size={14} /> {fieldErrors.phone}
                       </p>
                     )}
                   </div>
                 </div>
 
-                {/* ── Email ── */}
                 <div className="space-y-1.5 sm:space-y-2">
-                  <label className="text-xs sm:text-sm font-bold text-slate-700 ml-1">
+                  <label className="ml-1 text-xs font-bold text-slate-700 sm:text-sm">
                     Email Address *
                   </label>
                   <input
@@ -341,26 +350,21 @@ const BookAppointment = () => {
                     onChange={handleInputChange}
                     placeholder="john@example.com"
                     required
-                    className={`w-full bg-slate-50 border focus:outline-none focus:ring-2 transition-all
-                      rounded-xl sm:rounded-2xl
-                      py-3 px-4 text-sm
-                      sm:py-3.5 sm:px-5
-                      lg:py-4 lg:px-6
-                      ${fieldErrors.email
+                    className={`w-full rounded-xl border bg-slate-50 px-4 py-3 text-sm transition-all focus:outline-none focus:ring-2 sm:rounded-2xl sm:px-5 sm:py-3.5 lg:px-6 lg:py-4 ${
+                      fieldErrors.email
                         ? "border-red-500 focus:ring-red-500/20"
                         : "border-slate-100 focus:ring-primary/20"
-                      }`}
+                    }`}
                   />
                   {fieldErrors.email && (
-                    <p className="text-xs sm:text-sm text-red-600 ml-1 flex items-center gap-1">
+                    <p className="ml-1 flex items-center gap-1 text-xs text-red-600 sm:text-sm">
                       <AlertCircle size={14} /> {fieldErrors.email}
                     </p>
                   )}
                 </div>
 
-                {/* ── Service Selection ── */}
                 <div className="space-y-1.5 sm:space-y-2">
-                  <label className="text-xs sm:text-sm font-bold text-slate-700 ml-1">
+                  <label className="ml-1 text-xs font-bold text-slate-700 sm:text-sm">
                     Service/Department *
                   </label>
                   <select
@@ -368,15 +372,11 @@ const BookAppointment = () => {
                     value={formData.service}
                     onChange={handleInputChange}
                     required
-                    className={`w-full bg-slate-50 border focus:outline-none focus:ring-2 transition-all appearance-none
-                      rounded-xl sm:rounded-2xl
-                      py-3 px-4 text-sm
-                      sm:py-3.5 sm:px-5
-                      lg:py-4 lg:px-6
-                      ${fieldErrors.service
+                    className={`w-full appearance-none rounded-xl border bg-slate-50 px-4 py-3 text-sm transition-all focus:outline-none focus:ring-2 sm:rounded-2xl sm:px-5 sm:py-3.5 lg:px-6 lg:py-4 ${
+                      fieldErrors.service
                         ? "border-red-500 focus:ring-red-500/20"
                         : "border-slate-100 focus:ring-primary/20"
-                      }`}
+                    }`}
                   >
                     <option value="">-- Select a Service --</option>
                     {services.map((service) => (
@@ -386,15 +386,14 @@ const BookAppointment = () => {
                     ))}
                   </select>
                   {fieldErrors.service && (
-                    <p className="text-xs sm:text-sm text-red-600 ml-1 flex items-center gap-1">
+                    <p className="ml-1 flex items-center gap-1 text-xs text-red-600 sm:text-sm">
                       <AlertCircle size={14} /> {fieldErrors.service}
                     </p>
                   )}
                 </div>
 
-                {/* ── Date ── */}
                 <div className="space-y-1.5 sm:space-y-2">
-                  <label className="text-xs sm:text-sm font-bold text-slate-700 ml-1">
+                  <label className="ml-1 text-xs font-bold text-slate-700 sm:text-sm">
                     Preferred Date *
                   </label>
                   <input
@@ -403,54 +402,48 @@ const BookAppointment = () => {
                     value={formData.date}
                     onChange={handleInputChange}
                     required
-                    className={`w-full bg-slate-50 border focus:outline-none focus:ring-2 transition-all
-                      rounded-xl sm:rounded-2xl
-                      py-3 px-4 text-sm
-                      sm:py-3.5 sm:px-5
-                      lg:py-4 lg:px-6
-                      ${fieldErrors.date
+                    className={`w-full rounded-xl border bg-slate-50 px-4 py-3 text-sm transition-all focus:outline-none focus:ring-2 sm:rounded-2xl sm:px-5 sm:py-3.5 lg:px-6 lg:py-4 ${
+                      fieldErrors.date
                         ? "border-red-500 focus:ring-red-500/20"
                         : "border-slate-100 focus:ring-primary/20"
-                      }`}
+                    }`}
                   />
                   {fieldErrors.date && (
-                    <p className="text-xs sm:text-sm text-red-600 ml-1 flex items-center gap-1">
+                    <p className="ml-1 flex items-center gap-1 text-xs text-red-600 sm:text-sm">
                       <AlertCircle size={14} /> {fieldErrors.date}
                     </p>
                   )}
                 </div>
 
-                {/* ── Time Slots ── */}
                 <div className="space-y-1.5 sm:space-y-2">
-                  <label className="text-xs sm:text-sm font-bold text-slate-700 ml-1">
+                  <label className="ml-1 text-xs font-bold text-slate-700 sm:text-sm">
                     Preferred Time *
                   </label>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+                  <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
                     {timeSlots.map((time) => (
                       <button
                         key={time}
                         type="button"
                         onClick={() => handleTimeSelect(time)}
-                        className={`min-h-[42px] py-2 px-2.5 sm:px-3 text-xs sm:text-sm font-medium rounded-lg transition-all
-                          ${formData.time === time
+                        className={`min-h-[42px] rounded-lg px-2.5 py-2 text-xs font-medium transition-all sm:px-3 sm:text-sm ${
+                          formData.time === time
                             ? "gradient-primary text-white shadow-lg"
-                            : "bg-slate-50 border border-slate-100 text-slate-700 hover:border-primary hover:bg-primary/5"
-                          }`}
+                            : "border border-slate-100 bg-slate-50 text-slate-700 hover:border-primary hover:bg-primary/5"
+                        }`}
                       >
                         {time}
                       </button>
                     ))}
                   </div>
                   {fieldErrors.time && (
-                    <p className="text-xs sm:text-sm text-red-600 ml-1 flex items-center gap-1">
+                    <p className="ml-1 flex items-center gap-1 text-xs text-red-600 sm:text-sm">
                       <AlertCircle size={14} /> {fieldErrors.time}
                     </p>
                   )}
                 </div>
 
-                {/* ── Message ── */}
                 <div className="space-y-1.5 sm:space-y-2">
-                  <label className="text-xs sm:text-sm font-bold text-slate-700 ml-1">
+                  <label className="ml-1 text-xs font-bold text-slate-700 sm:text-sm">
                     Additional Notes (Optional)
                   </label>
                   <textarea
@@ -459,51 +452,37 @@ const BookAppointment = () => {
                     onChange={handleInputChange}
                     rows={3}
                     placeholder="Any specific concerns or medical history we should know?"
-                    className={`w-full bg-slate-50 border focus:outline-none focus:ring-2 transition-all resize-none
-                      rounded-xl sm:rounded-2xl
-                      py-3 px-4 text-sm
-                      sm:py-3.5 sm:px-5
-                      lg:py-4 lg:px-6
-                      ${fieldErrors.notes
+                    className={`w-full resize-none rounded-xl border bg-slate-50 px-4 py-3 text-sm transition-all focus:outline-none focus:ring-2 sm:rounded-2xl sm:px-5 sm:py-3.5 lg:px-6 lg:py-4 ${
+                      fieldErrors.notes
                         ? "border-red-500 focus:ring-red-500/20"
                         : "border-slate-100 focus:ring-primary/20"
-                      }`}
+                    }`}
                   />
                   {fieldErrors.notes && (
-                    <p className="text-xs sm:text-sm text-red-600 ml-1 flex items-center gap-1">
+                    <p className="ml-1 flex items-center gap-1 text-xs text-red-600 sm:text-sm">
                       <AlertCircle size={14} /> {fieldErrors.notes}
                     </p>
                   )}
                 </div>
 
-                {/* ── Submit Button ── */}
                 <button
                   type="submit"
                   disabled={isLoading || successMessage}
-                  className="
-                    w-full gradient-primary text-white font-bold
-                    rounded-xl sm:rounded-2xl
-                    shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all
-                    flex items-center justify-center gap-2 sm:gap-3
-                    py-3.5 text-sm
-                    sm:py-4 sm:text-base
-                    lg:py-5 lg:text-base
-                    disabled:opacity-50 disabled:cursor-not-allowed
-                  "
+                  className="flex w-full items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold text-white shadow-xl transition-all hover:-translate-y-1 hover:shadow-2xl disabled:cursor-not-allowed disabled:opacity-50 sm:gap-3 sm:rounded-2xl sm:py-4 sm:text-base lg:py-5 gradient-primary"
                 >
                   {isLoading ? (
                     <>
-                      <Loader2 size={18} className="sm:w-5 sm:h-5 animate-spin" />
+                      <Loader2 size={18} className="animate-spin sm:h-5 sm:w-5" />
                       Booking...
                     </>
                   ) : successMessage ? (
                     <>
-                      <CheckCircle2 size={18} className="sm:w-5 sm:h-5" />
+                      <CheckCircle2 size={18} className="sm:h-5 sm:w-5" />
                       Appointment Booked!
                     </>
                   ) : (
                     <>
-                      <Calendar size={18} className="sm:w-5 sm:h-5" />
+                      <Calendar size={18} className="sm:h-5 sm:w-5" />
                       Book Appointment
                     </>
                   )}
@@ -511,35 +490,32 @@ const BookAppointment = () => {
               </form>
             </motion.div>
 
-            {/* ── Sidebar ── */}
             <div className="flex flex-col gap-4 sm:gap-5 lg:gap-6">
-              {/* Info Card 1: Clinic Hours */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="
-                  bg-gradient-to-br from-primary to-primary/80 text-white relative overflow-hidden flex flex-col justify-between
-                  rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem]
-                  p-5 sm:p-6 lg:p-8
-                  flex-1"
+                className="relative flex flex-1 flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-primary/80 p-5 text-white sm:rounded-3xl sm:p-6 lg:rounded-[2.5rem] lg:p-8"
               >
-                <div className="absolute top-0 right-0 w-40 h-40 sm:w-48 sm:h-48 bg-white opacity-10 blur-[80px] pointer-events-none" />
+                <div className="pointer-events-none absolute right-0 top-0 h-40 w-40 bg-white opacity-10 blur-[80px] sm:h-48 sm:w-48" />
 
-                <h3 className="font-heading font-bold relative z-10 flex items-center gap-2 sm:gap-3
-                  text-base sm:text-lg lg:text-xl
-                  mb-4 sm:mb-5 lg:mb-6">
-                  <Clock className="text-white flex-shrink-0" size={20} />
+                <h3 className="relative z-10 mb-4 flex items-center gap-2 font-heading text-base font-bold sm:mb-5 sm:gap-3 sm:text-lg lg:mb-6 lg:text-xl">
+                  <Clock className="flex-shrink-0 text-white" size={20} />
                   Clinic Hours
                 </h3>
 
-                <div className="space-y-2 sm:space-y-3 relative z-10">
+                <div className="relative z-10 space-y-2 sm:space-y-3">
                   {[
-                    { day: "Mon — Fri", hours: "10:00 AM – 8:00 PM" },
-                    { day: "Saturday", hours: "10:00 AM – 4:00 PM" },
+                    { day: "Mon - Fri", hours: "10:00 AM - 8:00 PM" },
+                    { day: "Saturday", hours: "10:00 AM - 4:00 PM" },
                     { day: "Sunday", hours: "Emergency Only" },
                   ].map((row, i) => (
-                    <div key={i} className={`flex justify-between text-xs sm:text-sm pb-2 sm:pb-3 ${i < 2 ? "border-b border-white/20" : ""}`}>
+                    <div
+                      key={row.day}
+                      className={`flex justify-between pb-2 text-xs sm:pb-3 sm:text-sm ${
+                        i < 2 ? "border-b border-white/20" : ""
+                      }`}
+                    >
                       <span className="font-medium text-white/90">{row.day}</span>
                       <span className="font-bold">{row.hours}</span>
                     </div>
@@ -547,65 +523,47 @@ const BookAppointment = () => {
                 </div>
               </motion.div>
 
-              {/* Info Card 2: Location */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="
-                  bg-white border border-slate-100 shadow-lg flex flex-col
-                  rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem]
-                  p-5 sm:p-6 lg:p-8"
+                className="flex flex-col rounded-2xl border border-slate-100 bg-white p-5 shadow-lg sm:rounded-3xl sm:p-6 lg:rounded-[2.5rem] lg:p-8"
               >
-                <h3 className="font-heading font-bold flex items-center gap-2 sm:gap-3
-                  text-base sm:text-lg lg:text-xl
-                  text-foreground
-                  mb-3 sm:mb-4 lg:mb-5">
-                  <MapPin className="text-primary flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6" />
+                <h3 className="mb-3 flex items-center gap-2 font-heading text-base font-bold text-foreground sm:mb-4 sm:gap-3 sm:text-lg lg:mb-5 lg:text-xl">
+                  <MapPin className="h-5 w-5 flex-shrink-0 text-primary sm:h-6 sm:w-6" />
                   Clinic Location
                 </h3>
 
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
                   Krishna Nagar: 560 V/161, Plot 3B, Vijay Nagar, Kanpur Road,
                   Lucknow, Uttar Pradesh
                 </p>
               </motion.div>
 
-              {/* Info Card 3: Emergency */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="
-                  bg-slate-900 text-white relative overflow-hidden flex flex-col justify-between
-                  rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem]
-                  p-5 sm:p-6 lg:p-8"
+                className="relative flex flex-col justify-between overflow-hidden rounded-2xl bg-slate-900 p-5 text-white sm:rounded-3xl sm:p-6 lg:rounded-[2.5rem] lg:p-8"
               >
-                <div className="absolute top-0 right-0 w-32 h-32 sm:w-40 sm:h-40 bg-primary opacity-20 blur-3xl pointer-events-none" />
+                <div className="pointer-events-none absolute right-0 top-0 h-32 w-32 bg-primary opacity-20 blur-3xl sm:h-40 sm:w-40" />
 
-                <h3 className="font-heading font-bold relative z-10 flex items-center gap-2 sm:gap-3
-                  text-base sm:text-lg lg:text-xl
-                  mb-2 sm:mb-3 lg:mb-4">
-                  <PhoneCall className="text-primary flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6" />
+                <h3 className="relative z-10 mb-2 flex items-center gap-2 font-heading text-base font-bold sm:mb-3 sm:gap-3 sm:text-lg lg:mb-4 lg:text-xl">
+                  <PhoneCall className="h-5 w-5 flex-shrink-0 text-primary sm:h-6 sm:w-6" />
                   Emergency Support
                 </h3>
 
-                <p className="text-xs sm:text-sm text-slate-300 mb-4 sm:mb-5 relative z-10">
+                <p className="relative z-10 mb-4 text-xs text-slate-300 sm:mb-5 sm:text-sm">
                   Available for urgent medical consultations
                 </p>
 
                 <a
                   href="tel:+918081773201"
-                  className="relative z-10 inline-flex items-center gap-2 sm:gap-3
-                    bg-primary text-white font-bold
-                    rounded-lg sm:rounded-xl
-                    px-4 sm:px-5 py-2 sm:py-3
-                    text-xs sm:text-sm w-full justify-center
-                    hover:bg-primary/90 transition-all"
+                  className="relative z-10 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white transition-all hover:bg-primary/90 sm:gap-3 sm:rounded-xl sm:px-5 sm:py-3 sm:text-sm"
                 >
-                  <Phone size={16} className="sm:w-5 sm:h-5" />
+                  <Phone size={16} className="sm:h-5 sm:w-5" />
                   +91 80817 73201
                 </a>
               </motion.div>
@@ -614,27 +572,24 @@ const BookAppointment = () => {
         </div>
       </section>
 
-      {/* ── Benefits Section ── */}
       <section className="section-padding bg-slate-50">
         <div className="container-main">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-10 sm:mb-14 lg:mb-16"
+            className="mb-10 text-center sm:mb-14 lg:mb-16"
           >
-            <h2 className="font-heading font-bold text-foreground
-              text-2xl sm:text-3xl lg:text-4xl
-              mb-3 sm:mb-4">
+            <h2 className="mb-3 font-heading text-2xl font-bold text-foreground sm:mb-4 sm:text-3xl lg:text-4xl">
               Why Book With Us?
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base">
+            <p className="mx-auto max-w-2xl text-sm text-muted-foreground sm:text-base">
               Get expert care from a leading ENT specialist with years of
               experience
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 lg:gap-6">
             {[
               {
                 icon: Calendar,
@@ -658,21 +613,20 @@ const BookAppointment = () => {
               },
             ].map((item, i) => (
               <motion.div
-                key={i}
+                key={item.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white border border-slate-100 shadow-sm rounded-2xl p-5 sm:p-6 lg:p-7 text-center sm:text-left
-                  hover:shadow-lg hover:-translate-y-1 transition-all"
+                className="rounded-2xl border border-slate-100 bg-white p-5 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg sm:p-6 sm:text-left lg:p-7"
               >
-                <div className="w-10 h-10 sm:w-12 sm:h-12 gradient-primary rounded-lg flex items-center justify-center mb-3 sm:mb-4 mx-auto sm:mx-0">
+                <div className="gradient-primary mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg sm:mx-0 sm:mb-4 sm:h-12 sm:w-12">
                   <item.icon className="text-white" size={20} />
                 </div>
-                <h3 className="font-heading font-bold text-sm sm:text-base lg:text-lg text-foreground mb-2 sm:mb-3">
+                <h3 className="mb-2 font-heading text-sm font-bold text-foreground sm:mb-3 sm:text-base lg:text-lg">
                   {item.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground">
+                <p className="text-xs text-muted-foreground sm:text-sm">
                   {item.desc}
                 </p>
               </motion.div>
