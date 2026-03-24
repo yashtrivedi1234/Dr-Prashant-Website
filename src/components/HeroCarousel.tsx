@@ -15,31 +15,26 @@ const slides = [
 ];
 
 const slideVariants = {
-  enter: {
+  enter: (direction: number) => ({
     opacity: 0,
-    scale: 1.035,
-    filter: "blur(8px)",
-  },
+    y: direction > 0 ? 36 : -36,
+  }),
   center: {
     opacity: 1,
-    scale: 1,
-    filter: "blur(0px)",
+    y: 0,
     transition: {
-      opacity: { duration: 1.15, ease: [0.22, 1, 0.36, 1] },
-      scale: { duration: 6, ease: "linear" },
-      filter: { duration: 0.8, ease: "easeOut" },
+      opacity: { duration: 0.55, ease: "easeOut" },
+      y: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
     },
   },
-  exit: {
+  exit: (direction: number) => ({
     opacity: 0,
-    scale: 1.012,
-    filter: "blur(6px)",
+    y: direction > 0 ? -36 : 36,
     transition: {
-      opacity: { duration: 0.95, ease: "easeInOut" },
-      scale: { duration: 0.95, ease: "easeInOut" },
-      filter: { duration: 0.7, ease: "easeInOut" },
+      opacity: { duration: 0.4, ease: "easeInOut" },
+      y: { duration: 0.4, ease: "easeInOut" },
     },
-  },
+  }),
 };
 
 const overlayVariants = {
@@ -51,13 +46,16 @@ const overlayVariants = {
 };
 
 const HeroCarousel = () => {
-  const [[current], setCurrent] = useState([0, 1]);
+  const [[current, direction], setCurrent] = useState([0, 1]);
   const [autoPlay, setAutoPlay] = useState(true);
 
   useEffect(() => {
     if (!autoPlay) return;
     const id = setInterval(() => {
-      setCurrent(([prev]) => [(prev + 1) % slides.length, 1]);
+      setCurrent(([prev, prevDirection]) => [
+        (prev + 1) % slides.length,
+        prevDirection * -1,
+      ]);
     }, 5000);
     return () => clearInterval(id);
   }, [autoPlay]);
@@ -85,11 +83,12 @@ const HeroCarousel = () => {
 
       {/* ── CAROUSEL ── */}
       <div className="relative sm:absolute sm:inset-0">
-        <AnimatePresence initial={false} mode="sync">
+        <AnimatePresence initial={false} mode="wait" custom={direction}>
           <motion.img
             key={current}
             src={slides[current].src}
             alt={slides[current].alt}
+            custom={direction}
             variants={slideVariants}
             initial="enter"
             animate="center"
