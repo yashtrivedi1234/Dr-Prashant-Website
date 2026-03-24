@@ -84,6 +84,7 @@ const trustBadges = [
 ];
 
 const profileFacts = [
+  { label: "Name", value: "Dr Prashant" },
   { label: "Date of Birth", value: "16th Feb. 1984" },
   { label: "Sex", value: "Male" },
   { label: "Nationality", value: "Indian" },
