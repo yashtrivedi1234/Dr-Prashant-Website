@@ -15,24 +15,19 @@ const slides = [
 ];
 
 const slideVariants = {
-  enter: (direction: number) => ({
+  enter: () => ({
     opacity: 0,
-    y: direction > 0 ? 36 : -36,
   }),
   center: {
     opacity: 1,
-    y: 0,
     transition: {
-      opacity: { duration: 0.55, ease: "easeOut" },
-      y: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+      opacity: { duration: 0.7, ease: "easeInOut" },
     },
   },
-  exit: (direction: number) => ({
+  exit: () => ({
     opacity: 0,
-    y: direction > 0 ? -36 : 36,
     transition: {
-      opacity: { duration: 0.4, ease: "easeInOut" },
-      y: { duration: 0.4, ease: "easeInOut" },
+      opacity: { duration: 0.5, ease: "easeInOut" },
     },
   }),
 };
@@ -46,24 +41,20 @@ const overlayVariants = {
 };
 
 const HeroCarousel = () => {
-  const [[current, direction], setCurrent] = useState([0, 1]);
+  const [current, setCurrent] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
 
   useEffect(() => {
     if (!autoPlay) return;
     const id = setInterval(() => {
-      setCurrent(([prev, prevDirection]) => [
-        (prev + 1) % slides.length,
-        prevDirection * -1,
-      ]);
+      setCurrent((prev) => (prev + 1) % slides.length);
     }, 5000);
     return () => clearInterval(id);
   }, [autoPlay]);
 
   const goTo = (index: number) => {
     setAutoPlay(false);
-    const dir = index > current ? 1 : -1;
-    setCurrent([index, dir]);
+    setCurrent(index);
     setTimeout(() => setAutoPlay(true), 8000);
   };
 
@@ -83,12 +74,11 @@ const HeroCarousel = () => {
 
       {/* ── CAROUSEL ── */}
       <div className="relative sm:absolute sm:inset-0">
-        <AnimatePresence initial={false} mode="wait" custom={direction}>
+        <AnimatePresence initial={false} mode="wait">
           <motion.img
             key={current}
             src={slides[current].src}
             alt={slides[current].alt}
-            custom={direction}
             variants={slideVariants}
             initial="enter"
             animate="center"
