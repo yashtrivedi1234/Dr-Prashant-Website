@@ -85,7 +85,6 @@ const trustBadges = [
 
 const profileFacts = [
   { label: "Name", value: "Dr Prashant" },
-  { label: "Date of Birth", value: "16th Feb. 1984" },
   { label: "Nationality", value: "Indian" },
   { label: "Email", value: "drshiv707@gmail.com" },
 ];
@@ -162,13 +161,6 @@ const clinicSkills = [
   "Tumour clinic support for final planning across stages of head and neck malignancy",
 ];
 
-const academicRecord = [
-  "H.S.C. - CBSE - 1999 - 79.2%",
-  "S.S.C. - CBSE - 2001 - 69%",
-  "PMT - BCECE - 2004 - Rank 10",
-  "MBBS - Patna Medical College - 2010 - 59%",
-  "MS - Institute of Medical Sciences, Varanasi - 2015 - 52%",
-];
 
 const thesisAndPublications = [
   'Thesis: "Study of Eustachian Tube dysfunction in allergic Rhinitis Patients."',
@@ -569,7 +561,7 @@ const AboutUs = () => {
 
       <section className="section-padding bg-slate-50/80">
         <div className="container-main">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -602,33 +594,6 @@ const AboutUs = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.08 }}
-              className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
-            >
-              <div className="mb-6 flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-100 text-amber-700">
-                  <GraduationCap size={20} />
-                </div>
-                <h3 className="font-heading text-2xl font-bold text-foreground">
-                  Academic Record
-                </h3>
-              </div>
-              <div className="space-y-3">
-                {academicRecord.map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-2xl bg-amber-50 px-4 py-4 ring-1 ring-amber-100"
-                  >
-                    <p className="text-sm font-medium text-foreground">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.16 }}
               className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
             >
               <div className="mb-6 flex items-center gap-3">
