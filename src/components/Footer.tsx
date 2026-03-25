@@ -88,7 +88,7 @@ const Footer = () => {
                 <img
                   src={logo}
                   alt="Dr. Prashant Logo"
-                  className="h-[44px] sm:h-[52px] w-auto object-contain"
+                  className="h-[2.5rem] w-auto object-contain"
                 />
               </Link>
             </div>
@@ -318,7 +318,7 @@ const Footer = () => {
           <img
             src={ccLogo}
             alt="Code Crafter"
-            className="h-5 sm:h-6 opacity-80 hover:opacity-100 transition-opacity"
+            className="h-[2.5rem] opacity-80 hover:opacity-100 transition-opacity"
           />
         </motion.div>
       </div>
