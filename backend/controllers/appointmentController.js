@@ -164,15 +164,24 @@ export const getAvailableSlots = async (req, res, next) => {
       });
     }
 
-    // Check if date is in the past
+    // Check if date is within valid range (today to 6 months from today)
     const today = new Date();
     today.setHours(0, 0, 0, 0);
+    const maxDate = new Date(today);
+    maxDate.setMonth(maxDate.getMonth() + 6);
     selectedDate.setHours(0, 0, 0, 0);
 
     if (selectedDate < today) {
       return res.status(400).json({
         success: false,
         message: 'Cannot book appointments for past dates',
+      });
+    }
+
+    if (selectedDate > maxDate) {
+      return res.status(400).json({
+        success: false,
+        message: 'Cannot book appointments beyond 6 months in advance',
       });
     }
 

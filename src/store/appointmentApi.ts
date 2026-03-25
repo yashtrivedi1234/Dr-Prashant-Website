@@ -32,6 +32,15 @@ export interface AppointmentResponse {
   };
 }
 
+export interface AvailableSlotsResponse {
+  success: boolean;
+  date: string;
+  totalSlots: number;
+  availableCount: number;
+  availableSlots: string[];
+  bookedSlots: string[];
+}
+
 export const appointmentApi = createApi({
   reducerPath: 'appointmentApi',
   baseQuery: fetchBaseQuery({
@@ -54,8 +63,12 @@ export const appointmentApi = createApi({
       query: () => '/appointments',
       providesTags: ['Appointment'],
     }),
+    getAvailableSlots: builder.query<AvailableSlotsResponse, string>({
+      query: (date) => `/appointments/available-slots?date=${date}`,
+      providesTags: ['Appointment'],
+    }),
   }),
 });
 
-export const { useCreateAppointmentMutation, useGetAppointmentsQuery } =
+export const { useCreateAppointmentMutation, useGetAppointmentsQuery, useGetAvailableSlotsQuery } =
   appointmentApi;

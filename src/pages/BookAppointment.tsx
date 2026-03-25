@@ -8,9 +8,11 @@ import {
   MapPin,
   Phone,
   PhoneCall,
+  Lock,
+  X,
 } from "lucide-react";
-import { useRef, useState } from "react";
-import { useCreateAppointmentMutation } from "../store";
+import { useRef, useState, useEffect } from "react";
+import { useCreateAppointmentMutation, useGetAvailableSlotsQuery } from "../store";
 
 interface ValidationError {
   field: string;
@@ -58,6 +60,22 @@ const timeSlots = [
   "03:45 PM",
 ];
 
+// Helper function to format date as YYYY-MM-DD
+const formatDateForInput = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
+// Get date range for appointment booking (today to 6 months from today)
+const getTodayDate = () => new Date();
+const getMaxDate = () => {
+  const maxDate = new Date();
+  maxDate.setMonth(maxDate.getMonth() + 6);
+  return maxDate;
+};
+
 const BookAppointment = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -71,9 +89,24 @@ const BookAppointment = () => {
   const [successMessage, setSuccessMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [bookedSlots, setBookedSlots] = useState<string[]>([]);
   const formRef = useRef<HTMLFormElement>(null);
 
   const [createAppointment, { isLoading }] = useCreateAppointmentMutation();
+
+  // Fetch available slots when date changes
+  const { data: availableSlotsData, isLoading: slotsLoading } = useGetAvailableSlotsQuery(
+    formData.date,
+    {
+      skip: !formData.date,
+    }
+  );
+
+  useEffect(() => {
+    if (availableSlotsData) {
+      setBookedSlots(availableSlotsData.bookedSlots || []);
+    }
+  }, [availableSlotsData]);
 
   const handleInputChange = (
     e: React.ChangeEvent<
@@ -97,6 +130,8 @@ const BookAppointment = () => {
     setFormData((prev) => ({
       ...prev,
       [name]: filteredValue,
+      // Reset time when date changes
+      ...(name === "date" && { time: "" }),
     }));
     setErrorMessage("");
 
@@ -143,8 +178,18 @@ const BookAppointment = () => {
 
     const selectedDate = new Date(formData.date);
     const today = new Date();
+    today.setHours(0, 0, 0, 0);
     const maxDate = new Date();
     maxDate.setMonth(today.getMonth() + 6);
+
+    selectedDate.setHours(0, 0, 0, 0);
+
+    if (selectedDate < today) {
+      setFieldErrors({
+        date: "Cannot book appointments for past dates",
+      });
+      return;
+    }
 
     if (selectedDate > maxDate) {
       setFieldErrors({
@@ -401,6 +446,8 @@ const BookAppointment = () => {
                     name="date"
                     value={formData.date}
                     onChange={handleInputChange}
+                    min={formatDateForInput(getTodayDate())}
+                    max={formatDateForInput(getMaxDate())}
                     required
                     className={`w-full rounded-xl border bg-slate-50 px-4 py-3 text-sm transition-all focus:outline-none focus:ring-2 sm:rounded-2xl sm:px-5 sm:py-3.5 lg:px-6 lg:py-4 ${
                       fieldErrors.date
@@ -420,21 +467,69 @@ const BookAppointment = () => {
                     Preferred Time *
                   </label>
                   <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
-                    {timeSlots.map((time) => (
-                      <button
-                        key={time}
-                        type="button"
-                        onClick={() => handleTimeSelect(time)}
-                        className={`min-h-[42px] rounded-lg px-2.5 py-2 text-xs font-medium transition-all sm:px-3 sm:text-sm ${
-                          formData.time === time
-                            ? "gradient-primary text-white shadow-lg"
-                            : "border border-slate-100 bg-slate-50 text-slate-700 hover:border-primary hover:bg-primary/5"
-                        }`}
-                      >
-                        {time}
-                      </button>
-                    ))}
+                    {timeSlots.map((time) => {
+                      const isBooked = bookedSlots.includes(time);
+                      const isSelected = formData.time === time;
+                      const isDisabled = !formData.date || slotsLoading;
+
+                      return (
+                        <motion.button
+                          key={time}
+                          type="button"
+                          onClick={() => !isBooked && !isDisabled && handleTimeSelect(time)}
+                          disabled={isBooked || isDisabled}
+                          whileHover={!isBooked && !isDisabled ? { scale: 1.05 } : {}}
+                          whileTap={!isBooked && !isDisabled ? { scale: 0.98 } : {}}
+                          className={`min-h-[44px] rounded-lg px-2.5 py-2 text-xs font-medium transition-all relative sm:px-3 sm:text-sm lg:min-h-[48px] ${
+                            isDisabled && !isSelected
+                              ? "border border-slate-100 bg-slate-50 text-slate-400 cursor-not-allowed opacity-50"
+                              : isBooked
+                              ? "border-2 border-red-300 bg-gradient-to-br from-red-50 to-red-100 text-red-600 cursor-not-allowed shadow-sm hover:shadow-md"
+                              : isSelected
+                              ? "gradient-primary text-white shadow-lg scale-105"
+                              : "border border-slate-200 bg-white text-slate-700 hover:border-primary hover:bg-primary/5 hover:shadow-sm"
+                          }`}
+                          title={
+                            isDisabled && !isSelected
+                              ? "Select a date first"
+                              : isBooked
+                              ? "This slot is already booked"
+                              : ""
+                          }
+                        >
+                          <div className="flex items-center justify-center gap-1">
+                            <span>{time}</span>
+                            {isBooked && (
+                              <Lock size={12} className="flex-shrink-0 text-red-500" />
+                            )}
+                          </div>
+                        </motion.button>
+                      );
+                    })}
                   </div>
+                  {slotsLoading && formData.date && (
+                    <div className="flex items-center gap-2 rounded-lg bg-blue-50 border border-blue-200 px-3 py-2 text-xs text-blue-700 sm:text-sm">
+                      <Loader2 size={14} className="animate-spin flex-shrink-0" />
+                      <span>Loading available slots...</span>
+                    </div>
+                  )}
+                  {!formData.date && (
+                    <div className="rounded-lg bg-slate-50 border border-slate-200 px-3 py-2 text-xs text-slate-600 sm:text-sm">
+                      📅 Select a date to see available time slots
+                    </div>
+                  )}
+                  {formData.date && bookedSlots.length > 0 && !slotsLoading && (
+                    <div className="rounded-lg bg-red-50 border border-red-200 px-3 py-2 text-xs text-red-700 sm:text-sm flex items-center gap-2">
+                      <Lock size={14} className="flex-shrink-0" />
+                      <span><strong>{bookedSlots.length}</strong> slot{bookedSlots.length !== 1 ? 's' : ''} already booked on this date</span>
+                    </div>
+                  )}
+                  {formData.date && bookedSlots.length === 0 && !slotsLoading && (
+                    <div className="rounded-lg bg-green-50 border border-green-200 px-3 py-2 text-xs text-green-700 sm:text-sm flex items-center gap-2">
+                      <CheckCircle2 size={14} className="flex-shrink-0" />
+                      <span>All time slots are available!</span>
+                    </div>
+                  )}
                   {fieldErrors.time && (
                     <p className="ml-1 flex items-center gap-1 text-xs text-red-600 sm:text-sm">
                       <AlertCircle size={14} /> {fieldErrors.time}

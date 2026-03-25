@@ -67,16 +67,20 @@ const appointmentSchema = new mongoose.Schema(
 // Create compound index to ensure unique date-time-service combination
 appointmentSchema.index({ date: 1, time: 1 }, { unique: true });
 
-// Prevent past date bookings
+// Validate appointment date is within 6 months from today
 appointmentSchema.pre('validate', function (next) {
   if (this.date) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
+    const maxDate = new Date(today);
+    maxDate.setMonth(maxDate.getMonth() + 6);
     const appointmentDate = new Date(this.date);
     appointmentDate.setHours(0, 0, 0, 0);
 
     if (appointmentDate < today) {
       next(new Error('Cannot book appointments for past dates'));
+    } else if (appointmentDate > maxDate) {
+      next(new Error('Cannot book appointments beyond 6 months in advance'));
     } else {
       next();
     }
