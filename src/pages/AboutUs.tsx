@@ -199,6 +199,25 @@ const conferencesAndWorkshops = [
   "Head and Neck and temporal bone workshop conducted in PGIMER in 2018",
 ];
 
+const surgeryMilestones = [
+  { year: "2020", activity: "Nasal Chondromesenchymal Hamartoma (Publication)" },
+  { year: "2020", activity: "Isolated pediatric supraglottic stenosis (Publication)" },
+  { year: "2018", activity: "Allergy workshop (PGIMER)" },
+  { year: "2018", activity: "Head and Neck and temporal bone workshop (PGIMER)" },
+  { year: "2017", activity: "AIOCON Kolkata" },
+  { year: "2017", activity: "EXPLORE ENT Live surgery Workshop" },
+  { year: "2016", activity: "AIOCON Delhi" },
+  { year: "2016", activity: "SHIKHAR Live surgery Workshop" },
+  { year: "2016", activity: "Advanced Course on FESS Surgery (CEMAST)" },
+  { year: "2016", activity: "Micro Ear and Endoscopic Sinus Surgery workshop" },
+  { year: "2016", activity: "Cadaver Dissection Workshop (Patel Hospital)" },
+  { year: "2016", activity: "ENT Live Surgery Workshop (Medanta)" },
+  { year: "2015", activity: "MS (ENT) – Institute of Medical Sciences, Varanasi" },
+  { year: "2015", activity: "Otology Update & Surgical Workshop (AIIMS)" },
+  { year: "2015", activity: "ENT Update (MAMC, New Delhi)" },
+  { year: "2010", activity: "MBBS – Patna Medical College" },
+];
+
 const AboutUs = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -234,7 +253,7 @@ const AboutUs = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
               className="font-heading font-bold text-foreground mb-3 leading-tight
-                text-xl sm:text-3xl md:text-5xl lg:text-6xl whitespace-nowrap"
+                text-xl sm:text-3xl md:text-5xl lg:text-6xl"
             >
               Advanced Care for <span className="gradient-text">ENT &amp; Allergy</span>
             </motion.h1>
@@ -254,7 +273,7 @@ const AboutUs = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.28 }}
-             className="mt-6 grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-2 sm:gap-3"
+              className="mt-6 grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-2 sm:gap-3"
             >
               {trustBadges.map((badge) => (
                 <span
@@ -320,29 +339,29 @@ const AboutUs = () => {
             className="pt-6 sm:pt-10 lg:pt-0 text-center lg:text-left"
           >
             <h2
-             className="font-heading font-bold text-foreground mb-3 sm:mb-4 leading-tight
+              className="font-heading font-bold text-foreground mb-3 sm:mb-4 leading-tight
               text-xl sm:text-2xl md:text-3xl"
             >
               A Legacy of{" "}
               <span className="gradient-text">Medical Excellence</span>
             </h2>
 
-           <div className="mb-5 flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm lg:justify-start">
-  {/* Mobile: single combined badge */}
-  <span className="inline-flex sm:hidden items-center gap-2 rounded-full bg-primary/10 px-3.5 py-2 font-semibold text-primary whitespace-nowrap">
-    <Building2 size={14} />
-    Ex-Senior Resident, PGIMER, Chandigarh
-  </span>
-  {/* Desktop: two separate badges */}
-  <span className="hidden sm:inline-flex items-center gap-2 rounded-full bg-primary/10 px-3.5 py-2 font-semibold text-primary">
-    <Building2 size={14} />
-    Ex-Senior Resident, PGIMER
-  </span>
-  <span className="hidden sm:inline-flex items-center gap-2 rounded-full bg-teal-50 px-3.5 py-2 font-semibold text-teal-700">
-    <MapPin size={14} />
-    Chandigarh
-  </span>
-</div>
+            <div className="mb-5 flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm lg:justify-start">
+              {/* Mobile: single combined badge */}
+              <span className="inline-flex sm:hidden items-center gap-2 rounded-full bg-primary/10 px-3.5 py-2 font-semibold text-primary whitespace-nowrap">
+                <Building2 size={14} />
+                Ex-Senior Resident, PGIMER, Chandigarh
+              </span>
+              {/* Desktop: two separate badges */}
+              <span className="hidden sm:inline-flex items-center gap-2 rounded-full bg-primary/10 px-3.5 py-2 font-semibold text-primary">
+                <Building2 size={14} />
+                Ex-Senior Resident, PGIMER
+              </span>
+              <span className="hidden sm:inline-flex items-center gap-2 rounded-full bg-teal-50 px-3.5 py-2 font-semibold text-teal-700">
+                <MapPin size={14} />
+                Chandigarh
+              </span>
+            </div>
 
             <div
               className="space-y-3 sm:space-y-4 text-muted-foreground leading-relaxed
@@ -360,22 +379,22 @@ const AboutUs = () => {
               </p>
             </div>
 
-         <div className="grid grid-cols-3 gap-2 sm:gap-4">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4">
               {stats.map((s) => (
                 <div
-  key={s.label}
-  className="rounded-2xl border border-slate-200 bg-white px-2 py-4 sm:px-4 sm:py-5 text-center shadow-sm"
->
-  <div className="mx-auto mb-2 sm:mb-3 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
-    <s.icon size={16} className="sm:w-[18px] sm:h-[18px]" />
-  </div>
-  <p className="font-bold text-foreground mb-0.5 text-base sm:text-2xl md:text-3xl">
-    {s.value}
-  </p>
-  <p className="text-muted-foreground font-medium uppercase tracking-wider text-[8px] sm:text-xs leading-tight">
-    {s.label}
-  </p>
-</div>
+                  key={s.label}
+                  className="rounded-2xl border border-slate-200 bg-white px-2 py-4 sm:px-4 sm:py-5 text-center shadow-sm"
+                >
+                  <div className="mx-auto mb-2 sm:mb-3 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <s.icon size={16} className="sm:w-[18px] sm:h-[18px]" />
+                  </div>
+                  <p className="font-bold text-foreground mb-0.5 text-base sm:text-2xl md:text-3xl">
+                    {s.value}
+                  </p>
+                  <p className="text-muted-foreground font-medium uppercase tracking-wider text-[8px] sm:text-xs leading-tight">
+                    {s.label}
+                  </p>
+                </div>
               ))}
             </div>
           </motion.div>
@@ -545,9 +564,9 @@ const AboutUs = () => {
       </section>
 
       {/* ── Bio ── */}
-      
+
       {/* ── Expertise + Video ── */}
-      
+
 
       <section className="section-padding bg-slate-50/80">
         <div className="container-main">
@@ -767,6 +786,84 @@ const AboutUs = () => {
                 ))}
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding bg-slate-50/50">
+        <div className="container-main">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-10 text-center"
+          >
+            <h2 className="font-heading text-3xl font-bold text-foreground sm:text-4xl">
+              Year | Surgery Name
+            </h2>
+            <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+              A chronological overview of surgical milestones, advanced training, and expert contributions.
+            </p>
+          </motion.div>
+
+          <div className="mx-auto max-w-4xl">
+            {/* Desktop Table View */}
+            <div className="hidden sm:block overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm transition-all hover:shadow-md">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="bg-slate-100/50 border-b border-slate-200">
+                      <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest text-primary">Year</th>
+                      <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest text-primary">Surgery Name / Milestone</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    {surgeryMilestones.map((milestone, idx) => (
+                      <motion.tr
+                        key={idx}
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: idx * 0.03 }}
+                        className="group transition-colors hover:bg-sky-50/30"
+                      >
+                        <td className="whitespace-nowrap px-6 py-4 text-sm font-bold text-foreground">
+                          <span className="inline-flex items-center rounded-lg bg-primary/5 px-3 py-1 text-primary ring-1 ring-primary/10">
+                            {milestone.year}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 text-sm font-medium text-slate-600 transition-colors group-hover:text-primary">
+                          {milestone.activity}
+                        </td>
+                      </motion.tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Mobile Card View */}
+            <div className="sm:hidden space-y-3">
+              {surgeryMilestones.map((milestone, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.03 }}
+                  className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="inline-flex items-center rounded-lg bg-primary/5 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary ring-1 ring-primary/10">
+                      {milestone.year}
+                    </span>
+                  </div>
+                  <p className="text-sm font-medium leading-relaxed text-slate-700">
+                    {milestone.activity}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
