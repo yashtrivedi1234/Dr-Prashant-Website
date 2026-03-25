@@ -86,7 +86,6 @@ const trustBadges = [
 const profileFacts = [
   { label: "Name", value: "Dr Prashant" },
   { label: "Date of Birth", value: "16th Feb. 1984" },
-  { label: "Sex", value: "Male" },
   { label: "Nationality", value: "Indian" },
   { label: "Email", value: "drshiv707@gmail.com" },
 ];
@@ -659,20 +658,84 @@ const AboutUs = () => {
         <div className="container-main">
           <div className="mb-10 text-center">
             <h2 className="font-heading text-3xl font-bold text-foreground sm:text-4xl">
-              Surgical Expertise
+              Surgical Expertise & Professional Affiliations
             </h2>
             <p className="mx-auto mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
               Extensive operative exposure across ENT, head and neck, trauma,
-              oncology, airway, and endoscopic procedures.
+              oncology, airway, and endoscopic procedures, backed by prestigious professional memberships.
             </p>
           </div>
 
           <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
+            {/* Left Column: Memberships & Surgeries Assisted */}
+            <div className="flex flex-col gap-6">
+              {/* Memberships */}
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="rounded-[28px] border border-slate-200 bg-gradient-to-br from-primary to-sky-700 p-6 text-white shadow-sm sm:p-8"
+              >
+                <div className="mb-6 flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/15 text-white">
+                    <Users size={20} />
+                  </div>
+                  <h3 className="font-heading text-2xl font-bold text-white">
+                    Memberships
+                  </h3>
+                </div>
+                <div className="space-y-3">
+                  {[
+                    "Association of Otorhinolaryngology (AOI) India",
+                    "Indian Society of Otology",
+                    "AOI Delhi",
+                  ].map((item) => (
+                    <div
+                      key={item}
+                      className="rounded-2xl border border-white/15 bg-white/10 px-4 py-4 backdrop-blur-sm"
+                    >
+                      <p className="text-sm font-medium text-white">{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Surgeries Assisted */}
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.08 }}
+                className="rounded-[28px] border border-slate-200 bg-gradient-to-br from-teal-50 to-white p-6 shadow-sm sm:p-8 flex-1"
+              >
+                <div className="mb-6 flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-teal-100 text-teal-700">
+                    <ShieldCheck size={20} />
+                  </div>
+                  <h3 className="font-heading text-2xl font-bold text-foreground">
+                    Surgeries Assisted
+                  </h3>
+                </div>
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  {surgeriesAssisted.map((item) => (
+                    <div
+                      key={item}
+                      className="flex items-start gap-3 rounded-2xl bg-white px-4 py-4 ring-1 ring-slate-100"
+                    >
+                      <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-teal-700" />
+                      <p className="text-sm font-medium text-foreground">{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Right Column: Surgeries Independently Done */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="rounded-[28px] border border-slate-200 bg-gradient-to-br from-sky-50 to-white p-6 shadow-sm sm:p-8"
+              className="h-full rounded-[28px] border border-slate-200 bg-gradient-to-br from-sky-50 to-white p-6 shadow-sm sm:p-8"
             >
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
@@ -694,76 +757,15 @@ const AboutUs = () => {
                 ))}
               </div>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.08 }}
-              className="rounded-[28px] border border-slate-200 bg-gradient-to-br from-teal-50 to-white p-6 shadow-sm sm:p-8"
-            >
-              <div className="mb-6 flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-teal-100 text-teal-700">
-                  <ShieldCheck size={20} />
-                </div>
-                <h3 className="font-heading text-2xl font-bold text-foreground">
-                  Surgeries Assisted
-                </h3>
-              </div>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                {surgeriesAssisted.map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-start gap-3 rounded-2xl bg-white px-4 py-4 ring-1 ring-slate-100"
-                  >
-                    <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-teal-700" />
-                    <p className="text-sm font-medium text-foreground">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
           </div>
-        </div>
-      </section>
 
-      <section className="section-padding bg-white">
-        <div className="container-main">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+          {/* Conferences & Workshops Section (Repositioned) */}
+          <div className="mt-12">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="rounded-[28px] border border-slate-200 bg-gradient-to-br from-primary to-sky-700 p-6 text-white shadow-sm sm:p-8"
-            >
-              <div className="mb-6 flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/15 text-white">
-                  <Users size={20} />
-                </div>
-                <h3 className="font-heading text-2xl font-bold">
-                  Memberships
-                </h3>
-              </div>
-              <div className="space-y-3">
-                {[
-                  "Association of Otorhinolaryngology (AOI) India",
-                  "Indian Society of Otology",
-                  "AOI Delhi",
-                ].map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-2xl border border-white/15 bg-white/10 px-4 py-4 backdrop-blur-sm"
-                  >
-                    <p className="text-sm font-medium text-white">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.08 }}
+              transition={{ delay: 0.16 }}
               className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
             >
               <div className="mb-6 flex items-center gap-3">
@@ -774,7 +776,7 @@ const AboutUs = () => {
                   Conferences & Workshops
                 </h3>
               </div>
-              <div className="max-h-[520px] space-y-3 overflow-auto pr-1">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                 {conferencesAndWorkshops.map((item) => (
                   <div
                     key={item}
@@ -806,64 +808,27 @@ const AboutUs = () => {
             </p>
           </motion.div>
 
-          <div className="mx-auto max-w-4xl">
-            {/* Desktop Table View */}
-            <div className="hidden sm:block overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm transition-all hover:shadow-md">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left">
-                  <thead>
-                    <tr className="bg-slate-100/50 border-b border-slate-200">
-                      <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest text-primary">Year</th>
-                      <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest text-primary">Surgery Name / Milestone</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100">
-                    {surgeryMilestones.map((milestone, idx) => (
-                      <motion.tr
-                        key={idx}
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: idx * 0.03 }}
-                        className="group transition-colors hover:bg-sky-50/30"
-                      >
-                        <td className="whitespace-nowrap px-6 py-4 text-sm font-bold text-foreground">
-                          <span className="inline-flex items-center rounded-lg bg-primary/5 px-3 py-1 text-primary ring-1 ring-primary/10">
-                            {milestone.year}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 text-sm font-medium text-slate-600 transition-colors group-hover:text-primary">
-                          {milestone.activity}
-                        </td>
-                      </motion.tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            {/* Mobile Card View */}
-            <div className="sm:hidden space-y-3">
-              {surgeryMilestones.map((milestone, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.03 }}
-                  className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
-                >
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="inline-flex items-center rounded-lg bg-primary/5 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary ring-1 ring-primary/10">
-                      {milestone.year}
-                    </span>
-                  </div>
-                  <p className="text-sm font-medium leading-relaxed text-slate-700">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+            {surgeryMilestones.map((milestone, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.02 }}
+                className="flex items-start gap-3 rounded-2xl bg-slate-50 px-4 py-4 ring-1 ring-slate-100 transition-all hover:shadow-md"
+              >
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-primary mb-1 inline-flex items-center gap-1.5">
+                    <CheckCircle2 size={14} />
+                    {milestone.year}
+                  </span>
+                  <p className="text-sm font-medium text-foreground leading-relaxed">
                     {milestone.activity}
                   </p>
-                </motion.div>
-              ))}
-            </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
