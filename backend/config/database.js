@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { seedAdmin } from '../utils/seedAdmin.js';
 
 const connectDB = async () => {
   try {
@@ -13,6 +14,7 @@ const connectDB = async () => {
 ║  Status: Connected
 ╚═══════════════════════════════════════════════════════════╝
     `);
+    await seedAdmin();
     return conn;
   } catch (error) {
     console.error(`

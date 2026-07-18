@@ -115,7 +115,7 @@ app.listen(PORT, () => {
    ✅ Service: Resend
    ✅ API Key: ${process.env.RESEND_API_KEY ? '✓ Configured' : '❌ Not configured'}
    ✅ From Email: ${process.env.FROM_EMAIL || 'Not set'}
-   ✅ Admin Email: ${process.env.ADMIN_EMAIL || 'Not set'}
+   ✅ Admin: loaded from MongoDB (admins collection)
 
 🌐 CORS CONFIGURATION:
    ✅ Frontend URL: ${process.env.FRONTEND_URL || 'Not configured'}

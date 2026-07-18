@@ -1,4 +1,5 @@
 import { Resend } from 'resend';
+import { getAdminEmail } from './getAdminEmail.js';
 
 // Initialize Resend client
 let resendClient = null;
@@ -182,10 +183,11 @@ export const sendAdminNotificationEmail = async (appointmentData) => {
   `;
 
   try {
+    const adminEmail = await getAdminEmail();
     const resend = getResendClient();
     const result = await resend.emails.send({
       from: `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}>`,
-      to: process.env.ADMIN_EMAIL,
+      to: adminEmail,
       subject: `New Appointment Booking - ${service}`,
       html: html,
     });
@@ -194,7 +196,7 @@ export const sendAdminNotificationEmail = async (appointmentData) => {
       throw new Error(result.error.message);
     }
 
-    console.log(`✅ Admin notification email sent to ${process.env.ADMIN_EMAIL}`);
+    console.log(`✅ Admin notification email sent to ${adminEmail}`);
     return { success: true, messageId: result.data.id };
   } catch (error) {
     console.error('Error sending admin email:', error.message);
@@ -429,10 +431,11 @@ export const sendContactAdminEmail = async (contactData) => {
   `;
 
   try {
+    const adminEmail = await getAdminEmail();
     const resend = getResendClient();
     const result = await resend.emails.send({
       from: `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}>`,
-      to: process.env.ADMIN_EMAIL,
+      to: adminEmail,
       subject: `New Contact Form Submission - ${subject}`,
       html: html,
     });
@@ -441,7 +444,7 @@ export const sendContactAdminEmail = async (contactData) => {
       throw new Error(result.error.message);
     }
 
-    console.log(`✅ Contact admin notification email sent to ${process.env.ADMIN_EMAIL}`);
+    console.log(`✅ Contact admin notification email sent to ${adminEmail}`);
     return { success: true, messageId: result.data.id };
   } catch (error) {
     console.error('Error sending contact admin email:', error.message);
